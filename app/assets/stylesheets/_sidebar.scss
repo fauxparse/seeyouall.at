@@ -1,0 +1,49 @@
+#show-sidebar {
+  display: none;
+
+  ~ .scrim {
+    @include position(fixed, 0rem 0rem 0rem 0rem);
+    @include transition(opacity $medium $ease-out-cubic);
+    z-index: ($sidebar-z-index - 1);
+    margin: 0;
+    background: rgba(black, 0.75);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:checked {
+    ~ .scrim {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    ~ main {
+      @include filter(blur(3px));
+    }
+  }
+}
+
+aside.sidebar {
+  @include position(fixed, 0rem null 0rem 0rem);
+  @include transform(translateX(-100%));
+  @include transition-property(transform, box-shadow);
+  @include transition-duration($medium, $fast);
+  @include transition-delay(0s, $fast);
+  @include transition-timing-function($ease-out-cubic);
+  z-index: $sidebar-z-index;
+  width: 90%;
+  max-width: 20rem;
+  background: white;
+  overflow-y: auto;
+
+  #show-sidebar:checked ~ & {
+    @include transform(translateX(0));
+    box-shadow: 0 0 0.5rem rgba(black, 0.2);
+  }
+}
+
+main {
+  @include transition-property(filter);
+  @include transition-duration($medium);
+  @include transition-timing-function($ease-out-cubic);
+}

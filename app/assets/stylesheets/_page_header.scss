@@ -1,0 +1,10 @@
+header.page-header {
+  @include position(fixed, 0rem 0rem null 0rem);
+  height: $page-header-height;
+  background: $page-header-background;
+  color: $page-header-color;
+}
+
+main {
+  padding: ($page-header-height + 1rem) 1rem 1rem;
+}

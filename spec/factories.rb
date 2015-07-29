@@ -38,4 +38,8 @@ FactoryGirl.define do
     end_time { Time.current + 1.hour }
     event
   end
+
+  factory :location do
+    address "1 Kent Tce, Wellington"
+  end
 end

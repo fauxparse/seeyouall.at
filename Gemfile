@@ -32,6 +32,7 @@ gem 'omniauth-facebook'
 
 gem 'stringex'
 gem 'auto_strip_attributes', '~> 2.0'
+gem 'geocoder'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -20,6 +20,8 @@ FactoryGirl.define do
 
   factory :event, aliases: [:tri_wizard] do
     name "Tri-Wizard Tournament"
+    start_time Time.zone.parse("1994-10-31 19:00:00")
+    end_time Time.zone.parse("1995-06-24 19:00:00")
   end
 
   factory :activity_type, aliases: [:trial] do
@@ -29,5 +31,11 @@ FactoryGirl.define do
 
   factory :activity do
     name "Dragon Fighting"
+  end
+
+  factory :time_slot do
+    start_time { Time.current }
+    end_time { Time.current + 1.hour }
+    event
   end
 end

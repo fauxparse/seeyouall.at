@@ -6,6 +6,8 @@ class Event < ActiveRecord::Base
 
   auto_strip_attributes :name, squish: true
 
+  has_many :activity_types, dependent: :destroy, autosave: true
+
   validates :name, presence: { allow_blank: false }
   validates :slug,
     presence: { allow_blank: false },

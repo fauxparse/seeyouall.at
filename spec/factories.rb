@@ -21,4 +21,9 @@ FactoryGirl.define do
       name "Dumbledore"
     end
   end
+
+  factory :activity_type, aliases: [:trial] do
+    name "trial"
+    association :event, factory: :tri_wizard
+  end
 end

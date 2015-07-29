@@ -30,6 +30,9 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+gem 'stringex'
+gem 'auto_strip_attributes', '~> 2.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -40,6 +43,8 @@ gem 'unicorn'
 # gem 'capistrano-rails', group: :development
 
 gem "letter_opener", group: :development
+
+gem 'simplecov', require: false, group: :test
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,4 +57,7 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails'
+  gem 'rspec-collection_matchers'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
 end

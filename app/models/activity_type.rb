@@ -1,5 +1,6 @@
 class ActivityType < ActiveRecord::Base
   belongs_to :event, inverse_of: :activity_types
+  has_many :activities, inverse_of: :activity_type
 
   auto_strip_attributes :name, squish: true
 

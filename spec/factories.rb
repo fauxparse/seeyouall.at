@@ -1,8 +1,4 @@
 FactoryGirl.define do
-  factory :event, aliases: [:tri_wizard] do
-    name "Tri-Wizard Tournament"
-  end
-
   factory :user, aliases: [:hermione] do
     name "Hermione Granger"
     email { "#{name.downcase.gsub(/\s+/, ".")}@hogwarts.ac.uk" }
@@ -22,8 +18,16 @@ FactoryGirl.define do
     end
   end
 
+  factory :event, aliases: [:tri_wizard] do
+    name "Tri-Wizard Tournament"
+  end
+
   factory :activity_type, aliases: [:trial] do
     name "trial"
     association :event, factory: :tri_wizard
+  end
+
+  factory :activity do
+    name "Dragon Fighting"
   end
 end

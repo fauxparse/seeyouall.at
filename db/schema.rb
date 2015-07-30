@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730022949) do
+ActiveRecord::Schema.define(version: 20150730024501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,16 @@ ActiveRecord::Schema.define(version: 20150730022949) do
   add_index "scheduled_activities", ["location_id"], name: "index_scheduled_activities_on_location_id", using: :btree
   add_index "scheduled_activities", ["time_slot_id"], name: "index_scheduled_activities_on_time_slot_id", using: :btree
 
+  create_table "selections", force: :cascade do |t|
+    t.integer  "registration_id",       null: false
+    t.integer  "scheduled_activity_id", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "selections", ["registration_id", "scheduled_activity_id"], name: "index_selections_on_registration_id_and_scheduled_activity_id", unique: true, using: :btree
+  add_index "selections", ["scheduled_activity_id"], name: "index_selections_on_scheduled_activity_id", using: :btree
+
   create_table "time_slots", force: :cascade do |t|
     t.integer  "event_id"
     t.datetime "start_time", null: false
@@ -154,5 +164,7 @@ ActiveRecord::Schema.define(version: 20150730022949) do
   add_foreign_key "scheduled_activities", "activities", on_delete: :cascade
   add_foreign_key "scheduled_activities", "locations", on_delete: :nullify
   add_foreign_key "scheduled_activities", "time_slots", on_delete: :cascade
+  add_foreign_key "selections", "registrations", on_delete: :cascade
+  add_foreign_key "selections", "scheduled_activities", on_delete: :cascade
   add_foreign_key "time_slots", "events", on_delete: :cascade
 end

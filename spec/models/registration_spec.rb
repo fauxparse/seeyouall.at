@@ -11,8 +11,6 @@ RSpec.describe Registration, type: :model do
       user.registrations.create(event: event, package: package)
     end
 
-    it "is invalid" do
-      expect(registration).not_to be_valid
-    end
+    it { is_expected.not_to be_valid }
   end
 end

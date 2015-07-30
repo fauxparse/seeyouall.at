@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729233138) do
+ActiveRecord::Schema.define(version: 20150730001656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,9 +37,9 @@ ActiveRecord::Schema.define(version: 20150729233138) do
     t.string   "slug",                              null: false
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
-    t.time     "start_time",                        null: false
-    t.time     "end_time",                          null: false
     t.string   "time_zone",  default: "Wellington", null: false
+    t.datetime "start_time",                        null: false
+    t.datetime "end_time",                          null: false
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
@@ -57,9 +57,9 @@ ActiveRecord::Schema.define(version: 20150729233138) do
   add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
 
   create_table "time_slots", force: :cascade do |t|
-    t.integer "event_id"
-    t.time    "start_time", null: false
-    t.time    "end_time",   null: false
+    t.integer  "event_id"
+    t.datetime "start_time", null: false
+    t.datetime "end_time",   null: false
   end
 
   add_index "time_slots", ["event_id", "start_time", "end_time"], name: "index_time_slots_on_event_id_and_start_time_and_end_time", using: :btree

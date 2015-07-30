@@ -49,4 +49,61 @@ RSpec.describe Event, type: :model do
       expect(event.time_zone).to eq("Wellington")
     end
   end
+
+  context "in the past" do
+    before do
+      start = Time.current - 1.year
+      event.update! start_time: start, end_time: start + 1.week
+    end
+
+    it "is included in Event.past" do
+      expect(Event.past).to include(event)
+    end
+
+    it "is not included in Event.current" do
+      expect(Event.current).not_to include(event)
+    end
+
+    it "is not included in Event.upcoming" do
+      expect(Event.upcoming).not_to include(event)
+    end
+  end
+
+  context "in the future" do
+    before do
+      start = Time.current + 1.year
+      event.update! start_time: start, end_time: start + 1.week
+    end
+
+    it "is not included in Event.past" do
+      expect(Event.past).not_to include(event)
+    end
+
+    it "is not included in Event.current" do
+      expect(Event.current).not_to include(event)
+    end
+
+    it "is included in Event.upcoming" do
+      expect(Event.upcoming).to include(event)
+    end
+  end
+
+  context "happening right now" do
+    before do
+      start = Time.current - 1.day
+      event.update! start_time: start, end_time: start + 1.week
+    end
+
+    it "is not included in Event.past" do
+      expect(Event.past).not_to include(event)
+    end
+
+    it "is included in Event.current" do
+      expect(Event.current).to include(event)
+    end
+
+    it "is not included in Event.upcoming" do
+      expect(Event.upcoming).not_to include(event)
+    end
+  end
 end

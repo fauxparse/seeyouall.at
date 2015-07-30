@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730013241) do
+ActiveRecord::Schema.define(version: 20150730020736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,10 @@ ActiveRecord::Schema.define(version: 20150730013241) do
   end
 
   add_index "packages", ["event_id"], name: "index_packages_on_event_id", using: :btree
+
+  create_table "prices", force: :cascade do |t|
+    t.decimal "price", precision: 10, scale: 2, null: false
+  end
 
   create_table "scheduled_activities", force: :cascade do |t|
     t.integer "activity_id",  null: false

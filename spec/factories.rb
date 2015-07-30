@@ -1,4 +1,7 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :scheduled_activity do
+
+  end
+
   factory :user, aliases: [:hermione] do
     name "Hermione Granger"
     email { "#{name.downcase.gsub(/\s+/, ".")}@hogwarts.ac.uk" }
@@ -31,6 +34,7 @@ FactoryGirl.define do
 
   factory :activity do
     name "Dragon Fighting"
+    association :activity_type, factory: :trial
   end
 
   factory :time_slot do

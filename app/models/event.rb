@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   has_many :activity_types, dependent: :destroy, autosave: true
+  has_many :activities, through: :activity_types
   has_many :time_slots, dependent: :destroy, autosave: true
 
   scope :upcoming, -> { where("start_time > ?", Time.current) }

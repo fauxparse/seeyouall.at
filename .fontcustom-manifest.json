@@ -1,0 +1,64 @@
+{
+  "checksum": {
+    "previous": "71718cdd998175254a235be6d139ae2db54d86a449c42ed77bea2ac4be59152a",
+    "current": "71718cdd998175254a235be6d139ae2db54d86a449c42ed77bea2ac4be59152a"
+  },
+  "fonts": [
+    "app/assets/fonts/icons_71718cdd998175254a235be6d139ae2d.ttf",
+    "app/assets/fonts/icons_71718cdd998175254a235be6d139ae2d.svg",
+    "app/assets/fonts/icons_71718cdd998175254a235be6d139ae2d.woff",
+    "app/assets/fonts/icons_71718cdd998175254a235be6d139ae2d.eot"
+  ],
+  "glyphs": {
+    "add-event": {
+      "codepoint": 61699,
+      "source": "lib/assets/icons/svg/add-event.svg"
+    },
+    "arrow-drop-down": {
+      "codepoint": 61698,
+      "source": "lib/assets/icons/svg/arrow-drop-down.svg"
+    },
+    "block": {
+      "codepoint": 61697,
+      "source": "lib/assets/icons/svg/block.svg"
+    },
+    "logout": {
+      "codepoint": 61700,
+      "source": "lib/assets/icons/svg/logout.svg"
+    },
+    "menu": {
+      "codepoint": 61696,
+      "source": "lib/assets/icons/svg/menu.svg"
+    }
+  },
+  "options": {
+    "autowidth": false,
+    "config": "config/fontcustom.yml",
+    "css_selector": ".icon-{{glyph}}",
+    "debug": false,
+    "font_ascent": 448,
+    "font_descent": 64,
+    "font_design_size": 16,
+    "font_em": 512,
+    "font_name": "icons",
+    "force": false,
+    "input": {
+      "templates": "lib/assets/icons/templates",
+      "vectors": "lib/assets/icons/svg"
+    },
+    "no_hash": false,
+    "output": {
+      "css": "app/assets/stylesheets",
+      "fonts": "app/assets/fonts",
+      "preview": "app/assets/fonts"
+    },
+    "preprocessor_path": "",
+    "quiet": false,
+    "templates": [
+      "_icon_font.scss"
+    ]
+  },
+  "templates": [
+    "app/assets/stylesheets/_icon_font.scss"
+  ]
+}

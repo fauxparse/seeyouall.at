@@ -10,13 +10,14 @@ button {
   display: inline-block;
   font-family: $base-font-family;
   font-size: $base-font-size;
-  font-weight: 600;
+  font-weight: $bold-font-weight;
   line-height: 1;
   padding: 0.75em 1em;
   text-decoration: none;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  text-transform: uppercase;
 
   &:hover,
   &:focus {

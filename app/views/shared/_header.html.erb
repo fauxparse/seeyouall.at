@@ -1,3 +1,9 @@
 <header class="page-header">
-  <label for="show-sidebar">☰</label>
+  <label for="show-sidebar">
+    <% if signed_in? -%>
+      <%= gravatar_tag current_user, size: 64 %>
+    <% else -%>
+      <%= icon :menu %>
+    <% end -%>
+  </label>
 </header>

@@ -1,10 +1,47 @@
 header.page-header {
   @include position(fixed, 0rem 0rem null 0rem);
-  height: $page-header-height;
+  @include display(flex);
+  height: ($page-header-height * 0.875);
   background: $page-header-background;
   color: $page-header-color;
+
+  [for="show-sidebar"] {
+    display: block;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+
+    img {
+      display: block;
+      margin: -0.5rem;
+      width: 2.5rem;
+      height: auto;
+      max-width: none;
+    }
+  }
 }
 
 main {
-  padding: ($page-header-height + 1rem) 1rem 1rem;
+  padding-top: ($page-header-height * 0.875 + 1rem);
+}
+
+@include media($medium-screen) {
+  header.page-header {
+    height: $page-header-height;
+
+    [for="show-sidebar"] {
+      padding: 0.75rem;
+
+      img {
+        margin: -0.75rem;
+        width: 3rem;
+      }
+    }
+  }
+
+  main {
+    padding-top: ($page-header-height + 1rem);
+  }
 }

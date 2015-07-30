@@ -1,0 +1,7 @@
+main {
+  padding: 1rem;
+
+  @include media($medium-screen) {
+    padding: 1rem 4.5rem;
+  }
+}

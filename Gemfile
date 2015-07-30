@@ -29,6 +29,7 @@ gem 'neat'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'gravatarify', '~> 3.0.0'
 
 gem 'stringex'
 gem 'auto_strip_attributes', '~> 2.0'
@@ -61,4 +62,6 @@ group :development, :test do
   gem 'rspec-collection_matchers'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
+
+  gem 'fontcustom'
 end

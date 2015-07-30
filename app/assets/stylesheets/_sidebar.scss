@@ -6,7 +6,7 @@
     @include transition(opacity $medium $ease-out-cubic);
     z-index: ($sidebar-z-index - 1);
     margin: 0;
-    background: rgba(black, 0.75);
+    background: dark-scrim-color();
     opacity: 0;
     pointer-events: none;
   }
@@ -31,14 +31,82 @@ aside.sidebar {
   @include transition-delay(0s, $fast);
   @include transition-timing-function($ease-out-cubic);
   z-index: $sidebar-z-index;
-  width: 90%;
+  width: 82.5%;
   max-width: 20rem;
+  @include media($medium-screen) { max-width: 25rem; }
   background: white;
   overflow-y: auto;
 
   #show-sidebar:checked ~ & {
     @include transform(translateX(0));
-    box-shadow: 0 0 0.5rem rgba(black, 0.2);
+    box-shadow: $side-z1-shadow;
+  }
+
+  header {
+    display: block;
+    padding-top: 56.25%; // 16:9
+    box-sizing: border-box;
+    border-bottom: 1px solid divider-color();
+    position: relative;
+    background: $cyan-600;
+
+    .gravatar {
+      position: absolute;
+      left: 1rem;
+      bottom: 4rem;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+    }
+
+    .popup {
+      @include position(absolute, null 0rem 0rem 0rem);
+
+      .popup-toggle {
+        @include transition(none);
+        color: text-color($white);
+        background: $cyan-600;
+        font-weight: $bold-font-weight;
+      }
+
+      .popup-menu {
+        border-radius: 0;
+        box-shadow: none;
+        border-bottom: 1px solid divider-color();
+        background: none;
+
+        ul {
+          background: white;
+          border-top: none;
+          margin-top: 1px;
+        }
+      }
+    }
+
+    form {
+      @include position(absolute, null 1rem 1rem 1rem);
+
+      input {
+        margin: 0;
+        border-radius: $base-border-radius $base-border-radius 0 0;
+        box-shadow: none;
+
+        &[type="password"] {
+          margin-top: -1px;
+          border-radius: 0 0 $base-border-radius $base-border-radius;
+        }
+
+        &:focus {
+          position: relative;
+          z-index: 1;
+        }
+      }
+
+      button {
+        margin: 0.5rem 0 0;
+        width: 100%;
+      }
+    }
   }
 }
 

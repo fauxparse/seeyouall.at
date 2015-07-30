@@ -1,0 +1,26 @@
+.action-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    a {
+      @include display(flex);
+
+      i {
+        width: 3.5rem;
+        height: 3.5rem;
+        padding: 1rem;
+        color: icon-color();
+      }
+
+      span {
+        @include flex(1);
+        padding: 1rem;
+        line-height: 1.5rem;
+        @include ellipsis;
+        color: text-color();
+      }
+    }
+  }
+}

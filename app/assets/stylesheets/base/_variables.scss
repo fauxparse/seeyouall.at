@@ -1,9 +1,11 @@
 // Typography
-$base-font-family: $helvetica;
+$base-font-family: "Raleway", $helvetica;
 $heading-font-family: $base-font-family;
 
 // Font Sizes
 $base-font-size: 1em;
+$base-font-weight: 300;
+$bold-font-weight: 500;
 
 // Line height
 $base-line-height: 1.5;
@@ -16,15 +18,14 @@ $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
 // Colors
-$blue: #477dca;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
 
 // Font Colors
-$base-background-color: #fff;
-$base-font-color: $dark-gray;
-$action-color: $blue;
+$base-background-color: $white;
+$base-font-color: text-color();
+$action-color: $pink-500;
 
 // Border
 $base-border-color: $light-gray;
@@ -38,8 +39,10 @@ $fast: 0.25s;
 $medium: 0.5s;
 $slow: 1s;
 
+$icon-size: 1.5rem;
+
 $sidebar-z-index: 100;
 
 $page-header-height: 4rem;
-$page-header-background: $dark-gray;
-$page-header-color: white;
+$page-header-background: $cyan-700;
+$page-header-color: $white;

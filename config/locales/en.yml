@@ -20,4 +20,15 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  helpers:
+    label:
+      user:
+        email: Email address
+        password: Password
+    submit:
+      session:
+        create: Log in
+        destroy: Log out
+
+  events:
+    new: Create a new event

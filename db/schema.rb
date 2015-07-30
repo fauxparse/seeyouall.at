@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730030817) do
+ActiveRecord::Schema.define(version: 20150730033016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,15 @@ ActiveRecord::Schema.define(version: 20150730030817) do
 
   add_index "packages", ["event_id"], name: "index_packages_on_event_id", using: :btree
 
+  create_table "payments", force: :cascade do |t|
+    t.integer  "registration_id",                                      null: false
+    t.decimal  "amount",          precision: 10, scale: 2,             null: false
+    t.integer  "state",                                    default: 0, null: false
+    t.string   "reference"
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+  end
+
   create_table "prices", force: :cascade do |t|
     t.decimal "price", precision: 10, scale: 2, null: false
   end
@@ -174,6 +183,7 @@ ActiveRecord::Schema.define(version: 20150730030817) do
   add_foreign_key "package_prices", "packages", on_delete: :cascade
   add_foreign_key "package_prices", "prices", on_delete: :cascade
   add_foreign_key "packages", "events", on_delete: :cascade
+  add_foreign_key "payments", "registrations", on_delete: :cascade
   add_foreign_key "registrations", "events", on_delete: :cascade
   add_foreign_key "registrations", "packages", on_delete: :cascade
   add_foreign_key "registrations", "users", on_delete: :cascade

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730012404) do
+ActiveRecord::Schema.define(version: 20150730013241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 20150730012404) do
   end
 
   add_index "activity_types", ["event_id"], name: "index_activity_types_on_event_id", using: :btree
+
+  create_table "allocations", force: :cascade do |t|
+    t.integer "package_id",       null: false
+    t.integer "activity_type_id", null: false
+    t.integer "maximum"
+  end
+
+  add_index "allocations", ["package_id", "activity_type_id"], name: "index_allocations_on_package_id_and_activity_type_id", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "name",                              null: false
@@ -102,6 +110,8 @@ ActiveRecord::Schema.define(version: 20150730012404) do
 
   add_foreign_key "activities", "activity_types", on_delete: :cascade
   add_foreign_key "activity_types", "events", on_delete: :cascade
+  add_foreign_key "allocations", "activity_types", on_delete: :cascade
+  add_foreign_key "allocations", "packages", on_delete: :cascade
   add_foreign_key "packages", "events", on_delete: :cascade
   add_foreign_key "scheduled_activities", "activities", on_delete: :cascade
   add_foreign_key "scheduled_activities", "locations", on_delete: :nullify

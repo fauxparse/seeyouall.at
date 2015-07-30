@@ -1,10 +1,4 @@
-FactoryGirl.define do  factory :package do
-    
-  end
-  factory :scheduled_activity do
-
-  end
-
+FactoryGirl.define do
   factory :user, aliases: [:hermione] do
     name "Hermione Granger"
     email { "#{name.downcase.gsub(/\s+/, ".")}@hogwarts.ac.uk" }
@@ -48,5 +42,10 @@ FactoryGirl.define do  factory :package do
 
   factory :location, aliases: [:hogwarts] do
     address "1 Kent Tce, Wellington"
+  end
+
+  factory :package do
+    name "Standard"
+    event
   end
 end

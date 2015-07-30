@@ -1,6 +1,6 @@
 RSpec::Matchers.define :strip_spaces_from do |attribute|
   match do |record|
-    value = record.send(attribute)
+    value = record.send(attribute) || "test"
     record.send(:"#{attribute}=", " #{value} ")
     record.valid? && record.send(attribute) == value
   end

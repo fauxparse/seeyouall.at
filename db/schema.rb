@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730002849) do
+ActiveRecord::Schema.define(version: 20150730012404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,13 @@ ActiveRecord::Schema.define(version: 20150730002849) do
   add_index "locations", ["latitude", "longitude"], name: "index_locations_on_latitude_and_longitude", using: :btree
   add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
 
+  create_table "packages", force: :cascade do |t|
+    t.string  "name"
+    t.integer "event_id"
+  end
+
+  add_index "packages", ["event_id"], name: "index_packages_on_event_id", using: :btree
+
   create_table "scheduled_activities", force: :cascade do |t|
     t.integer "activity_id",  null: false
     t.integer "time_slot_id", null: false
@@ -95,6 +102,7 @@ ActiveRecord::Schema.define(version: 20150730002849) do
 
   add_foreign_key "activities", "activity_types", on_delete: :cascade
   add_foreign_key "activity_types", "events", on_delete: :cascade
+  add_foreign_key "packages", "events", on_delete: :cascade
   add_foreign_key "scheduled_activities", "activities", on_delete: :cascade
   add_foreign_key "scheduled_activities", "locations", on_delete: :nullify
   add_foreign_key "scheduled_activities", "time_slots", on_delete: :cascade

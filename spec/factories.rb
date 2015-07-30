@@ -1,4 +1,7 @@
-FactoryGirl.define do  factory :scheduled_activity do
+FactoryGirl.define do  factory :package do
+    
+  end
+  factory :scheduled_activity do
 
   end
 

@@ -48,4 +48,9 @@ FactoryGirl.define do
     name "Standard"
     event
   end
+
+  factory :facilitator do
+    name "Mad-Eye Moody"
+    email "moody@hogwarts.ac.uk"
+  end
 end

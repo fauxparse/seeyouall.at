@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   has_many :activities, through: :activity_types
   has_many :time_slots, inverse_of: :event, dependent: :destroy, autosave: true
   has_many :packages, inverse_of: :event, dependent: :destroy, autosave: true
+  has_many :registrations, inverse_of: :event, autosave: true, dependent: :destroy
 
   scope :upcoming, -> { where("start_time > ?", Time.current) }
   scope :current, -> {

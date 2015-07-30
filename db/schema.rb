@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730021418) do
+ActiveRecord::Schema.define(version: 20150730022949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(version: 20150730021418) do
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
   add_index "events", ["start_time", "end_time"], name: "index_events_on_start_time_and_end_time", using: :btree
 
+  create_table "individual_activity_prices", force: :cascade do |t|
+    t.integer "allocation_id", null: false
+    t.integer "price_id",      null: false
+  end
+
+  add_index "individual_activity_prices", ["allocation_id"], name: "index_individual_activity_prices_on_allocation_id", using: :btree
+
   create_table "locations", force: :cascade do |t|
     t.string  "name"
     t.string  "address"
@@ -83,6 +90,17 @@ ActiveRecord::Schema.define(version: 20150730021418) do
   create_table "prices", force: :cascade do |t|
     t.decimal "price", precision: 10, scale: 2, null: false
   end
+
+  create_table "registrations", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "event_id",   null: false
+    t.integer  "package_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "registrations", ["package_id", "event_id"], name: "index_registrations_on_package_id_and_event_id", using: :btree
+  add_index "registrations", ["user_id", "event_id"], name: "index_registrations_on_user_id_and_event_id", using: :btree
 
   create_table "scheduled_activities", force: :cascade do |t|
     t.integer "activity_id",  null: false
@@ -125,9 +143,14 @@ ActiveRecord::Schema.define(version: 20150730021418) do
   add_foreign_key "activity_types", "events", on_delete: :cascade
   add_foreign_key "allocations", "activity_types", on_delete: :cascade
   add_foreign_key "allocations", "packages", on_delete: :cascade
+  add_foreign_key "individual_activity_prices", "allocations", on_delete: :cascade
+  add_foreign_key "individual_activity_prices", "prices", on_delete: :cascade
   add_foreign_key "package_prices", "packages", on_delete: :cascade
   add_foreign_key "package_prices", "prices", on_delete: :cascade
   add_foreign_key "packages", "events", on_delete: :cascade
+  add_foreign_key "registrations", "events", on_delete: :cascade
+  add_foreign_key "registrations", "packages", on_delete: :cascade
+  add_foreign_key "registrations", "users", on_delete: :cascade
   add_foreign_key "scheduled_activities", "activities", on_delete: :cascade
   add_foreign_key "scheduled_activities", "locations", on_delete: :nullify
   add_foreign_key "scheduled_activities", "time_slots", on_delete: :cascade

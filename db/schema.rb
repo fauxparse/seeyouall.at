@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730024501) do
+ActiveRecord::Schema.define(version: 20150730025812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(version: 20150730024501) do
   end
 
   add_index "activity_types", ["event_id"], name: "index_activity_types_on_event_id", using: :btree
+
+  create_table "administrators", force: :cascade do |t|
+    t.integer "user_id",  null: false
+    t.integer "event_id", null: false
+  end
 
   create_table "allocations", force: :cascade do |t|
     t.integer "package_id",       null: false
@@ -151,6 +156,8 @@ ActiveRecord::Schema.define(version: 20150730024501) do
 
   add_foreign_key "activities", "activity_types", on_delete: :cascade
   add_foreign_key "activity_types", "events", on_delete: :cascade
+  add_foreign_key "administrators", "events", on_delete: :cascade
+  add_foreign_key "administrators", "users", on_delete: :cascade
   add_foreign_key "allocations", "activity_types", on_delete: :cascade
   add_foreign_key "allocations", "packages", on_delete: :cascade
   add_foreign_key "individual_activity_prices", "allocations", on_delete: :cascade

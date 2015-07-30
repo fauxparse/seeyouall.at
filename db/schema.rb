@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730020736) do
+ActiveRecord::Schema.define(version: 20150730021418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,15 @@ ActiveRecord::Schema.define(version: 20150730020736) do
   add_index "locations", ["address"], name: "index_locations_on_address", using: :btree
   add_index "locations", ["latitude", "longitude"], name: "index_locations_on_latitude_and_longitude", using: :btree
   add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
+
+  create_table "package_prices", force: :cascade do |t|
+    t.integer  "package_id", null: false
+    t.integer  "price_id",   null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time",   null: false
+  end
+
+  add_index "package_prices", ["package_id", "start_time", "end_time"], name: "index_package_prices_on_package_id_and_start_time_and_end_time", using: :btree
 
   create_table "packages", force: :cascade do |t|
     t.string  "name"
@@ -116,6 +125,8 @@ ActiveRecord::Schema.define(version: 20150730020736) do
   add_foreign_key "activity_types", "events", on_delete: :cascade
   add_foreign_key "allocations", "activity_types", on_delete: :cascade
   add_foreign_key "allocations", "packages", on_delete: :cascade
+  add_foreign_key "package_prices", "packages", on_delete: :cascade
+  add_foreign_key "package_prices", "prices", on_delete: :cascade
   add_foreign_key "packages", "events", on_delete: :cascade
   add_foreign_key "scheduled_activities", "activities", on_delete: :cascade
   add_foreign_key "scheduled_activities", "locations", on_delete: :nullify

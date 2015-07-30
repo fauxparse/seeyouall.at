@@ -1,4 +1,7 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :package_price do
+    
+  end
+
   factory :user, aliases: [:hermione] do
     name "Hermione Granger"
     email { "#{name.downcase.gsub(/\s+/, ".")}@hogwarts.ac.uk" }

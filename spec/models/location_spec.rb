@@ -18,4 +18,11 @@ RSpec.describe Location, type: :model do
       expect(location.longitude).to be_within(0.0001).of(174.7845941)
     end
   end
+
+  describe ".near" do
+    it "finds locations" do
+      location.save!
+      expect(Location.near("Wellington")).to include(location)
+    end
+  end
 end

@@ -39,7 +39,7 @@ FactoryGirl.define do
     event
   end
 
-  factory :location do
+  factory :location, aliases: [:hogwarts] do
     address "1 Kent Tce, Wellington"
   end
 end

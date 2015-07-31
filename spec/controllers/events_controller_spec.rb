@@ -5,37 +5,17 @@ RSpec.describe EventsController, type: :controller do
   let (:user) { FactoryGirl.create(:user) }
   let (:event_params) { EventSerializer.new(EventPresenter.new(FactoryGirl.build(:event))).attributes }
 
-  def log_in_as(user)
-    user.confirm
-    @request.env["devise.mapping"] = Devise.mappings[:user]
-    sign_in user
-  end
-
   describe "GET #index" do
-    it "returns http success" do
-      get :index
-      expect(response).to have_http_status(:success)
-    end
-
-    it "has a list of events" do
-      get :index
-      expect(assigns(:events)).not_to be_nil
-    end
+    before { get(:index) }
+    it { is_expected.to respond_with(:success) }
   end
 
   describe "GET #show" do
     context "for an existing event" do
-      before do
-        get :show, id: event.to_param
-      end
+      before { get(:show, id: event.to_param) }
 
-      it "returns http success" do
-        expect(response).to have_http_status(:success)
-      end
-
-      it "assigns the event" do
-        expect(assigns(:event)).to be_an_instance_of(EventPresenter)
-      end
+      it { is_expected.to respond_with(:success) }
+      it { is_expected.to assign(:event).as(EventPresenter) }
     end
 
     context "for a non-existent event" do
@@ -46,38 +26,12 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe "GET #new" do
-    context "when logged in" do
-      before do
-        log_in_as(user)
-      end
-
-      it "returns http success" do
-        get :new
-        expect(response).to have_http_status(:success)
-      end
-
-      it "has a list of events" do
-        get :new
-        expect(assigns(:event)).to be_an_instance_of(EventPresenter)
-      end
-    end
-
-    context "when not logged in" do
-      before do
-        get :new
-      end
-
-      it "redirects to login page" do
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
+    it_behaves_like "a secure resource", :new
   end
 
   describe "POST #create" do
     context "when logged in" do
-      before do
-        log_in_as(user)
-      end
+      include_context "logged in"
 
       it "creates an event" do
         expect { post :create, event: event_params }
@@ -100,54 +54,27 @@ RSpec.describe EventsController, type: :controller do
 
   describe "GET #edit" do
     context "for an existing event" do
-      before do
-        event.administrators.create!(user: user)
+      before { event.administrators.create!(user: user) }
+
+      it_behaves_like("a secure resource", :edit) do
+        let(:params) { { id: event.to_param } }
       end
 
       context "when logged in" do
-        before do
-          log_in_as(user)
-          get :edit, id: event.to_param
-        end
+        include_context "logged in"
 
-        it "returns http success" do
-          expect(response).to have_http_status(:success)
-        end
+        before { get :edit, id: event.to_param }
 
-        it "assigns the event" do
-          expect(assigns(:event)).to be_an_instance_of(EventPresenter)
-        end
-      end
-
-      context "when not logged in" do
-        before do
-          get :edit, id: event.to_param
-        end
-
-        it "redirects to login page" do
-          expect(response).to redirect_to(new_user_session_path)
-        end
+        it { is_expected.to assign(:event).as(EventPresenter) }
       end
     end
 
     context "for a non-existent event" do
       context "when logged in" do
-        before do
-          log_in_as(user)
-        end
+        include_context "logged in"
 
         it "throws an error" do
           expect { get :edit, id: "poops" }.to raise_error(ActiveRecord::RecordNotFound)
-        end
-      end
-
-      context "when not logged in" do
-        before do
-          get :edit, id: "missing"
-        end
-
-        it "redirects to login page" do
-          expect(response).to redirect_to(new_user_session_path)
         end
       end
     end
@@ -156,35 +83,29 @@ RSpec.describe EventsController, type: :controller do
   describe "PUT #update" do
     let(:updated_params) { EventSerializer.new(EventPresenter.new(event)).attributes.merge(name: "Updated") }
 
-    context "when not logged in" do
-      it "redirects to login page" do
-        put :update, id: event.to_param, event: updated_params
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
-
     context "when logged in" do
-      before do
-        log_in_as(user)
-      end
+      include_context "logged in"
 
-      it "denies access" do
-        expect { put :update, id: event.to_param, event: updated_params }
-          .to raise_error(CanCan::AccessDenied)
+      context "as a regular user" do
+        it "denies access" do
+          expect {put :update, id: event.to_param, event: updated_params }
+            .to raise_error(CanCan::AccessDenied)
+        end
+
+        it "does not update the event" do
+          expect(event.reload.name).to eq("Tri-Wizard Tournament")
+        end
       end
 
       context "as an event admin" do
         before do
           event.administrators.create!(user: user)
+          put :update, id: event.to_param, event: updated_params
         end
 
-        it "redirects to the event index" do
-          put :update, id: event.to_param, event: updated_params
-          expect(response).to redirect_to(edit_event_path(event))
-        end
+        it { is_expected.to redirect_to(edit_event_path(event))}
 
         it "updates the event" do
-          put :update, id: event.to_param, event: updated_params
           expect(event.reload.name).to eq("Updated")
         end
       end
@@ -192,27 +113,18 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    context "when not logged in" do
-      it "redirects to login page" do
-        delete :destroy, id: event.to_param
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
-
     context "when logged in" do
-      before do
-        log_in_as(user)
-      end
+      include_context "logged in"
 
-      it "denies access" do
-        expect { delete :destroy, id: event.to_param }
-          .to raise_error(CanCan::AccessDenied)
+      context "as a regular user" do
+        it "denies access" do
+          expect { delete :destroy, id: event.to_param }
+            .to raise_error(CanCan::AccessDenied)
+        end
       end
 
       context "as an event admin" do
-        before do
-          event.administrators.create!(user: user)
-        end
+        before { event.administrators.create!(user: user) }
 
         it "redirects to the event index" do
           delete :destroy, id: event.to_param
@@ -223,13 +135,10 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe "POST #check" do
-    before do
-      log_in_as(user)
-    end
+    include_context "logged in"
 
-    it "returns http success" do
-      post :check, event: event_params
-      expect(response).to have_http_status(:success)
-    end
+    before { post :check, event: event_params }
+
+    it { is_expected.to respond_with(:success) }
   end
 end

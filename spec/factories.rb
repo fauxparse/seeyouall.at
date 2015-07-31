@@ -29,7 +29,7 @@ FactoryGirl.define do
     association :event, factory: :tri_wizard
   end
 
-  factory :activity do
+  factory :activity, aliases: [:dragon_fighting] do
     name "Dragon Fighting"
     association :activity_type, factory: :trial
   end
@@ -37,7 +37,12 @@ FactoryGirl.define do
   factory :time_slot do
     start_time { Time.current }
     end_time { Time.current + 1.hour }
-    event
+    association :event, factory: :tri_wizard
+  end
+
+  factory :scheduled_activity do
+    association :activity, factory: :dragon_fighting
+    association :time_slot
   end
 
   factory :location, aliases: [:hogwarts] do
@@ -46,11 +51,17 @@ FactoryGirl.define do
 
   factory :package do
     name "Standard"
-    event
+    association :event, factory: :tri_wizard
   end
 
   factory :facilitator do
     name "Mad-Eye Moody"
     email "moody@hogwarts.ac.uk"
+  end
+
+  factory :registration do
+    association :user, factory: :hermione
+    association :package
+    association :event, factory: :tri_wizard
   end
 end

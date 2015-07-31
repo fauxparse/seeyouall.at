@@ -8,9 +8,7 @@ RSpec.describe Facilitator, type: :model do
   end
 
   context "with an associated user" do
-    before do
-      facilitator.user = FactoryGirl.create(:user)
-    end
+    before { facilitator.user = FactoryGirl.create(:user) }
 
     it { is_expected.to be_valid }
   end

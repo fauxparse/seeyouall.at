@@ -5,24 +5,25 @@ RSpec.describe Location, type: :model do
 
   it { is_expected.to validate_presence_of(:address) }
 
-  describe "#latitude" do
-    it "is generated automatically" do
-      location.save!
-      expect(location.latitude).to be_within(0.0001).of(-41.2935812)
-    end
-  end
+  context "when created" do
+    before { location.save! }
 
-  describe "#longitude" do
-    it "is generated automatically" do
-      location.save!
-      expect(location.longitude).to be_within(0.0001).of(174.7845941)
+    describe "#latitude" do
+      it "is generated automatically" do
+        expect(location.latitude).to be_within(0.0001).of(-41.2935812)
+      end
     end
-  end
 
-  describe ".near" do
-    it "finds locations" do
-      location.save!
-      expect(Location.near("Wellington")).to include(location)
+    describe "#longitude" do
+      it "is generated automatically" do
+        expect(location.longitude).to be_within(0.0001).of(174.7845941)
+      end
+    end
+
+    describe ".near" do
+      it "finds locations" do
+        expect(Location.near("Wellington")).to include(location)
+      end
     end
   end
 end

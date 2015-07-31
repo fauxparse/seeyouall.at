@@ -7,9 +7,7 @@ RSpec.describe Registration, type: :model do
   let(:package) { FactoryGirl.create(:package, event: event) }
 
   context "already registered for the same event" do
-    before do
-      user.registrations.create(event: event, package: package)
-    end
+    before { user.registrations.create(event: event, package: package) }
 
     it { is_expected.not_to be_valid }
   end

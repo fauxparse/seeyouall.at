@@ -1,10 +1,10 @@
 @font-face {
   font-family: "icons";
-  src: font-url("icons_71718cdd998175254a235be6d139ae2d.eot");
-  src: font-url("icons_71718cdd998175254a235be6d139ae2d.eot?#iefix") format("embedded-opentype"),
-       font-url("icons_71718cdd998175254a235be6d139ae2d.woff") format("woff"),
-       font-url("icons_71718cdd998175254a235be6d139ae2d.ttf") format("truetype"),
-       font-url("icons_71718cdd998175254a235be6d139ae2d.svg#icons") format("svg");
+  src: font-url("icons_906b256dd96d2363272548054ddc5511.eot");
+  src: font-url("icons_906b256dd96d2363272548054ddc5511.eot?#iefix") format("embedded-opentype"),
+       font-url("icons_906b256dd96d2363272548054ddc5511.woff") format("woff"),
+       font-url("icons_906b256dd96d2363272548054ddc5511.ttf") format("truetype"),
+       font-url("icons_906b256dd96d2363272548054ddc5511.svg#icons") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +12,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "icons";
-    src: font-url("icons_71718cdd998175254a235be6d139ae2d.svg#icons") format("svg");
+    src: font-url("icons_906b256dd96d2363272548054ddc5511.svg#icons") format("svg");
   }
 }
 
@@ -21,9 +21,15 @@
 [data-icon]:before,
 .icon-add-event:before,
 .icon-arrow-drop-down:before,
+.icon-arrow-left:before,
+.icon-arrow-right:before,
 .icon-block:before,
+.icon-cancel:before,
+.icon-event:before,
 .icon-logout:before,
-.icon-menu:before {
+.icon-menu:before,
+.icon-ok:before,
+.icon-spinner:before {
   display: inline-block;
   font-family: "icons";
   font-style: normal;
@@ -38,8 +44,26 @@
   font-smoothing: antialiased;
 }
 
-.icon-add-event:before { content: "\f103"; }
-.icon-arrow-drop-down:before { content: "\f102"; }
-.icon-block:before { content: "\f101"; }
-.icon-logout:before { content: "\f104"; }
-.icon-menu:before { content: "\f100"; }
+$icon-add-event: "\f103";
+$icon-arrow-drop-down: "\f102";
+$icon-arrow-left: "\f108";
+$icon-arrow-right: "\f109";
+$icon-block: "\f101";
+$icon-cancel: "\f106";
+$icon-event: "\f10a";
+$icon-logout: "\f104";
+$icon-menu: "\f100";
+$icon-ok: "\f107";
+$icon-spinner: "\f105";
+
+.icon-add-event::before { content: $icon-add-event; }
+.icon-arrow-drop-down::before { content: $icon-arrow-drop-down; }
+.icon-arrow-left::before { content: $icon-arrow-left; }
+.icon-arrow-right::before { content: $icon-arrow-right; }
+.icon-block::before { content: $icon-block; }
+.icon-cancel::before { content: $icon-cancel; }
+.icon-event::before { content: $icon-event; }
+.icon-logout::before { content: $icon-logout; }
+.icon-menu::before { content: $icon-menu; }
+.icon-ok::before { content: $icon-ok; }
+.icon-spinner::before { content: $icon-spinner; }

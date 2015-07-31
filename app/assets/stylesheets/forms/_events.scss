@@ -1,0 +1,21 @@
+.event-editor {
+  &.loading {
+
+  }
+
+  [rel="slug"] i::before {
+    content: $icon-ok;
+    color: $green;
+  }
+
+  [rel="slug"].has-errors i::before {
+    content: $icon-cancel;
+    color: $red;
+  }
+
+  &.loading [rel="slug"] i::before {
+    content: $icon-spinner;
+    color: icon-color();
+    @include animation(spin 2s linear infinite);
+  }
+}

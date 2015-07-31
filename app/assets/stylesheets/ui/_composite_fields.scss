@@ -1,0 +1,58 @@
+.composite-field {
+  @include display(flex);
+  position: relative;
+
+  label {
+    font-size: 100%;
+    font-weight: $base-font-weight;
+    color: disabled-text-color();
+    padding: 0.5em 0;
+    margin: 0;
+    line-height: 1.5em;
+
+    + input {
+      padding-left: 0;
+    }
+  }
+
+  input {
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    line-height: 1.5em;
+    background: none;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  :first-child {
+    padding-left: 0.5em;
+  }
+
+  :last-child {
+    padding-right: 0.5em;
+  }
+
+  .composite-field-border {
+    @include position(absolute, 0rem 0rem 0rem 0rem);
+    z-index: -1;
+    border: 1px solid $base-border-color;
+    border-radius: $base-border-radius;
+    box-shadow: $form-box-shadow;
+    @include transition(border-color $fast);
+  }
+
+  :focus ~ .composite-field-border {
+    border-color: $action-color;
+    box-shadow: $form-box-shadow-focus;
+  }
+
+  [class^="icon-"] {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    color: icon-color();
+  }
+}

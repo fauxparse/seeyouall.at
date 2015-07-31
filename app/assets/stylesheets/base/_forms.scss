@@ -14,7 +14,8 @@ select {
 }
 
 label {
-  font-weight: 600;
+  font-size: 75%;
+  color: secondary-color();
   margin-bottom: $small-spacing / 2;
 
   &.required::after {
@@ -38,7 +39,7 @@ textarea {
   font-size: $base-font-size;
   margin-bottom: $base-spacing / 2;
   padding: $base-spacing / 3;
-  transition: border-color;
+  @include transition(border-color $fast);
   width: 100%;
 
   &:hover {
@@ -75,4 +76,48 @@ select {
   margin-bottom: $base-spacing;
   max-width: 100%;
   width: auto;
+}
+
+form {
+  section {
+    margin: 0 -0.5rem 1rem;
+    @include display(flex);
+    @include flex-wrap(wrap);
+
+    section {
+      min-width: 10rem;
+      margin: 0 0.5rem ($base-spacing / 2);
+      @include flex(1 0);
+      @include display(flex);
+      @include flex-direction(column);
+
+      section {
+        margin: 0 0 ($base-spacing / 2);
+      }
+    }
+
+    #{$all-text-inputs},
+    select[multiple=multiple],
+    textarea {
+      margin-bottom: 0;
+    }
+  }
+
+  section.has-errors {
+    input, .composite-field-border {
+      border-color: $red;
+    }
+  }
+
+  .buttons {
+    margin: 0;
+    @include justify-content(flex-end);
+  }
+
+  .error-message {
+    font-size: 0.75em;
+    line-height: 1rem;
+    margin-top: $small-spacing / 2;
+    color: $red;
+  }
 }

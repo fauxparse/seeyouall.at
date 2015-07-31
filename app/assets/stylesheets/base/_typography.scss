@@ -57,17 +57,3 @@ picture {
   margin: 0;
   max-width: 100%;
 }
-
-[data-icon],
-[class^="icon-"] {
-  font-size: $icon-size;
-  display: block;
-  width: 1em;
-  height: 1em;
-  line-height: 1em;
-  text-align: center;
-
-  &::before {
-    display: block;
-  }
-}

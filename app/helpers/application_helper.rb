@@ -1,7 +1,10 @@
 module ApplicationHelper
   def icon(icon, options = {})
-    icon ||= "blank"
-    options[:class] = "icon-#{icon} #{options[:class]}".strip
+    add_class(options, "icon-#{icon || "blank"}")
     content_tag :i, "", options
+  end
+
+  def add_class(options, class_name)
+    options[:class] = "#{class_name} #{options[:class]}".strip
   end
 end

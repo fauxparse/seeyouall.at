@@ -1,6 +1,6 @@
 module PopupMenuHelper
   def popup_menu(label_text, options = {}, &block)
-    options[:class] = "popup #{options[:class]}".strip
+    add_class(options, "popup")
 
     content_tag :div, options do
       concat popup_menu_toggle(label_text)

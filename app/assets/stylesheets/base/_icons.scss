@@ -1,0 +1,22 @@
+[data-icon],
+[class^="icon-"] {
+  font-size: $icon-size;
+  display: block;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+
+  &::before {
+    display: block;
+  }
+
+  &.spin {
+    @include animation(spin 2s linear infinite);
+  }
+}
+
+@include keyframes(spin) {
+    0% { @include transform(rotate(0deg)); }
+  100% { @include transform(rotate(359deg)); }
+}

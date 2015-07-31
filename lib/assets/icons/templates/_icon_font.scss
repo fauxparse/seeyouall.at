@@ -7,4 +7,10 @@
 <%= glyph_properties %>
 }
 
-<%= glyphs %>
+<% @glyphs.each_pair do |name, value| -%>
+<%= "\$icon-#{name}: \"\\#{value[:codepoint].to_s(16)}\";" %>
+<% end -%>
+
+<% @glyphs.each_pair do |name, value| -%>
+<%= ".icon-#{name}::before { content: $icon-#{name}; }" %>
+<% end -%>

@@ -1,6 +1,6 @@
 module ActionListHelper
   def action_list(options = {}, &block)
-    options[:class] = "action-list #{options[:class]}".strip
+    add_class(options, "action-list")
     content_tag :ul, options, &block
   end
 

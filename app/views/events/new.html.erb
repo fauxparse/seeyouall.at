@@ -1,2 +1,37 @@
-<h1>Events#new</h1>
-<p>Find me in app/views/events/new.html.erb</p>
+<%= form_for @event do |form| %>
+  <section>
+    <section>
+      <section class="field" rel="name">
+        <%= form.label :name %>
+        <%= form.text_field :name, autofocus: true, required: true %>
+      </section>
+      <section class="field" rel="slug">
+        <%= form.label :slug %>
+        <%= composite_field do -%>
+          <%= form.label :slug, events_url + "/" %>
+          <%= form.text_field :slug, required: true %>
+          <%= icon :ok %>
+        <% end -%>
+      </section>
+    </section>
+  </section>
+
+  <section>
+    <section class="field" rel="start_date">
+      <%= form.label :start_date %>
+      <%= form.date_field :start_date %>
+    </section>
+
+    <section class="field" rel="end_date">
+      <%= form.label :end_date %>
+      <%= form.date_field :end_date %>
+    </section>
+  </section>
+
+  <section class="buttons">
+    <%= form.button do -%>
+      <%= content_tag :span, t("events.create") %>
+      <%= icon "arrow-right" %>
+    <% end %>
+  </section>
+<% end -%>

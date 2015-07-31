@@ -20,6 +20,30 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    attributes:
+      event:
+        name: Event name
+        slug: Event URL
+        start_time: Start date
+        end_time: End date
+    errors:
+      messages:
+        before_start: cannot end before it begins
+      models:
+        event:
+          attributes:
+            name:
+              blank: Event name cannot be empty.
+            slug:
+              blank: You need a URL for your event.
+              taken: This URL has already been taken.
+              invalid: This URL is not in the right format.
+            start_time:
+              blank: Start date cannot be blank.
+            end_time:
+              blank: End date cannot be blank.
+              before_start: Your event cannot end before it begins.
   helpers:
     label:
       user:
@@ -31,4 +55,6 @@ en:
         destroy: Log out
 
   events:
+    default_name: Your new event
     new: Create a new event
+    create: Create my event

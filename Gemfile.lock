@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/rails-api/active_model_serializers.git
+  revision: 3fe238ff17f08036e41749f40d76521c421bdb33
+  tag: v0.10.0.rc2
+  specs:
+    active_model_serializers (0.10.0.rc2)
+      activemodel (>= 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,6 +57,7 @@ GEM
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
+    cancancan (1.12.0)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     coffee-rails (4.1.0)
@@ -244,9 +253,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers!
   auto_strip_attributes (~> 2.0)
   bourbon
   byebug
+  cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
   devise
   factory_girl_rails

@@ -12,6 +12,7 @@ class Event < ActiveRecord::Base
     where("start_time <= ? AND end_time > ?", now, now)
   }
   scope :past, -> { where("end_time < ?", Time.current) }
+  scope :current_and_upcoming, -> { where("end_time > ?", Time.current) }
   scope :in_chronological_order, -> { order(start_time: :asc) }
 
   acts_as_url :name,

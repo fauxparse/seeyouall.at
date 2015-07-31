@@ -29,11 +29,14 @@ gem 'neat'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'cancancan', '~> 1.10'
 gem 'gravatarify', '~> 3.0.0'
 
 gem 'stringex'
 gem 'auto_strip_attributes', '~> 2.0'
 gem 'geocoder'
+
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers', tag: "v0.10.0.rc2"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

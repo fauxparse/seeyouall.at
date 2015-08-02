@@ -1,15 +1,27 @@
 {
   "checksum": {
-    "previous": "906b256dd96d2363272548054ddc55113a89e669299b8c6a0222db2afb13fc50",
-    "current": "906b256dd96d2363272548054ddc55113a89e669299b8c6a0222db2afb13fc50"
+    "previous": "d9c780a49cea3c4229c6cf672b3994980195eed2686ef477bef2a2cdd2908e3a",
+    "current": "d9c780a49cea3c4229c6cf672b3994980195eed2686ef477bef2a2cdd2908e3a"
   },
   "fonts": [
-    "app/assets/fonts/icons_906b256dd96d2363272548054ddc5511.ttf",
-    "app/assets/fonts/icons_906b256dd96d2363272548054ddc5511.svg",
-    "app/assets/fonts/icons_906b256dd96d2363272548054ddc5511.woff",
-    "app/assets/fonts/icons_906b256dd96d2363272548054ddc5511.eot"
+    "app/assets/fonts/icons_d9c780a49cea3c4229c6cf672b399498.ttf",
+    "app/assets/fonts/icons_d9c780a49cea3c4229c6cf672b399498.svg",
+    "app/assets/fonts/icons_d9c780a49cea3c4229c6cf672b399498.woff",
+    "app/assets/fonts/icons_d9c780a49cea3c4229c6cf672b399498.eot"
   ],
   "glyphs": {
+    "add": {
+      "codepoint": 61707,
+      "source": "lib/assets/icons/svg/add.svg"
+    },
+    "add-activity": {
+      "codepoint": 61709,
+      "source": "lib/assets/icons/svg/add-activity.svg"
+    },
+    "add-activity-type": {
+      "codepoint": 61710,
+      "source": "lib/assets/icons/svg/add-activity-type.svg"
+    },
     "add-event": {
       "codepoint": 61699,
       "source": "lib/assets/icons/svg/add-event.svg"
@@ -53,6 +65,10 @@
     "spinner": {
       "codepoint": 61701,
       "source": "lib/assets/icons/svg/spinner.svg"
+    },
+    "time-slot": {
+      "codepoint": 61708,
+      "source": "lib/assets/icons/svg/time-slot.svg"
     }
   },
   "options": {

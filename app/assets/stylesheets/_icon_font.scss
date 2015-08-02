@@ -1,10 +1,10 @@
 @font-face {
   font-family: "icons";
-  src: font-url("icons_906b256dd96d2363272548054ddc5511.eot");
-  src: font-url("icons_906b256dd96d2363272548054ddc5511.eot?#iefix") format("embedded-opentype"),
-       font-url("icons_906b256dd96d2363272548054ddc5511.woff") format("woff"),
-       font-url("icons_906b256dd96d2363272548054ddc5511.ttf") format("truetype"),
-       font-url("icons_906b256dd96d2363272548054ddc5511.svg#icons") format("svg");
+  src: font-url("icons_d9c780a49cea3c4229c6cf672b399498.eot");
+  src: font-url("icons_d9c780a49cea3c4229c6cf672b399498.eot?#iefix") format("embedded-opentype"),
+       font-url("icons_d9c780a49cea3c4229c6cf672b399498.woff") format("woff"),
+       font-url("icons_d9c780a49cea3c4229c6cf672b399498.ttf") format("truetype"),
+       font-url("icons_d9c780a49cea3c4229c6cf672b399498.svg#icons") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -12,13 +12,16 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "icons";
-    src: font-url("icons_906b256dd96d2363272548054ddc5511.svg#icons") format("svg");
+    src: font-url("icons_d9c780a49cea3c4229c6cf672b399498.svg#icons") format("svg");
   }
 }
 
 [data-icon]:before { content: attr(data-icon); }
 
 [data-icon]:before,
+.icon-add:before,
+.icon-add-activity:before,
+.icon-add-activity-type:before,
 .icon-add-event:before,
 .icon-arrow-drop-down:before,
 .icon-arrow-left:before,
@@ -29,7 +32,8 @@
 .icon-logout:before,
 .icon-menu:before,
 .icon-ok:before,
-.icon-spinner:before {
+.icon-spinner:before,
+.icon-time-slot:before {
   display: inline-block;
   font-family: "icons";
   font-style: normal;
@@ -44,6 +48,9 @@
   font-smoothing: antialiased;
 }
 
+$icon-add: "\f10b";
+$icon-add-activity: "\f10d";
+$icon-add-activity-type: "\f10e";
 $icon-add-event: "\f103";
 $icon-arrow-drop-down: "\f102";
 $icon-arrow-left: "\f108";
@@ -55,7 +62,11 @@ $icon-logout: "\f104";
 $icon-menu: "\f100";
 $icon-ok: "\f107";
 $icon-spinner: "\f105";
+$icon-time-slot: "\f10c";
 
+.icon-add::before { content: $icon-add; }
+.icon-add-activity::before { content: $icon-add-activity; }
+.icon-add-activity-type::before { content: $icon-add-activity-type; }
 .icon-add-event::before { content: $icon-add-event; }
 .icon-arrow-drop-down::before { content: $icon-arrow-drop-down; }
 .icon-arrow-left::before { content: $icon-arrow-left; }
@@ -67,3 +78,4 @@ $icon-spinner: "\f105";
 .icon-menu::before { content: $icon-menu; }
 .icon-ok::before { content: $icon-ok; }
 .icon-spinner::before { content: $icon-spinner; }
+.icon-time-slot::before { content: $icon-time-slot; }

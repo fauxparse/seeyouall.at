@@ -58,3 +58,15 @@ en:
     default_name: Your new event
     new: Create a new event
     create: Create my event
+
+  timetable:
+    new:
+      activity_type: "New activity type…"
+      activity: "New activity…"
+      time_slot: "New timeslot…"
+    day:
+      empty: Nothing scheduled today.
+
+  dialog:
+    ok: OK
+    cancel: Cancel

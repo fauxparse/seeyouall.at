@@ -1,0 +1,8 @@
+<section class="day" data-date="<%= @date.format("YYYY-MM-DD") %>">
+  <h3>
+    <span class="weekday"><%= @date.format("ddd") %></span>
+    <span class="date"><%= @date.date() %></span>
+    <span class="month"><%= @date.format("MMM") %></span>
+  </h3>
+  <div class="times"></div>
+</section>

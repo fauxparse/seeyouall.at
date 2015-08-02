@@ -1,0 +1,143 @@
+.floating-action-button {
+  @include position(fixed, null 0rem 0rem 0rem);
+
+  &::before {
+    content: "";
+    @include position(fixed, 0rem 0rem 0rem 0rem);
+    background: dark-scrim-color();
+    pointer-events: none;
+    opacity: 0;
+    @include transition(opacity $medium $ease-out-cubic);
+  }
+
+  button {
+    @include position(absolute, null 1rem 1rem null);
+    outline: none;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 1rem;
+    border-radius: 50%;
+    min-width: 0;
+    box-shadow: $raised-button-normal-shadow;
+
+    i:first-child:last-child {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .action-list {
+    @include position(absolute, null 0rem 0rem 0rem);
+    @include transform(translateY(100%));
+    @include transition-property(transform);
+    @include transition-duration($medium);
+    @include transition-timing-function($ease-out-cubic);
+    background: white;
+    box-shadow: $top-z1-shadow;
+  }
+
+  &.open {
+    &::before {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .action-list {
+      @include transform(translateY(0%));
+    }
+  }
+
+  @include media($medium-screen) {
+    .action-list {
+      @include transform(translateY(0%));
+      right: 1.5rem;
+      bottom: 5.5rem;
+      left: auto;
+      background: none;
+      box-shadow: none;
+
+      a {
+        position: absolute;
+        height: 3.5rem;
+
+        &[rel="cancel"] { display: none; }
+
+        i {
+          background: $action-color;
+          color: $white;
+          border-radius: 50%;
+          padding: 0.5rem;
+          width: 2.5rem;
+          height: 2.5rem;
+          margin: 0.5rem;
+          box-shadow: $raised-button-normal-shadow;
+          overflow: hidden;
+          z-index: 1;
+          @include transform(scale(0));
+          @include transition-property(transform);
+          @include transition-duration($fast);
+          @include transition-timing-function($ease-out-cubic);
+        }
+
+        span {
+          @include position(absolute, 50% 100% null null);
+          max-width: none;
+          background: dark-scrim-color();
+          color: white;
+          font-weight: $bold-font-weight;
+          font-size: 0.75rem;
+          line-height: 1.5rem;
+          padding: 0 0.5rem;
+          margin-top: -0.75rem;
+          border-radius: $base-border-radius;
+          opacity: 0;
+          @include transform(translateX(25%));
+          @include transition-property(transform, opacity);
+          @include transition-duration($fast);
+          @include transition-timing-function($ease-out-cubic);
+        }
+
+        &:hover {
+          i {
+            box-shadow: $raised-button-hover-shadow;
+          }
+
+          span {
+            opacity: 1;
+            @include transform(translateX(0));
+          }
+        }
+      }
+    }
+
+    @for $i from 1 through 10 {
+      .action-list li:nth-child(#{$i}) a {
+        right: 0;
+        bottom: (($i - 1) * 3rem - 0.5rem);
+      }
+
+      .action-list li:nth-last-child(#{$i}) a {
+        i { @include transition-delay($i * 50ms); }
+      }
+
+      &.open, &:hover {
+        .action-list li:nth-child(#{$i}) a {
+          i { @include transition-delay($i * 50ms); }
+        }
+      }
+    }
+
+    &.open, &:hover {
+      &::before { opacity: 0; }
+
+      .action-list i {
+        @include transform(scale(1));
+      }
+    }
+
+    button {
+      right: 1.5rem;
+      bottom: 1.5rem;
+    }
+  }
+}

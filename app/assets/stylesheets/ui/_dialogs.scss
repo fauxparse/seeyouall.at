@@ -1,0 +1,79 @@
+.dialog {
+  z-index: $dialog-z-index;
+  @include position(fixed, 0rem 0rem 0rem 0rem);
+
+  &::before {
+    content: "";
+    @include position(fixed, 0rem 0rem 0rem 0rem);
+    background: dark-scrim-color();
+    opacity: 0;
+    @include transition(opacity $medium $ease-out-cubic);
+  }
+
+  .dialog-wrapper {
+    @include position(fixed, 0rem 0rem 0rem 0rem);
+    @include transition-property(transform);
+    @include transition-duration($medium);
+    @include transition-timing-function($ease-out-cubic);
+    @include transform(translateY(100%));
+    @include display(flex);
+    @include flex-direction(column);
+    @include justify-content(flex-end);
+    @include align-items(center);
+  }
+
+  .dialog-container {
+    @include flex-direction(column);
+    width: 100%;
+    min-width: 17.5rem;
+    background: $white;
+    box-shadow: $z4-shadow;
+  }
+
+  .dialog-content {
+    padding: 1.5rem;
+  }
+
+  .dialog-footer {
+    padding: 0.5rem;
+    @include display(flex);
+    @include flex-direction(row);
+    @include justify-content(flex-end);
+
+    button {
+      background: none;
+      color: $action-color;
+      margin: 0;
+
+      &:not(:last-child) {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  &.in {
+    &::before {
+      opacity: 1;
+    }
+
+    .dialog-wrapper {
+      @include transform(translateY(0%));
+    }
+
+    + .page-container {
+      @include filter(blur(3px));
+    }
+  }
+
+  @include media($medium-screen) {
+    .dialog-wrapper {
+      @include justify-content(flex-end);
+    }
+
+    .dialog-container {
+      border-radius: $base-border-radius;
+      max-width: 30rem;
+      max-height: 90vh;
+    }
+  }
+}

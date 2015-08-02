@@ -1,0 +1,3 @@
+<article class="timetable-activity" data-id="<%= @activity.id %>" data-activity-type="<%= @activity.activity_type_id %>">
+  <h5><%= @activity.name %></h5>
+</article>

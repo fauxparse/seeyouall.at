@@ -5,7 +5,7 @@ $heading-font-family: $base-font-family;
 // Font Sizes
 $base-font-size: 1em;
 $base-font-weight: 300;
-$bold-font-weight: 500;
+$bold-font-weight: 600;
 
 // Line height
 $base-line-height: 1.5;
@@ -44,5 +44,8 @@ $icon-size: 1.5rem;
 $sidebar-z-index: 100;
 
 $page-header-height: 4rem;
+$page-header-height-mobile: ($page-header-height * 0.875);
 $page-header-background: $cyan-700;
 $page-header-color: $white;
+
+$dialog-z-index: 200;

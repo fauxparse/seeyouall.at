@@ -6,17 +6,19 @@
 
     <title>See you all at…</title>
 
-    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Raleway:300,500", media: "all" %>
+    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Raleway:300,600", media: "all" %>
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <%= render partial: "shared/sidebar" %>
-    <%= render partial: "shared/header" %>
+    <div class="page-container">
+      <%= render partial: "shared/sidebar" %>
+      <%= render partial: "shared/header" %>
 
-    <main>
-      <%= yield %>
+      <main>
+        <%= yield %>
+      </main>
     </main>
   </body>
 </html>

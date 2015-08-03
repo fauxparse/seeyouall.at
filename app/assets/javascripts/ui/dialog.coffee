@@ -10,6 +10,7 @@ class App.Dialog extends Spine.Controller
     @content = @renderContent().appendTo(@container)
     @footer = @renderFooter().appendTo(@container)
       .on("click", "button[rel]", @buttonClicked)
+    @refreshElements()
     @showAutomatically()
 
   showAutomatically: ->
@@ -20,8 +21,13 @@ class App.Dialog extends Spine.Controller
 
   shown: =>
 
+  # TODO dismiss with ESC key
   hide: ->
     @el.removeClass("in").on($.support.transitionEnd, @release)
+
+  ok: =>
+    trigger("ok")
+    @hide()
 
   cancel: =>
     @trigger("cancel")

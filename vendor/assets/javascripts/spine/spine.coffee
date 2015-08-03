@@ -365,8 +365,10 @@ class Model extends Module
     records = @constructor.irecords
     records[id] = records[@id]
     delete records[@id] unless @cid is @id
+    _id = @id
     @id = id
-    @save()
+    Spine.Ajax?.disable(=> @save()) || @save()
+    @trigger('changeID', records[id], _id, id)
 
   remove: (options = {}) ->
     # Remove record from model

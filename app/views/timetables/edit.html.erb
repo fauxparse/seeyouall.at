@@ -10,14 +10,4 @@
   </aside>
 
   <div class="timetable"></div>
-
-  <div class="floating-action-button">
-    <button><%= icon :add %></button>
-    <%= action_list do -%>
-      <%= action_list_item t("timetable.new.activity"), "#", "add-activity", rel: "new-activity" %>
-      <%= action_list_item t("timetable.new.activity_type"), "#", nil, rel: "new-activity-type" %>
-      <%= action_list_item t("timetable.new.time_slot"), "#", "time-slot", rel: "new-time-slot" %>
-      <%= action_list_item t("dialog.cancel"), "#", :cancel, rel: "cancel" %>
-    <% end -%>
-  </div>
 </div>

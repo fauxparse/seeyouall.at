@@ -1,6 +1,6 @@
 class TimetableSerializer < ActiveModel::Serializer
   attributes :event_id, :start_date, :end_date, :time_zone, :time_slots,
-    :activity_types, :activities
+    :activity_types, :activities, :scheduled_activities
 
   def event_id
     object.event.id
@@ -22,5 +22,9 @@ class TimetableSerializer < ActiveModel::Serializer
 
   def activities
     object.activities.map { |a| ActivitySerializer.new(a).attributes }
+  end
+
+  def scheduled_activities
+    object.scheduled_activities.map { |a| ScheduledActivitySerializer.new(a).attributes }
   end
 end

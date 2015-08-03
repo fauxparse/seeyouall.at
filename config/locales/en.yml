@@ -27,6 +27,9 @@ en:
         slug: Event URL
         start_time: Start date
         end_time: End date
+      time_slot:
+        start_time: Start time
+        end_time: End time
     errors:
       messages:
         before_start: cannot end before it begins

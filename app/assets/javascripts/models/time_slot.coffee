@@ -1,5 +1,8 @@
 class App.TimeSlot extends Spine.Model
-  @configure "TimeSlot", "start_time", "end_time"
+  @configure "TimeSlot", "event_id", "start_time", "end_time"
+  @extend Spine.Model.Ajax
+
+  url: -> "/events/#{@event_id}/time_slots"
 
   startTime: (value) ->
     @start_time = value.toISOString() if moment.isMoment(value)
@@ -8,6 +11,27 @@ class App.TimeSlot extends Spine.Model
   endTime: (value) ->
     @end_time = value.toISOString() if moment.isMoment(value)
     moment(@end_time)
+
+  @findByTimes: (startTime, endTime) ->
+    startTime = startTime.toISOString() if moment.isMoment(startTime)
+    endTime = endTime.toISOString() if moment.isMoment(endTime)
+
+    for record in @records
+      if record.startTime == startTime && record.endTime == endTime
+        return record
+    false
+
+  @findOrCreateByTimes: (event, startTime, endTime) ->
+    promise = $.Deferred()
+
+    if timeSlot = @findByTimes(startTime, endTime)
+      promise.resolve(timeSlot)
+    else
+      record = new this(event_id: event.id, start_time: startTime, end_time: endTime)
+      record.one "changeID", (timeSlot, oldID, newID) ->
+        promise.resolve(timeSlot)
+      .save(url: "/events/#{event.id}/time_slots")
+    promise
 
   @comparator: (a, b) ->
     [as, bs] = [a.startTime(), b.startTime()]

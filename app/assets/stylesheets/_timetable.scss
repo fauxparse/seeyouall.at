@@ -23,16 +23,6 @@
       @include flex(1);
       padding: 1rem;
       overflow-y: auto;
-
-      .timetable-activity {
-        &:not(:last-child) {
-          margin: 0 0 1rem;
-        }
-      }
-
-      .gu-transit {
-        display: none;
-      }
     }
   }
 
@@ -49,21 +39,23 @@
       @include flex(1);
       border-top: none;
       border-left: 1px solid divider-color();
-      max-width: 16rem;
     }
 
     .timetable {
       @include flex(2);
     }
+  }
 
-    .floating-action-button {
-      right: 33.333333%;
-      margin-right: -4rem;
+  @include media($large-screen) {
+    .timetable {
+      @include flex(3);
     }
   }
 }
 
 .timetable {
+  padding: 1rem 1rem 1rem 0;
+
   .day {
     @include display(flex);
     margin: 0;
@@ -102,7 +94,7 @@
       @include flex(1);
       @include display(flex);
       @include flex-direction(column);
-      min-height: 4rem;
+      min-height: 3.5rem;
       margin: 0 0 0rem -4.5rem;
       padding-left: 4.5rem;
       position: relative;
@@ -113,7 +105,7 @@
       }
 
       .time-slot {
-        margin: 0 0 0.5rem;
+        margin: 0;
         @include display(flex);
         @include flex-direction(row);
         @include flex-wrap(wrap);
@@ -151,12 +143,18 @@
   border-radius: $base-border-radius;
   padding: 0.5rem;
   font-size: 0.875rem;
+  margin: 0 0 0.5rem;
 
   h5 {
     font-size: 100%;
     font-weight: $bold-font-weight;
     margin: 0;
     line-height: 1rem;
+  }
+
+  .schedule {
+    color: secondary-color();
+    font-size: 0.75rem;
   }
 
   &.gu-mirror {
@@ -167,5 +165,23 @@
   .timetable-editor &,
   &.gu-mirror {
     cursor: move;
+  }
+}
+
+.schedule-activity {
+  section {
+    @include display(flex);
+    @include flex-wrap(wrap);
+
+    label {
+      width: 100%;
+    }
+
+    input {
+      @include flex(1);
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
   }
 }

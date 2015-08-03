@@ -51,6 +51,11 @@ textarea {
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
+
+  &:invalid:not(:focus) {
+    border-color: $red;
+    box-shadow: $form-box-shadow;
+  }
 }
 
 textarea {

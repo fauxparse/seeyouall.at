@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   has_many :activity_types, inverse_of: :event, dependent: :destroy, autosave: true
   has_many :activities, through: :activity_types
   has_many :time_slots, inverse_of: :event, dependent: :destroy, autosave: true
+  has_many :scheduled_activities, through: :time_slots
   has_many :packages, inverse_of: :event, dependent: :destroy, autosave: true
   has_many :registrations, inverse_of: :event, autosave: true, dependent: :destroy
   has_many :administrators, inverse_of: :event, autosave: true, dependent: :destroy

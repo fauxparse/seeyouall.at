@@ -1,5 +1,13 @@
-<h4><%= @activity.name %></h4>
-<input type="date" name="start-date" value="<%= @startTime.format("YYYY-MM-DD") %>">
-<input type="time" name="start-time" value="<%= @startTime.format("HH:mm:ss") %>">
-<input type="date" name="end-date" value="<%= @endTime.format("YYYY-MM-DD") %>">
-<input type="time" name="end-time" value="<%= @endTime.format("HH:mm:ss") %>">
+<div class="schedule-activity">
+  <h4 class="dialog-title"><%= @activity.name %></h4>
+  <section>
+    <label><%= I18n.t("activerecord.attributes.time_slot.start_time") %></label>
+    <input type="date" name="start-date" value="<%= @startTime.format("YYYY-MM-DD") %>" required min="<%= @event.startDate().format("YYYY-MM-DD") %>" max="<%= @event.endDate().format("YYYY-MM-DD") %>">
+    <input type="time" name="start-time" value="<%= @startTime.format("HH:mm:ss") %>" required>
+  </section>
+  <section>
+    <label><%= I18n.t("activerecord.attributes.time_slot.end_time") %></label>
+    <input type="date" name="end-date" value="<%= @endTime.format("YYYY-MM-DD") %>" required min="<%= @startTime.format("YYYY-MM-DD") %>" max="<%= @event.endDate().format("YYYY-MM-DD") %>">
+    <input type="time" name="end-time" value="<%= @endTime.format("HH:mm:ss") %>" required<%= " min='#{@startTime.format("HH:mm:ss")}'" if @startTime.isSame(@endTime, "day") %>>
+  </section>
+</div>

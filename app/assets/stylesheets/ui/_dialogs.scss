@@ -34,6 +34,13 @@
     padding: 1.5rem;
   }
 
+  .dialog-title {
+    font-size: 1.25rem;
+    font-weight: $bold-font-weight;
+    line-height: 1.25em;
+    margin: 0 0 1.25rem;
+  }
+
   .dialog-footer {
     padding: 0.5rem;
     @include display(flex);
@@ -47,6 +54,10 @@
 
       &:not(:last-child) {
         margin-right: 0.5rem;
+      }
+
+      &:disabled {
+        color: disabled-color($action-color);
       }
     }
   }
@@ -67,7 +78,7 @@
 
   @include media($medium-screen) {
     .dialog-wrapper {
-      @include justify-content(flex-end);
+      @include justify-content(center);
     }
 
     .dialog-container {

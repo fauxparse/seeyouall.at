@@ -7,12 +7,18 @@ class App.TimetableEditor extends Spine.Controller
     ".activity-list": "activityList"
     ".timetable": "timetable"
 
+  events:
+    "click .floating-action-button [data-activity-type-id]": "newActivity"
+    "click aside [data-activity-type-id]": "chooseActivityType"
+
   init: ->
     @dragula()
     App.ActivityType
       .one("refresh", @refreshActivityTypes)
+      .on("change", @refreshActivityTypes)
     App.Activity
       .one("refresh", @refreshActivities)
+      .on("change", @refreshActivities)
     App.TimeSlot
       .one("refresh", @refreshTimeSlots)
       .on("create", @createTimeSlot)
@@ -139,13 +145,13 @@ class App.TimetableEditor extends Spine.Controller
     @activityType(types[0]) unless @activityType()
     list = @$(".floating-action-button .action-list")
     list.find("[data-activity-type-id]").parent().remove()
-    list.append((@renderActivityType(type, I18n.t("timetable.new.of_type", {type})) for type in types))
+    list.append((@renderActivityType(type, I18n.t("activities.new_of_type", {type})) for type in types))
     list.find("[rel=cancel]").parent().appendTo(list)
 
   renderActivityType: (type, label = type.plural) ->
     color = Color.pickWithString(type.name)
     $("<li>").append(
-      $("<a>", href: "#", rel: type.id).append(
+      $("<a>", href: "#", "data-activity-type-id": type.id).append(
         $("<i>", class: "activity-type-icon", text: type.name.substr(0, 1).toLocaleUpperCase(), style: "background-color: #{color.shade(500)}")
         $("<span>", text: label)
       )
@@ -156,15 +162,21 @@ class App.TimetableEditor extends Spine.Controller
       @_activityType = type
       @activityTypeSelector
         .find(".popup-toggle-label").text(type.plural).end()
-        # .find("a")
-        #   .parent().show().end()
-        #   .filter("[rel=#{type.id}]").parent().hide().end().end()
-        # .end()
+        .find("a")
+          .parent().show().end()
+          .filter("[rel=#{type.id}]").parent().hide().end().end()
+        .end()
       @activityList
         .find(".timetable-activity").hide()
           .filter("[data-activity-type=#{type.id}]").show().end()
         .end()
     @_activityType
+
+  chooseActivityType: (e) ->
+    e.preventDefault()
+    id = $(e.target).closest("[data-activity-type-id]").data("activity-type-id")
+    if type = App.ActivityType.find(id)
+      @activityType(type)
 
   refreshActivities: =>
     @activityList.empty()
@@ -230,6 +242,12 @@ class App.TimetableEditor extends Spine.Controller
     @dragula().containers.splice 0, @dragula().containers.length,
       @$(".activity-list, .day .times, .day .time-slot").get()...
 
+  newActivity: (e) ->
+    activityType = App.ActivityType.find($(e.target).closest("[data-activity-type-id]").data("activity-type-id"))
+    activity = new App.Activity(activity_type_id: activityType.id)
+    event = @event()
+    new EditActivityDialog({ activity, event })
+
 class ScheduleActivityDialog extends App.Dialog
   elements:
     "[name=start-date]": "startDateInput"
@@ -266,6 +284,43 @@ class ScheduleActivityDialog extends App.Dialog
   ok: ->
     @trigger "ok", @startTime, @endTime
     @hide()
+
+class EditActivityDialog extends App.Dialog
+  elements:
+    "[name=name]": "nameInput"
+    "footer [rel=ok]": "okButton"
+    "footer [rel=another]": "addAnotherButton"
+    "footer [rel=ok], footer [rel=another]": "okButtons"
+
+  events:
+    "input input": "inputChanged"
+    "change input": "inputChanged"
+
+  init: ->
+    super
+    @addAnotherButton.toggle(@activity.isNew())
+
+  renderContent: ->
+    super.append(@view("timetable/edit_activity")(this))
+
+  renderFooter: ->
+    super.append($("<button>", rel: "another", text: I18n.t("activities.add_another")))
+
+  show: ->
+    super
+    @inputChanged()
+
+  shown: ->
+    super
+    @nameInput.focus()
+
+  ok: ->
+    @activity.name = @nameInput.val()
+    @activity.save()
+    @hide()
+
+  inputChanged: ->
+    @okButtons.prop("disabled", !!@$(":invalid").length)
 
 $ ->
   $(".timetable-editor").each ->

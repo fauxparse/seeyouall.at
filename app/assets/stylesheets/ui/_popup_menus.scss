@@ -16,6 +16,7 @@
     padding: 0.75rem;
     width: 3rem;
     height: 3rem;
+    overflow: hidden;
 
     @include transition-property(transform);
     @include transition-duration($fast);
@@ -47,6 +48,8 @@
 }
 
 .popup.open {
+  z-index: 1;
+
   .popup-toggle .icon-arrow-drop-down {
     @include transform(rotate(180deg));
   }

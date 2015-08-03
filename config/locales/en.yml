@@ -22,6 +22,9 @@
 en:
   activerecord:
     attributes:
+      activity:
+        name: Activity name
+        activity_type_id: Activity type
       event:
         name: Event name
         slug: Event URL
@@ -67,9 +70,13 @@ en:
       activity_type: "New activity type…"
       activity: "New activity…"
       time_slot: "New timeslot…"
-      of_type: "New %{type}"
     day:
       empty: Nothing scheduled today.
+
+  activities:
+    new: New activity
+    new_of_type: "New %{type}"
+    add_another: Add another
 
   dialog:
     ok: OK

@@ -38,13 +38,12 @@
   .action-list {
     @include position(absolute, null 0rem 0rem 0rem);
     @include transform(translateY(100%));
-    @include transition-property(transform);
+    @include transition-property(transform, box-shadow);
     @include transition-duration($medium);
     @include transition-timing-function($ease-out-cubic);
     max-height: 100vh;
     overflow-y: auto;
     background: white;
-    box-shadow: $top-z1-shadow;
   }
 
   &.open {
@@ -55,6 +54,7 @@
 
     .action-list {
       @include transform(translateY(0%));
+      box-shadow: $top-z1-shadow;
     }
 
     button i {

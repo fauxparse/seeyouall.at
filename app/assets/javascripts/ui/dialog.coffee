@@ -3,10 +3,10 @@ class App.Dialog extends Spine.Controller
     @el.addClass("dialog").prependTo("body")
     @wrapper = $("<div>", class: "dialog-wrapper")
       .appendTo(@el)
-      .on("click", @cancel)
+      .on "click", (e) =>
+        @cancel() unless $(e.target).parents(".dialog-container").length
     @container = $("<div>", class: "dialog-container")
       .appendTo(@wrapper)
-      .on("click", (e) -> e.stopPropagation())
     @content = @renderContent().appendTo(@container)
     @footer = @renderFooter().appendTo(@container)
       .on("click", "button[rel]", @buttonClicked)

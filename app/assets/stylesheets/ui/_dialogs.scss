@@ -46,14 +46,16 @@
     @include display(flex);
     @include flex-direction(row);
     @include justify-content(flex-end);
+    @include flex-wrap(wrap);
 
     button {
       background: none;
       color: $action-color;
       margin: 0;
+      text-align: center;
 
-      &:not(:last-child) {
-        margin-right: 0.5rem;
+      &:not(:first-child) {
+        margin-left: 0.5rem;
       }
 
       &:disabled {

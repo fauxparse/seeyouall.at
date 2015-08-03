@@ -1,0 +1,27 @@
+<div class="edit-activity">
+  <h4 class="dialog-title"><%= @activity.name || I18n.t("activities.new") %></h4>
+  <section>
+    <label><%= I18n.t("activerecord.attributes.activity.name") %></label>
+    <input type="text" name="name" value="<%= @activity.name %>" required autofocus>
+  </section>
+  <section>
+    <div class="popup">
+      <input type="hidden" name="activity_type_id" value="<%= @activity.activity_type_id %>">
+      <a class="popup-toggle" href="#">
+        <div class="popup-toggle-label"><%= @activity.activityType().name %></div><i class="icon-arrow-drop-down"></i>
+      </a>
+      <div class="popup-menu">
+        <ul class="action-list">
+          <% for type in App.ActivityType.all(): %>
+            <li>
+              <a href="#" data-activity-type-id="<%= type.id %>">
+                <i class="activity-type-icon" style="background-color: <%= Color.pickWithString(type.name).shade(500) %>"><%= type.name.substr(0,1).toLocaleUpperCase() %></i>
+                <span><%= type.name %></span>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>

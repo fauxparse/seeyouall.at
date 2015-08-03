@@ -67,6 +67,7 @@ en:
       activity_type: "New activity type…"
       activity: "New activity…"
       time_slot: "New timeslot…"
+      of_type: "New %{type}"
     day:
       empty: Nothing scheduled today.
 

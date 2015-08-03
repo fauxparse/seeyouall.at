@@ -1,11 +1,9 @@
 .timetable-editor {
   @include position(fixed, $page-header-height-mobile 0rem 0rem 0rem);
-  @include display(flex);
-  @include flex-direction(column);
 
   aside {
-    @include flex(1);
-    @include order(1);
+    @include position(absolute, null 0rem 0rem 0rem);
+    height: 40%;
     @include display(flex);
     @include flex-direction(column);
     border-top: 1px solid divider-color();
@@ -27,28 +25,47 @@
   }
 
   .timetable {
-    @include flex(1);
+    @include position(absolute, 0rem 0rem null 0rem);
+    height: 60%;
     overflow-y: auto;
+    padding-bottom: 4.5rem;
   }
 
   @include media($medium-screen) {
     top: $page-header-height;
-    @include flex-direction(row);
 
     aside {
-      @include flex(1);
       border-top: none;
       border-left: 1px solid divider-color();
+      height: auto;
+      left: auto;
+      top: 0;
+      width: 35%;
     }
 
     .timetable {
-      @include flex(2);
+      height: auto;
+      bottom: 0;
+      width: 65%;
+    }
+
+    .floating-action-button {
+      right: 35%;
+      margin-right: -3.25rem;
     }
   }
 
   @include media($large-screen) {
     .timetable {
-      @include flex(3);
+      width: 75%;
+    }
+
+    aside {
+      width: 25%;
+    }
+
+    .floating-action-button {
+      right: 25%;
     }
   }
 }
@@ -184,4 +201,18 @@
       }
     }
   }
+}
+
+.action-list i.activity-type-icon {
+  padding: 0;
+  margin: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  font-style: normal;
+  font-size: 1.5rem;
+  font-weight: $bold-font-weight;
+  color: secondary-color($white);
+  border-radius: 50%;
 }

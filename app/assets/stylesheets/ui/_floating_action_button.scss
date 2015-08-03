@@ -1,5 +1,6 @@
 .floating-action-button {
   @include position(fixed, null 0rem 0rem 0rem);
+  z-index: $floating-action-button-z-index;
 
   &::before {
     content: "";
@@ -20,9 +21,17 @@
     min-width: 0;
     box-shadow: $raised-button-normal-shadow;
 
+    &:hover, &:focus {
+      background-color: $action-color;
+      box-shadow: $raised-button-hover-shadow;
+    }
+
     i:first-child:last-child {
       margin: 0;
       padding: 0;
+      @include transition-property(transform);
+      @include transition-duration($medium);
+      @include transition-timing-function($ease-out-cubic);
     }
   }
 
@@ -32,6 +41,8 @@
     @include transition-property(transform);
     @include transition-duration($medium);
     @include transition-timing-function($ease-out-cubic);
+    max-height: 100vh;
+    overflow-y: auto;
     background: white;
     box-shadow: $top-z1-shadow;
   }
@@ -45,6 +56,10 @@
     .action-list {
       @include transform(translateY(0%));
     }
+
+    button i {
+      @include transform(rotate(45deg));
+    }
   }
 
   @include media($medium-screen) {
@@ -55,6 +70,7 @@
       left: auto;
       background: none;
       box-shadow: none;
+      overflow-y: visible;
 
       a {
         position: absolute;
@@ -69,6 +85,7 @@
           padding: 0.5rem;
           width: 2.5rem;
           height: 2.5rem;
+          line-height: 1.5rem;
           margin: 0.5rem;
           box-shadow: $raised-button-normal-shadow;
           overflow: hidden;

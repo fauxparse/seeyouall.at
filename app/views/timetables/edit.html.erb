@@ -10,4 +10,11 @@
   </aside>
 
   <div class="timetable"></div>
+
+  <div class="floating-action-button">
+    <button><%= icon :add %></button>
+    <%= action_list do -%>
+      <%= action_list_item t("dialog.cancel"), "#", :cancel, rel: "cancel" %>
+    <% end -%>
+  </div>
 </div>

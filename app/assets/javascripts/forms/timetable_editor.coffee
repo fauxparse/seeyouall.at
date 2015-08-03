@@ -133,15 +133,21 @@ class App.TimetableEditor extends Spine.Controller
 
   refreshActivityTypes: =>
     types = App.ActivityType.all()
-    @$("aside header").toggle(types.length > 1)
+    # @$("aside header").toggle(types.length > 1)
     @activityTypeSelector.find(".action-list").empty()
-      .append (@renderActivityType(type) for type in types)
+      .append((@renderActivityType(type) for type in types))
     @activityType(types[0]) unless @activityType()
+    list = @$(".floating-action-button .action-list")
+    list.find("[data-activity-type-id]").parent().remove()
+    list.append((@renderActivityType(type, I18n.t("timetable.new.of_type", {type})) for type in types))
+    list.find("[rel=cancel]").parent().appendTo(list)
 
-  renderActivityType: (type) ->
+  renderActivityType: (type, label = type.plural) ->
+    color = Color.pickWithString(type.name)
     $("<li>").append(
       $("<a>", href: "#", rel: type.id).append(
-        $("<span>", text: type.plural)
+        $("<i>", class: "activity-type-icon", text: type.name.substr(0, 1).toLocaleUpperCase(), style: "background-color: #{color.shade(500)}")
+        $("<span>", text: label)
       )
     )
 
@@ -150,10 +156,10 @@ class App.TimetableEditor extends Spine.Controller
       @_activityType = type
       @activityTypeSelector
         .find(".popup-toggle-label").text(type.plural).end()
-        .find("a")
-          .parent().show().end()
-          .filter("[rel=#{type.id}]").parent().hide().end().end()
-        .end()
+        # .find("a")
+        #   .parent().show().end()
+        #   .filter("[rel=#{type.id}]").parent().hide().end().end()
+        # .end()
       @activityList
         .find(".timetable-activity").hide()
           .filter("[data-activity-type=#{type.id}]").show().end()

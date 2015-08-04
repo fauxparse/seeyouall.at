@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     post "check", on: :collection
 
     resource :timetable
+    resources :activities
     resources :time_slots, only: [:create, :destroy]
     resources :scheduled_activities, only: [:create, :update, :destroy]
   end

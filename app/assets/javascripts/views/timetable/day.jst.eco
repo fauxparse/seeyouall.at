@@ -2,7 +2,7 @@
   <h3>
     <span class="weekday"><%= @date.format("ddd") %></span>
     <span class="date"><%= @date.date() %></span>
-    <span class="month"><%= @date.format("MMM") %></span>
+    <span class="month"><%= @date.format("MMMM") %></span>
   </h3>
   <div class="times"></div>
 </section>

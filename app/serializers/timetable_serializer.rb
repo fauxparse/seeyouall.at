@@ -1,9 +1,13 @@
 class TimetableSerializer < ActiveModel::Serializer
-  attributes :event_id, :start_date, :end_date, :time_zone, :time_slots,
+  attributes :event_id, :event_slug, :start_date, :end_date, :time_zone, :time_slots,
     :activity_types, :activities, :scheduled_activities
 
   def event_id
     object.event.id
+  end
+
+  def event_slug
+    object.event.slug
   end
 
   delegate :start_date, :end_date, to: :object

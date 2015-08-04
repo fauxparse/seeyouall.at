@@ -20,10 +20,15 @@ class App.Dialog extends Spine.Controller
     @el.addClass("in").one($.support.transitionEnd, @shown)
 
   shown: =>
+    $(document).on("keyup", @keypress)
 
-  # TODO dismiss with ESC key
   hide: ->
+    $(document).off("keyup", @keypress)
     @el.removeClass("in").on($.support.transitionEnd, @release)
+
+  keypress: (e) =>
+    if e.which == 27
+      @hide()
 
   ok: =>
     trigger("ok")

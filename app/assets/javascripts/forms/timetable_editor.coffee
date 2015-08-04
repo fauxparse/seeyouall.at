@@ -19,6 +19,8 @@ class App.TimetableEditor extends Spine.Controller
     App.Activity
       .one("refresh", @refreshActivities)
       .on("change", @refreshActivities)
+      .on("changeID", @changeActivityID)
+      .on("create", @switchToTypeOfNewActivity)
     App.TimeSlot
       .one("refresh", @refreshTimeSlots)
       .on("create", @createTimeSlot)
@@ -123,7 +125,7 @@ class App.TimetableEditor extends Spine.Controller
       @event().start_date = data.start_date
       @event().end_date = data.end_date
       App.ActivityType.refresh(data.activity_types)
-      App.Activity.refresh(data.activities)
+      App.Activity.refresh(($.extend(a, { event_id: @eventID() }) for a in data.activities))
       App.TimeSlot.refresh(($.extend(slot, { event_id: @eventID() }) for slot in data.time_slots))
       App.ScheduledActivity.refresh(data.scheduled_activities)
       @refreshDragContainers()
@@ -180,7 +182,7 @@ class App.TimetableEditor extends Spine.Controller
 
   refreshActivities: =>
     @activityList.empty()
-    for activity in App.Activity.all()
+    for activity in App.Activity.sorted()
       @renderActivity(activity).appendTo(@activityList)
         .toggle(activity.activity_type_id == @activityType().id)
 
@@ -188,6 +190,9 @@ class App.TimetableEditor extends Spine.Controller
     color = Color.pickWithString(activity.activityType().name)
     $(@view("timetable/activity")({ activity, schedule }))
       .css(background: color.shade(100))
+
+  changeActivityID: (activity, oldID, newID) =>
+    @$(".timetable-activity[data-id=#{oldID}]").attr("data-id", newID)
 
   refreshTimeSlots: =>
     @timetable.empty()
@@ -239,14 +244,19 @@ class App.TimetableEditor extends Spine.Controller
       $(this).append $(this).children(".time-slot").get().sort (a, b) ->
         $(a).data("start-time").localeCompare($(b).data("start-time")) ||
         $(a).data("end-time").localeCompare($(b).data("end-time"))
-    @dragula().containers.splice 0, @dragula().containers.length,
+    @dragula().containers.splice(
+      0, @dragula().containers.length,
       @$(".activity-list, .day .times, .day .time-slot").get()...
+    )
 
   newActivity: (e) ->
     activityType = App.ActivityType.find($(e.target).closest("[data-activity-type-id]").data("activity-type-id"))
     activity = new App.Activity(activity_type_id: activityType.id)
     event = @event()
     new EditActivityDialog({ activity, event })
+
+  switchToTypeOfNewActivity: (activity) =>
+    @activityType(activity.activityType())
 
 class ScheduleActivityDialog extends App.Dialog
   elements:
@@ -265,6 +275,7 @@ class ScheduleActivityDialog extends App.Dialog
   shown: ->
     super
     @timesChanged()
+    @startDateInput.focus()
 
   timesChanged: ->
     startTime = moment(@startDateInput.val() + " " + @startTimeInput.val())
@@ -284,6 +295,12 @@ class ScheduleActivityDialog extends App.Dialog
   ok: ->
     @trigger "ok", @startTime, @endTime
     @hide()
+
+  keypress: (e) =>
+    if e.which == 13
+      @ok()
+    else
+      super
 
 class EditActivityDialog extends App.Dialog
   elements:
@@ -314,13 +331,34 @@ class EditActivityDialog extends App.Dialog
     super
     @nameInput.focus()
 
-  ok: ->
+  save: ->
     @activity.name = @nameInput.val()
-    @activity.save()
+    @activity.save(url: @url())
+
+  ok: ->
+    @save()
     @hide()
+
+  another: ->
+    @save()
+    @activity = new App.Activity(activity_type_id: @activity.activity_type_id)
+    @nameInput.val("").focus()
+
+  url: ->
+    id = !@activity.isNew() && "/#{@activity.id}" || ""
+    "/events/#{@event.id}/activities#{id}"
 
   inputChanged: ->
     @okButtons.prop("disabled", !!@$(":invalid").length)
+
+  keypress: (e) =>
+    if e.which == 13
+      if @addAnotherButton.is(":visible")
+        @another()
+      else
+        @ok()
+    else
+      super
 
 $ ->
   $(".timetable-editor").each ->

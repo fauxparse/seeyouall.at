@@ -1,8 +1,12 @@
 <article class="timetable-activity" data-id="<%= @activity.id %>" data-activity-type="<%= @activity.activity_type_id %>"<%= " data-schedule-id=\"#{@schedule.id}\"" if @schedule?%>>
-  <h5><%= @activity.name %></h5>
-  <% if @schedule?: %>
-    <div class="schedule">
-      <%= @schedule.startTime().format("LT") %> – <%= @schedule.endTime().format("LT") %>
-    </div>
-  <% end %>
+  <div class="details">
+    <h5><%= @activity.name %></h5>
+    <% if @schedule?: %>
+      <div class="schedule">
+        <%= @schedule.startTime().format("LT") %> – <%= @schedule.endTime().format("LT") %>
+      </div>
+    <% end %>
+  </div>
+  <div class="icons">
+  </div>
 </article>

@@ -31,14 +31,15 @@ label {
 select[multiple=multiple],
 textarea {
   background-color: $base-background-color;
-  border: $base-border;
-  border-radius: $base-border-radius;
+  border: none; //$base-border;
+  border-bottom: $base-border;
+  border-radius: 0; //$base-border-radius;
   box-shadow: $form-box-shadow;
   box-sizing: border-box;
   font-family: $base-font-family;
   font-size: $base-font-size;
   margin-bottom: $base-spacing / 2;
-  padding: $base-spacing / 3;
+  padding: ($base-spacing / 2) 0;
   @include transition(border-color $fast);
   width: 100%;
 
@@ -48,6 +49,8 @@ textarea {
 
   &:focus {
     border-color: $action-color;
+    border-bottom-width: 0.125rem;
+    padding-bottom: ($base-spacing / 2) - 0.0625rem;
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
@@ -55,6 +58,10 @@ textarea {
   &:invalid:not(:focus) {
     border-color: $red;
     box-shadow: $form-box-shadow;
+  }
+
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
   }
 }
 
@@ -91,13 +98,13 @@ form {
 
     section {
       min-width: 10rem;
-      margin: 0 0.5rem ($base-spacing / 2);
+      margin: 0 0.5rem;
       @include flex(1 0);
       @include display(flex);
       @include flex-direction(column);
 
       section {
-        margin: 0 0 ($base-spacing / 2);
+        margin: 0;
       }
     }
 

@@ -60,25 +60,34 @@ aside.sidebar {
     }
 
     .popup {
-      @include position(absolute, null 0rem 0rem 0rem);
+      margin-top: -2.5rem;
 
       .popup-toggle {
         @include transition(none);
         color: text-color($white);
-        background: $cyan-600;
+        background: $sidebar-header-background;
         font-weight: $bold-font-weight;
+        border-bottom: none;
+
+        .popup-toggle-label {
+          padding-left: 1rem;
+        }
       }
 
       .popup-menu {
-        border-radius: 0;
-        box-shadow: none;
+        top: 2rem;
+        left: 0.5rem;
+        right: 0.5rem;
+        padding-top: 0;
         border-bottom: 1px solid divider-color();
-        background: none;
 
-        ul {
-          background: white;
+        .action-list {
           border-top: none;
           margin-top: 1px;
+
+          a {
+            padding: 0;
+          }
         }
       }
     }
@@ -88,17 +97,26 @@ aside.sidebar {
 
       input {
         margin: 0;
-        border-radius: $base-border-radius $base-border-radius 0 0;
         box-shadow: none;
-
-        &[type="password"] {
-          margin-top: -1px;
-          border-radius: 0 0 $base-border-radius $base-border-radius;
-        }
+        background: none;
+        color: text-color(white);
+        border-color: secondary-color(white);
+        -webkit-font-smoothing: auto;
 
         &:focus {
-          position: relative;
-          z-index: 1;
+          border-color: text-color(white);
+        }
+
+        &[type="password"] {
+        }
+
+        &:-webkit-autofill {
+          -webkit-box-shadow: 0 0 0px 1000px $sidebar-header-background inset;
+          -webkit-text-fill-color: text-color(white);
+        }
+
+        @include placeholder {
+          color: secondary-color(white);
         }
       }
 

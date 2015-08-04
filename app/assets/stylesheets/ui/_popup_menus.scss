@@ -5,54 +5,66 @@
 .popup-toggle {
   @include display(flex);
   position: relative;
-  z-index: 1;
   color: text-color();
+  border-bottom: 0.0625rem solid divider-color();
+  box-sizing: border-box;
+  height: 2.5em;
 
   &:hover, &:focus {
     color: text-color();
   }
 
   .icon-arrow-drop-down {
-    padding: 0.75rem;
-    width: 3rem;
-    height: 3rem;
+    padding: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     overflow: hidden;
-
-    @include transition-property(transform);
-    @include transition-duration($fast);
-    @include transition-timing-function($ease-out-cubic);
   }
 }
 
 .popup-toggle-label {
   @include flex(1);
   @include ellipsis;
-  line-height: 1rem;
-  padding: 1rem;
+  line-height: 1.5rem;
+  padding: 0.5rem 0;
 }
 
 .popup-menu {
   display: none;
-  @include position(absolute, 0rem 0rem null 0rem);
+  @include position(absolute, -0.5rem -0.5rem null -0.5rem);
   box-shadow: $z2-shadow;
-  padding-top: 3rem;
   background: $white;
   border-radius: $base-border-radius;
 
   ul {
     margin: 0;
-    padding: 0;
-    border-top: 1px solid divider-color();
+    padding: 0.5rem 0;
     list-style: none;
+  }
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    display: block;
+    margin: 0;
+    padding: 0.5rem;
+    color: text-color();
+
+    &:hover {
+      background: rgba($black, 0.1);
+    }
+  }
+
+  .action-list a {
+    padding: 0;
   }
 }
 
 .popup.open {
   z-index: 1;
-
-  .popup-toggle .icon-arrow-drop-down {
-    @include transform(rotate(180deg));
-  }
 
   .popup-menu {
     display: block;

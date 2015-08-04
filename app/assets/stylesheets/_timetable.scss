@@ -9,11 +9,19 @@
     border-top: 1px solid divider-color();
 
     header {
+      padding: 0 0.5rem;
+      @include display(flex);
+      @include flex-direction(row);
       border-bottom: 1px solid divider-color();
+      @include flex-shrink(0);
 
-      .popup-toggle-label,
-      .action-list span {
+      .popup {
+        @include flex(1);
         text-transform: capitalize;
+      }
+
+      .popup-toggle {
+        border-bottom-color: transparent;
       }
     }
 

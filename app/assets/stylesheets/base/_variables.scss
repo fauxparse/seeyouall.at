@@ -12,8 +12,8 @@ $base-line-height: 1.5;
 $heading-line-height: 1.2;
 
 // Other Sizes
-$base-border-radius: 3px;
-$base-spacing: $base-line-height * 1em;
+$base-border-radius: 0.25rem;
+$base-spacing: 1rem;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
@@ -26,14 +26,15 @@ $light-gray: #ddd;
 $base-background-color: $white;
 $base-font-color: text-color();
 $action-color: $pink;
+$error-color: $red;
 
 // Border
 $base-border-color: $light-gray;
 $base-border: 1px solid $base-border-color;
 
 // Forms
-$form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
-$form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
+$form-box-shadow: none; //inset 0 1px 3px rgba(#000, 0.06);
+$form-box-shadow-focus: none; //$form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
 
 $fast: 0.25s;
 $medium: 0.5s;
@@ -42,6 +43,7 @@ $slow: 1s;
 $icon-size: 1.5rem;
 
 $sidebar-z-index: 100;
+$sidebar-header-background: $cyan-600;
 
 $page-header-height: 4rem;
 $page-header-height-mobile: ($page-header-height * 0.875);

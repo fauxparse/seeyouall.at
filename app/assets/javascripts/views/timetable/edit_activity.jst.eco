@@ -1,10 +1,11 @@
 <div class="edit-activity">
   <h4 class="dialog-title"><%= @activity.name || I18n.t("activities.new") %></h4>
-  <section>
-    <label><%= I18n.t("activerecord.attributes.activity.name") %></label>
+  <section class="floating-label field">
     <input type="text" name="name" value="<%= @activity.name %>" required autofocus>
+    <label><%= I18n.t("activerecord.attributes.activity.name") %></label>
   </section>
-  <section>
+  <section class="floating-label field has-value">
+    <label><%= I18n.t("activerecord.attributes.activity.activity_type_id") %></label>
     <div class="popup">
       <input type="hidden" name="activity_type_id" value="<%= @activity.activity_type_id %>">
       <a class="popup-toggle" href="#">

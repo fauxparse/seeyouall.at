@@ -27,26 +27,22 @@
     }
   }
 
-  :first-child {
-    padding-left: 0.5em;
-  }
-
-  :last-child {
-    padding-right: 0.5em;
-  }
-
   .composite-field-border {
     @include position(absolute, 0rem 0rem 0rem 0rem);
     z-index: -1;
-    border: 1px solid $base-border-color;
-    border-radius: $base-border-radius;
+    border-bottom: 1px solid $base-border-color;
     box-shadow: $form-box-shadow;
     @include transition(border-color $fast);
   }
 
-  :focus ~ .composite-field-border {
-    border-color: $action-color;
-    box-shadow: $form-box-shadow-focus;
+  :focus {
+    padding-bottom: 0.5rem !important;
+
+    ~ .composite-field-border {
+      border-color: $action-color;
+      border-width: 0.125rem;
+      box-shadow: $form-box-shadow-focus;
+    }
   }
 
   [class^="icon-"] {

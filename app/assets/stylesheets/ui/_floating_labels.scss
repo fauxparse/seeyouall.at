@@ -1,0 +1,38 @@
+.field.floating-label {
+  position: relative;
+  padding-top: 2rem;
+  box-sizing: border-box;
+
+  > input {
+    margin: 0 0 0.5em;
+    height: 2em;
+
+    &[type="text"] {
+      line-height: 2rem;
+    }
+  }
+
+  > label {
+    @include position(absolute, 2rem null null 0rem);
+    @include transition(all $fast $ease-out-cubic);
+    font-size: 1em;
+    line-height: 2em;
+    pointer-events: none;
+    color: secondary-color();
+  }
+
+  &.has-value > label,
+  > input:focus ~ label {
+    @include position(absolute, 1rem null null 0rem);
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  > input:invalid ~ label {
+    color: $error-color;
+  }
+
+  > input:focus ~ label {
+    color: $action-color;
+  }
+}

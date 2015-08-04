@@ -7,7 +7,6 @@ button {
   border: none;
   color: #fff;
   cursor: pointer;
-  @include display(inline-flex);
   font-family: $base-font-family;
   font-size: $base-font-size;
   font-weight: $bold-font-weight;
@@ -21,6 +20,10 @@ button {
   white-space: nowrap;
   text-transform: uppercase;
 
+  @include display(inline-flex);
+  @include justify-content(center);
+  @include align-items(center);
+
   &:hover,
   &:focus {
     background-color: darken($action-color, 15%);
@@ -33,10 +36,11 @@ button {
   }
 
   span {
+    @include flex(1);
   }
 
   i[class^="icon-"] {
-    margin: -0.25rem -0.5rem;
+    // margin: -0.25rem -0.5rem;
     &:first-child {
       margin-right: 0.5rem;
     }

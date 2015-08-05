@@ -100,10 +100,11 @@
 }
 
 .timetable {
-  padding: 0.5rem 1rem 1rem 0;
+  padding: 0rem 1rem 1rem 0;
 
   .day {
     @include display(flex);
+    @include flex-wrap(wrap);
     margin: 0;
     padding: 0 0 0 0.5rem;
     position: relative;
@@ -112,6 +113,10 @@
       h3 {
         color: $action-color;
       }
+    }
+
+    h2 {
+      display: none;
     }
 
     h3 {
@@ -180,7 +185,7 @@
   }
 
   @include media($medium-screen) {
-    padding: 0.5rem 1rem 1rem;
+    padding: 0rem 1rem 1rem;
 
     .day {
       border-radius: $base-border-radius;
@@ -194,16 +199,14 @@
 
   .day:first-child,
   .day[data-date$="-01"] {
-    margin-top: 2rem;
-
-    h3 {
-      .month {
-        display: block;
-        @include position(absolute, -2.5rem null null 5rem);
-        line-height: 2.5rem;
-        vertical-align: middle;
-        color: text-color();
-      }
+    h2 {
+      display: block;
+      margin: 0;
+      width: 100%;
+      line-height: 2.5rem;
+      vertical-align: middle;
+      color: text-color();
+      padding-left: 5rem;
     }
   }
 }

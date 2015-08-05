@@ -34,6 +34,7 @@ class App.TimetableEditor extends Spine.Controller
       .on("update", @updateScheduledActivity)
       .on("changeID", @changeScheduledActivityID)
       .on("destroy", @destroyScheduledActivity)
+    @timetable.on("scroll", @timetableScrolled)
     @loadJSON()
 
   dragula: ->
@@ -79,6 +80,7 @@ class App.TimetableEditor extends Spine.Controller
             .done (scheduledActivity) =>
               if @$("[data-schedule-id=#{scheduledActivity.id}]").length
                 item.remove()
+                @refreshDragContainers()
               else
                 item
                   .appendTo(@$(".time-slot[data-id=#{scheduledActivity.time_slot_id}]"))
@@ -86,6 +88,7 @@ class App.TimetableEditor extends Spine.Controller
                 @refreshDragContainers()
             .fail =>
               item.remove()
+              @refreshDragContainers()
         .on "cancel", =>
           if schedule
             item
@@ -93,6 +96,7 @@ class App.TimetableEditor extends Spine.Controller
               .replaceWith(@renderActivity(activity, schedule))
           else
             item.remove()
+            @refreshDragContainers()
     else if $(container).hasClass("time-slot")
       timeSlot = App.TimeSlot.find($(container).data("id"))
       if schedule
@@ -105,13 +109,16 @@ class App.TimetableEditor extends Spine.Controller
             @refreshDragContainers()
           .fail =>
             item.remove()
+            @refreshDragContainers()
 
   cancelDrag: (el, container) =>
     if $(container).hasClass("activity-list")
       $(el).remove()
+    @refreshDragContainers()
 
   dragOver: (el, container, source) =>
     $(container).closest(".day").addClass("hover")
+    @refreshDragContainers()
 
   dragOut: (el, container, source) =>
     $(container).closest(".day").removeClass("hover")
@@ -262,6 +269,16 @@ class App.TimetableEditor extends Spine.Controller
       0, @dragula().containers.length,
       @$(".activity-list, .day .times, .day .time-slot").get()...
     )
+    top = @timetable.scrollTop()
+    @$(".day h3").each ->
+      day = $(this)
+      pos = day.position()
+      h3 = day.find(".weekday")
+      day
+        .data("height", day.outerHeight() + pos.top)
+        .data("top", pos.top + top + day.parent().position().top)
+        .data("offset", h3.position().top + h3.outerHeight())
+    @timetableScrolled()
 
   newActivity: (e) ->
     activityType = App.ActivityType.find($(e.target).closest("[data-activity-type-id]").data("activity-type-id"))
@@ -276,6 +293,14 @@ class App.TimetableEditor extends Spine.Controller
 
   switchToTypeOfNewActivity: (activity) =>
     @activityType(activity.activityType())
+
+  timetableScrolled: =>
+    top = @timetable.scrollTop()
+    @$(".day h3").each (_, i) ->
+      day = $(this)
+      y = day.data("top")
+      h = day.data("height") - day.data("offset")
+      day.css(y: Math.max(Math.min(h - 8, top - y), 0))
 
 class ScheduleActivityDialog extends App.Dialog
   elements:

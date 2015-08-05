@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
-  let (:event) { FactoryGirl.create(:event) }
-  let (:user) { FactoryGirl.create(:user) }
-  let (:event_params) { EventSerializer.new(EventPresenter.new(FactoryGirl.build(:event))).attributes }
+  let(:event) { FactoryGirl.create(:event) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:event_params) { EventSerializer.new(EventPresenter.new(FactoryGirl.build(:event))).attributes }
 
   describe "GET #index" do
     before { get(:index) }

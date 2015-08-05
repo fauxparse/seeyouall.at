@@ -9,8 +9,9 @@ class TimeSlotsController < ApplicationController
 
   def destroy
     authorize! :update, event
-    time_slot = event.time_slots.find(params[:id])
-    time_slot.destroy
+    if time_slot = event.time_slots.find_by(id: params[:id])
+      time_slot.destroy
+    end
     render(nothing: true)
   end
 

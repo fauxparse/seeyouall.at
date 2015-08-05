@@ -17,7 +17,7 @@ class ActivitiesController < ApplicationController
   def update
     activity = event.activities.find(params[:id])
     authorize! :update, activity
-    update_activity = update_activity.new(activity, activity_params)
+    update_activity = UpdateActivity.new(activity, activity_params)
 
     respond_to do |format|
       if update_activity.call

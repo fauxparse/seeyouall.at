@@ -1,6 +1,6 @@
 <div class="edit-activity">
   <h4 class="dialog-title"><%= @activity.name || I18n.t("activities.new") %></h4>
-  <section class="floating-label field">
+  <section class="floating-label field<%= " has-value" if @activity.name %>">
     <input type="text" name="name" value="<%= @activity.name %>" required autofocus>
     <label><%= I18n.t("activerecord.attributes.activity.name") %></label>
   </section>

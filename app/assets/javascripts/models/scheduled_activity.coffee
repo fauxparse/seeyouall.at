@@ -7,7 +7,8 @@ class App.ScheduledActivity extends Spine.Model
   timeSlot: ->
     @_timeSlot = App.TimeSlot.find(@time_slot_id)
 
-  startTime: -> @timeSlot().startTime()
+  startTime: ->
+    @timeSlot().startTime()
 
   endTime: -> @timeSlot().endTime()
 
@@ -34,3 +35,10 @@ class App.ScheduledActivity extends Spine.Model
       promise.resolve(scheduledActivity)
     .save(url: "/events/#{timeSlot.event_id}/scheduled_activities")
     promise
+
+App.ScheduledActivity.on "change", ->
+  timeSlotIDs = {}
+  for schedule in App.ScheduledActivity.all()
+    timeSlotIDs[schedule.time_slot_id] = true
+  for slot in App.TimeSlot.all()
+    slot.destroy() unless timeSlotIDs[slot.id]

@@ -1,5 +1,9 @@
 .popup {
   position: relative;
+
+  .field & {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .popup-toggle {

@@ -217,6 +217,7 @@
   padding: 0.5rem;
   font-size: 0.875rem;
   margin: 0 0 0.5rem;
+  position: relative;
   @include display(flex);
   @include flex-direction(row);
 
@@ -253,6 +254,24 @@
   .timetable-editor &,
   &.gu-mirror {
     cursor: move;
+  }
+
+  .icons {
+    @include position(absolute, 0rem 0rem null null);
+    @include transition(opacity $fast $ease-out-cubic);
+    opacity: 0;
+    pointer-events: none;
+
+    a {
+      display: block;
+      padding: 0.25rem;
+      color: icon-color();
+    }
+  }
+
+  &:hover .icons {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 

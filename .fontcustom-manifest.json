@@ -1,26 +1,18 @@
 {
   "checksum": {
-    "previous": "d9c780a49cea3c4229c6cf672b3994980195eed2686ef477bef2a2cdd2908e3a",
-    "current": "d9c780a49cea3c4229c6cf672b3994980195eed2686ef477bef2a2cdd2908e3a"
+    "previous": "a182d341898287467dcb0347805c1fefabe3253d9ead6dcdbd6d28ade460cd52",
+    "current": "a182d341898287467dcb0347805c1fefabe3253d9ead6dcdbd6d28ade460cd52"
   },
   "fonts": [
-    "app/assets/fonts/icons_d9c780a49cea3c4229c6cf672b399498.ttf",
-    "app/assets/fonts/icons_d9c780a49cea3c4229c6cf672b399498.svg",
-    "app/assets/fonts/icons_d9c780a49cea3c4229c6cf672b399498.woff",
-    "app/assets/fonts/icons_d9c780a49cea3c4229c6cf672b399498.eot"
+    "app/assets/fonts/icons_a182d341898287467dcb0347805c1fef.ttf",
+    "app/assets/fonts/icons_a182d341898287467dcb0347805c1fef.svg",
+    "app/assets/fonts/icons_a182d341898287467dcb0347805c1fef.woff",
+    "app/assets/fonts/icons_a182d341898287467dcb0347805c1fef.eot"
   ],
   "glyphs": {
     "add": {
       "codepoint": 61707,
       "source": "lib/assets/icons/svg/add.svg"
-    },
-    "add-activity": {
-      "codepoint": 61709,
-      "source": "lib/assets/icons/svg/add-activity.svg"
-    },
-    "add-activity-type": {
-      "codepoint": 61710,
-      "source": "lib/assets/icons/svg/add-activity-type.svg"
     },
     "add-event": {
       "codepoint": 61699,
@@ -45,6 +37,10 @@
     "cancel": {
       "codepoint": 61702,
       "source": "lib/assets/icons/svg/cancel.svg"
+    },
+    "edit-activity": {
+      "codepoint": 61713,
+      "source": "lib/assets/icons/svg/edit-activity.svg"
     },
     "event": {
       "codepoint": 61706,

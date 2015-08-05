@@ -11,6 +11,7 @@ class App.TimetableEditor extends Spine.Controller
     "click .floating-action-button [data-activity-type-id]": "newActivity"
     "click aside [data-activity-type-id]": "chooseActivityType"
     "click aside [rel=new-activity-type]": "newActivityType"
+    "click .timetable-activity [rel=edit]": "editActivity"
 
   init: ->
     @dragula()
@@ -22,6 +23,7 @@ class App.TimetableEditor extends Spine.Controller
       .one("refresh", @refreshActivities)
       .on("change", @refreshActivities)
       .on("changeID", @changeActivityID)
+      .on("update", @updateActivity)
       .on("create", @switchToTypeOfNewActivity)
     App.TimeSlot
       .one("refresh", @refreshTimeSlots)
@@ -118,16 +120,18 @@ class App.TimetableEditor extends Spine.Controller
     @refreshDragContainers()
 
   dragOver: (el, container, source) =>
+    @_dragOverContainer = container
     $(container).closest(".day").addClass("hover")
     @refreshDragContainers()
 
   dragOut: (el, container, source) =>
+    @_dragOverContainer = null
     $(container).closest(".day").removeClass("hover")
     @refreshDragContainers()
 
   dragEnd: (el) =>
     el = $(el)
-    if (schedule = el.data("schedule-id")) && !el.parent().length
+    if (schedule = el.data("schedule-id")) && !@_dragOverContainer
       App.ScheduledActivity.destroy(schedule)
 
   loadJSON: ->
@@ -218,6 +222,12 @@ class App.TimetableEditor extends Spine.Controller
     $(@view("timetable/activity")({ activity, schedule }))
       .css(background: color.translucent(0.3))
 
+  updateActivity: (activity) =>
+    @$(".timetable-activity[data-id=#{activity.id}][data-schedule-id]").each (i, el) =>
+      el = $(el)
+      schedule = App.ScheduledActivity.find(el.data("schedule-id"))
+      el.replaceWith @renderActivity(activity, schedule)
+
   changeActivityID: (activity, oldID, newID) =>
     @$(".timetable-activity[data-id=#{oldID}]").attr("data-id", newID)
 
@@ -255,8 +265,13 @@ class App.TimetableEditor extends Spine.Controller
       .appendTo(@$(".time-slot[data-id=\"#{scheduled.time_slot_id}\"]"))
 
   updateScheduledActivity: (scheduled) =>
-    @$(".timetable-activity[data-schedule-id=\"#{scheduled.id}\"]")
-      .replaceWith(@renderActivity(scheduled.activity(), scheduled))
+    schedule = @$(".timetable-activity[data-schedule-id=\"#{scheduled.id}\"]")
+    unless schedule.closest(".time-slot").data("id") == scheduled.time_slot_id.toString()
+      setTimeout =>
+        @$("[data-schedule-id=#{scheduled.id}]").appendTo(@$(".time-slot[data-id=#{scheduled.time_slot_id}]"))
+        @refreshDragContainers()
+      , 0
+    schedule.replaceWith(@renderActivity(scheduled.activity(), scheduled))
 
   changeScheduledActivityID: (scheduled, oldID, newID) =>
     @$(".timetable-activity[data-schedule-id=\"#{oldID}\"]").attr("data-schedule-id", newID)
@@ -265,8 +280,8 @@ class App.TimetableEditor extends Spine.Controller
     @$(".timetable-activity[data-schedule-id=\"#{scheduled.id}\"]").remove()
 
   refreshDragContainers: ->
-    @$(".time-slot:empty").each ->
-      App.TimeSlot.destroy($(this).remove().data("id"))
+    # @$(".time-slot:empty").each ->
+    #   App.TimeSlot.destroy($(this).remove().data("id"))
     @$(".times").each ->
       $(this).append $(this).children(".time-slot").get().sort (a, b) ->
         $(a).data("start-time").localeCompare($(b).data("start-time")) ||
@@ -292,6 +307,15 @@ class App.TimetableEditor extends Spine.Controller
     event = @event()
     new EditActivityDialog({ activity, event })
 
+  editActivity: (e) ->
+    e.preventDefault()
+    el = $(e.target).closest(".timetable-activity")
+    activity = App.Activity.find(el.data("id"))
+    scheduleID = el.data("schedule-id")
+    schedule = scheduleID && App.ScheduledActivity.find(scheduleID)
+    event = @event()
+    new EditActivityDialog({ activity, event, schedule })
+
   newActivityType: (e) ->
     activityType = new App.ActivityType()
     event = @event()
@@ -314,13 +338,16 @@ class ScheduleActivityDialog extends App.Dialog
     "[name=start-time]": "startTimeInput"
     "[name=end-date]": "endDateInput"
     "[name=end-time]": "endTimeInput"
-    "footer [rel=ok]": "okButton"
+    "footer [rel=ok]": "okButtons"
 
   events:
-    "change input": "timesChanged"
+    "change input[type=date]": "timesChanged"
+    "change input[type=time]": "timesChanged"
 
   renderContent: ->
-    super.append(@view("timetable/schedule_activity")(this))
+    super
+      .append($("<h4>", class: "dialog-title", text: @activity.name))
+      .append(@view("timetable/schedule_activity")(this))
 
   shown: ->
     super
@@ -333,14 +360,14 @@ class ScheduleActivityDialog extends App.Dialog
 
     if startTime.isValid() && endTime.isValid() && endTime.isAfter(startTime)
       [@startTime, @endTime] = [startTime, endTime]
-      @okButton.removeAttr("disabled")
+      @okButtons.removeAttr("disabled")
       @endDateInput.attr("min", @startTime.format("YYYY-MM-DD"))
       if @startTime.isSame(@endTime, "day")
         @endTimeInput.attr("min", @startTime.format("HH:mm:ss"))
       else
         @endTimeInput.removeAttr("min")
     else
-      @okButton.attr("disabled", true)
+      @okButtons.attr("disabled", true)
 
   ok: ->
     @trigger "ok", @startTime, @endTime
@@ -352,10 +379,14 @@ class ScheduleActivityDialog extends App.Dialog
     else
       super
 
-class EditActivityDialog extends App.Dialog
+class EditActivityDialog extends ScheduleActivityDialog
   elements:
     "[name=name]": "nameInput"
     "[rel=activity-type-id] .popup-toggle-label": "activityTypeLabel"
+    "[name=start-date]": "startDateInput"
+    "[name=start-time]": "startTimeInput"
+    "[name=end-date]": "endDateInput"
+    "[name=end-time]": "endTimeInput"
     "footer [rel=ok]": "okButton"
     "footer [rel=another]": "addAnotherButton"
     "footer [rel=ok], footer [rel=another]": "okButtons"
@@ -364,14 +395,22 @@ class EditActivityDialog extends App.Dialog
     "input input": "inputChanged"
     "change input": "inputChanged"
     "click [data-activity-type-id]": "changeActivityType"
+    "change input[type=date]": "timesChanged"
+    "change input[type=time]": "timesChanged"
 
   init: ->
+    if @schedule
+      [@startTime, @endTime] = [@schedule.startTime(), @schedule.endTime()]
     super
     @addAnotherButton.toggle(@activity.isNew())
     @_activityTypeID = @activity.activity_type_id
 
   renderContent: ->
-    super.append(@view("timetable/edit_activity")(this))
+    content = $("<div>", class: "dialog-content")
+    content.append(@view("timetable/edit_activity")(this))
+    if @schedule
+      content.append(@view("timetable/schedule_activity")(this))
+    content
 
   renderFooter: ->
     super.append($("<button>", rel: "another", text: I18n.t("activities.add_another")))
@@ -385,13 +424,29 @@ class EditActivityDialog extends App.Dialog
     @nameInput.focus()
 
   save: ->
+    promise = $.Deferred()
     @activity.name = @nameInput.val()
     @activity.activity_type_id = @_activityTypeID
-    @activity.save(url: @url())
+    if @schedule
+      App.TimeSlot.findOrCreateByTimes(@event, @startTime, @endTime)
+        .done (timeSlot) =>
+          for s in App.ScheduledActivity.all()
+            if s.id != @schedule.id && s.activity_id == @activity.id && s.time_slot_id == timeSlot.id
+              promise.reject()
+              return
+          unless timeSlot.id == @schedule.time_slot_id
+            @schedule.time_slot_id = timeSlot.id
+            @schedule.save()
+          @activity.save(url: @url())
+          promise.resolve()
+    else
+      @activity.save(url: @url())
+      promise.resolve()
+    promise
 
   ok: ->
-    @save()
-    @hide()
+    # TODO show the user the clash
+    @save().done => @hide()
 
   another: ->
     @save()

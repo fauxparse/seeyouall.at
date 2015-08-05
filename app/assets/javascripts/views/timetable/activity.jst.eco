@@ -8,5 +8,6 @@
     <% end %>
   </div>
   <div class="icons">
+    <a href="#" rel="edit"><i class="icon-edit-activity"></i>
   </div>
 </article>

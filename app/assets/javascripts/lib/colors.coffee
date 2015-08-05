@@ -36,9 +36,15 @@ class @Color
   @pickWithString: (str) ->
     @pickWithInteger(hashCode(str))
 
+  @named: (name) ->
+    @_byName[name]
+
   @all: (colors) ->
     if colors?
       @_all = colors
+      @_byName = {}
+      for color in colors
+        @_byName[color.name] = color
       @_shuffled = (colors[i] for i in bitReversal(colors.length))
     @_all
 

@@ -50,6 +50,6 @@ class ActivityTypesController < ApplicationController
   end
 
   def activity_type_params
-    params.require(:activity_type).permit(:name)
+    params.require(:activity_type).permit(:name, :color_name)
   end
 end

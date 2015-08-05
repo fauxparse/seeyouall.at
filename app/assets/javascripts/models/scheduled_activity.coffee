@@ -2,7 +2,7 @@ class App.ScheduledActivity extends Spine.Model
   @configure "ScheduledActivity", "activity_id", "time_slot_id"
   @extend Spine.Model.Ajax
 
-  url: -> "/events/#{@timeSlot().event_id}/scheduled_activities/#{@id}"
+  url: -> "/events/#{@timeSlot().event_id}/scheduled_activities"
 
   timeSlot: ->
     @_timeSlot = App.TimeSlot.find(@time_slot_id)

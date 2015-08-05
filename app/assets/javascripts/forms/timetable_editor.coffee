@@ -51,6 +51,7 @@ class App.TimetableEditor extends Spine.Controller
     .on("cancel", @cancelDrag)
     .on("over", @dragOver)
     .on("out", @dragOut)
+    .on("dragend", @dragEnd)
 
   dragActivity: (el, container) =>
     unless $(container).hasClass("activity-list")
@@ -123,6 +124,11 @@ class App.TimetableEditor extends Spine.Controller
   dragOut: (el, container, source) =>
     $(container).closest(".day").removeClass("hover")
     @refreshDragContainers()
+
+  dragEnd: (el) =>
+    el = $(el)
+    if (schedule = el.data("schedule-id")) && !el.parent().length
+      App.ScheduledActivity.destroy(schedule)
 
   loadJSON: ->
     $.getJSON(@url()).done (data) =>
@@ -300,7 +306,7 @@ class App.TimetableEditor extends Spine.Controller
       day = $(this)
       y = day.data("top")
       h = day.data("height") - day.data("offset")
-      day.css(y: Math.max(Math.min(h - 8, top - y), 0))
+      day.css(y: Math.max(Math.min(h - 8, top - y + 8), 0))
 
 class ScheduleActivityDialog extends App.Dialog
   elements:

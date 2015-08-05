@@ -1,4 +1,4 @@
-<article class="timetable-activity" data-id="<%= @activity.id %>" data-activity-type="<%= @activity.activity_type_id %>"<%= " data-schedule-id=\"#{@schedule.id}\"" if @schedule?%>>
+<article class="timetable-activity" data-id="<%= @activity.id %>" data-activity-type="<%= @activity.activity_type_id %>"<%= " data-schedule-id='#{@schedule.id}'" if @schedule?%>>
   <div class="details">
     <h5><%= @activity.name %></h5>
     <% if @schedule?: %>

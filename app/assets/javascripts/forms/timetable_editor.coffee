@@ -10,12 +10,14 @@ class App.TimetableEditor extends Spine.Controller
   events:
     "click .floating-action-button [data-activity-type-id]": "newActivity"
     "click aside [data-activity-type-id]": "chooseActivityType"
+    "click aside [rel=new-activity-type]": "newActivityType"
 
   init: ->
     @dragula()
     App.ActivityType
       .one("refresh", @refreshActivityTypes)
       .on("change", @refreshActivityTypes)
+      .on("changeID", @activityTypeCreated)
     App.Activity
       .one("refresh", @refreshActivities)
       .on("change", @refreshActivities)
@@ -48,7 +50,6 @@ class App.TimetableEditor extends Spine.Controller
     .on("cancel", @cancelDrag)
     .on("over", @dragOver)
     .on("out", @dragOut)
-    .on("clone", @cloneActivity)
 
   dragActivity: (el, container) =>
     unless $(container).hasClass("activity-list")
@@ -116,9 +117,6 @@ class App.TimetableEditor extends Spine.Controller
     $(container).closest(".day").removeClass("hover")
     @refreshDragContainers()
 
-  cloneActivity: =>
-    console.log arguments
-
   loadJSON: ->
     $.getJSON(@url()).done (data) =>
       moment.tz.setDefault(data.time_zone)
@@ -142,7 +140,7 @@ class App.TimetableEditor extends Spine.Controller
   refreshActivityTypes: =>
     types = App.ActivityType.all()
     # @$("aside header").toggle(types.length > 1)
-    @activityTypeSelector.find("ul").empty()
+    @activityTypeSelector.find(".types").empty()
       .append((@renderActivityType(type) for type in types))
     @activityType(types[0]) unless @activityType()
     list = @$(".floating-action-button .action-list")
@@ -156,7 +154,7 @@ class App.TimetableEditor extends Spine.Controller
     )
 
   renderNewActivityButton: (type) ->
-    color = Color.pickWithString(type.name)
+    color = type.color()
     $("<li>").append(
       $("<a>", href: "#", "data-activity-type-id": type.id).append(
         $("<i>", class: "activity-type-icon", style: "background-color: #{color.shade(500)}", text: type.name.substr(0, 1).toLocaleUpperCase()),
@@ -164,13 +162,13 @@ class App.TimetableEditor extends Spine.Controller
       )
     )
 
-  activityType: (type) ->
+  activityType: (type) =>
     if type?
       @_activityType = type
       @activityTypeSelector
         .find(".popup-toggle-label").text(type.plural).end()
         .find("[data-activity-type-id=#{type.id}]")
-          .parent().prependTo(@activityTypeSelector.find("ul")).end()
+          .parent().prependTo(@activityTypeSelector.find(".types")).end()
         .end()
       @activityList
         .find(".timetable-activity").hide()
@@ -184,6 +182,18 @@ class App.TimetableEditor extends Spine.Controller
     if type = App.ActivityType.find(id)
       @activityType(type)
 
+  newActivityType: (e) ->
+    e.preventDefault()
+    activityType = new App.ActivityType
+    event = @event()
+    new EditActivityTypeDialog({ activityType, event })
+
+  activityTypeCreated: (activityType) =>
+    setTimeout =>
+      @refreshActivityTypes()
+      @activityType(activityType)
+    , 0
+
   refreshActivities: =>
     @activityList.empty()
     for activity in App.Activity.sorted()
@@ -191,9 +201,9 @@ class App.TimetableEditor extends Spine.Controller
         .toggle(activity.activity_type_id == @activityType().id)
 
   renderActivity: (activity, schedule) ->
-    color = Color.pickWithString(activity.activityType().name)
+    color = activity.activityType().color()
     $(@view("timetable/activity")({ activity, schedule }))
-      .css(background: color.shade(100))
+      .css(background: color.translucent(0.3))
 
   changeActivityID: (activity, oldID, newID) =>
     @$(".timetable-activity[data-id=#{oldID}]").attr("data-id", newID)
@@ -259,6 +269,11 @@ class App.TimetableEditor extends Spine.Controller
     event = @event()
     new EditActivityDialog({ activity, event })
 
+  newActivityType: (e) ->
+    activityType = new App.ActivityType()
+    event = @event()
+    new EditActivityTypeDialog({ activityType, event })
+
   switchToTypeOfNewActivity: (activity) =>
     @activityType(activity.activityType())
 
@@ -309,6 +324,7 @@ class ScheduleActivityDialog extends App.Dialog
 class EditActivityDialog extends App.Dialog
   elements:
     "[name=name]": "nameInput"
+    "[rel=activity-type-id] .popup-toggle-label": "activityTypeLabel"
     "footer [rel=ok]": "okButton"
     "footer [rel=another]": "addAnotherButton"
     "footer [rel=ok], footer [rel=another]": "okButtons"
@@ -316,10 +332,12 @@ class EditActivityDialog extends App.Dialog
   events:
     "input input": "inputChanged"
     "change input": "inputChanged"
+    "click [data-activity-type-id]": "changeActivityType"
 
   init: ->
     super
     @addAnotherButton.toggle(@activity.isNew())
+    @_activityTypeID = @activity.activity_type_id
 
   renderContent: ->
     super.append(@view("timetable/edit_activity")(this))
@@ -337,6 +355,7 @@ class EditActivityDialog extends App.Dialog
 
   save: ->
     @activity.name = @nameInput.val()
+    @activity.activity_type_id = @_activityTypeID
     @activity.save(url: @url())
 
   ok: ->
@@ -355,6 +374,11 @@ class EditActivityDialog extends App.Dialog
   inputChanged: ->
     @okButtons.prop("disabled", !!@$(":invalid").length)
 
+  changeActivityType: (e) ->
+    typeID = $(e.target).closest("a").data("activity-type-id")
+    @_activityTypeID = typeID
+    @activityTypeLabel.text(@activity.activityType().name)
+
   keypress: (e) =>
     if e.which == 13
       if @addAnotherButton.is(":visible")
@@ -363,6 +387,37 @@ class EditActivityDialog extends App.Dialog
         @ok()
     else
       super
+
+class EditActivityTypeDialog extends App.Dialog
+  elements:
+    "[name=name]": "nameInput"
+    "footer [rel=ok]": "okButton"
+
+  events:
+    "input input": "inputChanged"
+    "change input": "inputChanged"
+
+  renderContent: ->
+    super.append(@view("timetable/edit_activity_type")(this))
+
+  shown: ->
+    super
+    @nameInput.focus()
+
+  inputChanged: ->
+    @okButton.prop("disabled", !!@$(":invalid").length)
+
+  save: ->
+    @activityType.name = @nameInput.val()
+    @activityType.save(url: @url())
+
+  ok: ->
+    @save()
+    @hide()
+
+  url: ->
+    id = !@activityType.isNew() && "/#{@activityType.id}" || ""
+    "/events/#{@event.id}/activity_types#{id}"
 
 $ ->
   $(".timetable-editor").each ->

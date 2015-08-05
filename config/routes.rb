@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
     resource :timetable
     resources :activities
+    resources :activity_types, only: [:create, :update, :destroy]
     resources :time_slots, only: [:create, :destroy]
     resources :scheduled_activities, only: [:create, :update, :destroy]
   end

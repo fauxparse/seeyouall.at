@@ -40,6 +40,11 @@
     margin: 0;
     padding: 0.5rem 0;
     list-style: none;
+
+    + ul {
+      margin-top: 0.5rem;
+      border-top: 1px solid divider-color();
+    }
   }
 
   li {
@@ -54,7 +59,7 @@
     color: text-color();
 
     &:hover {
-      background: rgba($black, 0.1);
+      background: rgba($cyan-200, 0.5);
     }
   }
 
@@ -64,7 +69,7 @@
 }
 
 .popup.open {
-  z-index: 1;
+  z-index: $popup-menu-z-index;
 
   .popup-menu {
     display: block;

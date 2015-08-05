@@ -3,7 +3,10 @@
   <aside>
     <header>
       <%= popup_menu "", rel: "activity-type" do %>
-        <ul></ul>
+        <ul class="types"></ul>
+        <ul>
+          <li><a href="#" rel="new-activity-type"><%= t("timetable.new.activity_type") %></a></li>
+        </ul>
       <% end -%>
     </header>
     <div class="activity-list"></div>

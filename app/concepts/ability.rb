@@ -13,8 +13,8 @@ class Ability < Struct.new(:user)
         administrator_of?(event)
       end
 
-      can :manage, Activity do |activity|
-        administrator_of?(activity.event)
+      can :manage, [Activity, ActivityType, TimeSlot] do |resource|
+        administrator_of?(resource.event)
       end
     end
   end

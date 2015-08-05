@@ -25,6 +25,8 @@ en:
       activity:
         name: Activity name
         activity_type_id: Activity type
+      activity_type:
+        name: Activity type name (lower-case, singular)
       event:
         name: Event name
         slug: Event URL
@@ -77,6 +79,9 @@ en:
     new: New activity
     new_of_type: "New %{type}"
     add_another: Add another
+
+  activity_types:
+    new: "New activity type"
 
   dialog:
     ok: OK

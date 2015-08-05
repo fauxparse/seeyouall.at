@@ -6,7 +6,7 @@
   </section>
   <section class="floating-label field has-value">
     <label><%= I18n.t("activerecord.attributes.activity.activity_type_id") %></label>
-    <div class="popup">
+    <div class="popup" rel="activity-type-id">
       <input type="hidden" name="activity_type_id" value="<%= @activity.activity_type_id %>">
       <a class="popup-toggle" href="#">
         <div class="popup-toggle-label"><%= @activity.activityType().name %></div><i class="icon-arrow-drop-down"></i>

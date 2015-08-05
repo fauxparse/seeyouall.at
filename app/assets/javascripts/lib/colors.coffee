@@ -1,10 +1,11 @@
-hashCode = (str) ->
-  return 0 unless str
-  hash = 0
-  for i in [0...str.length]
-    hash = ((hash << 5) - hash) + str.charCodeAt(i)
-    hash |= 0
-  hash
+@hashCode = (str) ->
+  hash = 5381
+  i = str.length
+
+  while i
+    hash = (hash * 33) ^ str.charCodeAt(--i)
+
+  hash >>> 0
 
 bitReversal = (n) ->
   if n == 1
@@ -21,6 +22,13 @@ class @Color
   toString: -> @name
 
   shade: (shade) -> @shades[shade]
+
+  translucent: (opacity, shade = 500) ->
+    "rgba(#{@rgb(shade).concat([opacity]).join(", ")})"
+
+  rgb: (shade = 500) ->
+    hex = @shade(shade)
+    (parseInt(hex.substr(i * 2 + 1, 2), 16) for i in [0...3])
 
   @pickWithInteger: (int) ->
     @_shuffled[int % @_shuffled.length]

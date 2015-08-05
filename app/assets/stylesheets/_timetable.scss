@@ -9,7 +9,7 @@
     border-top: 1px solid divider-color();
 
     header {
-      padding: 0 0.5rem;
+      padding: 0;
       @include display(flex);
       @include flex-direction(row);
       border-bottom: 1px solid divider-color();
@@ -22,6 +22,15 @@
 
       .popup-toggle {
         border-bottom-color: transparent;
+
+        .popup-toggle-label {
+          padding-left: 1rem;
+        }
+      }
+
+      .popup-menu {
+        left: 0.5rem;
+        right: 0.5rem;
       }
     }
 
@@ -44,17 +53,29 @@
 
     aside {
       border-top: none;
-      border-left: 1px solid divider-color();
       height: auto;
       left: auto;
       top: 0;
       width: 35%;
+
+      header {
+        padding-left: 2rem;
+        padding-right: 0.5rem;
+        border-bottom: none;
+      }
+
+      .activity-list {
+        padding-top: 0rem;
+        margin-left: 1.5rem;
+        @include scrolling-shadows;
+      }
     }
 
     .timetable {
       height: auto;
       bottom: 0;
       width: 65%;
+      padding-right: 2.5rem;
     }
 
     .floating-action-button {
@@ -79,7 +100,7 @@
 }
 
 .timetable {
-  padding: 1rem 1rem 1rem 0;
+  padding: 0.5rem 1rem 1rem 0;
 
   .day {
     @include display(flex);
@@ -159,7 +180,7 @@
   }
 
   @include media($medium-screen) {
-    padding: 1rem;
+    padding: 0.5rem 1rem 1rem;
 
     .day {
       border-radius: $base-border-radius;
@@ -178,7 +199,10 @@
     h3 {
       .month {
         display: block;
-        @include position(absolute, -1.5rem null null 5rem);
+        @include position(absolute, -2.5rem null null 5rem);
+        line-height: 2.5rem;
+        vertical-align: middle;
+        color: text-color();
       }
     }
   }

@@ -1,0 +1,7 @@
+<div class="new-activity-type">
+  <h4 class="dialog-title"><%= I18n.t("activity_types.new") %></h4>
+  <section class="floating-label field">
+    <input type="text" name="name" value="<%= @activityType.name %>" required autofocus>
+    <label><%= I18n.t("activerecord.attributes.activity_type.name") %></label>
+  </section>
+</div>

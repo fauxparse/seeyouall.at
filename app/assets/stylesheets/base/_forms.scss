@@ -66,7 +66,11 @@ textarea {
 }
 
 textarea {
-  resize: vertical;
+  // resize: vertical;
+  resize: none;
+  // line-height: $base-line-height;
+  // box-sizing: content-box;
+  // height: 1.5em;
 }
 
 input[type="search"] {

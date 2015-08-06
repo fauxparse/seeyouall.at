@@ -10,6 +10,7 @@
 
     header {
       padding: 0;
+      height: 2.5rem;
       @include display(flex);
       @include flex-direction(row);
       border-bottom: 1px solid divider-color();

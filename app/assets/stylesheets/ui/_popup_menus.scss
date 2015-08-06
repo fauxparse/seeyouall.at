@@ -12,7 +12,7 @@
   color: text-color();
   border-bottom: 0.0625rem solid divider-color();
   box-sizing: border-box;
-  height: 2.5em;
+  height: 2.5rem;
 
   &:hover, &:focus {
     color: text-color();
@@ -54,16 +54,17 @@
   li {
     margin: 0;
     padding: 0;
-  }
 
-  a {
-    display: block;
-    margin: 0;
-    padding: 0.5rem;
-    color: text-color();
+    a {
+      display: block;
+      margin: 0;
+      padding: 0.5rem;
+      color: text-color();
+      line-height: 1.5rem;
 
-    &:hover {
-      background: rgba($cyan-200, 0.5);
+      &:hover {
+        background: rgba($cyan-200, 0.5);
+      }
     }
   }
 

@@ -382,6 +382,7 @@ class ScheduleActivityDialog extends App.Dialog
 class EditActivityDialog extends ScheduleActivityDialog
   elements:
     "[name=name]": "nameInput"
+    "[name=description]": "description"
     "[rel=activity-type-id] .popup-toggle-label": "activityTypeLabel"
     "[name=start-date]": "startDateInput"
     "[name=start-time]": "startTimeInput"
@@ -394,6 +395,8 @@ class EditActivityDialog extends ScheduleActivityDialog
   events:
     "input input": "inputChanged"
     "change input": "inputChanged"
+    "input textarea": "inputChanged"
+    "change textarea": "inputChanged"
     "click [data-activity-type-id]": "changeActivityType"
     "change input[type=date]": "timesChanged"
     "change input[type=time]": "timesChanged"
@@ -426,6 +429,7 @@ class EditActivityDialog extends ScheduleActivityDialog
   save: ->
     promise = $.Deferred()
     @activity.name = @nameInput.val()
+    @activity.description = @description.val()
     @activity.activity_type_id = @_activityTypeID
     if @schedule
       App.TimeSlot.findOrCreateByTimes(@event, @startTime, @endTime)
@@ -467,6 +471,8 @@ class EditActivityDialog extends ScheduleActivityDialog
 
   keypress: (e) =>
     if e.which == 13
+      return if $(e.target).closest("textarea").length
+
       if @addAnotherButton.is(":visible")
         @another()
       else

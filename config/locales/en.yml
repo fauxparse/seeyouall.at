@@ -24,6 +24,7 @@ en:
     attributes:
       activity:
         name: Activity name
+        description: Description
         activity_type_id: Activity type
       activity_type:
         name: Activity type name (lower-case, singular)

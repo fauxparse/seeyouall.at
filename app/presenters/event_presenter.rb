@@ -1,6 +1,10 @@
 class EventPresenter < SimpleDelegator
   alias_method :event, :__getobj__
 
+  def to_s
+    name
+  end
+
   def name
     event.name || I18n.t("events.default_name")
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805023148) do
+ActiveRecord::Schema.define(version: 20150805221855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,16 +104,18 @@ ActiveRecord::Schema.define(version: 20150805023148) do
   add_index "packages", ["event_id"], name: "index_packages_on_event_id", using: :btree
 
   create_table "payments", force: :cascade do |t|
-    t.integer  "registration_id",                                      null: false
-    t.decimal  "amount",          precision: 10, scale: 2,             null: false
-    t.integer  "state",                                    default: 0, null: false
+    t.integer  "registration_id",                 null: false
+    t.integer  "state",           default: 0,     null: false
     t.string   "reference"
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "amount_cents",    default: 0,     null: false
+    t.string   "amount_currency", default: "NZD", null: false
   end
 
   create_table "prices", force: :cascade do |t|
-    t.decimal "price", precision: 10, scale: 2, null: false
+    t.integer "price_cents",    default: 0,     null: false
+    t.string  "price_currency", default: "NZD", null: false
   end
 
   create_table "registrations", force: :cascade do |t|

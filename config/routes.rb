@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
-  get 'timetables/show'
-
-  get 'timetables/edit'
-
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :events do
     post "check", on: :collection
 
-    resource :timetable
+    get :register, to: "registrations#new"
+    post :register, to: "registrations#create"
+    get :registration, to: "registrations#show"
+    put :registration, to: "registrations#update"
+    resources :registrations
+    resource  :timetable
     resources :activities
     resources :activity_types, only: [:create, :update, :destroy]
     resources :time_slots, only: [:create, :destroy]

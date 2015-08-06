@@ -1,6 +1,7 @@
 header.page-header {
   @include position(fixed, 0rem 0rem null 0rem);
   @include display(flex);
+  z-index: $page-header-z-index;
   height: $page-header-height-mobile;
   background: $page-header-background;
   color: $page-header-color;

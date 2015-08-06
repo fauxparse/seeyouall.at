@@ -3,7 +3,5 @@ class Payment < ActiveRecord::Base
 
   enum state: [:pending, :approved, :declined, :refunded]
 
-  validates :amount,
-    presence: { allow_blank: false },
-    numericality: { greater_than: 0 }
+  monetize :amount_cents, numericality: { greater_than: 0 }
 end

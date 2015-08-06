@@ -6,4 +6,6 @@ class Registration < ActiveRecord::Base
   has_many :payments, inverse_of: :registration, dependent: :destroy
 
   validates :user_id, uniqueness: { scope: :event_id }
+  validates :package_id, presence: { allow_blank: false }
+  validates_associated :user
 end

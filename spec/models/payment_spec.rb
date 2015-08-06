@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Payment, type: :model do
   subject(:payment) { Payment.new }
 
-  it { is_expected.to validate_presence_of(:amount) }
   it { is_expected.to validate_numericality_of(:amount).is_greater_than(0) }
 
   describe "#state" do

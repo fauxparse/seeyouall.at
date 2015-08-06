@@ -4,8 +4,8 @@
   box-sizing: border-box;
 
   > input {
-    margin: 0 0 0.5em;
-    height: 2em;
+    margin: 0 0 0.5rem;
+    height: 2rem;
 
     &[type="text"] {
       line-height: 2rem;
@@ -16,7 +16,7 @@
     @include position(absolute, 2rem null null 0rem);
     @include transition(all $fast $ease-out-cubic);
     font-size: 1em;
-    line-height: 2em;
+    line-height: 2rem;
     pointer-events: none;
     color: secondary-color();
   }
@@ -28,11 +28,17 @@
     line-height: 1rem;
   }
 
-  > input:invalid ~ label {
-    color: $error-color;
-  }
-
   > input:focus ~ label {
     color: $action-color;
+  }
+
+  > input:invalid ~ label,
+  &.has-errors label {
+    color: $error-color !important;
+  }
+
+  > input:invalid,
+  &.has-errors input {
+    border-bottom-color: $error-color;
   }
 }

@@ -1,0 +1,90 @@
+.registration-form {
+  > section {
+    &:nth-of-type(1),
+    &:nth-of-type(2) {
+      margin-bottom: 0;
+    }
+  }
+
+  .packages {
+    padding: 0 0.5rem;
+
+    label {
+      @include display(flex);
+      @include align-items(flex-start);
+      width: 100%;
+      margin: 0;
+      font-size: 100%;
+      padding: 0.5rem 0;
+      box-sizing: content-box;
+      cursor: pointer;
+    }
+
+    label:not(:first-of-type) {
+      border-top: 1px solid divider-color();
+      padding-top: 0.4375rem;
+    }
+
+    .checkbox {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin: 0.25rem;
+
+      circle {
+        fill: rgba($cyan-100, 0.5);
+      }
+
+      polyline {
+        fill: none;
+        stroke: $action-color;
+        stroke-width: 2;
+        stroke-dasharray: 28;
+        stroke-dashoffset: 28;
+      }
+    }
+
+    h4 {
+      margin: 0 1rem;
+      @include flex(1);
+      @include align-self(center);
+    }
+
+    .price {
+      font-size: 1.25rem;
+      line-height: 2rem;
+      font-weight: $bold-font-weight;
+    }
+
+    input[type="radio"] { display: none; }
+
+    label:hover {
+      color: $action-color;
+    }
+
+    :checked + label {
+      background: $cyan;
+      color: text-color($white);
+      -webkit-font-smoothing: auto;
+      border-radius: $base-border-radius;
+      margin: 0 -0.5rem;
+      padding: 0.5rem;
+      box-shadow: $z1-shadow;
+
+      .checkbox {
+        circle {
+          fill: text-color($white);
+        }
+
+        polyline {
+          stroke-dashoffset: 0;
+          @include transition(stroke-dashoffset $fast $ease-in-cubic);
+        }
+      }
+
+      &, & + input + label {
+        border-top: none;
+        padding-top: 0.5rem;
+      }
+    }
+  }
+}

@@ -32,14 +32,18 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'cancancan', '~> 1.10'
 gem 'gravatarify', '~> 3.0.0'
+gem 'inline_svg'
 
 gem 'stringex'
 gem 'auto_strip_attributes', '~> 2.0'
 gem 'geocoder'
+gem 'money-rails'
 
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers', tag: "v0.10.0.rc2"
 
 gem 'i18n-js', '>= 3.0.0.rc11'
+
+gem 'colorize'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

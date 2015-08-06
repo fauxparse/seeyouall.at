@@ -1,0 +1,52 @@
+<h1>Register for <%= @registration.event.name %></h1>
+
+<%= form_for @registration, url: event_register_path(@registration.event), html: { class: "registration-form" } do |registration| -%>
+  <% if @registration.user.new_record? %>
+    <%= registration.fields_for :user, @registration.user do |user| %>
+      <section>
+        <%= floating_label_field user, :name do -%>
+          <%= user.text_field :name %>
+        <% end -%>
+      </section>
+      <section>
+        <%= floating_label_field user, :email do -%>
+          <%= user.email_field :email %>
+        <% end -%>
+      </section>
+      <section>
+        <%= floating_label_field user, :password do -%>
+          <%= user.password_field :password %>
+        <% end -%>
+        <%= floating_label_field user, :password_confirmation do -%>
+          <%= user.password_field :password_confirmation %>
+        <% end -%>
+      </section>
+    <% end -%>
+  <% end -%>
+
+  <section class="packages">
+    <h2><%= t("packages.select") %></h2>
+
+    <% @registration.packages.each do |package| -%>
+      <%= registration.radio_button :package_id, package.id, disabled: !package.available?, required: true %>
+      <%= registration.label :package_id, value: package.id do -%>
+        <%= inline_svg "icons/check.svg", class: "checkbox" %>
+        <%= content_tag :h4, package.description %>
+        <%= content_tag :div, class: "price" do %>
+          <% if package.available? %>
+            <%= dollar_amount(package.current_price.price.price) %>
+          <% else -%>
+            <%= t("packages.unavailable") %>
+          <% end -%>
+        <% end -%>
+      <% end -%>
+    <% end -%>
+  </section>
+
+  <section class="buttons">
+    <%= registration.button do -%>
+      <%= content_tag :span, t("registration.continue") %>
+      <%= icon "arrow-right" %>
+    <% end -%>
+  </section>
+<% end -%>

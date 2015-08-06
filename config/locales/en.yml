@@ -83,6 +83,16 @@ en:
   activity_types:
     new: "New activity type"
 
+  allocations:
+    unlimited: "unlimited %{type}"
+
+  packages:
+    select: "Select a package:"
+    unavailable: "Unavailable"
+
+  registration:
+    continue: "Continue"
+
   dialog:
     ok: OK
     cancel: Cancel

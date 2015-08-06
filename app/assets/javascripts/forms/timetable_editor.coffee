@@ -56,9 +56,10 @@ class App.TimetableEditor extends Spine.Controller
     .on("dragend", @dragEnd)
 
   dragActivity: (el, container) =>
+    console.log @drake.options
     unless $(container).hasClass("activity-list")
       setTimeout ->
-        el.remove()
+        $(el).remove()
       , 0
 
   dropActivity: (el, container) =>

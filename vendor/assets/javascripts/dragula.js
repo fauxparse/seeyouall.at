@@ -221,7 +221,7 @@ function dragula (initialContainers, options) {
     var clientY = getCoord('clientY', e);
     var elementBehindCursor = getElementBehindPoint(_mirror, clientX, clientY);
     var dropTarget = findDropTarget(elementBehindCursor, clientX, clientY);
-    if (dropTarget && (o.copy === false || dropTarget !== _source)) {
+    if (dropTarget && (true/*o.copy === false*/ || dropTarget !== _source)) {
       drop(item, dropTarget);
     } else if (o.removeOnSpill) {
       remove();
@@ -248,7 +248,7 @@ function dragula (initialContainers, options) {
     if (parent) {
       parent.removeChild(item);
     }
-    drake.emit(o.copy ? 'cancel' : 'remove', item, parent);
+    drake.emit(/*o.copy ? 'cancel' :*/ 'remove', item, parent);
     cleanup();
   }
 
@@ -259,11 +259,11 @@ function dragula (initialContainers, options) {
     var reverts = arguments.length > 0 ? revert : o.revertOnSpill;
     var item = _copy || _item;
     var parent = item.parentElement;
-    if (parent === _source && o.copy) {
-      parent.removeChild(_copy);
-    }
+    // if (parent === _source && o.copy) {
+    //   parent.removeChild(_copy);
+    // }
     var initial = isInitialPlacement(parent);
-    if (initial === false && o.copy === false && reverts) {
+    if (initial === false && /*o.copy === false &&*/ reverts) {
       _source.insertBefore(item, _initialSibling);
     }
     if (initial || reverts) {
@@ -347,21 +347,21 @@ function dragula (initialContainers, options) {
       _lastDropTarget = dropTarget;
       over();
     }
-    if (dropTarget === _source && o.copy) {
-      if (item.parentElement) {
-        item.parentElement.removeChild(item);
-      }
-      return;
-    }
+    // if (dropTarget === _source && o.copy) {
+    //   if (item.parentElement) {
+    //     item.parentElement.removeChild(item);
+    //   }
+    //   return;
+    // }
     var reference;
     var immediate = getImmediateChild(dropTarget, elementBehindCursor);
     if (immediate !== null) {
       reference = getReference(dropTarget, immediate, _clientX, _clientY);
-    } else if (o.revertOnSpill === true && !o.copy) {
+    } else if (o.revertOnSpill === true/* && !o.copy*/) {
       reference = _initialSibling;
       dropTarget = _source;
     } else {
-      if ((o.copy || o.removeOnSpill === true) && item.parentElement !== null) {
+      if ((/*o.copy ||*/ o.removeOnSpill === true) && item.parentElement !== null) {
         item.parentElement.removeChild(item);
       }
       return;

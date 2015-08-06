@@ -1,10 +1,13 @@
 header.page-header {
   @include position(fixed, 0rem 0rem null 0rem);
   @include display(flex);
+  @include justify-content(flex-start);
+  @include align-items(center);
   z-index: $page-header-z-index;
   height: $page-header-height-mobile;
   background: $page-header-background;
   color: $page-header-color;
+  padding-right: 1rem;
 
   [for="show-sidebar"] {
     display: block;
@@ -21,6 +24,19 @@ header.page-header {
       height: auto;
       max-width: none;
     }
+  }
+
+  .logo {
+    display: block;
+    width: 8.75rem;
+    height: $page-header-height-mobile;
+  }
+
+  h2 {
+    @include flex(1);
+    @include ellipsis;
+    margin: 0;
+    font-size: 1.5em;
   }
 }
 
@@ -39,6 +55,23 @@ main {
         margin: -0.75rem;
         width: 3rem;
       }
+
+      i {
+        color: icon-color($white);
+      }
+
+      &:hover i {
+        color: $white;
+      }
+    }
+
+    .logo {
+      width: 10rem;
+      height: $page-header-height;
+    }
+
+    h2 {
+      font-size: 1.75rem;
     }
   }
 

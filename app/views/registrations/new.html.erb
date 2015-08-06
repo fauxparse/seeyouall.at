@@ -3,17 +3,15 @@
 <%= form_for @registration, url: event_register_path(@registration.event), html: { class: "registration-form" } do |registration| -%>
   <% if @registration.user.new_record? %>
     <%= registration.fields_for :user, @registration.user do |user| %>
-      <section>
+      <section class="name-and-email">
         <%= floating_label_field user, :name do -%>
           <%= user.text_field :name %>
         <% end -%>
-      </section>
-      <section>
         <%= floating_label_field user, :email do -%>
           <%= user.email_field :email %>
         <% end -%>
       </section>
-      <section>
+      <section class="password">
         <%= floating_label_field user, :password do -%>
           <%= user.password_field :password %>
         <% end -%>

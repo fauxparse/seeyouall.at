@@ -63,6 +63,9 @@ en:
         create: Log in
         destroy: Log out
 
+  header:
+    your_event_here: (your event here)
+
   events:
     default_name: Your new event
     new: Create a new event

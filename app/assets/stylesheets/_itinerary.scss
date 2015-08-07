@@ -1,5 +1,19 @@
 .itinerary {
+  .days {
+    .day {
+      margin: 0 0 1rem;
+    }
 
+    h3 {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    h4 {
+      @include display(flex);
+      @include justify-content(space-between);
+    }
+  }
 }
 
 .itinerary.editor {
@@ -10,6 +24,7 @@
   > .days {
     @include flex(1);
     overflow-y: auto;
+    padding: 1rem;
   }
 
   > aside {
@@ -26,6 +41,7 @@
       }
 
       .progress {
+        @include flex(2);
         position: relative;
         height: 0.25rem;
         margin-right: 1rem;
@@ -45,5 +61,13 @@
 
   @include media($medium-screen) {
     top: $page-header-height;
+
+    > aside {
+      padding: 1rem $page-gutter;
+    }
+
+    .days {
+      padding: 1rem $page-gutter;
+    }
   }
 }

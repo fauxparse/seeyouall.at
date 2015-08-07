@@ -148,7 +148,7 @@
       @include display(flex);
       @include flex-direction(column);
       min-height: 3.5rem;
-      margin: 0 0 0rem -$page-gutter;
+      margin: 0 0 0rem (-$page-gutter);
       padding-left: $page-gutter;
       position: relative;
       z-index: 1;

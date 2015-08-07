@@ -13,5 +13,9 @@ class AllocationPresenter < SimpleDelegator
     ActivityTypePresenter.new(allocation.activity_type)
   end
 
+  def unlimited?
+    !maximum.present?
+  end
+
   delegate :name, :plural, to: :activity_type
 end

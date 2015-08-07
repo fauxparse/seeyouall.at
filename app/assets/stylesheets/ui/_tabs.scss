@@ -1,0 +1,44 @@
+ul.tabs {
+  @include display(flex);
+  padding: 0 1rem;
+  border-bottom: $base-border;
+  min-height: $tab-height;
+
+  li {
+    @include flex(1);
+    @include display(flex);
+    @include flex-direction(column);
+    margin: 0 0 -1px;
+    padding: 0;
+    border-bottom: 2px solid transparent;
+
+    a {
+      @include flex(1);
+      @include display(flex);
+      @include flex-direction(column);
+      @include justify-content(center);
+      @include align-items(center);
+      margin-bottom: -2px;
+      text-align: center;
+      padding: 0 0.5rem;
+
+      * {
+        @include ellipsis;
+      }
+    }
+
+    &.selected {
+      border-bottom-color: $action-color;
+    }
+  }
+
+  @include media($medium-screen) {
+    padding: 0 ($page-gutter - 0.75rem);
+
+    li {
+      a {
+        padding: 0 0.75rem;
+      }
+    }
+  }
+}

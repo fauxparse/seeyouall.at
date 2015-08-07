@@ -37,7 +37,7 @@ class RegistrationsController < ApplicationController
 
   def registration
     @registration ||= begin
-      scope = event.registrations.with_packages
+      scope = event.registrations.with_packages.with_payments
 
       registration = if params[:id].present?
         scope.find(params[:id])

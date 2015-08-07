@@ -8,4 +8,8 @@ class ActivityTypePresenter < SimpleDelegator
   def plural
     name.pluralize
   end
+
+  def pluralize(n)
+    "#{n} #{n == 1 ? name : plural}"
+  end
 end

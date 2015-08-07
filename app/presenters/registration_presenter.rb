@@ -47,6 +47,10 @@ class RegistrationPresenter < SimpleDelegator
     package_prices.first.price.currency
   end
 
+  def count_type(type)
+    0
+  end
+
   protected
 
   def current_package_price

@@ -21,6 +21,14 @@ class EventPresenter < SimpleDelegator
     (event.end_time || start_date + 1.week).to_date
   end
 
+  def dates
+    start_date..end_date
+  end
+
+  def time_slots
+    event.time_slots.sort_by(&:start_time).map { |t| TimeSlotPresenter.new(t) }
+  end
+
   def errors
     event.errors.to_hash.tap do |errors|
       [:start_time, :end_time].each do |key|

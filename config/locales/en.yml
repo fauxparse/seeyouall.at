@@ -63,6 +63,14 @@ en:
         create: Log in
         destroy: Log out
 
+  date:
+    formats:
+      itinerary: "%A %e %B"
+
+  time:
+    formats:
+      time_only: "%I:%M%P"
+
   header:
     your_event_here: (your event here)
 

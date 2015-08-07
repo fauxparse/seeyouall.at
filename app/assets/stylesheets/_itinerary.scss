@@ -1,0 +1,49 @@
+.itinerary {
+
+}
+
+.itinerary.editor {
+  @include position(fixed, $page-header-height-mobile 0rem 0rem 0rem);
+  @include display(flex);
+  @include flex-direction(column);
+
+  > .days {
+    @include flex(1);
+    overflow-y: auto;
+  }
+
+  > aside {
+    @include flex-shrink(0);
+    background: rgba($cyan, 0.1);
+    padding: 1rem;
+
+    li {
+      @include display(flex);
+      @include align-items(center);
+
+      > * {
+        @include flex(1);
+      }
+
+      .progress {
+        position: relative;
+        height: 0.25rem;
+        margin-right: 1rem;
+        background: divider-color();
+        border-radius: 1px;
+
+        .bar {
+          @include position(absolute, 0rem null 0rem 0rem);
+          background-color: $green;
+          max-width: 100%;
+          border-radius: 1px;
+          @include transition(width, $fast, $ease-out-cubic);
+        }
+      }
+    }
+  }
+
+  @include media($medium-screen) {
+    top: $page-header-height;
+  }
+}

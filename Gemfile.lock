@@ -55,6 +55,9 @@ GEM
       sass (~> 3.4)
       thor
     builder (3.2.2)
+    bullet (4.14.7)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.9.0)
     byebug (5.0.0)
       columnize (= 0.9.0)
     cancancan (1.12.0)
@@ -169,6 +172,8 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.18.2)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -262,6 +267,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    uniform_notifier (1.9.0)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.2.1)
@@ -277,6 +283,7 @@ DEPENDENCIES
   active_model_serializers!
   auto_strip_attributes (~> 2.0)
   bourbon
+  bullet
   byebug
   cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
@@ -297,6 +304,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   pg
+  quiet_assets
   rails (= 4.2.3)
   rspec-collection_matchers
   rspec-rails

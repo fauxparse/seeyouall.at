@@ -1,3 +1,5 @@
 <h1>Registered for <%= event %></h1>
 
 <%= render(partial: "balance") %>
+
+<%= link_to t("registrations.itinerary"), event_itinerary_path(event) %>

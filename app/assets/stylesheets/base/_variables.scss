@@ -29,7 +29,7 @@ $action-color: $pink;
 $error-color: $red;
 
 // Border
-$base-border-color: $light-gray;
+$base-border-color: divider-color();
 $base-border: 1px solid $base-border-color;
 
 // Forms
@@ -50,6 +50,10 @@ $page-header-height: 4rem;
 $page-header-height-mobile: ($page-header-height * 0.875);
 $page-header-background: $cyan-700;
 $page-header-color: $white;
+
+$page-gutter: 4.5rem;
+
+$tab-height: 3rem;
 
 $dialog-z-index: 400;
 

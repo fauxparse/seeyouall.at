@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'itineraries/show'
+
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :events do
@@ -8,6 +10,7 @@ Rails.application.routes.draw do
     post :register, to: "registrations#create"
 
     resource  :registration, only: [:show, :update]
+    resource  :itinerary
     resources :registrations, shallow: true
     resource  :timetable
     resources :activities

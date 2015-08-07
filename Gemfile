@@ -54,9 +54,14 @@ gem 'unicorn'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "letter_opener", group: :development
 
 gem 'simplecov', require: false, group: :test
+
+group :development do
+  gem 'letter_opener'
+  gem 'quiet_assets'
+  gem 'bullet'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

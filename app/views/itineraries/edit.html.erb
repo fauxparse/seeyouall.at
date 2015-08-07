@@ -1,0 +1,26 @@
+<div class="itinerary editor">
+  <section class="days">
+    <% event.time_slots.chunk(&:date).each do |date, slots| %>
+      <%= content_tag :section, class: "day", "data-date" => date.to_s(:db) do -%>
+        <header><%= content_tag :h3, l(date, format: :itinerary) %></header>
+        <% slots.each do |slot| %>
+          <%= time_slot_header(slot) %>
+        <% end -%>
+      <% end -%>
+    <% end -%>
+  </section>
+  <aside class="package-limits">
+    <ul>
+      <% registration.package.allocations.reject(&:unlimited?).each do |allocation| -%>
+        <li>
+          <div class="progress">
+            <%= content_tag :div, "", class: "bar", style: "width: #{100 * registration.count_type(allocation.activity_type) / allocation.maximum}%" %>
+          </div>
+          <span class="limit">
+            <%= content_tag :span, 0, class: "count" %>/<%= allocation.activity_type.pluralize(allocation.maximum) %>
+          </span>
+        </li>
+      <% end -%>
+    </ul>
+  </aside>
+</div>

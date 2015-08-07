@@ -22,10 +22,8 @@ class TimetablesController < ApplicationController
 
   def event
     @event ||= Event
-      .includes(
-        :time_slots => :scheduled_activities,
-        :activity_types => :activities
-      )
+      .with_activities
+      .with_schedule
       .where(slug: params[:event_id])
       .first!
     @event_presenter ||= EventPresenter.new(@event)

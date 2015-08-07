@@ -4,7 +4,7 @@ class RegistrationForm < SimpleDelegator
   extend ActiveModel::Naming
 
   def initialize(event, user, params = {})
-    super event.registrations.build(user: user || User.new)
+    super event.registrations.find_or_initialize_by(user: user || User.new)
 
     sanitize(params).each_pair do |key, value|
       self.public_send :"#{key}=", value

@@ -31,7 +31,12 @@ module SeeYouAllAt
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    config.i18n.default_locale = "en-NZ"
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    # rails will fallback to config.i18n.default_locale translation
+    config.i18n.fallbacks = true
+    # rails will fallback to en, no matter what is set as config.i18n.default_locale
+    config.i18n.fallbacks = [:en]
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true

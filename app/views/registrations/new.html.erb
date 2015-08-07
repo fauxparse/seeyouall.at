@@ -32,7 +32,7 @@
         <%= content_tag :h4, package.description %>
         <%= content_tag :div, class: "price" do %>
           <% if package.available? %>
-            <%= dollar_amount(package.current_price.price.price) %>
+            <%= dollar_amount(package.current_price.amount) %>
           <% else -%>
             <%= t("packages.unavailable") %>
           <% end -%>
@@ -43,7 +43,7 @@
 
   <section class="buttons">
     <%= registration.button do -%>
-      <%= content_tag :span, t("registration.continue") %>
+      <%= content_tag :span, t("registrations.continue") %>
       <%= icon "arrow-right" %>
     <% end -%>
   </section>

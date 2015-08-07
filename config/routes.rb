@@ -6,9 +6,9 @@ Rails.application.routes.draw do
 
     get :register, to: "registrations#new"
     post :register, to: "registrations#create"
-    get :registration, to: "registrations#show"
-    put :registration, to: "registrations#update"
-    resources :registrations
+
+    resource  :registration, only: [:show, :update]
+    resources :registrations, shallow: true
     resource  :timetable
     resources :activities
     resources :activity_types, only: [:create, :update, :destroy]

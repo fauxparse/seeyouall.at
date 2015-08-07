@@ -94,8 +94,12 @@ en:
     select: "Select a package:"
     unavailable: "Unavailable"
 
-  registration:
+  registrations:
     continue: "Continue"
+    payments:
+      paid: "Total paid"
+      balance: "Total to pay"
+      if_paid_before: "If paid before %{date}"
 
   dialog:
     ok: OK

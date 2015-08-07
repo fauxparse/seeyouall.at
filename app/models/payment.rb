@@ -4,4 +4,6 @@ class Payment < ActiveRecord::Base
   enum state: [:pending, :approved, :declined, :refunded]
 
   monetize :amount_cents, numericality: { greater_than: 0 }
+
+  scope :paid, -> { where(state: :approved) }
 end

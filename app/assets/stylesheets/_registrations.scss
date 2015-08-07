@@ -55,13 +55,21 @@
       font-size: 1.25rem;
       line-height: 2rem;
       font-weight: $bold-font-weight;
-      color: secondary-color();
+      min-width: 6em;
+
+      abbr {
+        color: secondary-color();
+      }
     }
 
     input[type="radio"] { display: none; }
 
     label:hover, label:hover .price {
       color: $action-color;
+    }
+
+    label:hover .price abbr {
+      color: secondary-color($action-color);
     }
 
     :checked + label {
@@ -86,6 +94,7 @@
 
       .price {
         color: $white;
+        abbr { color: secondary-color($white); }
       }
 
       &, & + input + label {
@@ -93,5 +102,70 @@
         padding-top: 0.5rem;
       }
     }
+  }
+}
+
+.registration-balance {
+  table {
+    border-top: $base-border;
+  }
+
+  td {
+    vertical-align: top;
+    padding-right: 0;
+
+    &:first-child {
+      width: 100%;
+    }
+
+    &:nth-last-child(2) {
+      width: 2em;
+      color: secondary-color();
+    }
+
+    &:last-child {
+      text-align: right;
+      width: 30%;
+      min-width: 6em;
+      padding-right: 0;
+    }
+  }
+
+  .discounted {
+    td {
+      border-bottom: none;
+    }
+
+    td:not(:first-child) {
+      abbr, .money {
+        display: block;
+        position: relative;
+        color: $red;
+
+        &::after {
+          content: "";
+          @include position(absolute, 50% -0.5em null -0.5em);
+          border-top: 1px solid $red;
+        }
+      }
+    }
+
+    + tr {
+      td:first-child {
+        padding-left: 2em;
+        color: secondary-color();
+      }
+    }
+  }
+
+  tfoot td {
+    font-weight: $bold-font-weight;
+  }
+}
+
+.money {
+  abbr {
+    color: secondary-color();
+    padding-right: 0.5em;
   }
 }

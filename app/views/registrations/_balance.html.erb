@@ -1,0 +1,30 @@
+<div class="registration-balance">
+  <table>
+    <tbody>
+      <tr<%= " class=discounted" if registration.discounted? %>>
+        <td><%= registration.package.description %></td>
+        <td><abbr><%= registration.currency %></abbr></td>
+        <td><%= dollar_amount(registration.full_price, include_currency = false) %></td>
+      </tr>
+      <% if registration.discounted? -%>
+        <tr class="discount">
+          <td><%= t("registrations.payments.if_paid_before", date: l(registration.package_price.end_date, format: :long)) %></td>
+          <td><abbr><%= registration.currency %></abbr></td>
+          <td><%= dollar_amount(registration.subtotal, include_currency = false) %></td>
+        </tr>
+      <% end -%>
+      <tr>
+        <td><%= t("registrations.payments.paid") %></td>
+        <td><abbr><%= registration.currency %></abbr></td>
+        <td><%= dollar_amount(registration.total_paid, include_currency = false) %></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td><%= t("registrations.payments.balance") %></td>
+        <td><abbr><%= registration.currency %></abbr></td>
+        <td><%= dollar_amount(registration.outstanding_balance, include_currency = false) %></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

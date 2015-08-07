@@ -14,9 +14,15 @@ class PackagePresenter < SimpleDelegator
   end
 
   def current_price
-    package_prices.detect do |price|
-      price.start_time <= Time.current &&
-        Time.current < price.end_time
-    end
+    package_prices.detect { |price| price.includes?(Time.current) }
+  end
+
+  def full_price
+    package_prices.max(&:amount)
+  end
+
+  def package_prices
+    package.package_prices.sort_by(&:start_time)
+      .map { |p| PackagePricePresenter.new(p) }
   end
 end

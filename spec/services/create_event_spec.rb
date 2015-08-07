@@ -20,6 +20,16 @@ describe CreateEvent do
       expect { service.call }.to change { Administrator.count }.by(1)
       expect(Administrator.where(user_id: user.id, event_id: service.event.id)).to exist
     end
+
+    it "creates a default activity type for the new event" do
+      service.call
+      expect(service.event.activity_types).not_to be_empty
+    end
+
+    it "creates a default package for the new event" do
+      service.call
+      expect(service.event.packages).not_to be_empty
+    end
   end
 
   context "with invalid parameters" do

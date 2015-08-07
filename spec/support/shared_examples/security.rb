@@ -1,5 +1,5 @@
 shared_examples "a secure resource" do |method|
-  let(:user) { FactoryGirl.create(:user).tap(&:confirm) }
+  let(:user) { FactoryGirl.create(:user) }
   let(:request_method) { :get }
   let(:params) { {} }
 
@@ -19,7 +19,7 @@ shared_examples "a secure resource" do |method|
 end
 
 shared_context "logged in" do
-  let(:user) { FactoryGirl.create(:user).tap(&:confirm) }
+  let(:user) { FactoryGirl.create(:user) }
 
   before { log_in_as(user) }
 

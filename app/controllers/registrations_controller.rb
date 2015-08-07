@@ -26,16 +26,18 @@ class RegistrationsController < ApplicationController
   protected
 
   def event
-    @event ||= Event
-      .includes(:packages => { :allocations => :activity_type, :package_prices => :price })
-      .where(slug: params[:event_id])
-      .first!
-    @event_presenter ||= EventPresenter.new(@event)
+    @event ||= begin
+      event = Event
+        .with_packages
+        .where(slug: params[:event_id])
+        .first!
+      EventPresenter.new(event)
+    end
   end
 
   def registration
     @registration ||= begin
-      scope = event.registrations.with_package_information
+      scope = event.registrations.with_packages
 
       registration = if params[:id].present?
         scope.find(params[:id])

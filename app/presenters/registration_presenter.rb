@@ -35,7 +35,7 @@ class RegistrationPresenter < SimpleDelegator
   end
 
   def package_prices
-    @package_prices ||= registration.package_prices.sort_by(&:start_time)
+    @package_prices ||= registration.package.package_prices.sort_by(&:start_time)
       .map { |p| PackagePricePresenter.new(p) }
   end
 

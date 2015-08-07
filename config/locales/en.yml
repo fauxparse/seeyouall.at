@@ -96,6 +96,7 @@ en:
 
   registrations:
     continue: "Continue"
+    itinerary: "Your itinerary"
     payments:
       paid: "Total paid"
       balance: "Total to pay"

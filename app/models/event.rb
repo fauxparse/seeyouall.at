@@ -15,6 +15,8 @@ class Event < ActiveRecord::Base
   scope :past, -> { where("end_time < ?", Time.current) }
   scope :current_and_upcoming, -> { where("end_time > ?", Time.current) }
   scope :in_chronological_order, -> { order(start_time: :asc) }
+  scope :with_activities, -> { includes(:activity_types => :activities) }
+  scope :with_packages, -> { includes(:packages => { :allocations => :activity_type, :package_prices => :price }) }
 
   acts_as_url :name,
     url_attribute: :slug,

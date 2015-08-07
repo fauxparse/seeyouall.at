@@ -4,9 +4,8 @@ class Registration < ActiveRecord::Base
   belongs_to :package, inverse_of: :registrations
   has_many :selections, inverse_of: :registration, dependent: :destroy
   has_many :payments, inverse_of: :registration, dependent: :destroy
-  has_many :package_prices, through: :package
 
-  scope :with_package_information, -> {
+  scope :with_packages, -> {
     includes(
       :selections,
       :payments,

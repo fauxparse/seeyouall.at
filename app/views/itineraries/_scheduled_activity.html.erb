@@ -2,6 +2,9 @@
   <header><%= placeholder_image %></header>
   <footer>
     <h4><%= scheduled_activity.name %></h4>
+    <div class="description">
+      <%= markdown scheduled_activity.description %>
+    </div>
     <div class="buttons">
       <button><%= t("itinerary.book") %></button>
     </div>

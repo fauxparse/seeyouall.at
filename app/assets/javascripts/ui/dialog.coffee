@@ -35,11 +35,13 @@ class App.Dialog extends Spine.Controller
     if e.which == 27
       @hide()
 
-  ok: =>
+  ok: (e) =>
+    e?.preventDefault()
     @trigger("ok")
     @hide()
 
-  cancel: =>
+  cancel: (e) =>
+    e?.preventDefault()
     @trigger("cancel")
     @hide()
 

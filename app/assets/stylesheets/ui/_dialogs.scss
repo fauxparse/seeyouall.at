@@ -44,6 +44,7 @@
 
   .dialog-footer {
     padding: 0.5rem;
+    @include flex(0 0 3rem);
     @include display(flex);
     @include flex-direction(row);
     @include justify-content(flex-end);
@@ -54,6 +55,8 @@
       color: $action-color;
       margin: 0;
       text-align: center;
+      line-height: 1rem;
+      @include ellipsis;
 
       &:not(:first-child) {
         margin-left: 0.5rem;

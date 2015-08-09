@@ -65,6 +65,10 @@
     }
   }
 
+  .description {
+    display: none;
+  }
+
   footer {
     @include flex(1);
     @include display(flex);
@@ -112,7 +116,7 @@
 
   > aside {
     @include flex-shrink(0);
-    background: rgba($cyan, 0.1);
+    background: $cyan-100;
     padding: 1rem;
 
     li {
@@ -161,43 +165,94 @@
     position: absolute;
     right: auto;
     bottom: auto;
-    overflow: hidden;
     @include transition(none);
     @include transform(none);
-    @include justify-content(center);
   }
 
   .dialog-container {
-    @include justify-content(stretch);
     @include flex(1);
+    @include display(flex);
+    @include flex-direction(column);
     min-width: 0;
-    max-height: none;
-    border-radius: 0;
+    @include transition(border-radius $medium $ease-out-cubic);
+  }
+
+  .dialog-content {
+    @include flex(1);
+    padding: 0;
 
     header {
       position: relative;
+      overflow: hidden;
+
+      .header-color {
+        @include position(absolute, 0rem 0rem 0rem 0rem);
+        z-index: 1;
+      }
 
       img {
         display: block;
         width: 100%;
+        height: auto;
+      }
+
+      &::after {
+        content: "";
+        opacity: 0;
+        @include position(absolute, 0rem 0rem 0rem 0rem);
+        @include linear-gradient(rgba(0, 0, 0, 0), dark-scrim-color());
+        @include transition(opacity $medium $ease-out-cubic);
+      }
+
+      h4 {
+        @include position(absolute, null 0rem 0rem 0rem);
+        z-index: 2;
+        opacity: 0;
+        margin: 0;
+        padding: 1rem 3.5rem 1rem 1rem;
+        font-weight: $bold-font-weight;
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        color: white;
+        @include transition(opacity $medium $ease-out-cubic);
+      }
+
+      [rel="cancel"] {
+        @include position(absolute, 0rem 0rem null null);
+        z-index: 3;
+        color: white;
+        padding: 1rem;
       }
     }
+
+    .description {
+      padding: 1rem;
+    }
   }
 
-  .dialog-content {
-    padding: 0;
-    @include flex(1);
+  .dialog-footer {
+    @include justify-content(space-between);
+    border-top: $base-border;
+    padding-top: 0.4375rem;
+
+    button:not([rel="book"]) {
+      display: none;
+    }
   }
 
-  @include media($medium-screen) {
-    header {
-      overflow: hidden;
-      @include border-top-radius($base-border-radius);
+  &.in {
+    .dialog-container {
+      border-radius: 0;
     }
 
-    .dialog-container {
-      max-height: 90vh;
-      border-radius: $base-border-radius;
+    .dialog-content header {
+      h4, &::after {
+        opacity: 1;
+      }
+    }
+
+    .dialog-footer button {
+      display: block;
     }
   }
 }

@@ -111,7 +111,7 @@ en:
       if_paid_before: "If paid before %{date}"
 
   itinerary:
-    book: "Book"
+    book: "Book now"
 
   dialog:
     ok: OK

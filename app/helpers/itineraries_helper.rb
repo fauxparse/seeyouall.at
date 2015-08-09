@@ -8,4 +8,8 @@ module ItinerariesHelper
       concat content_tag(:span, "#{types.to_sentence.capitalize}")
     end
   end
+
+  def placeholder_image(width = 320, height = 180)
+    image_tag("http://lorempixel.com/#{width}/#{height}/cats/#{rand(1..10)}", alt: "Placeholder")
+  end
 end

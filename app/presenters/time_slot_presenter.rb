@@ -10,6 +10,11 @@ class TimeSlotPresenter < SimpleDelegator
       .map { |t| ActivityTypePresenter.new(t) }
   end
 
+  def scheduled_activities
+    @scheduled_activitiies ||= time_slot.scheduled_activities
+      .map { |t| ScheduledActivityPresenter.new(t) }
+  end
+
   def activities_of_type(type)
     scheduled_activities.select { |s| s.activity.activity_type_id == type.id }
   end

@@ -7,6 +7,7 @@ class App.Dialog extends Spine.Controller
         @cancel() unless $(e.target).parents(".dialog-container").length
     @container = $("<div>", class: "dialog-container")
       .appendTo(@wrapper)
+      .on $.support.transitionEnd, (e) -> e.stopPropagation()
     @content = @renderContent().appendTo(@container)
     @footer = @renderFooter().appendTo(@container)
       .on("click", "button[rel]", @buttonClicked)
@@ -24,14 +25,18 @@ class App.Dialog extends Spine.Controller
 
   hide: ->
     $(document).off("keyup", @keypress)
-    @el.removeClass("in").on($.support.transitionEnd, @release)
+    @el.removeClass("in").on($.support.transitionEnd, @hidden)
+
+  hidden: =>
+    @trigger("hidden")
+    @release()
 
   keypress: (e) =>
     if e.which == 27
       @hide()
 
   ok: =>
-    trigger("ok")
+    @trigger("ok")
     @hide()
 
   cancel: =>

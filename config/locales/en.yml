@@ -110,6 +110,9 @@ en:
       balance: "Total to pay"
       if_paid_before: "If paid before %{date}"
 
+  itinerary:
+    book: "Book"
+
   dialog:
     ok: OK
     cancel: Cancel

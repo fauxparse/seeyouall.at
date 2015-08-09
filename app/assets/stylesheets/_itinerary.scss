@@ -14,6 +14,89 @@
       @include justify-content(space-between);
     }
   }
+
+  .scheduled-activities {
+    margin: 0 -0.25rem;
+    @include display(flex);
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+  }
+
+  article {
+    @include flex(1 0 35%);
+    margin: 0 0.25rem 0.5rem;
+  }
+
+  @include media($medium-screen) {
+    article {
+      @include flex-basis(25%);
+    }
+  }
+
+  @include media($large-screen) {
+    article {
+      @include flex-basis(20%);
+    }
+  }
+}
+
+.scheduled-activity {
+  @include display(flex);
+  @include flex-direction(column);
+  border-radius: $card-border-radius;
+  box-shadow: $card-shadow;
+
+  &.open {
+    opacity: 0;
+    box-shadow: none;
+  }
+
+  header {
+    position: relative;
+    margin: 0;
+    padding: 56.25% 0 0; // 16:9
+    overflow: hidden;
+
+    img {
+      @include position(absolute, 0rem 0rem null 0rem);
+      @include border-top-radius($card-border-radius);
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  footer {
+    @include flex(1);
+    @include display(flex);
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+    padding: 0.5rem;
+
+    > * {
+      width: 100%;
+    }
+
+    h4 {
+      font-weight: $bold-font-weight;
+      margin: 0;
+    }
+
+    .buttons {
+      @include align-self(flex-end);
+      margin: 0 -0.5rem -0.5rem;
+
+      button {
+        background: none;
+        color: $action-color;
+        padding: 0.5rem;
+        min-width: 0;
+
+        &:disabled {
+          color: disabled-color();
+        }
+      }
+    }
+  }
 }
 
 .itinerary.editor {
@@ -35,6 +118,7 @@
     li {
       @include display(flex);
       @include align-items(center);
+      white-space: nowrap;
 
       > * {
         @include flex(1);
@@ -68,6 +152,52 @@
 
     .days {
       padding: 1rem $page-gutter;
+    }
+  }
+}
+
+.activity-details {
+  .dialog-wrapper {
+    position: absolute;
+    right: auto;
+    bottom: auto;
+    overflow: hidden;
+    @include transition(none);
+    @include transform(none);
+    @include justify-content(center);
+  }
+
+  .dialog-container {
+    @include justify-content(stretch);
+    @include flex(1);
+    min-width: 0;
+    max-height: none;
+    border-radius: 0;
+
+    header {
+      position: relative;
+
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+
+  .dialog-content {
+    padding: 0;
+    @include flex(1);
+  }
+
+  @include media($medium-screen) {
+    header {
+      overflow: hidden;
+      @include border-top-radius($base-border-radius);
+    }
+
+    .dialog-container {
+      max-height: 90vh;
+      border-radius: $base-border-radius;
     }
   }
 }

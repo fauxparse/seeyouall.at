@@ -5,6 +5,12 @@
         <header><%= content_tag :h3, l(date, format: :itinerary) %></header>
         <% slots.each do |slot| %>
           <%= time_slot_header(slot) %>
+          <div class="scheduled-activities">
+            <%= render(partial: "itineraries/scheduled_activity", collection: slot.scheduled_activities) %>
+            <% 5.times do -%>
+              <article class="filler"></article>
+            <% end -%>
+          </div>
         <% end -%>
       <% end -%>
     <% end -%>

@@ -1,0 +1,9 @@
+<%= content_tag :article, class: "scheduled-activity card", "data-id" => scheduled_activity.id do -%>
+  <header><%= placeholder_image %></header>
+  <footer>
+    <h4><%= scheduled_activity.name %></h4>
+    <div class="buttons">
+      <button><%= t("itinerary.book") %></button>
+    </div>
+  </footer>
+<% end -%>

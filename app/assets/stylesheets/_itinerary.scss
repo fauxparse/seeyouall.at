@@ -99,6 +99,7 @@
         @include ellipsis;
 
         &:disabled {
+          opacity: 1;
           color: disabled-color();
         }
 
@@ -123,6 +124,11 @@
   &[data-state*= "unavailable"],
   &[data-state*= "limited"] {
     opacity: $disabled-alpha;
+
+    .buttons button:disabled {
+      opacity: 1;
+      color: secondary-color();
+    }
   }
 }
 

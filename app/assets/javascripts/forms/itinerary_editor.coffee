@@ -20,7 +20,8 @@ class App.ItineraryEditor extends Spine.Controller
     e.stopPropagation()
     e.preventDefault()
 
-    id = parseInt($(e.target).closest("article").data("id"))
+    article = $(e.target).closest("article").attr("data-state", "selected")
+    id = parseInt(article.data("id"))
     if @selected.indexOf(id) == -1
       @selected.push(id)
       @changed()
@@ -29,7 +30,8 @@ class App.ItineraryEditor extends Spine.Controller
     e.stopPropagation()
     e.preventDefault()
 
-    id = parseInt($(e.target).closest("article").data("id"))
+    article = $(e.target).closest("article").attr("data-state", "available")
+    id = parseInt(article.data("id"))
     while (index = @selected.indexOf(id)) > -1
       @selected.splice(index, 1)
       @changed()

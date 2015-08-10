@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806043448) do
+ActiveRecord::Schema.define(version: 20150810000033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,9 +131,10 @@ ActiveRecord::Schema.define(version: 20150806043448) do
   add_index "registrations", ["user_id", "event_id"], name: "index_registrations_on_user_id_and_event_id", using: :btree
 
   create_table "scheduled_activities", force: :cascade do |t|
-    t.integer "activity_id",  null: false
-    t.integer "time_slot_id", null: false
+    t.integer "activity_id",                  null: false
+    t.integer "time_slot_id",                 null: false
     t.integer "location_id"
+    t.integer "selections_count", default: 0
   end
 
   add_index "scheduled_activities", ["activity_id"], name: "index_scheduled_activities_on_activity_id", using: :btree

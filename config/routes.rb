@@ -4,13 +4,15 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :events do
-    post "check", on: :collection
+    post :check, on: :collection
 
     get :register, to: "registrations#new"
     post :register, to: "registrations#create"
 
     resource  :registration, only: [:show, :update]
-    resource  :itinerary
+    resource  :itinerary do
+      post :check
+    end
     resources :registrations, shallow: true
     resource  :timetable
     resources :activities

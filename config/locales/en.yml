@@ -39,6 +39,9 @@ en:
     errors:
       messages:
         before_start: cannot end before it begins
+        activity_type_not_allowed: "Your package does not include any %{type}."
+        too_many: "Too many %{type}. You have selected %{count}, but your package includes a maximum of %{maximum}."
+        schedule_clash: "You can't do both %{first} and %{second} at the same time"
       models:
         event:
           attributes:
@@ -112,6 +115,8 @@ en:
 
   itinerary:
     book: "Book now"
+    booked: "Booked!"
+    limited: "Package limit reached"
 
   dialog:
     ok: OK

@@ -9,6 +9,12 @@ class PackagePresenter < SimpleDelegator
     package.allocations.map { |a| AllocationPresenter.new(a) }
   end
 
+  def limits
+    allocations.map.with_object({}) do |allocation, limits|
+      limits[allocation.activity_type_id] = allocation.maximum
+    end
+  end
+
   def available?
     current_price.present?
   end

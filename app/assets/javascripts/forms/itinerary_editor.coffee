@@ -1,12 +1,61 @@
 class App.ItineraryEditor extends Spine.Controller
+  elements:
+    ".package-limits": "limits"
+
   events:
     "click .scheduled-activity": "showActivityDetails"
+    "click .scheduled-activity [rel=\"book\"]": "bookActivity"
+    "click .scheduled-activity [rel=\"unbook\"]": "unbookActivity"
+
+  init: ->
+    @selected = (parseInt($(el).data("id")) for el in @$("[data-state*=\"selected\"]").get())
 
   showActivityDetails: (e) ->
     source = $(e.target).closest("article")
     new App.ActivityDetails({source})
       .on "hidden", -> source.removeClass("open")
     source.addClass("open")
+
+  bookActivity: (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+
+    id = parseInt($(e.target).closest("article").data("id"))
+    if @selected.indexOf(id) == -1
+      @selected.push(id)
+      @changed()
+
+  unbookActivity: (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+
+    id = parseInt($(e.target).closest("article").data("id"))
+    while (index = @selected.indexOf(id)) > -1
+      @selected.splice(index, 1)
+      @changed()
+
+  changed: ->
+    clearTimeout(@_checkTimer)
+    @_checkTimer = setTimeout(@check, 100)
+
+  check: =>
+    options = $.extend {}, Spine.Ajax.defaults,
+      url: "/events/#{@$("#event_id").val()}/itinerary/check"
+      type: "post"
+      contentType: "application/json"
+      data: JSON.stringify(selections: @selected)
+    $.ajax(options).done(@processCheckResult)
+
+  processCheckResult: (data) =>
+    @selected = []
+    for own key, states of data.schedule
+      key = parseInt(key)
+      @selected.push(key) if states.indexOf("selected") > -1
+      @$(".scheduled-activity[data-id=#{key}]").attr("data-state", states.join(" "))
+    for own id, limits of data.limits
+      @limits.find("[data-activity-type-id=#{id}]")
+        .find(".bar").css(width: "#{limits.count * 100.0 / limits.limit}%").end()
+        .find(".count").text(limits.count).end()
 
 class App.ActivityDetails extends App.Dialog
   events:

@@ -51,6 +51,10 @@ class RegistrationPresenter < SimpleDelegator
     0
   end
 
+  def event
+    @event ||= EventPresenter.new(registration.event)
+  end
+
   protected
 
   def current_package_price

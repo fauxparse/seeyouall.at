@@ -1,4 +1,4 @@
-<%= content_tag :article, class: "scheduled-activity card", "data-id" => scheduled_activity.id do -%>
+<%= content_tag :article, class: "scheduled-activity card", "data-id" => scheduled_activity.id, "data-state" => @form.scheduled_activity_state(scheduled_activity.id).to_a.join(" ") do -%>
   <header><%= placeholder_image %></header>
   <footer>
     <h4><%= scheduled_activity.name %></h4>
@@ -6,7 +6,9 @@
       <%= markdown scheduled_activity.description %>
     </div>
     <div class="buttons">
-      <button><%= t("itinerary.book") %></button>
+      <button rel="book"><%= t("itinerary.book") %></button>
+      <button rel="unbook"><%= t("itinerary.booked") %></button>
+      <button rel="limited" disabled><%= t("itinerary.limited") %></button>
     </div>
   </footer>
 <% end -%>

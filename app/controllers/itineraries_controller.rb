@@ -1,8 +1,22 @@
 class ItinerariesController < ApplicationController
+  wrap_parameters :itinerary, include: [:selections]
+
   def show
   end
 
   def edit
+    @form = ItineraryForm.new(registration)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @form }
+    end
+  end
+
+  def check
+    form = ItineraryForm.new(registration, itinerary_params)
+    form.validate
+    render json: form
   end
 
   protected
@@ -25,4 +39,8 @@ class ItinerariesController < ApplicationController
   end
 
   helper_method :event, :registration
+
+  def itinerary_params
+    params.require(:itinerary).permit(selections: [])
+  end
 end

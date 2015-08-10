@@ -29,6 +29,10 @@ class EventPresenter < SimpleDelegator
     event.time_slots.sort_by(&:start_time).map { |t| TimeSlotPresenter.new(t) }
   end
 
+  def activity_types
+    event.activity_types.map { |t| ActivityTypePresenter.new(t) }
+  end
+
   def errors
     event.errors.to_hash.tap do |errors|
       [:start_time, :end_time].each do |key|

@@ -43,6 +43,7 @@
 .scheduled-activity {
   @include display(flex);
   @include flex-direction(column);
+  @include transition(all $fast $ease-out-cubic);
   border-radius: $card-border-radius;
   box-shadow: $card-shadow;
 
@@ -94,12 +95,34 @@
         color: $action-color;
         padding: 0.5rem;
         min-width: 0;
+        max-width: 100%;
+        @include ellipsis;
 
         &:disabled {
           color: disabled-color();
         }
+
+        &[rel="unbook"] {
+          color: $green;
+        }
       }
     }
+  }
+
+  &:not([data-state*="selected"]) button[rel="unbook"],
+  &[data-state*="available"] button[rel="limited"],
+  &[data-state*="restricted"] button[rel="limited"],
+  &[data-state*="selected"] button[rel="limited"],
+  &[data-state*="limited"] button[rel="book"],
+  &[data-state*="unavailable"] button[rel="book"],
+  &[data-state*="selected"] button[rel="book"] {
+    display: none;
+  }
+
+  &[data-state*= "restricted"],
+  &[data-state*= "unavailable"],
+  &[data-state*= "limited"] {
+    opacity: $disabled-alpha;
   }
 }
 

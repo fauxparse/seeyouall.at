@@ -81,10 +81,9 @@ class ItineraryForm
     registration.selections
   end
 
-  # TODO this is returning the wrong count for some reason?!
   def counts_by_activity_type
     @counts ||= begin
-      chunked = schedules.map(&:activity).chunk(&:activity_type_id)
+      chunked = schedules.map(&:activity).sort_by(&:activity_type_id).chunk(&:activity_type_id)
       chunked.map.with_object(Hash.new(0)) do |(id, activities), counts|
         counts[id] = activities.length
       end
@@ -129,19 +128,27 @@ class ItineraryForm
       allocation = allocation_for_activity_type(activity_type_id)
       if allocation.present?
         if !allocation.unlimited? && count > allocation.maximum
-          message = I18n.t("activerecord.errors.messages.too_many",
-            type: allocation.activity_type.plural, count: count, maximum: allocation.maximum
-          )
-          errors.add(:selections, message)
+          add_too_many_error(allocation.activity_type, count, allocation.maximum)
         end
       else
-        type = event.activity_types.detect { |t| t.id == activity_type_id }
-        message = I18n.t("activerecord.errors.messages.activity_type_not_allowed",
-          type: type.plural
-        )
-        errors.add(:selections, message)
+        add_no_allocation_error(activity_type_id)
       end
     end
+  end
+
+  def add_too_many_error(type, count, maximum)
+    message = I18n.t("activerecord.errors.messages.too_many",
+      type: type.plural, count: count, maximum: maximum
+    )
+    errors.add(:selections, message)
+  end
+
+  def add_no_allocation_error(type_id)
+    type = event.activity_types.detect { |t| t.id == type_id }
+    message = I18n.t("activerecord.errors.messages.activity_type_not_allowed",
+      type: type.plural
+    )
+    errors.add(:selections, message)
   end
 
   def restrict_clashes

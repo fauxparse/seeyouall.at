@@ -1,5 +1,5 @@
 class ItineraryFormSerializer < ActiveModel::Serializer
-  attributes :selections, :limits, :schedule
+  attributes :selections, :limits, :schedule, :errors
 
   def selections
     object.schedules.map(&:id)
@@ -21,5 +21,9 @@ class ItineraryFormSerializer < ActiveModel::Serializer
         }
       end
     end
+  end
+
+  def errors
+    object.errors
   end
 end

@@ -85,7 +85,7 @@ en:
     register: Register now
     payment: Complete payment
     edit_itinerary: Select activities
-    admin_menu: Administration
+    admin_menu: "%{event} admin"
 
   timetable:
     new:

@@ -29,7 +29,7 @@
         <%= loading_spinner %>
       </div>
       <% if can? :update, event -%>
-        <h4><%= t("events.admin_menu") %></h4>
+        <h4><%= t("events.admin_menu", event: event.name) %></h4>
         <%= action_list do -%>
           <%= action_list_item(t("events.edit_timetable"), edit_event_timetable_path(event), "timetable") %>
         <% end -%>

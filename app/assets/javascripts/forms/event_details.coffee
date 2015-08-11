@@ -17,7 +17,7 @@ class EventDetails extends Spine.Controller
     @header
       .find(".header-color").css(opacity: Math.min(1, top / travel)).end()
       .css(y: Math.max(top - travel, 0))
-    @sidebar.css(y: Math.max(top - travel, 0)) if @_page_width >= 640
+    @sidebar.css(y: @_page_width >= 640 && Math.max(top - travel, 0) || 0)
 
   resized: =>
     delete @_header_height

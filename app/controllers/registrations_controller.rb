@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_filter :authenticate_user!, except: [:new, :create]
+  before_filter :authenticate_user!, except: [:new, :create, :summary]
 
   def show
     redirect_to event_register_path(event) unless can? :read, registration
@@ -42,6 +42,8 @@ class RegistrationsController < ApplicationController
   end
 
   def registration
+    return nil unless signed_in?
+
     @registration ||= begin
       scope = event.registrations.with_packages.with_payments
 

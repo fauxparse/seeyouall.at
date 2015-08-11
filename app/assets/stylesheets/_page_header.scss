@@ -24,12 +24,44 @@ header.page-header {
       height: auto;
       max-width: none;
     }
+
+    i {
+      color: icon-color($white);
+    }
   }
 
   .logo {
-    display: block;
-    width: 8.75rem;
-    height: $page-header-height-mobile;
+    @include flex(1);
+    @include display(flex);
+    @include align-items(baseline);
+
+    font-size: 1rem;
+    margin: 0 0 0 0.25rem;
+    color: $white;
+
+    .see-you-all {
+      text-transform: uppercase;
+      &:not(.short) { display: none; }
+    }
+
+    .see-you-all, .at {
+      margin-right: 0.25rem;
+    }
+
+    .at {
+      @include position(relative, -0.0625em null null null);
+    }
+
+    .event-name {
+      @include flex(1);
+      color: $white;
+    }
+
+    .your-event-here {
+      @include flex(1);
+      color: secondary-color($white);
+      border-bottom: 1px solid $white;
+    }
   }
 
   h2 {
@@ -47,6 +79,7 @@ main {
 @include media($medium-screen) {
   header.page-header {
     height: $page-header-height;
+    padding-right: $page-gutter;
 
     [for="show-sidebar"] {
       padding: 0.75rem;
@@ -56,22 +89,19 @@ main {
         width: 3rem;
       }
 
-      i {
-        color: icon-color($white);
-      }
-
       &:hover i {
         color: $white;
       }
     }
 
     .logo {
-      width: 10rem;
-      height: $page-header-height;
-    }
+      margin-left: 0.5rem;
+      font-size: 1.25rem;
 
-    h2 {
-      font-size: 1.75rem;
+      .see-you-all {
+        &:not(.short) { display: block; }
+        &.short { display: none; }
+      }
     }
   }
 

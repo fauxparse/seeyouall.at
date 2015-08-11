@@ -6,14 +6,5 @@
       <%= icon :menu %>
     <% end -%>
   </label>
-  <%= link_to root_path, class: "logo" do -%>
-    <%= image_tag "logo.svg" %>
-  <% end -%>
-  <h2>
-    <% if respond_to?(:event) -%>
-      <%= event %>
-    <% else -%>
-      <%= t("header.your_event_here") %>
-    <% end -%>
-  </h2>
+  <%= event_header_link %>
 </header>

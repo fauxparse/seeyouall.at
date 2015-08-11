@@ -89,7 +89,7 @@ class EventsController < ApplicationController
   end
 
   def event
-    @event ||= Event.find_by!(slug: params[:id])
+    @event ||= params[:id] && Event.find_by!(slug: params[:id])
   end
 
   helper_method :event

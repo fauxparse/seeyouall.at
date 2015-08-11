@@ -75,6 +75,8 @@ en:
       time_only: "%I:%M%P"
 
   header:
+    title: "See you all"
+    title_short: "SYA"
     your_event_here: (your event here)
 
   events:

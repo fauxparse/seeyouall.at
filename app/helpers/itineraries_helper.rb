@@ -9,7 +9,8 @@ module ItinerariesHelper
     end
   end
 
-  def placeholder_image(width = 320, height = 180)
-    image_tag("http://lorempixel.com/#{width}/#{height}/cats/#{rand(1..10)}", alt: "Placeholder")
+  def placeholder_image(width: 320, height: 180, sequence:)
+    sequence = sequence % 10 + 1 if sequence
+    image_tag("http://lorempixel.com/#{width}/#{height}/cats/#{sequence || rand(1..10)}", alt: "Placeholder")
   end
 end

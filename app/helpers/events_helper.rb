@@ -12,7 +12,11 @@ module EventsHelper
       concat content_tag(:span, t("header.title"), class: "see-you-all")
       concat content_tag(:span, t("header.title_short"), class: "see-you-all short")
       concat content_tag(:span, "@", class: "at")
-      concat content_tag(:span, event.try(:name) || t("header.your_event_here"), class: "your-event-here")
+      if current_event?
+        concat content_tag(:span, event.name, class: "your-event-here has-event")
+      else
+        concat content_tag(:span, t("header.your_event_here"), class: "your-event-here")
+      end
     end
   end
 

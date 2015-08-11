@@ -28,6 +28,7 @@ $base-font-color: text-color();
 $accent-color: $cyan;
 $accent-100: $cyan-100;
 $accent-600: $cyan-600;
+$accent-700: $cyan-700;
 $action-color: $pink;
 $error-color: $red;
 
@@ -51,7 +52,7 @@ $sidebar-header-background: $cyan-600;
 $page-header-z-index: 100;
 $page-header-height: 4rem;
 $page-header-height-mobile: ($page-header-height * 0.875);
-$page-header-background: $cyan-700;
+$page-header-background: $accent-700;
 $page-header-color: $white;
 
 $page-gutter: 4.5rem;

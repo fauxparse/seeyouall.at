@@ -4,11 +4,7 @@ class UpdateEvent
   end
 
   def call
-    begin
-      @form.save!
-    rescue ActiveRecord::RecordInvalid
-      false
-    end
+    @form.save!
   end
 
   def event

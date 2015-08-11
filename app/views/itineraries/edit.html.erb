@@ -21,10 +21,10 @@
       <% registration.package.allocations.reject(&:unlimited?).each do |allocation| -%>
         <%= content_tag :li, "data-activity-type-id" => allocation.activity_type_id do %>
           <div class="progress">
-            <%= content_tag :div, "", class: "bar", style: "width: #{100 * registration.count_type(allocation.activity_type) / allocation.maximum}%" %>
+            <%= content_tag :div, "", class: "bar", style: "width: #{100 * @form.counts_by_activity_type[allocation.activity_type_id] / allocation.maximum}%" %>
           </div>
           <span class="limit">
-            <%= content_tag :span, 0, class: "count" %>/<%= allocation.activity_type.pluralize(allocation.maximum) %>
+            <%= content_tag :span, @form.counts_by_activity_type[allocation.activity_type_id], class: "count" %>/<%= allocation.activity_type.pluralize(allocation.maximum) %>
           </span>
         <% end -%>
       <% end -%>

@@ -47,10 +47,6 @@ class RegistrationPresenter < SimpleDelegator
     package_prices.first.price.currency
   end
 
-  def count_type(type)
-    0
-  end
-
   def event
     @event ||= EventPresenter.new(registration.event)
   end

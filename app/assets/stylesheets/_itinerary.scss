@@ -145,17 +145,19 @@
 
   > aside {
     @include flex-shrink(0);
+    @include display(flex);
+    @include align-items(flex-start);
     background: $cyan-100;
     padding: 1rem;
+
+    ul {
+      @include flex(1);
+    }
 
     li {
       @include display(flex);
       @include align-items(center);
       white-space: nowrap;
-
-      > * {
-        @include flex(1);
-      }
 
       .progress {
         @include flex(2);
@@ -173,6 +175,56 @@
           @include transition(width, $fast, $ease-out-cubic);
         }
       }
+
+      .limit {
+        @include flex(1 0 5em);
+        @include ellipsis;
+      }
+    }
+
+    button {
+      @include display(flex);
+      margin-left: 1rem;
+
+      .full, .done { display: none; }
+
+      .check {
+        width: 0;
+        height: 2rem;
+        margin: -0.25rem 0;
+
+        circle {
+          display: none;
+        }
+
+        polyline {
+          stroke: $green;
+          stroke-width: 2;
+          stroke-dasharray: 28;
+          stroke-dashoffset: 28;
+          @include transition(stroke-dashoffset $medium $ease-in-cubic);
+          @include transition-delay($medium);
+        }
+      }
+
+      &.saved {
+        background: none;
+        color: $green;
+        opacity: 1;
+        cursor: default;
+
+        .check {
+          width: 2rem;
+          margin-right: 0.5rem;
+
+          polyline {
+            stroke-dashoffset: 0;
+          }
+        }
+
+        .full, .short { display: none; }
+        .done { display: block; }
+      }
     }
   }
 
@@ -181,6 +233,11 @@
 
     > aside {
       padding: 1rem $page-gutter;
+
+      button {
+        .full { display: inline; }
+        .short { display: none; }
+      }
     }
 
     .days {

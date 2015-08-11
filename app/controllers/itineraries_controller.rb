@@ -13,6 +13,21 @@ class ItinerariesController < ApplicationController
     end
   end
 
+  def update
+    authorize! :update, registration
+    @form = ItineraryForm.new(registration, itinerary_params)
+    respond_to do |format|
+      begin
+        @form.save!
+        format.html { redirect_to event_itinerary_path(event) }
+        format.json { render json: @form }
+      rescue ActiveRecord::RecordNotSaved
+        format.html { render :edit }
+        format.json { render json: @form, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def check
     form = ItineraryForm.new(registration, itinerary_params)
     form.validate

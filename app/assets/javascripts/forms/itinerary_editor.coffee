@@ -1,11 +1,13 @@
 class App.ItineraryEditor extends Spine.Controller
   elements:
     ".package-limits": "limits"
+    "aside [rel=save]": "saveButton"
 
   events:
     "click .scheduled-activity": "showActivityDetails"
-    "click .scheduled-activity [rel=\"book\"]": "bookActivity"
-    "click .scheduled-activity [rel=\"unbook\"]": "unbookActivity"
+    "click .scheduled-activity [rel=book]": "bookActivity"
+    "click .scheduled-activity [rel=unbook]": "unbookActivity"
+    "click [rel=save]": "save"
 
   init: ->
     @selected = (parseInt($(el).data("id")) for el in @$("[data-state*=\"selected\"]").get())
@@ -37,16 +39,23 @@ class App.ItineraryEditor extends Spine.Controller
       @changed()
 
   changed: ->
+    @saveButton.prop("disabled", false).removeClass("saved")
     clearTimeout(@_checkTimer)
     @_checkTimer = setTimeout(@check, 100)
 
-  check: =>
+  eventID: ->
+    @_eventID ||= @$("#event_id").val()
+
+  sendJSON: (options = {}) =>
     options = $.extend {}, Spine.Ajax.defaults,
-      url: "/events/#{@$("#event_id").val()}/itinerary/check"
       type: "post"
       contentType: "application/json"
       data: JSON.stringify(selections: @selected)
+    , options
     $.ajax(options).done(@processCheckResult)
+
+  check: =>
+    @sendJSON(url: "/events/#{@eventID()}/itinerary/check")
 
   processCheckResult: (data) =>
     @selected = []
@@ -58,6 +67,16 @@ class App.ItineraryEditor extends Spine.Controller
       @limits.find("[data-activity-type-id=#{id}]")
         .find(".bar").css(width: "#{limits.count * 100.0 / limits.limit}%").end()
         .find(".count").text(limits.count).end()
+    @saveButton.prop("disabled", !$.isEmptyObject(data.errors))
+
+  save: (e) =>
+    e.preventDefault()
+    @saveButton.prop("disabled", true)
+    @sendJSON(url: "/events/#{@eventID()}/itinerary", type: "put")
+      .done(@saved)
+
+  saved: =>
+    @saveButton.addClass("saved")
 
 class App.ActivityDetails extends App.Dialog
   events:

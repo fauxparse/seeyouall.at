@@ -24,8 +24,16 @@ class ItineraryForm
     @registration
   end
 
+  def save
+    valid? && registration.save
+  end
+
   def save!
-    registration.save!
+    if valid?
+      registration.save!
+    else
+      raise(ActiveRecord::RecordInvalid.new(self))
+    end
   end
 
   def selections=(schedule_ids)
@@ -43,22 +51,8 @@ class ItineraryForm
 
   def schedule
     @schedule ||= begin
-      counts = counts_by_activity_type
       status = registration.event.scheduled_activities.map.with_object({}) do |s, hash|
-        allocation = allocation_for_activity_type(s.activity.activity_type_id)
-        state = if allocation
-          if allocation.unlimited?
-            :unlimited
-          elsif counts[allocation.activity_type_id] < allocation.maximum
-            :available
-          else
-            :limited
-          end
-        else
-          :unavailable
-        end
-
-        hash[s.id] = Set.new([state])
+        hash[s.id] = Set.new([determine_scheduled_activity_state(s)])
       end
 
       schedules.map.with_object(status) do |selected, hash|
@@ -70,6 +64,21 @@ class ItineraryForm
           end
         end
       end
+    end
+  end
+
+  def determine_scheduled_activity_state(scheduled_activity)
+    allocation = allocation_for_activity_type(scheduled_activity.activity.activity_type_id)
+    if allocation
+      if allocation.unlimited?
+        :unlimited
+      elsif counts_by_activity_type[allocation.activity_type_id] < allocation.maximum
+        :available
+      else
+        :limited
+      end
+    else
+      :unavailable
     end
   end
 

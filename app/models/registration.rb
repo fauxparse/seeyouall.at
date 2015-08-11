@@ -7,7 +7,7 @@ class Registration < ActiveRecord::Base
 
   scope :with_package, -> { includes(
     { :package => { :allocations => :activity_type } },
-    # :selections
+    :selections
   ) }
   scope :with_packages, -> { includes(
     :package => [{ :package_prices => :price, :allocations => :activity_type }]

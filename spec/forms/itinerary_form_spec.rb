@@ -53,9 +53,10 @@ describe ItineraryForm do
         form.selections = [@activity1.id, @activity2.id]
       end
 
-      it "is invalid" do
-        expect(form).not_to be_valid
-        expect(form).to have(1).error_on(:selections)
+      it "removes oldest first" do
+        expect(form).to be_valid
+        expect(form.schedules).to include(@activity2)
+        expect(form.schedules).not_to include(@activity1)
       end
     end
 
@@ -82,6 +83,16 @@ describe ItineraryForm do
         expect(form).not_to be_valid
         expect(form).to have(1).error_on(:selections)
       end
+    end
+  end
+
+  describe "#save!" do
+    before do
+      form.selections = [@activity1.id]
+    end
+
+    it "saves the changes" do
+      expect { form.save! }.to change { Selection.count }.by(1)
     end
   end
 end

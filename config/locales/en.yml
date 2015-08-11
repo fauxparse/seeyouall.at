@@ -117,6 +117,9 @@ en:
     book: "Book now"
     booked: "Booked!"
     limited: "Package limit reached"
+    save: "Save"
+    save_changes: "Save changes"
+    saved: "Saved"
 
   dialog:
     ok: OK

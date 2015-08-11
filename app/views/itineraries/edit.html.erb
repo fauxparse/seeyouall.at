@@ -29,5 +29,11 @@
         <% end -%>
       <% end -%>
     </ul>
+    <%= button_tag rel: "save", disabled: true do %>
+      <%= inline_svg "icons/check.svg", class: "check" %>
+      <%= content_tag :span, t("itinerary.save"), class: "short" %>
+      <%= content_tag :span, t("itinerary.save_changes"), class: "full" %>
+      <%= content_tag :span, t("itinerary.saved"), class: "done" %>
+    <% end -%>
   </aside>
 </div>

@@ -4,7 +4,7 @@
   <header>
     <% if signed_in? -%>
       <%= gravatar_tag current_user, size: 64, html: { class: "gravatar" } %>
-      <%= popup_menu current_user.name do %>
+      <%= popup_menu current_user_details do %>
         <%= action_list do -%>
           <%= action_list_item t("helpers.submit.session.destroy"), destroy_user_session_path, "logout", method: :delete %>
         <% end -%>

@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "a182d341898287467dcb0347805c1fefabe3253d9ead6dcdbd6d28ade460cd52",
-    "current": "a182d341898287467dcb0347805c1fefabe3253d9ead6dcdbd6d28ade460cd52"
+    "previous": "459fa3e825400256a5ebfae899c79f0801c4a8ac9b4140abac4bada6760eceb1",
+    "current": "459fa3e825400256a5ebfae899c79f0801c4a8ac9b4140abac4bada6760eceb1"
   },
   "fonts": [
-    "app/assets/fonts/icons_a182d341898287467dcb0347805c1fef.ttf",
-    "app/assets/fonts/icons_a182d341898287467dcb0347805c1fef.svg",
-    "app/assets/fonts/icons_a182d341898287467dcb0347805c1fef.woff",
-    "app/assets/fonts/icons_a182d341898287467dcb0347805c1fef.eot"
+    "app/assets/fonts/icons_459fa3e825400256a5ebfae899c79f08.ttf",
+    "app/assets/fonts/icons_459fa3e825400256a5ebfae899c79f08.svg",
+    "app/assets/fonts/icons_459fa3e825400256a5ebfae899c79f08.woff",
+    "app/assets/fonts/icons_459fa3e825400256a5ebfae899c79f08.eot"
   ],
   "glyphs": {
     "add": {
@@ -58,6 +58,18 @@
       "codepoint": 61703,
       "source": "lib/assets/icons/svg/ok.svg"
     },
+    "payment": {
+      "codepoint": 61716,
+      "source": "lib/assets/icons/svg/payment.svg"
+    },
+    "register": {
+      "codepoint": 61715,
+      "source": "lib/assets/icons/svg/register.svg"
+    },
+    "select-activities": {
+      "codepoint": 61718,
+      "source": "lib/assets/icons/svg/select-activities.svg"
+    },
     "spinner": {
       "codepoint": 61701,
       "source": "lib/assets/icons/svg/spinner.svg"
@@ -65,6 +77,10 @@
     "time-slot": {
       "codepoint": 61708,
       "source": "lib/assets/icons/svg/time-slot.svg"
+    },
+    "timetable": {
+      "codepoint": 61714,
+      "source": "lib/assets/icons/svg/timetable.svg"
     }
   },
   "options": {

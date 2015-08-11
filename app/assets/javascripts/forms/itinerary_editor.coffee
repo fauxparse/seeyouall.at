@@ -44,7 +44,7 @@ class App.ItineraryEditor extends Spine.Controller
     @_checkTimer = setTimeout(@check, 100)
 
   eventID: ->
-    @_eventID ||= @$("#event_id").val()
+    @_eventID ||= $("#event_id").val()
 
   sendJSON: (options = {}) =>
     options = $.extend {}, Spine.Ajax.defaults,

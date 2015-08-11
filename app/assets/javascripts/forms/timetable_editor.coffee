@@ -150,7 +150,7 @@ class App.TimetableEditor extends Spine.Controller
     "/events/#{@eventID()}/timetable"
 
   eventID: ->
-    @_eventID ||= @$("[name=event_id]").val()
+    @_eventID ||= $("#event_id").val()
 
   event: ->
     @_event ||= new App.Event(id: @eventID())

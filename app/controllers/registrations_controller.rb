@@ -23,6 +23,12 @@ class RegistrationsController < ApplicationController
     end
   end
 
+  def summary
+    respond_to do |format|
+      format.html { render partial: "summary", locals: { registration: registration } }
+    end
+  end
+
   protected
 
   def event

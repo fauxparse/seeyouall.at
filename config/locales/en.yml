@@ -81,6 +81,11 @@ en:
     default_name: Your new event
     new: Create a new event
     create: Create my event
+    details: Event details
+    register: Register now
+    payment: Complete payment
+    edit_itinerary: Select activities
+    admin_menu: Administration
 
   timetable:
     new:

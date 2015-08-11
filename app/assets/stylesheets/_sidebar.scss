@@ -137,6 +137,26 @@ aside.sidebar {
       }
     }
   }
+
+  section {
+    border-top: $base-border;
+    padding: 1rem 0;
+
+    h4 {
+      padding: 0 1rem;
+      margin: 0 0 0.5rem;
+      font-weight: $bold-font-weight;
+      color: secondary-color();
+
+      &:not(:first-of-type) {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  header + section {
+    border-top: none;
+  }
 }
 
 main {

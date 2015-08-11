@@ -14,11 +14,10 @@ class EventsController < ApplicationController
   end
 
   def show
-    event = Event.find_by!(slug: params[:id])
     authorize! :read, event
 
     respond_to do |format|
-      @event = EventPresenter.new(Event.new)
+      @event = EventPresenter.new(event)
       format.html
       format.json { render json: @event, serializer: EventSerializer }
     end
@@ -45,13 +44,11 @@ class EventsController < ApplicationController
   end
 
   def edit
-    event = Event.find_by!(slug: params[:id])
     authorize! :update, event
     @event = EventPresenter.new(event)
   end
 
   def update
-    event = Event.find_by!(slug: params[:id])
     authorize! :update, event
 
     update_event = UpdateEvent.new(event, event_params)
@@ -69,7 +66,6 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    event = Event.find_by!(slug: params[:id])
     authorize! :destroy, event
 
     event.destroy!
@@ -91,4 +87,10 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(EventForm.permitted_parameters)
   end
+
+  def event
+    @event ||= Event.find_by!(slug: params[:id])
+  end
+
+  helper_method :event
 end

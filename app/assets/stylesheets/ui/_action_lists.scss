@@ -7,19 +7,31 @@ ul.action-list {
     a {
       @include display(flex);
 
-      i {
+      &:hover {
+        background: rgba($black, 0.06666667);
+      }
+
+      > i {
         width: 3.5rem;
-        height: 3.5rem;
-        padding: 1rem;
+        height: 2.5rem;
+        padding: 0.5rem 1rem;
         color: icon-color();
       }
 
-      span {
-        @include flex(1);
-        padding: 1rem;
+      > span {
+        padding: 0.5rem 1rem;
         line-height: 1.5rem;
         @include ellipsis;
         color: text-color();
+
+        &:first-of-type {
+          @include flex(1);
+        }
+
+        + span {
+          text-align: right;
+          color: secondary-color();
+        }
       }
     }
   }

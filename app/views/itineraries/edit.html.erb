@@ -1,5 +1,4 @@
 <div class="itinerary editor">
-  <%= hidden_field_tag(:event_id, event.to_param) %>
   <section class="days">
     <% event.time_slots.chunk(&:date).each do |date, slots| %>
       <%= content_tag :section, class: "day", "data-date" => date.to_s(:db) do -%>

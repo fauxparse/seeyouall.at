@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     get :register, to: "registrations#new"
     post :register, to: "registrations#create"
 
-    resource  :registration, only: [:show, :update]
+    resource  :registration, only: [:show, :update] do
+      get :summary
+    end
     resource  :itinerary do
       post :check
     end

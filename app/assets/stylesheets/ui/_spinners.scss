@@ -1,0 +1,35 @@
+.loading-spinner {
+  display: block;
+  margin: 0.5rem auto;
+  width: 2.5rem;
+  height: 2.5rem;
+
+  g {
+    @include transform-origin(50% 50%);
+    @include animation(loading-spinner-rotation 10s linear infinite);
+  }
+
+  circle {
+    stroke: $action-color;
+    fill: none;
+    stroke-width: 4px;
+    stroke-dasharray: 113;
+    @include animation(loading-spinner-animation 3s linear infinite);
+  }
+}
+
+@include keyframes(loading-spinner-animation) {
+  0% { stroke-dashoffset: 113; }
+
+  100% { stroke-dashoffset: -113; }
+}
+
+@include keyframes(loading-spinner-rotation) {
+  0% {
+    @include transform(rotate(0deg));
+  }
+
+  100% {
+    @include transform(rotate(360deg));
+  }
+}

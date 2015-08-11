@@ -1,10 +1,10 @@
 @font-face {
   font-family: "icons";
-  src: font-url("icons_a182d341898287467dcb0347805c1fef.eot");
-  src: font-url("icons_a182d341898287467dcb0347805c1fef.eot?#iefix") format("embedded-opentype"),
-       font-url("icons_a182d341898287467dcb0347805c1fef.woff") format("woff"),
-       font-url("icons_a182d341898287467dcb0347805c1fef.ttf") format("truetype"),
-       font-url("icons_a182d341898287467dcb0347805c1fef.svg#icons") format("svg");
+  src: font-url("icons_459fa3e825400256a5ebfae899c79f08.eot");
+  src: font-url("icons_459fa3e825400256a5ebfae899c79f08.eot?#iefix") format("embedded-opentype"),
+       font-url("icons_459fa3e825400256a5ebfae899c79f08.woff") format("woff"),
+       font-url("icons_459fa3e825400256a5ebfae899c79f08.ttf") format("truetype"),
+       font-url("icons_459fa3e825400256a5ebfae899c79f08.svg#icons") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +12,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "icons";
-    src: font-url("icons_a182d341898287467dcb0347805c1fef.svg#icons") format("svg");
+    src: font-url("icons_459fa3e825400256a5ebfae899c79f08.svg#icons") format("svg");
   }
 }
 
@@ -31,8 +31,12 @@
 .icon-logout:before,
 .icon-menu:before,
 .icon-ok:before,
+.icon-payment:before,
+.icon-register:before,
+.icon-select-activities:before,
 .icon-spinner:before,
-.icon-time-slot:before {
+.icon-time-slot:before,
+.icon-timetable:before {
   display: inline-block;
   font-family: "icons";
   font-style: normal;
@@ -59,8 +63,12 @@ $icon-event: "\f10a";
 $icon-logout: "\f104";
 $icon-menu: "\f100";
 $icon-ok: "\f107";
+$icon-payment: "\f114";
+$icon-register: "\f113";
+$icon-select-activities: "\f116";
 $icon-spinner: "\f105";
 $icon-time-slot: "\f10c";
+$icon-timetable: "\f112";
 
 .icon-add::before { content: $icon-add; }
 .icon-add-event::before { content: $icon-add-event; }
@@ -74,5 +82,9 @@ $icon-time-slot: "\f10c";
 .icon-logout::before { content: $icon-logout; }
 .icon-menu::before { content: $icon-menu; }
 .icon-ok::before { content: $icon-ok; }
+.icon-payment::before { content: $icon-payment; }
+.icon-register::before { content: $icon-register; }
+.icon-select-activities::before { content: $icon-select-activities; }
 .icon-spinner::before { content: $icon-spinner; }
 .icon-time-slot::before { content: $icon-time-slot; }
+.icon-timetable::before { content: $icon-timetable; }

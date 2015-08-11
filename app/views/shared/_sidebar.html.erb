@@ -1,3 +1,4 @@
+<%= hidden_field_tag(:event_id, event.to_param) if respond_to?(:event) %>
 <input type="checkbox" id="show-sidebar" autocomplete="off" tabindex="-1">
 <label class="scrim" for="show-sidebar"></label>
 <aside class="sidebar">
@@ -21,7 +22,24 @@
     <% end -%>
   </header>
 
-  <%= action_list do -%>
-    <%= action_list_item(t("events.new"), new_event_path, "add-event") if can? :create, Event %>
+  <% with_current_event do |event| -%>
+    <%= content_tag :section, class: "current-event" do %>
+      <%= content_tag :h4, event.name %>
+      <div class="registration">
+        <%= loading_spinner %>
+      </div>
+      <% if can? :update, event -%>
+        <h4><%= t("events.admin_menu") %></h4>
+        <%= action_list do -%>
+          <%= action_list_item(t("events.edit_timetable"), edit_event_timetable_path(event), "timetable") %>
+        <% end -%>
+      <% end -%>
+    <% end -%>
   <% end -%>
+
+  <section>
+    <%= action_list do -%>
+      <%= action_list_item(t("events.new"), new_event_path, "add-event") if can? :create, Event %>
+    <% end -%>
+  </section>
 </aside>

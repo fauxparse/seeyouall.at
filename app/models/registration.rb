@@ -13,6 +13,7 @@ class Registration < ActiveRecord::Base
     :package => [{ :package_prices => :price, :allocations => :activity_type }]
   ) }
   scope :with_payments, -> { includes(:payments) }
+  scope :for_event, ->(event) { where(event_id: event.id) }
 
   validates :user_id, uniqueness: { scope: :event_id }
   validates :package_id, presence: { allow_blank: false }

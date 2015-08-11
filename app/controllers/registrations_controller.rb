@@ -25,7 +25,7 @@ class RegistrationsController < ApplicationController
 
   def summary
     respond_to do |format|
-      format.html { render partial: "summary", locals: { registration: registration } }
+      format.html { render partial: "summary", locals: { registration: registration, show_event_link: true } }
     end
   end
 

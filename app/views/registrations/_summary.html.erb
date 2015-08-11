@@ -5,7 +5,7 @@
         <%= dollar_amount(registration.outstanding_balance) %>
       <% end -%>
     <% end -%>
-    <%= action_list_item(t("events.details"), event_path(event), "event") %>
+    <%= action_list_item(t("events.details"), event_path(event), "event") if show_event_link %>
     <%= action_list_item(t("events.edit_itinerary"), edit_event_itinerary_path(event), "select-activities") %>
   <% else -%>
     <%= action_list_item(t("events.details"), event_path(event), "event") %>

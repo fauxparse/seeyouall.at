@@ -33,7 +33,7 @@
       margin: 0.25rem;
 
       circle {
-        fill: rgba($cyan-100, 0.5);
+        fill: rgba($accent-100, 0.5);
       }
 
       polyline {
@@ -73,7 +73,7 @@
     }
 
     :checked + label {
-      background: $cyan;
+      background: $accent-color;
       color: text-color($white);
       -webkit-font-smoothing: auto;
       border-radius: $base-border-radius;

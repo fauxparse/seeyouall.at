@@ -92,5 +92,12 @@ class EventsController < ApplicationController
     @event ||= params[:id] && Event.find_by!(slug: params[:id])
   end
 
-  helper_method :event
+  def registration
+    @registration ||= begin
+      registration = event && current_user && current_user.registrations.for_event(event).first
+      registration && RegistrationPresenter.new(registration)
+    end
+  end
+
+  helper_method :event, :registration
 end

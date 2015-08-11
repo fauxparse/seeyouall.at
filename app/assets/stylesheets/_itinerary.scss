@@ -147,7 +147,7 @@
     @include flex-shrink(0);
     @include display(flex);
     @include align-items(flex-start);
-    background: $cyan-100;
+    background: $accent-100;
     padding: 1rem;
 
     ul {

@@ -61,3 +61,7 @@ picture {
   margin: 0;
   max-width: 100%;
 }
+
+b, strong {
+  font-weight: $bold-font-weight;
+}

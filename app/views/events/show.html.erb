@@ -1,2 +1,27 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<div class="event-details">
+  <header style="background-image: url(<%= placeholder_image_url(width: 800, height: 800, sequence: event.id) %>)">
+    <%= content_tag :h1 do %>
+      <%= content_tag :b, event.name %>
+      <%= content_tag :small, date_range(event.dates) %>
+    <% end -%>
+    <div class="header-color"></div>
+  </header>
+
+  <div class="body">
+    <section class="description">
+      <p>
+        <b>You'll prove I can trust you when the day comes that you have to kill me. And you do. Bunnies aren't just cute like everybody supposes. I suppose there is a sort of Machiavellian ingenuity to your transgression. The only time you were ever at peace in your whole life was when you were dead. My entire existence was constructed by a sociopath in a sweater vest; what do you suggest I do?</b>
+      </p>
+      <p>
+        That probably would've sounded more commanding if I wasn't wearing my yummy sushi pajamas. Men watch the action movie, they eat of the beef, and enjoy to look at the bosoms. She came from the grave much graver. If you can't do something smart, do something right. Well, you were busy trying to get yourself lit on fire. The gentlemen are coming by. And what's with all the carrots? And now the one person who should be here is gone, and a waste like you gets to live. If I could make you purtier, I would.
+      </p>
+      <p>
+        I'll never leave. Not even if you kill me. Spike! It's Spike. And he's wearing a coat. I've got four brothers, none of them Democrats. Every single person down there is ignoring your pain because they're too busy with their own. I just don't see why everyone's always picking on Marie-Antoinette. Stay with me. Forever. That's the whole point. Okay, at this point you're abusing sarcasm. I am never gonna see a merman, ever. They need to take seven and they might take yours. They rampaged through half the known world until Angel got his soul.
+      </p>
+    </section>
+
+    <aside>
+      <%= render partial: "registrations/summary", locals: { show_event_link: false } %>
+    </aside>
+  </div>
+</div>

@@ -39,7 +39,7 @@
 
   <section>
     <%= action_list do -%>
-      <%= action_list_item(t("events.new"), new_event_path, "add-event") if can? :create, Event %>
+      <%= action_list_item(t("events.new"), new_event_path, "add-event") %>
     <% end -%>
   </section>
 </aside>

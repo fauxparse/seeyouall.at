@@ -71,6 +71,7 @@
       background: none;
       box-shadow: none;
       overflow-y: visible;
+      pointer-events: none;
 
       a {
         position: absolute;
@@ -149,8 +150,12 @@
     &.open, &:hover {
       &::before { opacity: 0; }
 
-      .action-list i {
-        @include transform(scale(1));
+      .action-list {
+        pointer-events: auto;
+
+        i {
+          @include transform(scale(1));
+        }
       }
     }
 

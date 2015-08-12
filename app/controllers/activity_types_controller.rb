@@ -1,6 +1,6 @@
 class ActivityTypesController < ApplicationController
   def create
-    authorize! :update, event
+    authorize!(:update, event)
     create_activity_type = CreateActivityType.new(event, activity_type_params)
 
     respond_to do |format|
@@ -16,7 +16,7 @@ class ActivityTypesController < ApplicationController
 
   def update
     activity_type = event.activity_types.find(params[:id])
-    authorize! :update, activity_type
+    authorize!(:update, activity_type)
     update_activity_type = update_activity_type.new(activity_type, activity_type_params)
 
     respond_to do |format|
@@ -32,7 +32,7 @@ class ActivityTypesController < ApplicationController
 
   def destroy
     activity_type = event.activity_types.find(params[:id])
-    authorize! :destroy, activity_type
+    authorize!(:destroy, activity_type)
 
     activity_type.destroy!
 

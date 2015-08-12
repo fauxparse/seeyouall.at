@@ -5,4 +5,13 @@ class TimeSlot < ActiveRecord::Base
 
   validates :start_time, :end_time, presence: true
   validates_with TimePeriodValidator
+
+  def empty?
+    scheduled_activities.empty?
+  end
+
+  def overlaps?(another)
+    start_time <= another.end_time &&
+    another.start_time <= end_time
+  end
 end

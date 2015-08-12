@@ -5,12 +5,7 @@ class CreateActivityType
   end
 
   def call
-    begin
-      @activity_type.save!
-
-    rescue ActiveRecord::RecordInvalid
-      false
-    end
+    @activity_type.save
   end
 
   def activity_type

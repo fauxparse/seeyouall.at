@@ -16,11 +16,11 @@ class EventForm < SimpleDelegator
   end
 
   def start_date=(value)
-    event.start_time = value.presence && Time.zone.parse(value.to_s)
+    event.start_time = value.present? ? Time.zone.parse(value.to_s) : nil
   end
 
   def end_date=(value)
-    event.end_time = value.presence && Time.zone.parse(value.to_s).end_of_day
+    event.end_time = value.present? ? Time.zone.parse(value.to_s) : nil
   end
 
   def self.permitted_parameters

@@ -5,12 +5,7 @@ class CreateActivity
   end
 
   def call
-    begin
-      @activity.save!
-
-    rescue ActiveRecord::RecordInvalid
-      false
-    end
+    @activity.save
   end
 
   def activity

@@ -4,7 +4,7 @@ class UpdateEvent
   end
 
   def call
-    @form.save!
+    @form.save
   end
 
   def event

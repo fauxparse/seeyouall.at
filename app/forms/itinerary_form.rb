@@ -59,7 +59,7 @@ class ItineraryForm
         hash[selected.id] << :selected
         event.scheduled_activities.each do |schedule|
           next if schedule.id == selected.id || !hash[schedule.id].include?(:available)
-          if time_slots_overlap?(selected.time_slot, schedule.time_slot)
+          if selected.time_slot.overlaps?(schedule.time_slot)
             hash[schedule.id] ^= [:available, :restricted]
           end
         end
@@ -122,14 +122,10 @@ class ItineraryForm
     selections.each do |selection|
       next if selection.marked_for_destruction? #|| selection.new_record?
 
-      if time_slots_overlap?(selection.scheduled_activity.time_slot, scheduled_activity.time_slot)
+      if selection.scheduled_activity.time_slot.overlaps?(scheduled_activity.time_slot)
         selection.mark_for_destruction
       end
     end
-  end
-
-  def time_slots_overlap?(a, b)
-    a.start_time <= b.end_time && b.start_time <= a.end_time
   end
 
   def enforce_package_limits
@@ -164,7 +160,7 @@ class ItineraryForm
     selected = selections.reject(&:marked_for_destruction?)
     selected.each.with_index do |selection, i|
       selected[0...i].each do |candidate|
-        if time_slots_overlap?(selection.time_slot, candidate.time_slot)
+        if selection.time_slot.overlaps?(candidate.time_slot)
           message = I18n.t("activerecord.errors.messages.schedule_clash",
             first: candidate.activity.name,
             second: selection.activity.name

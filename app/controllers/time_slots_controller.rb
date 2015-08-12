@@ -1,6 +1,6 @@
 class TimeSlotsController < ApplicationController
   def create
-    authorize! :update, event
+    authorize!(:update, event)
     params = time_slot_params
     add_event_time_slot = AddEventTimeSlot.new(event, params[:start_time], params[:end_time])
     @time_slot = add_event_time_slot.call
@@ -8,7 +8,7 @@ class TimeSlotsController < ApplicationController
   end
 
   def destroy
-    authorize! :update, event
+    authorize!(:update, event)
     if time_slot = event.time_slots.find_by(id: params[:id])
       time_slot.destroy
     end

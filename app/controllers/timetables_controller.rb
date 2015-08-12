@@ -9,7 +9,7 @@ class TimetablesController < ApplicationController
   end
 
   def edit
-    authorize! :update, event
+    authorize!(:update, event)
     @timetable = TimetablePresenter.new(event)
 
     respond_to do |format|

@@ -5,6 +5,7 @@ class ItinerariesController < ApplicationController
   end
 
   def edit
+    authorize!(:update, registration)
     @form = ItineraryForm.new(registration)
 
     respond_to do |format|
@@ -14,7 +15,7 @@ class ItinerariesController < ApplicationController
   end
 
   def update
-    authorize! :update, registration
+    authorize!(:update, registration)
     @form = ItineraryForm.new(registration, itinerary_params)
     respond_to do |format|
       begin

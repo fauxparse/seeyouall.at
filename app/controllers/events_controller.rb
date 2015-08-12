@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    authorize! :read, event
+    authorize!(:read, event)
 
     respond_to do |format|
       @event = EventPresenter.new(event)
@@ -44,12 +44,12 @@ class EventsController < ApplicationController
   end
 
   def edit
-    authorize! :update, event
+    authorize!(:update, event)
     @event = EventPresenter.new(event)
   end
 
   def update
-    authorize! :update, event
+    authorize!(:update, event)
 
     update_event = UpdateEvent.new(event, event_params)
 
@@ -66,7 +66,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, event
+    authorize!(:destroy, event)
 
     event.destroy!
 

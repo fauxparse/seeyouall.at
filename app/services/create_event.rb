@@ -5,19 +5,17 @@ class CreateEvent
   end
 
   def call
-    begin
-      Event.transaction do
-        if @form.save!
-          AddUserAsEventAdministrator.new(@user, @form.event).call
-          CreateDefaultActivityType.new(@form.event).call
-          CreateDefaultPackage.new(@form.event).call
-        end
+    Event.transaction do
+      if @form.save!
+        AddUserAsEventAdministrator.new(@user, @form.event).call
+        CreateDefaultActivityType.new(@form.event).call
+        CreateDefaultPackage.new(@form.event).call
       end
-      true
-
-    rescue ActiveRecord::RecordInvalid
-      false
     end
+    true
+
+  rescue ActiveRecord::RecordInvalid
+    false
   end
 
   def event

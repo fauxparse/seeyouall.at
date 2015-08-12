@@ -177,11 +177,11 @@ class ItineraryForm
   def add_status_information_for_selected_activities(status)
     schedules.map.with_object(status) do |selected, hash|
       hash[selected.id] << :selected
-      add_clash_information(hash)
+      add_clash_information(selected, hash)
     end
   end
 
-  def add_clash_information(status)
+  def add_clash_information(selected, status)
     event.scheduled_activities.each do |schedule|
       next if schedule.id == selected.id || !status[schedule.id].include?(:available)
       if selected.time_slot.overlaps?(schedule.time_slot)

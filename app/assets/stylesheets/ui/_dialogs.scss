@@ -31,8 +31,16 @@
   }
 
   .dialog-content {
-    padding: 1.5rem;
+    @include flex(1);
+    padding: 1.5rem 1.5rem 4.5rem;
+    margin-bottom: -3rem;
+    max-height: 100vh;
     overflow-y: auto;
+    background: linear-gradient($white, $white), linear-gradient(divider-color(), divider-color());
+    background-size: 100% 1px, 100% 1px;
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+    background-attachment: local, scroll;
   }
 
   .dialog-title {
@@ -49,6 +57,9 @@
     @include flex-direction(row);
     @include justify-content(flex-end);
     @include flex-wrap(wrap);
+    position: relative;
+    z-index: 1;
+    background: $white;
 
     button {
       background: none;
@@ -90,7 +101,16 @@
     .dialog-container {
       border-radius: $base-border-radius;
       max-width: 30rem;
-      max-height: 90vh;
+    }
+
+    .dialog-content {
+      max-height: 75vh;
+      padding-bottom: 1.5rem;
+      margin-bottom: 0;
+    }
+
+    .dialog-footer {
+      @include border-bottom-radius($base-border-radius);
     }
   }
 }

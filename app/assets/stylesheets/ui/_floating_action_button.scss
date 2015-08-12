@@ -115,6 +115,8 @@
         }
 
         &:hover {
+          background: none;
+
           i {
             box-shadow: $raised-button-hover-shadow;
           }

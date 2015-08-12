@@ -32,7 +32,6 @@ class App.TimetableEditor extends Spine.Controller
       .on("destroy", @destroyTimeSlot)
     App.ScheduledActivity
       .one("refresh", @refreshScheduledActivities)
-      # .on("create", @createScheduledActivity)
       .on("update", @updateScheduledActivity)
       .on("changeID", @changeScheduledActivityID)
       .on("destroy", @destroyScheduledActivity)
@@ -398,7 +397,6 @@ class EditActivityDialog extends ScheduleActivityDialog
     "change input": "inputChanged"
     "input textarea": "inputChanged"
     "change textarea": "inputChanged"
-    "click [data-activity-type-id]": "changeActivityType"
     "change input[type=date]": "timesChanged"
     "change input[type=time]": "timesChanged"
 
@@ -427,11 +425,14 @@ class EditActivityDialog extends ScheduleActivityDialog
     super
     @nameInput.focus()
 
+  timesChanged: =>
+    super if @schedule?
+
   save: ->
     promise = $.Deferred()
     @activity.name = @nameInput.val()
     @activity.description = @description.val()
-    @activity.activity_type_id = @_activityTypeID
+    @activity.activity_type_id = parseInt(@$("[name=activity_type_id]:checked").val())
     if @schedule
       App.TimeSlot.findOrCreateByTimes(@event, @startTime, @endTime)
         .done (timeSlot) =>
@@ -464,11 +465,6 @@ class EditActivityDialog extends ScheduleActivityDialog
 
   inputChanged: ->
     @okButtons.prop("disabled", !!@$(":invalid").length)
-
-  changeActivityType: (e) ->
-    typeID = $(e.target).closest("a").data("activity-type-id")
-    @_activityTypeID = typeID
-    @activityTypeLabel.text(@activity.activityType().name)
 
   keypress: (e) =>
     if e.which == 13

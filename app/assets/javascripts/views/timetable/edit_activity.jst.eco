@@ -10,23 +10,15 @@
   </section>
   <section class="floating-label field has-value">
     <label><%= I18n.t("activerecord.attributes.activity.activity_type_id") %></label>
-    <div class="popup" rel="activity-type-id">
-      <input type="hidden" name="activity_type_id" value="<%= @activity.activity_type_id %>">
-      <a class="popup-toggle" href="#">
-        <div class="popup-toggle-label"><%= @activity.activityType().name %></div><i class="icon-arrow-drop-down"></i>
-      </a>
-      <div class="popup-menu">
-        <ul class="action-list">
-          <% for type in App.ActivityType.all(): %>
-            <li>
-              <a href="#" data-activity-type-id="<%= type.id %>">
-                <i class="activity-type-icon" style="background-color: <%= type.color().shade(500) %>"><%= type.name.substr(0,1).toLocaleUpperCase() %></i>
-                <span><%= type.name %></span>
-              </a>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+    <ul class="radio-buttons">
+      <% for type in App.ActivityType.all(): %>
+        <li>
+          <label>
+            <input type="radio" name="activity_type_id" value="<%= type.id %>" <%= " checked" if @activity.activity_type_id == type.id %>>
+            <%= type.name %>
+          </label>
+        </li>
+      <% end %>
+    </ul>
   </section>
 </div>

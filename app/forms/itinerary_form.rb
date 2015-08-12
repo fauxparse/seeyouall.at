@@ -55,7 +55,7 @@ class ItineraryForm
         hash[s.id] = Set.new([determine_scheduled_activity_state(s)])
       end
 
-      add_status_information_for_scheduled_activities(status)
+      add_status_information_for_selected_activities(status)
     end
   end
 
@@ -80,6 +80,10 @@ class ItineraryForm
 
   def selections
     registration.selections
+  end
+
+  def activities
+    schedules.map(&:activity).sort_by(&:activity_type_id)
   end
 
   def counts_by_activity_type
@@ -170,19 +174,23 @@ class ItineraryForm
     errors.add(:selections, message)
   end
 
-  def add_status_information_for_scheduled_activities(status)
+  def add_status_information_for_selected_activities(status)
     schedules.map.with_object(status) do |selected, hash|
       hash[selected.id] << :selected
-      event.scheduled_activities.each do |schedule|
-        next if schedule.id == selected.id || !hash[schedule.id].include?(:available)
-        if selected.time_slot.overlaps?(schedule.time_slot)
-          hash[schedule.id] ^= [:available, :restricted]
-        end
+      add_clash_information(hash)
+    end
+  end
+
+  def add_clash_information(status)
+    event.scheduled_activities.each do |schedule|
+      next if schedule.id == selected.id || !status[schedule.id].include?(:available)
+      if selected.time_slot.overlaps?(schedule.time_slot)
+        status[schedule.id] ^= [:available, :restricted]
       end
     end
   end
 
   def schedules_chunked_by_activity_type
-    schedules.map(&:activity).sort_by(&:activity_type_id).chunk(&:activity_type_id)
+    activities.chunk(&:activity_type_id)
   end
 end

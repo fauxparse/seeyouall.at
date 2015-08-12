@@ -1,4 +1,8 @@
 class ActivitiesController < ApplicationController
+  before_filter :activity, only: [:update, :destroy]
+  authorize_resource
+  skip_authorize_resource only: [:create]
+
   def create
     authorize!(:update, event)
     create_activity = CreateActivity.new(event, activity_params)
@@ -15,8 +19,6 @@ class ActivitiesController < ApplicationController
   end
 
   def update
-    activity = event.activities.find(params[:id])
-    authorize!(:update, activity)
     update_activity = UpdateActivity.new(activity, activity_params)
 
     respond_to do |format|
@@ -42,11 +44,14 @@ class ActivitiesController < ApplicationController
     end
   end
 
-
   protected
 
   def event
     @event ||= Event.find_by!(slug: params[:event_id])
+  end
+
+  def activity
+    @activity ||= event.activities.find(params[:id])
   end
 
   def activity_params

@@ -2,6 +2,10 @@ class EventsController < ApplicationController
   wrap_parameters :event, include: EventForm.wrapped_parameters
 
   before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :event, only: [:show, :edit, :update, :destroy]
+
+  authorize_resource
+  skip_load_and_authorize_resource only: [:index, :check]
 
   def index
     events = Event.current_and_upcoming.in_chronological_order.limit(5)
@@ -14,8 +18,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    authorize!(:read, event)
-
     respond_to do |format|
       @event = EventPresenter.new(event)
       format.html
@@ -24,12 +26,10 @@ class EventsController < ApplicationController
   end
 
   def new
-    authorize!(:create, Event)
     @event = EventPresenter.new(Event.new)
   end
 
   def create
-    authorize!(:create, Event)
     create_event = CreateEvent.new(event_params, current_user)
 
     respond_to do |format|
@@ -44,13 +44,10 @@ class EventsController < ApplicationController
   end
 
   def edit
-    authorize!(:update, event)
     @event = EventPresenter.new(event)
   end
 
   def update
-    authorize!(:update, event)
-
     update_event = UpdateEvent.new(event, event_params)
 
     respond_to do |format|
@@ -66,8 +63,6 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    authorize!(:destroy, event)
-
     event.destroy!
 
     respond_to do |format|

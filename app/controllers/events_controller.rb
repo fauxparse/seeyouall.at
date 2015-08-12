@@ -31,16 +31,7 @@ class EventsController < ApplicationController
 
   def create
     create_event = CreateEvent.new(event_params, current_user)
-
-    respond_to do |format|
-      if create_event.call
-        format.html { redirect_to(edit_event_path(create_event.event)) }
-        format.json { render(json: create_event.event, serializer: EventSerializer) }
-      else
-        format.html { render :new }
-        format.json { render(json: create_event.event, serializer: EventSerializer, status: :unprocessable_entity) }
-      end
-    end
+    call_and_respond_with create_event
   end
 
   def edit
@@ -49,17 +40,7 @@ class EventsController < ApplicationController
 
   def update
     update_event = UpdateEvent.new(event, event_params)
-
-    respond_to do |format|
-      if update_event.call
-        format.html { redirect_to(edit_event_path(update_event.event)) }
-        format.json { render(json: update_event.event, serializer: EventSerializer) }
-      else
-        @event = UpdateEvent.event
-        format.html { render :new }
-        format.json { render(json: update_event.event, status: :unprocessable_entity) }
-      end
-    end
+    call_and_respond_with update_event
   end
 
   def destroy
@@ -95,4 +76,20 @@ class EventsController < ApplicationController
   end
 
   helper_method :event, :registration
+
+  def call_and_respond_with(service)
+    result = service.call
+
+    respond_to do |format|
+      @event = service.event
+
+      if result
+        format.html { redirect_to(edit_event_path(@event)) }
+        format.json { render(json: @event, serializer: ActivitySerializer) }
+      else
+        format.html { render(@event.new_record? ? :new : :edit) }
+        format.json { render(json: @event, serializer: ActivitySerializer, status: :unprocessable_entity) }
+      end
+    end
+  end
 end

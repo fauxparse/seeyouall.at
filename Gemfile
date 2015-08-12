@@ -57,6 +57,7 @@ gem 'unicorn'
 
 
 gem 'simplecov', require: false, group: :test
+gem "codeclimate-test-reporter", group: :test, require: nil
 
 group :development do
   gem 'letter_opener'

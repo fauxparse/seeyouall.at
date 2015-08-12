@@ -139,6 +139,7 @@ class App.TimetableEditor extends Spine.Controller
       moment.tz.setDefault(data.time_zone)
       @event().start_date = data.start_date
       @event().end_date = data.end_date
+      App.Location.refresh(data.locations)
       App.ActivityType.refresh(data.activity_types)
       App.Activity.refresh(($.extend(a, { event_id: @eventID() }) for a in data.activities))
       App.TimeSlot.refresh(($.extend(slot, { event_id: @eventID() }) for slot in data.time_slots))

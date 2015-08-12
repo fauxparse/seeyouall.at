@@ -24,6 +24,7 @@ class TimetablesController < ApplicationController
     @event ||= Event
       .with_activities
       .with_schedule
+      .with_locations
       .where(slug: params[:event_id])
       .first!
     @event_presenter ||= EventPresenter.new(@event)

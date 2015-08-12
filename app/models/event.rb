@@ -6,6 +6,7 @@ class Event < ActiveRecord::Base
   has_many :packages, inverse_of: :event, dependent: :destroy, autosave: true
   has_many :registrations, inverse_of: :event, autosave: true, dependent: :destroy
   has_many :administrators, inverse_of: :event, autosave: true, dependent: :destroy
+  has_many :locations, inverse_of: :event, autosave: true, dependent: :destroy
 
   scope :upcoming, -> { where("start_time > ?", Time.current) }
   scope :current, -> {
@@ -18,6 +19,7 @@ class Event < ActiveRecord::Base
   scope :with_activities, -> { includes(:activity_types => :activities) }
   scope :with_schedule, -> { includes(:scheduled_activities => [:time_slot, { :activity => :activity_type }]) }
   scope :with_packages, -> { includes(:packages => { :allocations => :activity_type, :package_prices => :price }) }
+  scope :with_locations, -> { includes(:locations) }
 
   acts_as_url :name,
     url_attribute: :slug,

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :activity_types, only: [:create, :update, :destroy]
     resources :time_slots, only: [:create, :destroy]
     resources :scheduled_activities, only: [:create, :update, :destroy]
+    resources :locations
   end
 
   root to: "events#index"

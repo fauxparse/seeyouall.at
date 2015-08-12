@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812015747) do
+ActiveRecord::Schema.define(version: 20150812040426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,9 +82,11 @@ ActiveRecord::Schema.define(version: 20150812015747) do
     t.string  "address"
     t.decimal "latitude",  precision: 9, scale: 6
     t.decimal "longitude", precision: 9, scale: 6
+    t.integer "event_id"
   end
 
   add_index "locations", ["address"], name: "index_locations_on_address", using: :btree
+  add_index "locations", ["event_id"], name: "index_locations_on_event_id", using: :btree
   add_index "locations", ["latitude", "longitude"], name: "index_locations_on_latitude_and_longitude", using: :btree
   add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
 
@@ -189,6 +191,7 @@ ActiveRecord::Schema.define(version: 20150812015747) do
   add_foreign_key "facilitators", "users", on_delete: :nullify
   add_foreign_key "individual_activity_prices", "allocations", on_delete: :cascade
   add_foreign_key "individual_activity_prices", "prices", on_delete: :cascade
+  add_foreign_key "locations", "events"
   add_foreign_key "package_prices", "packages", on_delete: :cascade
   add_foreign_key "package_prices", "prices", on_delete: :cascade
   add_foreign_key "packages", "events", on_delete: :cascade

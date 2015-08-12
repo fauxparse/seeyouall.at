@@ -3,6 +3,7 @@ class ItineraryForm
 
   validate :enforce_package_limits
   validate :restrict_clashes
+  validate :respect_participant_limits
 
   def initialize(registration, params = {})
     @registration = RegistrationPresenter.new(registration)
@@ -56,6 +57,7 @@ class ItineraryForm
       end
 
       add_status_information_for_selected_activities(status)
+      add_status_information_for_limited_activities(status)
     end
   end
 
@@ -181,6 +183,12 @@ class ItineraryForm
     end
   end
 
+  def add_status_information_for_limited_activities(status)
+    event.scheduled_activities.select(&:sold_out?).each.with_object(status) do |scheduled, hash|
+      hash[scheduled.id] << :sold_out
+    end
+  end
+
   def add_clash_information(selected, status)
     event.scheduled_activities.each do |schedule|
       next if schedule.id == selected.id || !status[schedule.id].include?(:available)
@@ -192,5 +200,18 @@ class ItineraryForm
 
   def schedules_chunked_by_activity_type
     activities.chunk(&:activity_type_id)
+  end
+
+  def respect_participant_limits
+    registration.selections.each do |selection|
+      if selection.new_record? && selection.scheduled_activity.sold_out?
+        add_sold_out_error(selection.scheduled_activity)
+      end
+    end
+  end
+
+  def add_sold_out_error(scheduled)
+    message = I18n.t("activerecord.errors.messages.sold_out", activity: scheduled.activity.name)
+    errors.add(:selections, message)
   end
 end

@@ -106,28 +106,41 @@
         &[rel="unbook"] {
           color: $green;
         }
+
+        &[rel="sold-out"] {
+          color: $error-color;
+        }
       }
     }
   }
 
   &:not([data-state*="selected"]) button[rel="unbook"],
+  &:not([data-state*="sold_out"]) button[rel="sold-out"],
   &[data-state*="available"] button[rel="limited"],
   &[data-state*="restricted"] button[rel="limited"],
   &[data-state*="selected"] button[rel="limited"],
+  &[data-state*="sold_out"] button[rel="limited"],
+  &[data-state*="selected"] button[rel="sold-out"],
+  &[data-state*="sold_out"]:not([data-state*="selected"]) button[rel="book"],
   &[data-state*="limited"] button[rel="book"],
   &[data-state*="unavailable"] button[rel="book"],
   &[data-state*="selected"] button[rel="book"] {
     display: none;
   }
 
-  &[data-state*= "restricted"],
-  &[data-state*= "unavailable"],
-  &[data-state*= "limited"] {
+  &[data-state*="sold-out"]:not([data-state*="booked"]),
+  &[data-state*="restricted"],
+  &[data-state*="unavailable"],
+  &[data-state*="limited"] {
     opacity: $disabled-alpha;
 
     .buttons button:disabled {
       opacity: 1;
       color: secondary-color();
+
+      &[rel="sold-out"] {
+        color: $error-color;
+      }
     }
   }
 }

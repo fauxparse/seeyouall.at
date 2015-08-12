@@ -84,6 +84,45 @@ describe ItineraryForm do
         expect(form).to have(1).error_on(:selections)
       end
     end
+
+    context "when an activity is sold out" do
+      before do
+        @activity1.update(participant_limit: 1)
+      end
+
+      context "when someone else has registered" do
+        before do
+          someone_else = FactoryGirl.create(:ron)
+          their_registration = Registration.create!(user: someone_else, event: registration.event, package: registration.package)
+          their_registration.selections.create!(scheduled_activity: @activity1)
+        end
+
+        it "is invalid" do
+          form.selections = [@activity1.id]
+          expect(form).not_to be_valid
+          expect(form).to have(1).error_on(:selections)
+        end
+
+        it "shows as sold out" do
+          expect(form.schedule[@activity1.id]).to include(:sold_out)
+        end
+      end
+
+      context "when this user has registered" do
+        before do
+          registration.selections.create!(scheduled_activity: @activity1)
+        end
+
+        it "is valid" do
+          form.selections = [@activity1.id]
+          expect(form).to be_valid
+        end
+
+        it "shows as sold out" do
+          expect(form.schedule[@activity1.id]).to include(:sold_out)
+        end
+      end
+    end
   end
 
   describe "#save!" do

@@ -42,6 +42,7 @@ en:
         activity_type_not_allowed: "Your package does not include any %{type}."
         too_many: "Too many %{type}. You have selected %{count}, but your package includes a maximum of %{maximum}."
         schedule_clash: "You can't do both %{first} and %{second} at the same time"
+        sold_out: "%{activity} is sold out."
       models:
         event:
           attributes:
@@ -128,6 +129,7 @@ en:
     book: "Book now"
     booked: "Booked!"
     limited: "Package limit reached"
+    sold_out: "Sold out!"
     save: "Save"
     save_changes: "Save changes"
     saved: "Saved"

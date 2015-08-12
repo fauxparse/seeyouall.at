@@ -55,15 +55,7 @@ class ItineraryForm
         hash[s.id] = Set.new([determine_scheduled_activity_state(s)])
       end
 
-      schedules.map.with_object(status) do |selected, hash|
-        hash[selected.id] << :selected
-        event.scheduled_activities.each do |schedule|
-          next if schedule.id == selected.id || !hash[schedule.id].include?(:available)
-          if selected.time_slot.overlaps?(schedule.time_slot)
-            hash[schedule.id] ^= [:available, :restricted]
-          end
-        end
-      end
+      add_status_information_for_scheduled_activities(status)
     end
   end
 
@@ -92,8 +84,7 @@ class ItineraryForm
 
   def counts_by_activity_type
     @counts ||= begin
-      chunked = schedules.map(&:activity).sort_by(&:activity_type_id).chunk(&:activity_type_id)
-      chunked.map.with_object(Hash.new(0)) do |(id, activities), counts|
+      schedules_chunked_by_activity_type.map.with_object(Hash.new(0)) do |(id, activities), counts|
         counts[id] = activities.length
       end
     end
@@ -157,17 +148,41 @@ class ItineraryForm
   end
 
   def restrict_clashes
+    with_selections_for_comparison do |selection, candidate|
+      if selection.time_slot.overlaps?(candidate.time_slot)
+        add_restriction_error(selection, candidate)
+      end
+    end
+  end
+
+  def with_selections_for_comparison
     selected = selections.reject(&:marked_for_destruction?)
     selected.each.with_index do |selection, i|
-      selected[0...i].each do |candidate|
-        if selection.time_slot.overlaps?(candidate.time_slot)
-          message = I18n.t("activerecord.errors.messages.schedule_clash",
-            first: candidate.activity.name,
-            second: selection.activity.name
-          )
-          errors.add(:selections, message)
+      selected[0...i].each { |candidate| yield(selection, candidate) }
+    end
+  end
+
+  def add_restriction_error(selection, candidate)
+    message = I18n.t("activerecord.errors.messages.schedule_clash",
+      first: candidate.activity.name,
+      second: selection.activity.name
+    )
+    errors.add(:selections, message)
+  end
+
+  def add_status_information_for_scheduled_activities(status)
+    schedules.map.with_object(status) do |selected, hash|
+      hash[selected.id] << :selected
+      event.scheduled_activities.each do |schedule|
+        next if schedule.id == selected.id || !hash[schedule.id].include?(:available)
+        if selected.time_slot.overlaps?(schedule.time_slot)
+          hash[schedule.id] ^= [:available, :restricted]
         end
       end
     end
+  end
+
+  def schedules_chunked_by_activity_type
+    schedules.map(&:activity).sort_by(&:activity_type_id).chunk(&:activity_type_id)
   end
 end

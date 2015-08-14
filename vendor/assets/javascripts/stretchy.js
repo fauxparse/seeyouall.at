@@ -1,6 +1,6 @@
 /*
  * Stretchy: Form element autosizing, the way it should be.
- * by Lea Verou http://lea.verou.me 
+ * by Lea Verou http://lea.verou.me
  * MIT license
  */
 (function() {
@@ -36,7 +36,7 @@ var _ = self.Stretchy = {
 		if (!_.resizes(element)) {
 			return;
 		}
-		
+
 		var cs = getComputedStyle(element);
 		var offset = 0;
 
@@ -44,9 +44,9 @@ var _ = self.Stretchy = {
 			var empty = true;
 			element.value = element.placeholder;
 		}
-		
+
 		var type = element.nodeName.toLowerCase();
-		
+
 		if (type == "textarea") {
 			element.style.height = "0";
 
@@ -88,7 +88,6 @@ var _ = self.Stretchy = {
 
 			for (var property in cs) {
 				if (!/^(width|webkitLogicalWidth)$/.test(property)) {
-					//console.log(property, option.offsetWidth, cs[property]);
 					option.style[property] = cs[property];
 
 					if (/appearance$/i.test(property)) {
@@ -121,7 +120,7 @@ var _ = self.Stretchy = {
 	resizeAll: function(elements) {
 		$$(elements || _.selectors.base).forEach(function (element) {
 			_.resize(element);
-		});	
+		});
 	},
 
 	active: true,

@@ -13,11 +13,11 @@ class App.TimeSlot extends Spine.Model
     moment(@end_time)
 
   @findByTimes: (startTime, endTime) ->
-    startTime = startTime.toISOString() if moment.isMoment(startTime)
-    endTime = endTime.toISOString() if moment.isMoment(endTime)
+    startTime = moment(startTime.toISOString()) unless moment.isMoment(startTime)
+    endTime = moment(endTime.toISOString()) unless moment.isMoment(endTime)
 
     for record in @records
-      if record.startTime == startTime && record.endTime == endTime
+      if record.startTime().isSame(startTime) && record.endTime().isSame(endTime)
         return record
     false
 

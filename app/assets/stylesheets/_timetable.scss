@@ -33,6 +33,12 @@
         left: 0.5rem;
         right: 0.5rem;
       }
+
+      > a[rel] {
+        color: icon-color();
+        padding: 0.5rem;
+        &:hover { color: text-color(); }
+      }
     }
 
     .activity-list {
@@ -288,7 +294,7 @@
 
     input {
       @include flex(1);
-      &:not(:last-child) {
+      &:not(:last-of-type) {
         margin-right: 1rem;
       }
     }
@@ -307,4 +313,108 @@
   font-weight: $bold-font-weight;
   color: secondary-color($white);
   border-radius: 50%;
+}
+
+.edit-locations {
+  .locations {
+    margin: 0;
+    padding: 0;
+    border-bottom: $base-border;
+
+    > li {
+      margin: 0;
+      padding: 0.25rem 2.5rem;
+      position: relative;
+      border-top: $base-border;
+
+      .expand {
+        @include position(absolute, 0.25rem null null 0rem);
+        margin: 0;
+
+        .icon-chevron-right {
+          display: block;
+          padding: 0.5rem;
+          width: 2.5rem;
+          height: 2.5rem;
+          color: icon-color();
+          cursor: pointer;
+
+          &:hover { color: text-color(); }
+        }
+      }
+
+      > .icon-delete {
+        @include position(absolute, 0.25rem 0rem null null);
+        padding: 0.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        color: icon-color();
+        cursor: pointer;
+        &:hover { color: text-color(); }
+      }
+
+      [type="text"] {
+        border: none;
+        padding: 0;
+        height: 1.25rem;
+        line-height: 1.25rem;
+        margin: 0;
+      }
+
+      [name="location_name"] {
+        font-weight: $bold-font-weight;
+      }
+
+      [type="checkbox"] {
+        display: none;
+      }
+
+      ul {
+        display: none;
+      }
+
+      li {
+        @include display(flex);
+        @include align-items(center);
+        height: 1.5rem;
+
+        i {
+          color: icon-color();
+          &:first-child { padding-right: 0.5rem; }
+          &:last-child {
+            padding-left: 0.5rem;
+            opacity: 0;
+            pointer-events: none;
+            @include transition(opacity $fast $ease-out-cubic);
+          }
+        }
+
+        &:hover i:last-child {
+          opacity: 1;
+          cursor: pointer;
+          pointer-events: auto;
+          &:hover { color: text-color(); }
+        }
+
+        &:first-child:nth-last-of-type(2) i:last-child {
+          display: none;
+        }
+
+        input {
+          @include flex(1);
+        }
+      }
+
+      :checked {
+        ~ .expand i {
+          @include transform(rotate(90deg));
+        }
+
+        ~ ul {
+          display: block;
+          margin-top: 0.5rem;
+        }
+      }
+    }
+  }
 }

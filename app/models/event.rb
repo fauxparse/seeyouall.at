@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
   scope :with_activities, -> { includes(:activity_types => :activities) }
   scope :with_schedule, -> { includes(:scheduled_activities => [:time_slot, { :activity => :activity_type }]) }
   scope :with_packages, -> { includes(:packages => { :allocations => :activity_type, :package_prices => :price }) }
-  scope :with_locations, -> { includes(:locations) }
+  scope :with_locations, -> { includes(:locations => :rooms) }
 
   acts_as_url :name,
     url_attribute: :slug,

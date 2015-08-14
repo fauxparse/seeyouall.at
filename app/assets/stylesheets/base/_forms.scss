@@ -14,7 +14,7 @@ select {
 }
 
 label {
-  font-size: 75%;
+  font-size: 0.75rem;
   color: secondary-color();
   margin-bottom: $small-spacing / 2;
 
@@ -37,8 +37,9 @@ ul.radio-buttons {
 
 #{$all-text-inputs},
 select[multiple=multiple],
-textarea {
-  background-color: $base-background-color;
+textarea,
+select {
+  background-color: transparent;
   border: none; //$base-border;
   border-bottom: $base-border;
   border-radius: 0; //$base-border-radius;
@@ -98,8 +99,11 @@ input[type="file"] {
 
 select {
   margin-bottom: $base-spacing;
-  max-width: 100%;
-  width: auto;
+  display: block;
+  border-radius: 0;
+  padding-left: 0;
+  width: 100%;
+  @include appearance(none);
 }
 
 form {

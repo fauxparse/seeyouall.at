@@ -1,10 +1,10 @@
 @font-face {
   font-family: "icons";
-  src: font-url("icons_459fa3e825400256a5ebfae899c79f08.eot");
-  src: font-url("icons_459fa3e825400256a5ebfae899c79f08.eot?#iefix") format("embedded-opentype"),
-       font-url("icons_459fa3e825400256a5ebfae899c79f08.woff") format("woff"),
-       font-url("icons_459fa3e825400256a5ebfae899c79f08.ttf") format("truetype"),
-       font-url("icons_459fa3e825400256a5ebfae899c79f08.svg#icons") format("svg");
+  src: font-url("icons_349cc4bc79b46ceb268ee609f3d784f8.eot");
+  src: font-url("icons_349cc4bc79b46ceb268ee609f3d784f8.eot?#iefix") format("embedded-opentype"),
+       font-url("icons_349cc4bc79b46ceb268ee609f3d784f8.woff") format("woff"),
+       font-url("icons_349cc4bc79b46ceb268ee609f3d784f8.ttf") format("truetype"),
+       font-url("icons_349cc4bc79b46ceb268ee609f3d784f8.svg#icons") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +12,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "icons";
-    src: font-url("icons_459fa3e825400256a5ebfae899c79f08.svg#icons") format("svg");
+    src: font-url("icons_349cc4bc79b46ceb268ee609f3d784f8.svg#icons") format("svg");
   }
 }
 
@@ -26,8 +26,15 @@
 .icon-arrow-right:before,
 .icon-block:before,
 .icon-cancel:before,
+.icon-chevron-down:before,
+.icon-chevron-left:before,
+.icon-chevron-right:before,
+.icon-chevron-up:before,
+.icon-delete:before,
+.icon-edit:before,
 .icon-edit-activity:before,
 .icon-event:before,
+.icon-location:before,
 .icon-logout:before,
 .icon-menu:before,
 .icon-ok:before,
@@ -58,8 +65,15 @@ $icon-arrow-left: "\f108";
 $icon-arrow-right: "\f109";
 $icon-block: "\f101";
 $icon-cancel: "\f106";
+$icon-chevron-down: "\f118";
+$icon-chevron-left: "\f119";
+$icon-chevron-right: "\f11a";
+$icon-chevron-up: "\f11b";
+$icon-delete: "\f11d";
+$icon-edit: "\f11c";
 $icon-edit-activity: "\f111";
 $icon-event: "\f10a";
+$icon-location: "\f117";
 $icon-logout: "\f104";
 $icon-menu: "\f100";
 $icon-ok: "\f107";
@@ -77,8 +91,15 @@ $icon-timetable: "\f112";
 .icon-arrow-right::before { content: $icon-arrow-right; }
 .icon-block::before { content: $icon-block; }
 .icon-cancel::before { content: $icon-cancel; }
+.icon-chevron-down::before { content: $icon-chevron-down; }
+.icon-chevron-left::before { content: $icon-chevron-left; }
+.icon-chevron-right::before { content: $icon-chevron-right; }
+.icon-chevron-up::before { content: $icon-chevron-up; }
+.icon-delete::before { content: $icon-delete; }
+.icon-edit::before { content: $icon-edit; }
 .icon-edit-activity::before { content: $icon-edit-activity; }
 .icon-event::before { content: $icon-event; }
+.icon-location::before { content: $icon-location; }
 .icon-logout::before { content: $icon-logout; }
 .icon-menu::before { content: $icon-menu; }
 .icon-ok::before { content: $icon-ok; }

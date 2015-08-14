@@ -9,4 +9,17 @@
     <input type="time" name="end-time" value="<%= @endTime.format("HH:mm:ss") %>" required<%= " min='#{@startTime.format("HH:mm:ss")}'" if @startTime.isSame(@endTime, "day") %>>
     <label><%= I18n.t("activerecord.attributes.time_slot.end_time") %></label>
   </section>
+  <section class="field">
+    <label><%= I18n.t("activerecord.attributes.scheduled_activity.room_id") %></label>
+    <select name="location">
+      <option value=""><%= I18n.t("locations.none") %></option>
+      <% for location in App.Location.all(): %>
+        <optgroup label="<%= location.name %>">
+          <% for room in location.rooms(): %>
+            <option value="<%= room.id %>"<%= " selected" if @room_id == room.id %>><%= room.name %></option>
+          <% end %>
+        </optgroup>
+      <% end %>
+    </select>
+  </section>
 </div>

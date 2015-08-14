@@ -11,6 +11,7 @@ class App.TimetableEditor extends Spine.Controller
     "click .floating-action-button [data-activity-type-id]": "newActivity"
     "click aside [data-activity-type-id]": "chooseActivityType"
     "click aside [rel=new-activity-type]": "newActivityType"
+    "click aside [rel=locations]": "editLocations"
     "click .timetable-activity [rel=edit]": "editActivity"
 
   init: ->
@@ -55,7 +56,6 @@ class App.TimetableEditor extends Spine.Controller
     .on("dragend", @dragEnd)
 
   dragActivity: (el, container) =>
-    console.log @drake.options
     unless $(container).hasClass("activity-list")
       setTimeout ->
         $(el).remove()
@@ -78,8 +78,8 @@ class App.TimetableEditor extends Spine.Controller
 
       event = @event()
       new ScheduleActivityDialog({ event, activity, startTime, endTime })
-        .on "ok", (startTime, endTime) =>
-          App.ScheduledActivity.createByTimes(@event(), activity, startTime, endTime)
+        .on "ok", (startTime, endTime, room_id) =>
+          App.ScheduledActivity.createByTimes(@event(), activity, startTime, endTime, { room_id })
             .done (scheduledActivity) =>
               if @$("[data-schedule-id=#{scheduledActivity.id}]").length
                 item.remove()
@@ -333,6 +333,10 @@ class App.TimetableEditor extends Spine.Controller
       h = day.data("height") - day.data("offset")
       day.css(y: Math.max(Math.min(h - 8, top - y + 8), 0))
 
+  editLocations: (e) =>
+    e.preventDefault()
+    new LocationsEditor
+
 class ScheduleActivityDialog extends App.Dialog
   elements:
     "[name=start-date]": "startDateInput"
@@ -370,13 +374,16 @@ class ScheduleActivityDialog extends App.Dialog
     else
       @okButtons.attr("disabled", true)
 
+  locationID: ->
+    @$("[name=location]").val()
+
   ok: ->
-    @trigger "ok", @startTime, @endTime
+    @trigger "ok", @startTime, @endTime, @locationID()
     @hide()
 
   keypress: (e) =>
     if e.which == 13
-      @ok()
+      @ok() unless $(e.target).attr("list")
     else
       super
 
@@ -404,6 +411,7 @@ class EditActivityDialog extends ScheduleActivityDialog
   init: ->
     if @schedule
       [@startTime, @endTime] = [@schedule.startTime(), @schedule.endTime()]
+      @room_id = @schedule.room_id
     super
     @addAnotherButton.toggle(@activity.isNew())
     @_activityTypeID = @activity.activity_type_id
@@ -441,9 +449,9 @@ class EditActivityDialog extends ScheduleActivityDialog
             if s.id != @schedule.id && s.activity_id == @activity.id && s.time_slot_id == timeSlot.id
               promise.reject()
               return
-          unless timeSlot.id == @schedule.time_slot_id
-            @schedule.time_slot_id = timeSlot.id
-            @schedule.save()
+          @schedule.time_slot_id = timeSlot.id
+          @schedule.room_id = @locationID() || ""
+          @schedule.save()
           @activity.save(url: @url())
           promise.resolve()
     else
@@ -508,6 +516,173 @@ class EditActivityTypeDialog extends App.Dialog
   url: ->
     id = !@activityType.isNew() && "/#{@activityType.id}" || ""
     "/events/#{@event.id}/activity_types#{id}"
+
+class LocationsEditor extends App.Dialog
+  events:
+    "change [name=location_name]": "changeLocationName"
+    "change [name=location_address]": "changeLocationAddress"
+    "change [name=room_name]": "changeRoomName"
+    "click .location > .icon-delete": "removeLocation"
+    "click .room .icon-delete": "removeRoom"
+
+  init: ->
+    super
+    @el.addClass("edit-locations")
+    App.Location
+      .on("create", @createLocation)
+      .on("update", @updateLocation)
+      .on("destroy", @destroyLocation)
+      .on("ajaxSuccess", @updateLocation)
+      .on("changeID", @changeLocationID)
+    App.Room
+      .on("changeID", @changeRoomID)
+
+  release: =>
+    App.Location
+      .off("create", @createLocation)
+      .off("update", @updateLocation)
+      .off("destroy", @destroyLocation)
+      .off("ajaxSuccess", @updateLocation)
+      .off("changeID", @changeLocationID)
+    App.Room
+      .off("changeID", @changeRoomID)
+    super
+
+  eventID: -> @_event_id ||= $("#event_id").val()
+
+  renderContent: ->
+    content = super.append(@view("timetable/edit_locations")(this))
+    for location in App.Location.all()
+      @renderLocation(location).insertBefore(content.find(".new-location"))
+    content
+
+  renderFooter: ->
+    $("<footer>", class: "dialog-footer")
+      .append($("<button>", rel: "done", text: I18n.t("dialog.done")))
+
+  renderLocation: (location) ->
+    $("<li>", class: "location", "data-id": location.id).append(
+      $("<input>", type: "checkbox", id: "expand-location-#{location.id}"),
+      $("<label>", class: "expand", for: "expand-location-#{location.id}").append(
+        $("<i>", class: "icon-chevron-right")
+      ),
+      $("<input>", type: "text", name: "location_name", value: location.name, placeholder: I18n.t("activerecord.attributes.location.name")),
+      $("<input>", type: "text", name: "location_address", value: location.address, placeholder: I18n.t("activerecord.attributes.location.address")),
+      $("<ul>", class: "rooms")
+        .append((@renderRoom(room) for room in location.rooms()))
+        .append(
+          $("<li>", class: "new-room")
+            .append(
+              $("<i>", class: "icon-edit"),
+              $("<input>", type: "text", name: "new_room_name", placeholder: I18n.t("locations.add_room"))
+            )
+        ),
+      $("<i>", class: "icon-delete")
+    )
+
+  renderRoom: (room) ->
+    $("<li>", class: "room", "data-id": room.id).append(
+      $("<i>", class: "icon-location"),
+      $("<input>", type: "text", name: "room_name", value: room.name, placeholder: I18n.t("activerecord.attributes.room.name")),
+      $("<i>", class: "icon-delete")
+    )
+
+  keypress: (e) ->
+    if e.which == 13
+      e.preventDefault()
+      input = $(e.target).closest(":input")
+      if input.is("[name=new_location_name]")
+        @$("[name=new_location_address]").focus()
+      else if input.is("[name=new_location_address]")
+        if @addLocation()
+          input.val("")
+          @$("[name=new_location_name]").val("").focus()
+      else if input.is("[name=new_room_name]")
+        @addRoom(input)
+      else
+        input.nextAll(":input:visible")
+          .add(input.closest("li").nextAll("li").find(":input:visible"))
+          .first().focus()
+    else
+      super
+
+  saveLocation: (location) ->
+    location.save(url: @locationURL(location))
+
+  locationURL: (location) ->
+    "/events/#{@eventID()}/locations#{if location?.id then "/" + location.id else ""}"
+
+  addLocation: ->
+    name = @$("[name=new_location_name]").val()
+    address = @$("[name=new_location_address]").val()
+    return false unless name && address
+    location = new App.Location({name, address})
+    location.save(url: @locationURL())
+
+  addRoom: (input) ->
+    location = App.Location.find(input.closest(".location").data("id"))
+    @renderRoom(location.addRoom(name: input.val()))
+      .insertBefore(input.val("").closest("li"))
+    @saveLocation(location)
+
+  done: ->
+    @trigger("ok")
+    @hide()
+
+  changeLocationName: (e) ->
+    input = $(e.target)
+    if location = App.Location.find(input.closest(".location").data("id"))
+      location.name = input.val()
+      @saveLocation(location)
+
+  changeLocationAddress: (e) ->
+    input = $(e.target)
+    if location = App.Location.find(input.closest(".location").data("id"))
+      location.address = input.val()
+      @saveLocation(location)
+
+  changeRoomName: (e) ->
+    input = $(e.target)
+    if location = App.Location.find(input.closest(".location").data("id"))
+      if room = location.findRoom(input.closest(".room").data("id"))
+        room.name = input.val()
+        @saveLocation(location)
+
+  removeRoom: (e) ->
+    row = $(e.target).closest(".room")
+    if location = App.Location.find(row.closest(".location").data("id"))
+      # location.removeRoom(row.data("id"))
+      App.Room.find(row.data("id")).destroy()
+      row.remove()
+      @saveLocation(location)
+
+  createLocation: (location) =>
+    @renderLocation(location).insertBefore(@$(".new-location"))
+
+  updateLocation: (location) =>
+    li = @$(".location[data-id=#{location.id}]")
+    if li.length
+      li
+        .find("[name=location_name]").val(location.name).end()
+        .find("[name=location_address]").val(location.address).end()
+      li.find(".rooms")
+        .children(":not(.new-room)").remove().end()
+      for room in location.rooms()
+        @renderRoom(room).insertBefore(li.find(".new-room"))
+
+  destroyLocation: (location) =>
+    @$(".location[data-id=#{location.id}]").remove()
+
+  removeLocation: (e) ->
+    id = $(e.target).closest(".location").data("id")
+    location = App.Location.find(id)
+    location.destroy(url: @locationURL(location))
+
+  changeLocationID: (location, oldID, newID) =>
+    @$(".location[data-id=#{oldID}]").attr("data-id", newID)
+
+  changeRoomID: (room, oldID, newID) =>
+    @$(".room[data-id=#{oldID}]").attr("data-id", newID)
 
 $ ->
   $(".timetable-editor").each ->

@@ -1,5 +1,5 @@
 class App.ScheduledActivity extends Spine.Model
-  @configure "ScheduledActivity", "activity_id", "time_slot_id"
+  @configure "ScheduledActivity", "activity_id", "time_slot_id", "room_id"
   @extend Spine.Model.Ajax
 
   url: -> "/events/#{@timeSlot().event_id}/scheduled_activities"
@@ -15,22 +15,28 @@ class App.ScheduledActivity extends Spine.Model
   activity: ->
     @_activity = App.Activity.find(@activity_id)
 
-  @createByTimes: (event, activity, startTime, endTime) ->
+  room: ->
+    App.Room.find(@room_id) if @room_id
+
+  location: ->
+    @room()?.location()
+
+  @createByTimes: (event, activity, startTime, endTime, extras = {}) ->
     promise = $.Deferred()
     App.TimeSlot.findOrCreateByTimes(event, startTime, endTime)
       .done (timeSlot) =>
-        @createByActivityAndTimeSlot(activity, timeSlot)
+        @createByActivityAndTimeSlot(activity, timeSlot, extras)
           .done (scheduledActivity) -> promise.resolve(scheduledActivity)
           .fail -> promise.reject()
     promise
 
-  @createByActivityAndTimeSlot: (activity, timeSlot) ->
+  @createByActivityAndTimeSlot: (activity, timeSlot, extras = {}) ->
     promise = $.Deferred()
     for record in @records
       if record.activity_id == activity.id && record.time_slot_id == timeSlot.id
         promise.reject()
 
-    record = new this(activity_id: activity.id, time_slot_id: timeSlot.id)
+    record = new this($.extend({}, extras, activity_id: activity.id, time_slot_id: timeSlot.id))
     record.one "changeID", (scheduledActivity, oldID, newID) ->
       promise.resolve(scheduledActivity)
     .save(url: "/events/#{timeSlot.event_id}/scheduled_activities")

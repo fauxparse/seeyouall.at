@@ -64,4 +64,9 @@ FactoryGirl.define do
     association :package
     association :event, factory: :tri_wizard
   end
+
+  factory :room do
+    name "Room of Requirement"
+    location nil
+  end
 end

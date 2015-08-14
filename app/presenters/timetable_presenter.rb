@@ -19,10 +19,24 @@ class TimetablePresenter < SimpleDelegator
   end
 
   def activity_types
-    event.activity_types.map { |t| ActivityTypePresenter.new(t) }.sort_by(&:to_s)
+    present_collection(event.activity_types, ActivityTypePresenter)
   end
 
   def activities
-    event.activities.map { |a| ActivityPresenter.new(a) }.sort_by(&:to_s)
+    present_collection(event.activities, ActivityPresenter)
+  end
+
+  def locations
+    present_collection(event.locations, LocationPresenter)
+  end
+
+  def rooms
+    present_collection(locations.map(&:rooms).flatten, RoomPresenter)
+  end
+
+  protected
+
+  def present_collection(collection, presenter)
+    collection.map { |item| presenter.new(item) }.sort_by(&:to_s)
   end
 end

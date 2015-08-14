@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "459fa3e825400256a5ebfae899c79f0801c4a8ac9b4140abac4bada6760eceb1",
-    "current": "459fa3e825400256a5ebfae899c79f0801c4a8ac9b4140abac4bada6760eceb1"
+    "previous": "349cc4bc79b46ceb268ee609f3d784f8000061ed8dd381d5036fc9224bf42f0f",
+    "current": "349cc4bc79b46ceb268ee609f3d784f8000061ed8dd381d5036fc9224bf42f0f"
   },
   "fonts": [
-    "app/assets/fonts/icons_459fa3e825400256a5ebfae899c79f08.ttf",
-    "app/assets/fonts/icons_459fa3e825400256a5ebfae899c79f08.svg",
-    "app/assets/fonts/icons_459fa3e825400256a5ebfae899c79f08.woff",
-    "app/assets/fonts/icons_459fa3e825400256a5ebfae899c79f08.eot"
+    "app/assets/fonts/icons_349cc4bc79b46ceb268ee609f3d784f8.ttf",
+    "app/assets/fonts/icons_349cc4bc79b46ceb268ee609f3d784f8.svg",
+    "app/assets/fonts/icons_349cc4bc79b46ceb268ee609f3d784f8.woff",
+    "app/assets/fonts/icons_349cc4bc79b46ceb268ee609f3d784f8.eot"
   ],
   "glyphs": {
     "add": {
@@ -38,6 +38,30 @@
       "codepoint": 61702,
       "source": "lib/assets/icons/svg/cancel.svg"
     },
+    "chevron-down": {
+      "codepoint": 61720,
+      "source": "lib/assets/icons/svg/chevron-down.svg"
+    },
+    "chevron-left": {
+      "codepoint": 61721,
+      "source": "lib/assets/icons/svg/chevron-left.svg"
+    },
+    "chevron-right": {
+      "codepoint": 61722,
+      "source": "lib/assets/icons/svg/chevron-right.svg"
+    },
+    "chevron-up": {
+      "codepoint": 61723,
+      "source": "lib/assets/icons/svg/chevron-up.svg"
+    },
+    "delete": {
+      "codepoint": 61725,
+      "source": "lib/assets/icons/svg/delete.svg"
+    },
+    "edit": {
+      "codepoint": 61724,
+      "source": "lib/assets/icons/svg/edit.svg"
+    },
     "edit-activity": {
       "codepoint": 61713,
       "source": "lib/assets/icons/svg/edit-activity.svg"
@@ -45,6 +69,10 @@
     "event": {
       "codepoint": 61706,
       "source": "lib/assets/icons/svg/event.svg"
+    },
+    "location": {
+      "codepoint": 61719,
+      "source": "lib/assets/icons/svg/location.svg"
     },
     "logout": {
       "codepoint": 61700,

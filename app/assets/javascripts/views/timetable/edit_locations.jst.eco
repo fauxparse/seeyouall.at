@@ -1,0 +1,7 @@
+<h4 class="dialog-title"><%= I18n.t("timetable.locations.title") %></h4>
+<ul class="locations">
+  <li class="location new-location">
+    <input type="text" name="new_location_name" placeholder="<%= I18n.t("locations.add_location") %>">
+    <input type="text" name="new_location_address" placeholder="<%= I18n.t("activerecord.attributes.location.address") %>">
+  </li>
+</ul>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812040426) do
+ActiveRecord::Schema.define(version: 20150812201322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,16 +132,23 @@ ActiveRecord::Schema.define(version: 20150812040426) do
   add_index "registrations", ["package_id", "event_id"], name: "index_registrations_on_package_id_and_event_id", using: :btree
   add_index "registrations", ["user_id", "event_id"], name: "index_registrations_on_user_id_and_event_id", using: :btree
 
+  create_table "rooms", force: :cascade do |t|
+    t.string  "name"
+    t.integer "location_id"
+  end
+
+  add_index "rooms", ["location_id"], name: "index_rooms_on_location_id", using: :btree
+
   create_table "scheduled_activities", force: :cascade do |t|
     t.integer "activity_id",                   null: false
     t.integer "time_slot_id",                  null: false
-    t.integer "location_id"
     t.integer "selections_count",  default: 0
     t.integer "participant_limit"
+    t.integer "room_id"
   end
 
   add_index "scheduled_activities", ["activity_id"], name: "index_scheduled_activities_on_activity_id", using: :btree
-  add_index "scheduled_activities", ["location_id"], name: "index_scheduled_activities_on_location_id", using: :btree
+  add_index "scheduled_activities", ["room_id"], name: "index_scheduled_activities_on_room_id", using: :btree
   add_index "scheduled_activities", ["time_slot_id"], name: "index_scheduled_activities_on_time_slot_id", using: :btree
 
   create_table "selections", force: :cascade do |t|
@@ -199,8 +206,9 @@ ActiveRecord::Schema.define(version: 20150812040426) do
   add_foreign_key "registrations", "events", on_delete: :cascade
   add_foreign_key "registrations", "packages", on_delete: :cascade
   add_foreign_key "registrations", "users", on_delete: :cascade
+  add_foreign_key "rooms", "locations"
   add_foreign_key "scheduled_activities", "activities", on_delete: :cascade
-  add_foreign_key "scheduled_activities", "locations", on_delete: :nullify
+  add_foreign_key "scheduled_activities", "rooms"
   add_foreign_key "scheduled_activities", "time_slots", on_delete: :cascade
   add_foreign_key "selections", "registrations", on_delete: :cascade
   add_foreign_key "selections", "scheduled_activities", on_delete: :cascade

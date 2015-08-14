@@ -34,6 +34,6 @@ class ScheduledActivitiesController < ApplicationController
   end
 
   def scheduled_activity_params
-    params.require(:scheduled_activity).permit(:activity_id, :time_slot_id)
+    params.require(:scheduled_activity).permit(:activity_id, :time_slot_id, :room_id)
   end
 end

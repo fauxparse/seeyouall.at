@@ -8,7 +8,7 @@
     margin: 0 0 0.5rem;
     height: 2rem;
 
-    &[type="text"] {
+    &[type="text"]:not([list]) {
       line-height: 2rem;
     }
   }

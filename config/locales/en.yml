@@ -36,6 +36,13 @@ en:
       time_slot:
         start_time: Start time
         end_time: End time
+      room:
+        name: Room
+      location:
+        name: Location
+        address: Address
+      scheduled_activity:
+        room_id: Location
     errors:
       messages:
         before_start: cannot end before it begins
@@ -101,6 +108,8 @@ en:
       time_slot: "New timeslot…"
     day:
       empty: Nothing scheduled today.
+    locations:
+      title: Locations
 
   activities:
     new: New activity
@@ -134,6 +143,12 @@ en:
     save_changes: "Save changes"
     saved: "Saved"
 
+  locations:
+    add_location: "Add a location…"
+    add_room: "Add a room…"
+    none: "(No location)"
+
   dialog:
     ok: OK
     cancel: Cancel
+    done: Done

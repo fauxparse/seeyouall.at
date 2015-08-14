@@ -73,7 +73,7 @@ class App.TimetableEditor extends Spine.Controller
       else if (nxt = item.next(".time-slot")).length
         moment(nxt.data("start-time")).subtract(1, "hour")
       else
-        moment(item.closest(".day").data("date")).add(9, "hours")
+        moment($(container).closest(".day").data("date")).add(9, "hours")
       endTime = startTime.clone().add(1, "hour")
 
       event = @event()

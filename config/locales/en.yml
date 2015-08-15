@@ -114,7 +114,11 @@ en:
   activities:
     new: New activity
     new_of_type: "New %{type}"
-    add_another: Add another
+    add_another: "Add another"
+
+  scheduled_activities:
+    participant_limit_before: "Limit participation to"
+    participant_limit_after: "people"
 
   activity_types:
     new: "New activity type"

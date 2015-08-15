@@ -1,8 +1,9 @@
 class ScheduledActivitiesController < ApplicationController
   def create
     authorize!(:update, event)
-    scheduled_activity = ScheduleActivity.new(activity, time_slot).call
-    render(json: ScheduledActivityPresenter.new(scheduled_activity), serializer: ScheduledActivitySerializer)
+    schedule = ScheduleActivity.new(activity, time_slot, scheduled_activity_params)
+    schedule.call
+    render(json: schedule.presenter, serializer: ScheduledActivitySerializer)
   end
 
   def update
@@ -34,6 +35,7 @@ class ScheduledActivitiesController < ApplicationController
   end
 
   def scheduled_activity_params
-    params.require(:scheduled_activity).permit(:activity_id, :time_slot_id, :room_id)
+    params.require(:scheduled_activity)
+      .permit(:activity_id, :time_slot_id, :room_id, :participant_limit)
   end
 end

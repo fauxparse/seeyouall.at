@@ -78,8 +78,8 @@ class App.TimetableEditor extends Spine.Controller
 
       event = @event()
       new ScheduleActivityDialog({ event, activity, startTime, endTime })
-        .on "ok", (startTime, endTime, room_id) =>
-          App.ScheduledActivity.createByTimes(@event(), activity, startTime, endTime, { room_id })
+        .on "ok", (dialog) =>
+          App.ScheduledActivity.createByTimes(@event(), activity, dialog.startTime, dialog.endTime, { room_id: dialog.room_id, participant_limit: dialog.participant_limit })
             .done (scheduledActivity) =>
               if @$("[data-schedule-id=#{scheduledActivity.id}]").length
                 item.remove()
@@ -131,8 +131,9 @@ class App.TimetableEditor extends Spine.Controller
 
   dragEnd: (el) =>
     el = $(el)
-    if (schedule = el.data("schedule-id")) && !@_dragOverContainer
-      App.ScheduledActivity.destroy(schedule)
+    if (id = el.attr("data-schedule-id")) && !@_dragOverContainer
+      schedule = App.ScheduledActivity.find(parseInt(id, 10))
+      schedule?.destroy(clear: true)
 
   loadJSON: ->
     $.getJSON(@url()).done (data) =>
@@ -281,8 +282,6 @@ class App.TimetableEditor extends Spine.Controller
     @$(".timetable-activity[data-schedule-id=\"#{scheduled.id}\"]").remove()
 
   refreshDragContainers: ->
-    # @$(".time-slot:empty").each ->
-    #   App.TimeSlot.destroy($(this).remove().data("id"))
     @$(".times").each ->
       $(this).append $(this).children(".time-slot").get().sort (a, b) ->
         $(a).data("start-time").localeCompare($(b).data("start-time")) ||
@@ -348,6 +347,7 @@ class ScheduleActivityDialog extends App.Dialog
   events:
     "change input[type=date]": "timesChanged"
     "change input[type=time]": "timesChanged"
+    "change [name=limited]": "limitParticipation"
 
   renderContent: ->
     super
@@ -377,8 +377,21 @@ class ScheduleActivityDialog extends App.Dialog
   locationID: ->
     @$("[name=location]").val()
 
+  participantLimit: ->
+    if @$("[name=limited]").is(":checked")
+      parseInt(@$("[name=participant_limit]").val())
+    else
+      null
+
+  limitParticipation: ->
+    @$("[name=participant_limit]")
+      .prop("disabled", !@$("[name=limited]").is(":checked"))
+      .focus().select()
+
   ok: ->
-    @trigger "ok", @startTime, @endTime, @locationID()
+    @room_id = @locationID()
+    @participant_limit = @participantLimit()
+    @trigger "ok", this
     @hide()
 
   keypress: (e) =>
@@ -407,11 +420,13 @@ class EditActivityDialog extends ScheduleActivityDialog
     "change textarea": "inputChanged"
     "change input[type=date]": "timesChanged"
     "change input[type=time]": "timesChanged"
+    "change [name=limited]": "limitParticipation"
 
   init: ->
     if @schedule
       [@startTime, @endTime] = [@schedule.startTime(), @schedule.endTime()]
       @room_id = @schedule.room_id
+      @participant_limit = @schedule.participant_limit
     super
     @addAnotherButton.toggle(@activity.isNew())
     @_activityTypeID = @activity.activity_type_id
@@ -451,6 +466,8 @@ class EditActivityDialog extends ScheduleActivityDialog
               return
           @schedule.time_slot_id = timeSlot.id
           @schedule.room_id = @locationID() || ""
+          @schedule.participant_limit = @participantLimit()
+          console.log @schedule.participant_limit, @participantLimit()
           @schedule.save()
           @activity.save(url: @url())
           promise.resolve()
@@ -651,7 +668,6 @@ class LocationsEditor extends App.Dialog
   removeRoom: (e) ->
     row = $(e.target).closest(".room")
     if location = App.Location.find(row.closest(".location").data("id"))
-      # location.removeRoom(row.data("id"))
       App.Room.find(row.data("id")).destroy()
       row.remove()
       @saveLocation(location)

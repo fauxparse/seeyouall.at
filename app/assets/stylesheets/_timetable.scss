@@ -299,6 +299,23 @@
       }
     }
   }
+
+  .participant-limit {
+    font-size: 100%;
+    color: text-color();
+    @include display(flex);
+    @include align-items(center);
+    @include justify-content(flex-start);
+
+    [type="checkbox"] {
+      @include flex(0);
+    }
+
+    [type="number"] {
+      @include flex(0 0 6rem);
+      margin: 0 0.5rem;
+    }
+  }
 }
 
 .action-list i.activity-type-icon {

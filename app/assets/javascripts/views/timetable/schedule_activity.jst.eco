@@ -22,4 +22,12 @@
       <% end %>
     </select>
   </section>
+  <section class="field">
+    <label class="participant-limit">
+      <input type="checkbox" name="limited"<%= " checked" if !!@participant_limit %>>
+      <span><%= I18n.t("scheduled_activities.participant_limit_before") %></span>
+      <input type="number" name="participant_limit" value="<%= @participant_limit || 100 %>" min="1"<%= " disabled" if !@participant_limit %>>
+      <span><%= I18n.t("scheduled_activities.participant_limit_after") %></span>
+    </label>
+  </section>
 </div>

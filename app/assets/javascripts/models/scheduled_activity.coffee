@@ -42,9 +42,9 @@ class App.ScheduledActivity extends Spine.Model
     .save(url: "/events/#{timeSlot.event_id}/scheduled_activities")
     promise
 
-# App.ScheduledActivity.on "change", ->
-#   timeSlotIDs = {}
-#   for schedule in App.ScheduledActivity.all()
-#     timeSlotIDs[schedule.time_slot_id] = true
-#   for slot in App.TimeSlot.all()
-#     slot.destroy() unless timeSlotIDs[slot.id]
+App.ScheduledActivity.on "change", ->
+  timeSlotIDs = {}
+  for schedule in App.ScheduledActivity.all()
+    timeSlotIDs[schedule.time_slot_id] = true
+  for slot in App.TimeSlot.all()
+    slot.destroy() unless timeSlotIDs[slot.id]

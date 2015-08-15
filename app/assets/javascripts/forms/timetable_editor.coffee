@@ -467,7 +467,6 @@ class EditActivityDialog extends ScheduleActivityDialog
           @schedule.time_slot_id = timeSlot.id
           @schedule.room_id = @locationID() || ""
           @schedule.participant_limit = @participantLimit()
-          console.log @schedule.participant_limit, @participantLimit()
           @schedule.save()
           @activity.save(url: @url())
           promise.resolve()

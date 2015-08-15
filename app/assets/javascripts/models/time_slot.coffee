@@ -43,3 +43,8 @@ class App.TimeSlot extends Spine.Model
       -1
     else
       1
+
+App.TimeSlot.on "destroy", (timeSlot) =>
+  setTimeout =>
+    Spine.Ajax.disable => timeSlot.destroy()
+  , 1000

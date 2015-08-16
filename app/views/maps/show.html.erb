@@ -18,7 +18,8 @@
       marker = e.layer
       feature = marker.feature
 
-      content = "<h4>#{feature.properties.name}</h4><address>#{feature.properties.address}</address><ul>"
+      content = "<h4>#{feature.properties.name}</h4><address>#{feature.properties.address}</address>"
+      content += "<ul>"
       for room in feature.properties.rooms when room != feature.properties.name
         content += "<li>#{room}</li>"
       content += "</ul>"

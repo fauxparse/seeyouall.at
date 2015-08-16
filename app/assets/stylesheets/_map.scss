@@ -1,0 +1,49 @@
+.full-page-map-container {
+  height: 100vh;
+  margin: (-$page-header-height-mobile - 1rem) (-1rem) (-1rem);
+  @include display(flex);
+  @include flex-direction(column);
+
+  &::before {
+    content: "";
+    display: block;
+    @include flex(0 0 $page-header-height-mobile);
+  }
+
+  .map {
+    @include flex(1);
+  }
+
+  @include media($medium-screen) {
+    margin: (-$page-header-height - 1rem) (-$page-gutter) (-1rem);
+
+    &::before {
+      @include flex-basis($page-header-height);
+    }
+  }
+
+  .leaflet-container {
+    font: 14px/1.5 $base-font-family;
+    color: text-color();
+
+    h4 {
+      font-weight: $bold-font-weight;
+      margin: 0;
+    }
+
+    address {
+      font-size: 12px;
+      font-style: normal;
+      color: secondary-color();
+    }
+
+    ul {
+      font-size: 12px;
+
+      li:first-child {
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
+}

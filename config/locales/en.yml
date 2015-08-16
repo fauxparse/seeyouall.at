@@ -86,6 +86,10 @@ en:
     formats:
       time_only: "%I:%M%P"
 
+  application:
+    title: See you all at…
+    title_with_event: See you all at %{event}
+
   header:
     title: "See you all"
     title_short: "SYA"
@@ -100,6 +104,7 @@ en:
     payment: Complete payment
     edit_itinerary: Select activities
     admin_menu: "%{event} admin"
+    map: Map
 
   timetable:
     new:

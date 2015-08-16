@@ -1,11 +1,11 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <!--
-2015-8-14: Created with FontForge (http://fontforge.org)
+2015-8-17: Created with FontForge (http://fontforge.org)
 -->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 <metadata>
-Created by FontForge 20150715 at Fri Aug 14 14:29:24 2015
+Created by FontForge 20150715 at Mon Aug 17 07:59:43 2015
  By Matt Powell
 Copyright (c) 2015, Matt Powell
 </metadata>
@@ -22,7 +22,7 @@ Copyright (c) 2015, Matt Powell
     bbox="0 -64 512 448"
     underline-thickness="25.6"
     underline-position="-51.2"
-    unicode-range="U+0020-F11D"
+    unicode-range="U+0020-F11E"
   />
     <missing-glyph />
     <glyph glyph-name="space" unicode=" " horiz-adv-x="200" 
@@ -51,6 +51,9 @@ d="M213.333 64v128h106.667v-128h-106.667zM85.333 64v277.333h106.667v-277.333h-10
     <glyph glyph-name="uniF103" unicode="&#xf103;" 
 d="M277.333 85.333v42.667h-42.666v42.667h42.666v42.666h42.667v-42.666h42.667v-42.667h-42.667v-42.667h-42.667zM405.333 384c23.4668 0 42.667 -19.2002 42.667 -42.667v-298.666c0 -23.4668 -19.2002 -42.667 -42.667 -42.667h-298.666
 c-23.4668 0 -42.667 19.2002 -42.667 42.667v298.666c0 23.4668 19.2002 42.667 42.667 42.667h21.333v42.667h42.667v-42.667h170.666v42.667h42.667v-42.667h21.333zM405.333 42.667v234.666h-298.666v-234.666h298.666z" />
+    <glyph glyph-name="uniF11E" unicode="&#xf11e;" 
+d="M437.333 384c5.97363 0 10.667 -4.69336 10.667 -10.667v-322.56c0 -4.90723 -3.2002 -8.74707 -7.67969 -10.2402l-120.32 -40.5332l-128 44.7998l-113.92 -44.1602l-3.41309 -0.639648c-5.97363 0 -10.667 4.69336 -10.667 10.667v322.56
+c0 4.90723 3.2002 8.74707 7.67969 10.2402l120.32 40.5332l128 -44.7998l113.92 44.1602zM320 42.667v253.653l-128 45.0127v-253.653z" />
     <glyph glyph-name="uniF11A" unicode="&#xf11a;" 
 d="M213.333 320l128 -128l-128 -128l-30.0801 30.0801l97.707 97.9199l-97.707 97.9199z" />
     <glyph glyph-name="uniF104" unicode="&#xf104;" 

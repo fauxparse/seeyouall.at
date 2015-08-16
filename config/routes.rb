@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'itineraries/show'
-
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :events do
@@ -22,6 +20,7 @@ Rails.application.routes.draw do
     resources :time_slots, only: [:create, :destroy]
     resources :scheduled_activities, only: [:create, :update, :destroy]
     resources :locations
+    resource  :map, only: :show
   end
 
   root to: "events#index"

@@ -1,0 +1,30 @@
+<% content_for :head do %>
+  <script src="https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js"></script>
+  <link href="https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css" rel="stylesheet" />
+<% end %>
+
+<div class="full-page-map-container">
+  <div class="map" id="map"></div>
+</div>
+
+<%= coffee_script_tag do %>
+  L.mapbox.accessToken = "pk.eyJ1Ijoic2VleW91YWxsYXQiLCJhIjoiZjcxYTJiOTFhZmI3Y2ZkOTFiY2U1M2ZiZjEzYmVhZmYifQ.tQrnfMhCPGQXa-JVgzl1qQ"
+  map = L.mapbox.map("map", "seeyouallat.n6hmp474")
+
+  featureLayer = L.mapbox.featureLayer()
+    .loadURL("#{location}.json")
+    .addTo(map)
+    .on "layeradd", (e) ->
+      marker = e.layer
+      feature = marker.feature
+
+      content = "<h4>#{feature.properties.name}</h4><address>#{feature.properties.address}</address><ul>"
+      for room in feature.properties.rooms when room != feature.properties.name
+        content += "<li>#{room}</li>"
+      content += "</ul>"
+
+      marker.bindPopup(content, closeButton: false, minWidth: 320)
+
+    .on "ready", ->
+      map.fitBounds(featureLayer.getBounds());
+<% end %>

@@ -49,4 +49,14 @@
   &.has-errors textarea {
     border-bottom-color: $error-color;
   }
+
+  &:not(.has-value) {
+    input, textarea {
+      &:not(:focus) {
+        @include placeholder {
+          color: transparent;
+        }
+      }
+    }
+  }
 }

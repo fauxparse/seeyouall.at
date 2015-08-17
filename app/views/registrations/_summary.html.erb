@@ -1,7 +1,7 @@
 <%= action_list do %>
   <% if registration.present? %>
     <% unless registration.paid? -%>
-      <%= action_list_item(t("events.payment"), "#", "payment") do %>
+      <%= action_list_item(t("events.payment"), event_account_path(event), "payment") do %>
         <%= dollar_amount(registration.outstanding_balance) %>
       <% end -%>
     <% end -%>

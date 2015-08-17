@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   has_many :registrations, inverse_of: :event, autosave: true, dependent: :destroy
   has_many :administrators, inverse_of: :event, autosave: true, dependent: :destroy
   has_many :locations, inverse_of: :event, autosave: true, dependent: :destroy
+  has_many :payment_method_configurations, inverse_of: :event, autosave: true, dependent: :destroy
 
   scope :upcoming, -> { where("start_time > ?", Time.current) }
   scope :current, -> {

@@ -1,7 +1,8 @@
 class CheckEventParams
-  def initialize(params)
+  def initialize(event, params)
+    @event = event || Event.new
     @params = params
-    @form = EventForm.new(Event.new, @params)
+    @form = EventForm.new(event, @params)
   end
 
   def call

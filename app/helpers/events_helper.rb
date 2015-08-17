@@ -31,4 +31,11 @@ module EventsHelper
   def current_event?
     current_event.present? && current_event.persisted?
   end
+
+  def payment_methods
+    @payment_methods ||= PaymentMethod.all_payment_methods.map do |method|
+      event.payment_method_configurations.detect { |c| method === c.payment_method } ||
+      event.payment_method_configurations.build(payment_method_name: method.name.demodulize.underscore)
+    end.map(&:payment_method)
+  end
 end

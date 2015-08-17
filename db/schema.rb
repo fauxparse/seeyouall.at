@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812201322) do
+ActiveRecord::Schema.define(version: 20150817011556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,14 +106,24 @@ ActiveRecord::Schema.define(version: 20150812201322) do
 
   add_index "packages", ["event_id"], name: "index_packages_on_event_id", using: :btree
 
+  create_table "payment_method_configurations", force: :cascade do |t|
+    t.integer "event_id"
+    t.string  "payment_method_name",                 null: false
+    t.string  "options",             default: "{}"
+    t.boolean "enabled",             default: false, null: false
+  end
+
+  add_index "payment_method_configurations", ["event_id", "payment_method_name"], name: "index_payment_configurations_by_event_and_name", using: :btree
+
   create_table "payments", force: :cascade do |t|
-    t.integer  "registration_id",                 null: false
-    t.integer  "state",           default: 0,     null: false
+    t.integer  "registration_id",                     null: false
+    t.integer  "state",               default: 0,     null: false
     t.string   "reference"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.integer  "amount_cents",    default: 0,     null: false
-    t.string   "amount_currency", default: "NZD", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "amount_cents",        default: 0,     null: false
+    t.string   "amount_currency",     default: "NZD", null: false
+    t.string   "payment_method_name",                 null: false
   end
 
   create_table "prices", force: :cascade do |t|
@@ -202,6 +212,7 @@ ActiveRecord::Schema.define(version: 20150812201322) do
   add_foreign_key "package_prices", "packages", on_delete: :cascade
   add_foreign_key "package_prices", "prices", on_delete: :cascade
   add_foreign_key "packages", "events", on_delete: :cascade
+  add_foreign_key "payment_method_configurations", "events", on_delete: :cascade
   add_foreign_key "payments", "registrations", on_delete: :cascade
   add_foreign_key "registrations", "events", on_delete: :cascade
   add_foreign_key "registrations", "packages", on_delete: :cascade

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :events do
     post :check, on: :collection
+    post :check, on: :member
 
     get :register, to: "registrations#new"
     post :register, to: "registrations#create"
@@ -20,6 +21,8 @@ Rails.application.routes.draw do
     resources :time_slots, only: [:create, :destroy]
     resources :scheduled_activities, only: [:create, :update, :destroy]
     resources :locations
+    resources :payments
+    resource  :account
     resource  :map, only: :show
   end
 

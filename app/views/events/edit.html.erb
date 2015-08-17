@@ -1,2 +1,20 @@
-<h1>Events#edit</h1>
-<p>Find me in app/views/events/edit.html.erb</p>
+<% content_for :title, t("events.details"), html: { class: "event-editor" } %>
+
+<%= form_for @event, html: { class: "event-editor" } do |form| %>
+  <header>
+    <%= tabs %w(basic payment) do |tab| %>
+      <%= tab("##{tab}") do %>
+        <%= t("events.tabs.#{tab}") %>
+      <% end %>
+    <% end %>
+    <%= form.button t("dialog.save"), rel: :save %>
+  </header>
+
+  <div class="">
+    <% %w(basic payment).each do |tab| %>
+      <%= content_tag :div, class: "tab-pane", id: "#{tab}" do %>
+        <%= render partial: tab, locals: { form: form } %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

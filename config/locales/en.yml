@@ -43,6 +43,9 @@ en:
         address: Address
       scheduled_activity:
         room_id: Location
+      payment_method:
+        account_name: Bank account name
+        account_number: Bank account number
     errors:
       messages:
         before_start: cannot end before it begins
@@ -105,6 +108,9 @@ en:
     edit_itinerary: Select activities
     admin_menu: "%{event} admin"
     map: Map
+    tabs:
+      basic: Basic
+      payment: Payment
 
   timetable:
     new:
@@ -161,3 +167,11 @@ en:
     ok: OK
     cancel: Cancel
     done: Done
+    save: Save
+
+  accounts:
+    title: "Account balance for %{participant}"
+
+  payment_methods:
+    internet_banking:
+      name: Internet banking

@@ -1,5 +1,5 @@
 class App.Event extends Spine.Model
-  @configure "Event", "name", "slug", "start_date", "end_date"
+  @configure "Event", "name", "slug", "start_date", "end_date", "payment_methods"
   @extend Spine.Model.Ajax
 
   startDate: (value) ->
@@ -11,10 +11,14 @@ class App.Event extends Spine.Model
     moment(@end_date)
 
   check: ->
+    url = App.Event.url() + "#{("/#{@id}" if @id) || ""}/check"
     options = $.extend {}, Spine.Ajax.defaults,
-      url: App.Event.url() + "/check"
+      url: url
       type: "post"
       contentType: "application/json"
       data: JSON.stringify(@toJSON())
 
     $.ajax(options)
+
+  isNew: ->
+    !@id

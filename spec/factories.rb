@@ -69,4 +69,11 @@ FactoryGirl.define do
     name "Room of Requirement"
     location nil
   end
+
+  factory :payment_method_configuration do
+    payment_method_name "internet_banking"
+    options account_name: "H Potter", account_number: "01-2345-6789012-34"
+    enabled true
+    event
+  end
 end

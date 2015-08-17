@@ -53,7 +53,7 @@ class EventsController < ApplicationController
   end
 
   def check
-    check_event_params = CheckEventParams.new(event_params)
+    check_event_params = CheckEventParams.new(event, event_params)
     check_event_params.call
     render(json: check_event_params.event, serializer: EventSerializer)
   end
@@ -85,10 +85,10 @@ class EventsController < ApplicationController
 
       if result
         format.html { redirect_to(edit_event_path(@event)) }
-        format.json { render(json: @event, serializer: ActivitySerializer) }
+        format.json { render(json: @event, serializer: EventSerializer) }
       else
         format.html { render(@event.new_record? ? :new : :edit) }
-        format.json { render(json: @event, serializer: ActivitySerializer, status: :unprocessable_entity) }
+        format.json { render(json: @event, serializer: EventSerializer, status: :unprocessable_entity) }
       end
     end
   end

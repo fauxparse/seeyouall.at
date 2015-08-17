@@ -1,0 +1,8 @@
+<section class="floating-label field" rel="payment_method_configurations.account_name">
+  <%= form.text_field :account_name, name: "event[payment_methods][internet_banking][account_name]" %>
+  <%= form.label :account_name %>
+</section>
+<section class="floating-label field" rel="payment_method_configurations.account_number">
+  <%= form.text_field :account_number, name: "event[payment_methods][internet_banking][account_number]", pattern: "\\d{2}-\\d{4}-\\d{7}-\\d{2,3}", placeholder: "XX-XXXX-XXXXXXX-XX" %>
+  <%= form.label :account_number %>
+</section>

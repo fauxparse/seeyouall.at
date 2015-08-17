@@ -1,0 +1,12 @@
+<% payment_methods.each do |payment_method| %>
+  <%= form.fields_for :payment_method, payment_method do |fields| %>
+    <% class_name = payment_method.class.name.demodulize %>
+    <section class="payment-method <%= class_name.underscore.dasherize %>">
+      <%= check_box_tag "event[payment_methods][#{class_name.underscore}][enabled]", nil, payment_method.enabled?, value: nil, id: "#{class_name.underscore.dasherize}-payment-enabled", rel: "enabled" %>
+      <%= form.label t("payment_methods.#{class_name.underscore}.name"), for: "#{class_name.underscore.dasherize}-payment-enabled" %>
+      <div class="payment-method-configuration">
+        <%= render partial: "events/payment_methods/#{class_name.underscore}", object: payment_method, locals: { form: fields } %>
+      </div>
+    </section>
+  <% end %>
+<% end %>

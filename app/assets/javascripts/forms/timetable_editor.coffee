@@ -484,6 +484,7 @@ class EditActivityDialog extends ScheduleActivityDialog
     @save()
     @activity = new App.Activity(activity_type_id: @activity.activity_type_id)
     @nameInput.val("").focus()
+    @description.val("")
 
   url: ->
     id = !@activity.isNew() && "/#{@activity.id}" || ""

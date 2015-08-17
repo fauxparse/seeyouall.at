@@ -50,10 +50,10 @@ class RegistrationsController < ApplicationController
       registration = if params[:id].present?
         scope.find(params[:id])
       else
-        scope.find_by!(user_id: current_user.id)
+        scope.find_by(user_id: current_user.id)
       end
 
-      RegistrationPresenter.new(registration)
+      registration && RegistrationPresenter.new(registration)
     end
   end
 

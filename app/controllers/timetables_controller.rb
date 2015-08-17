@@ -1,4 +1,6 @@
 class TimetablesController < ApplicationController
+  before_filter :authenticate_user!, except: [:show]
+
   def show
     @timetable = TimetablePresenter.new(event)
 

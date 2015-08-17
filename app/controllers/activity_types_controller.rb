@@ -6,18 +6,12 @@ class ActivityTypesController < ApplicationController
   def create
     authorize!(:update, event)
     create_activity_type = CreateActivityType.new(event, activity_type_params)
-
-    respond_to do |format|
-      call_and_respond_with create_activity_type
-    end
+    call_and_respond_with create_activity_type
   end
 
   def update
     update_activity_type = update_activity_type.new(activity_type, activity_type_params)
-
-    respond_to do |format|
-      call_and_respond_with update_activity_type
-    end
+    call_and_respond_with update_activity_type
   end
 
   def destroy

@@ -174,9 +174,10 @@ class App.TimetableEditor extends Spine.Controller
 
   renderNewActivityButton: (type) ->
     color = type.color()
+    style = "background-color: #{color.shade(500)}" if color?
     $("<li>").append(
       $("<a>", href: "#", "data-activity-type-id": type.id).append(
-        $("<i>", class: "activity-type-icon", style: "background-color: #{color.shade(500)}", text: type.name.substr(0, 1).toLocaleUpperCase()),
+        $("<i>", class: "activity-type-icon", style: style, text: type.name.substr(0, 1).toLocaleUpperCase()),
         $("<span>", text: I18n.t("activities.new_of_type", {type}))
       )
     )

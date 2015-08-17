@@ -8,4 +8,4 @@ class App.ActivityType extends Spine.Model
     if @color_name
       Color.named(@color_name)
     else
-      Color.pickWithInteger(@id + 4)
+      Color.pickWithInteger((parseInt(@id) || 0) + 4)

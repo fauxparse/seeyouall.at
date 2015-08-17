@@ -4,7 +4,7 @@ class Avatar < Struct.new(:user)
   end
 
   def shape
-    avatars[user.id.hash % avatars.length]
+    avatars[user.id % avatars.length]
   end
 
   def color
@@ -12,6 +12,6 @@ class Avatar < Struct.new(:user)
   end
 
   def avatars
-    @@avatars ||= Dir[Rails.root.join("lib", "assets", "avatars", "*.svg")]
+    @@avatars ||= Dir[Rails.root.join("lib", "assets", "avatars", "*.svg")].sort
   end
 end

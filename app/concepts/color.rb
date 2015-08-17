@@ -15,9 +15,9 @@ class Color < Struct.new(:name, :shades)
     rgb
   end
 
-  def self.random(object = nil)
-    if object
-      colors[object.hash % colors.length]
+  def self.random(seed = nil)
+    if seed.present?
+      shuffled[seed.to_i % colors.length]
     else
       colors.sample
     end
@@ -36,6 +36,19 @@ class Color < Struct.new(:name, :shades)
 
   def self.[](name)
     @by_name[name]
+  end
+
+  def self.shuffled
+    @shuffled ||= bit_reversal(colors.length).map { |i| colors[i] }
+  end
+
+  def self.bit_reversal(n)
+    if n == 1
+      [0]
+    else
+      prev = bit_reversal(n / 2).map { |i| i * 2 }
+      prev + prev.map(&:succ)
+    end
   end
 end
 

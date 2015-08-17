@@ -1,0 +1,10 @@
+<%= form_for @event, html: { class: "event-editor" } do |form| %>
+  <%= render partial: "basic", locals: { form: form } %>
+
+  <section class="buttons">
+    <%= form.button do -%>
+      <%= content_tag :span, t("events.create") %>
+      <%= icon "arrow-right" %>
+    <% end %>
+  </section>
+<% end -%>

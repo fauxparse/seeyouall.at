@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
 
+  resources :users
+
   resources :events do
     post :check, on: :collection
     post :check, on: :member

@@ -1,7 +1,7 @@
 <header class="page-header">
   <label for="show-sidebar">
     <% if signed_in? -%>
-      <%= gravatar_tag current_user, size: 64 %>
+      <%= avatar current_user %>
     <% else -%>
       <%= icon :menu %>
     <% end -%>

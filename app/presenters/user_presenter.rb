@@ -4,4 +4,8 @@ class UserPresenter < SimpleDelegator
   def to_s
     name
   end
+
+  def avatar
+    Avatar.new(self)
+  end
 end

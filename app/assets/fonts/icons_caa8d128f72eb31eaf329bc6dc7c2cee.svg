@@ -1,32 +1,34 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <!--
-2015-8-17: Created with FontForge (http://fontforge.org)
+2015-8-17: Created.
 -->
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<svg xmlns="http://www.w3.org/2000/svg">
 <metadata>
-Created by FontForge 20150715 at Mon Aug 17 07:59:43 2015
+Created by FontForge 20120731 at Mon Aug 17 22:21:59 2015
  By Matt Powell
-Copyright (c) 2015, Matt Powell
+Created by Matt Powell with FontForge 2.0 (http://fontforge.sf.net)
 </metadata>
 <defs>
 <font id="icons" horiz-adv-x="512" >
   <font-face 
     font-family="icons"
-    font-weight="400"
+    font-weight="500"
     font-stretch="normal"
     units-per-em="512"
-    panose-1="2 0 5 3 0 0 0 0 0 0"
+    panose-1="2 0 6 3 0 0 0 0 0 0"
     ascent="448"
     descent="-64"
     bbox="0 -64 512 448"
     underline-thickness="25.6"
     underline-position="-51.2"
-    unicode-range="U+0020-F11E"
+    unicode-range="U+0020-F11F"
   />
     <missing-glyph />
     <glyph glyph-name="space" unicode=" " horiz-adv-x="200" 
  />
+    <glyph glyph-name="uniF11F" unicode="&#xf11f;" 
+d="M405.333 170.667h-128v-128h-42.666v128h-128v42.666h128v128h42.666v-128h128v-42.666z" />
     <glyph glyph-name="uniF108" unicode="&#xf108;" 
 d="M426.667 213.333v-42.666h-259.627l119.04 -119.254l-30.0801 -30.0801l-170.667 170.667l170.667 170.667l30.293 -30.0801l-119.253 -119.254h259.627z" />
     <glyph glyph-name="uniF106" unicode="&#xf106;" 

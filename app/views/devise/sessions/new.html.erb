@@ -1,26 +1,30 @@
-<h2>Log in</h2>
+<header>
+  <h2><%= t("accounts.log_in") %></h2>
+  <small>
+    <%= t("accounts.or") %>
+    <%= link_to t("accounts.sign_up"), new_user_registration_path %>
+  </small>
+</header>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="floating-label field">
-    <%= f.email_field :email, autofocus: true, required: true %>
+  <section class="floating-label field">
+    <%= f.email_field :email, autofocus: true %>
     <%= f.label :email %>
-  </div>
+  </section>
 
-  <div class="floating-label field">
+  <section class="floating-label field">
+    <%= f.password_field :password, autocomplete: "off" %>
     <%= f.label :password %>
-    <%= f.password_field :password, autocomplete: "off", required: true %>
-  </div>
+  </section>
 
   <% if devise_mapping.rememberable? -%>
-    <div class="field">
+    <section class="checkbox field">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
-    </div>
+    </section>
   <% end -%>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+  <%= f.button t("accounts.log_in") %>
 
-<%= render "devise/shared/links" %>
+  <%= link_to t("accounts.forgot_password"), new_user_password_path %>
+<% end %>

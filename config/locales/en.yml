@@ -175,3 +175,13 @@ en:
   payment_methods:
     internet_banking:
       name: Internet banking
+
+  accounts:
+    sign_up: Sign up
+    minimum_password_length: (%{minimum} characters minumum)
+    or: or
+    log_in: Log in
+    forgot_password: "Forgot your password?"
+    send_instructions: Send instructions
+    new_password: New password
+    confirm_password: Confirm password

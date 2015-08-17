@@ -1,34 +1,34 @@
-<h2>Sign up</h2>
+<header>
+  <h2><%= t("accounts.sign_up") %></h2>
+  <small>
+    <%= t("accounts.or") %>
+    <%= link_to t("accounts.log_in"), new_user_session_path %>
+  </small>
+</header>
 
 <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :name %><br />
+  <section class="floating-label field">
     <%= f.text_field :name, autofocus: true %>
-  </div>
+    <%= f.label :name %>
+  </section>
 
-  <div class="field">
-    <%= f.label :email %><br />
+  <section class="floating-label field">
     <%= f.email_field :email %>
-  </div>
+    <%= f.label :email %>
+  </section>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
+  <section class="floating-label field">
     <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <%= f.label :password %>
+    <%= content_tag :div, t("accounts.minimum_password_length", minimum: @minimum_password_length), class: "form-hint" if @minimum_password_length %>
+  </section>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
+  <section class="floating-label field">
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <%= f.label :password_confirmation %>
+  </section>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
+  <%= f.button t("accounts.sign_up") %>
 <% end %>
-
-<%= render "devise/shared/links" %>

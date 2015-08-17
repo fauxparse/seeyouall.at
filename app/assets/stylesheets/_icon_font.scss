@@ -1,10 +1,10 @@
 @font-face {
   font-family: "icons";
-  src: font-url("icons_b9c6040c1402ba6f6c20aa5a86efe37f.eot");
-  src: font-url("icons_b9c6040c1402ba6f6c20aa5a86efe37f.eot?#iefix") format("embedded-opentype"),
-       font-url("icons_b9c6040c1402ba6f6c20aa5a86efe37f.woff") format("woff"),
-       font-url("icons_b9c6040c1402ba6f6c20aa5a86efe37f.ttf") format("truetype"),
-       font-url("icons_b9c6040c1402ba6f6c20aa5a86efe37f.svg#icons") format("svg");
+  src: font-url("icons_caa8d128f72eb31eaf329bc6dc7c2cee.eot");
+  src: font-url("icons_caa8d128f72eb31eaf329bc6dc7c2cee.eot?#iefix") format("embedded-opentype"),
+       font-url("icons_caa8d128f72eb31eaf329bc6dc7c2cee.woff") format("woff"),
+       font-url("icons_caa8d128f72eb31eaf329bc6dc7c2cee.ttf") format("truetype"),
+       font-url("icons_caa8d128f72eb31eaf329bc6dc7c2cee.svg#icons") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +12,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "icons";
-    src: font-url("icons_b9c6040c1402ba6f6c20aa5a86efe37f.svg#icons") format("svg");
+    src: font-url("icons_caa8d128f72eb31eaf329bc6dc7c2cee.svg#icons") format("svg");
   }
 }
 
@@ -42,6 +42,7 @@
 .icon-payment:before,
 .icon-register:before,
 .icon-select-activities:before,
+.icon-sign-up:before,
 .icon-spinner:before,
 .icon-time-slot:before,
 .icon-timetable:before {
@@ -82,6 +83,7 @@ $icon-ok: "\f107";
 $icon-payment: "\f114";
 $icon-register: "\f113";
 $icon-select-activities: "\f116";
+$icon-sign-up: "\f11f";
 $icon-spinner: "\f105";
 $icon-time-slot: "\f10c";
 $icon-timetable: "\f112";
@@ -109,6 +111,7 @@ $icon-timetable: "\f112";
 .icon-payment::before { content: $icon-payment; }
 .icon-register::before { content: $icon-register; }
 .icon-select-activities::before { content: $icon-select-activities; }
+.icon-sign-up::before { content: $icon-sign-up; }
 .icon-spinner::before { content: $icon-spinner; }
 .icon-time-slot::before { content: $icon-time-slot; }
 .icon-timetable::before { content: $icon-timetable; }

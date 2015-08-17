@@ -137,6 +137,13 @@ form {
     }
   }
 
+  section.checkbox.field {
+    label {
+      font-size: 100%;
+      color: text-color();
+    }
+  }
+
   .buttons {
     margin: 0;
     @include justify-content(flex-end);

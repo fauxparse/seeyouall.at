@@ -104,7 +104,7 @@ aside.sidebar {
     }
 
     form {
-      @include position(absolute, null 1rem 1rem 1rem);
+      @include position(absolute, null 1rem 0.5rem 1rem);
 
       input {
         margin: 0;
@@ -131,9 +131,35 @@ aside.sidebar {
         }
       }
 
+      footer {
+        @include display(flex);
+        margin-top: 0.5rem;
+      }
+
       button {
-        margin: 0.5rem 0 0;
-        width: 100%;
+        margin: 0 1rem 0 0;
+        @include flex(1);
+      }
+
+      .action-list {
+        a {
+          i {
+            color: icon-color($white);
+            padding-left: 0;
+            padding-right: 0;
+            width: 1.5rem;
+          }
+
+          span {
+            color: text-color($white);
+          }
+
+          &:hover {
+            background: none;
+
+            i, span { color: $white; }
+          }
+        }
       }
     }
   }

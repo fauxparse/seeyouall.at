@@ -131,8 +131,15 @@ aside.sidebar {
         }
       }
 
+      > a {
+        display: block;
+        color: secondary-color($white);
+        margin: 0.5rem 0;
+      }
+
       footer {
         @include display(flex);
+        @include flex-wrap(wrap);
         margin-top: 0.5rem;
       }
 

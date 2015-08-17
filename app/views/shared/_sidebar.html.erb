@@ -15,13 +15,13 @@
         <%= form.email_field :email, placeholder: t("helpers.label.user.email") %>
         <%= form.password_field :password, placeholder: t("helpers.label.user.password") %>
         <%= form.hidden_field :remember_me, value: 1 %>
+        <%= link_to t("accounts.forgot_password"), new_user_password_path %>
         <footer>
           <%= form.button do -%>
             <span><%= t("helpers.submit.session.create") %></span>
           <% end -%>
           <%= action_list do %>
             <%= action_list_item t("accounts.sign_up"), new_user_registration_path, "sign-up" %>
-            <%= action_list_item t("accounts.forgot_password"), new_user_password_path, "help" %>
           <% end -%>
         </footer>
       <% end -%>

@@ -16,3 +16,64 @@
     }
   }
 }
+
+.payment-pending {
+  svg {
+    width: 25%;
+    max-width: 10rem;
+    display: block;
+    margin: 0 auto 1rem;
+
+    circle.outer {
+      fill: $grey-100;
+    }
+
+    circle.dot {
+      fill: $green;
+    }
+  }
+
+  h1, p {
+    text-align: center;
+  }
+
+  p {
+    margin: 0 auto 1rem;
+    max-width: 18rem;
+  }
+
+  dl {
+    margin: 0 auto 1rem;
+    background: $grey-200;
+    padding: 1rem;
+    border-radius: $base-border-radius;
+    @include display(flex);
+    @include flex-wrap(wrap);
+
+    dt {
+      @include flex(1 1 40%);
+      margin: 0 1rem 0 0;
+      padding: 0;
+    }
+
+    dd {
+      @include flex(1 1 50%);
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .button {
+    display: block;
+    text-align: center;
+    margin: 0 auto 1rem;
+    max-width: 20rem;
+  }
+
+  @include media($medium-screen) {
+    dl {
+      width: 75%;
+      max-width: 20rem;
+    }
+  }
+}

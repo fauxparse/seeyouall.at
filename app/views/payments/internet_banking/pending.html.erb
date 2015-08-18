@@ -1,1 +1,16 @@
-<h1>Payment pending</h1>
+<div class="payment-pending">
+  <%= inline_svg("icons/pending.svg") %>
+  <h1><%= t("payment_methods.internet_banking.pending.title") %></h1>
+  <p><%= t("payment_methods.internet_banking.pending.message_top", amount: dollar_amount(payment.amount)).html_safe %></p>
+  <dl>
+    <dt><%= t("payment_methods.internet_banking.pending.account_name") %></dt>
+    <dd><%= payment.payment_method.account_name %></dd>
+    <dt><%= t("payment_methods.internet_banking.pending.account_number") %></dt>
+    <dd><%= payment.payment_method.account_number %></dd>
+    <dt><%= t("payment_methods.internet_banking.pending.reference") %></dt>
+    <dd><%= t("payment_methods.internet_banking.pending.reference_value") %></dd>
+  </dl>
+  <p><%= t("payment_methods.internet_banking.pending.message_bottom").html_safe %></p>
+
+  <%= link_to(t("payment_methods.internet_banking.pending.continue"), event_registration_path(event), class: "button") %>
+</div>

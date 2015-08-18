@@ -164,6 +164,15 @@ en:
     internet_banking:
       name: Internet banking
       description: Pay via a direct deposit into our bank account (takes 1–2 working days to clear)
+      pending:
+        title: Payment pending
+        message_top: "Please deposit %{amount} into our account:"
+        account_name: Account name
+        account_number: Account number
+        reference: Reference
+        reference_value: (your name)
+        message_bottom: Once your payment has cleared (1–2 working days), you will be able to select activities.
+        continue: OK, got it!
 
   accounts:
     sign_up: Sign up

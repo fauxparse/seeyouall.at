@@ -46,14 +46,16 @@ class PaymentsController < ApplicationController
   end
 
   def payment
-    @payment ||= @registration.payments.build(payment_params || {}).tap do |payment|
+    @payment ||= begin
+      payment = @registration.payments.build(payment_params || {})
       payment.amount = registration.outstanding_balance if payment.amount.to_i.zero?
       payment.payment_method_name ||= event.payment_methods.first.name
+      PaymentPresenter.new(payment)
     end
   end
 
   def payment_method
-    event.payment_methods.detect { |m| m.name == payment.payment_method_name }
+    payment.payment_method
   end
 
   def payment_params

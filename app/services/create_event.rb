@@ -6,11 +6,10 @@ class CreateEvent
 
   def call
     Event.transaction do
-      if @form.save!
-        AddUserAsEventAdministrator.new(@user, @form.event).call
-        CreateDefaultActivityType.new(@form.event).call
-        CreateDefaultPackage.new(@form.event).call
-      end
+      @form.save!
+      AddUserAsEventAdministrator.new(@user, @form.event).call
+      CreateDefaultActivityType.new(@form.event).call
+      CreateDefaultPackage.new(@form.event).call
     end
     true
 

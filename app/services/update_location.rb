@@ -37,7 +37,6 @@ class UpdateLocation
   end
 
   def find_room(id)
-    @location.rooms.detect { |r| r.id == id } ||
-    @location.rooms.build
+    @location.rooms.detect { |r| r.id == id } || @location.rooms.build
   end
 end

@@ -13,7 +13,7 @@ describe AddUserAsEventAdministrator do
 
   context "when the relationship already exists" do
     before do
-      Administrator.create(user: user, event: event)
+      Administrator.create!(user: user, event: event)
     end
 
     it "does not create the relationship again" do

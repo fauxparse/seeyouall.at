@@ -5,11 +5,7 @@ class UpdateActivityType
   end
 
   def call
-    begin
-      @activity_type.update! @params
-    rescue ActiveRecord::RecordInvalid
-      false
-    end
+    @activity_type.update(@params)
   end
 
   def activity_type

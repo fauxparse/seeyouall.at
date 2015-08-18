@@ -1,6 +1,9 @@
-class ScheduleActivity < Struct.new(:activity, :time_slot)
+class ScheduleActivity
+  attr_reader :activity, :time_slot
+
   def initialize(activity, time_slot, params)
-    super(activity, time_slot)
+    @activity = activity
+    @time_slot = time_slot
     @params = params
   end
 

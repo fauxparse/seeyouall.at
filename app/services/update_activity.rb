@@ -5,11 +5,7 @@ class UpdateActivity
   end
 
   def call
-    begin
-      @activity.update! @params
-    rescue ActiveRecord::RecordInvalid
-      false
-    end
+    @activity.update(@params)
   end
 
   def activity

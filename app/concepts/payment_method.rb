@@ -16,7 +16,7 @@ class PaymentMethod
     _, option, punc = method.to_s.match(/^([^\?=]+)([\?=])?$/).to_a
     if default_options.key?(option)
       if punc == "?"
-        !get_option_or_default(option).blank?
+        get_option_or_default(option).present?
       elsif punc == "="
         options[option] = args.first
       else

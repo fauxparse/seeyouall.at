@@ -6,5 +6,5 @@ class Package < ActiveRecord::Base
 
   auto_strip_attributes :name, squish: true
 
-  validates :name, presence: { allow_blanks: false }
+  validates :name, presence: { allow_blank: false }
 end

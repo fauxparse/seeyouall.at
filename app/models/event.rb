@@ -11,8 +11,7 @@ class Event < ActiveRecord::Base
 
   scope :upcoming, -> { where("start_time > ?", Time.current) }
   scope :current, -> {
-    now = Time.current
-    where("start_time <= ? AND end_time > ?", now, now)
+    where("start_time <= :now AND end_time > :now", now: Time.current)
   }
   scope :past, -> { where("end_time < ?", Time.current) }
   scope :current_and_upcoming, -> { where("end_time > ?", Time.current) }
@@ -21,6 +20,7 @@ class Event < ActiveRecord::Base
   scope :with_schedule, -> { includes(:scheduled_activities => [:time_slot, { :activity => :activity_type }]) }
   scope :with_packages, -> { includes(:packages => { :allocations => :activity_type, :package_prices => :price }) }
   scope :with_locations, -> { includes(:locations => :rooms) }
+  scope :with_payment_details, -> { includes(:payment_method_configurations) }
 
   acts_as_url :name,
     url_attribute: :slug,

@@ -1,0 +1,31 @@
+<% if registration.paid? %>
+  <h1><%= t("payments.paid_in_full.title") %></h1>
+  <p><%= t("payments.paid_in_full.message", event: event.name, link: edit_event_itinerary_path(event)).html_safe %></p>
+<% else %>
+  <h1><%= t("payments.complete_payment.title") %></h1>
+  <p><%= t("payments.complete_payment.message", event: event.name, amount: dollar_amount(registration.outstanding_balance)).html_safe %></p>
+
+  <%= form_for @payment, url: event_payments_path(event) do |form| %>
+    <ul class="fancy-checkbox-list payment-methods">
+      <% event.payment_methods.select(&:enabled?).each do |payment_method| -%>
+        <li>
+          <%= form.radio_button :payment_method_name, payment_method.name, required: true %>
+          <%= form.label :payment_method_name, value: payment_method.name do -%>
+            <%= inline_svg "icons/check.svg", class: "checkbox" %>
+            <div class="details">
+              <h4><%= t("payment_methods.#{payment_method.name}.name") %></h4>
+              <p><%= t("payment_methods.#{payment_method.name}.description") %></p>
+            </div>
+          <% end -%>
+        </li>
+      <% end -%>
+    </ul>
+
+    <section class="buttons">
+      <%= form.button do -%>
+        <%= content_tag :span, t("registrations.continue") %>
+        <%= icon "arrow-right" %>
+      <% end -%>
+    </section>
+  <% end -%>
+<% end %>

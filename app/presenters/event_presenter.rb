@@ -41,4 +41,9 @@ class EventPresenter < SimpleDelegator
       errors[:slug] = [errors[:slug].first] if errors[:slug].present?
     end
   end
+
+  def payment_methods
+    @payment_methods ||= event.payment_method_configurations.select(&:enabled?)
+      .map(&:payment_method)
+  end
 end

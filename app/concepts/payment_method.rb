@@ -8,6 +8,10 @@ class PaymentMethod
     @options = options
   end
 
+  def name
+    self.class.name.demodulize.underscore
+  end
+
   def enabled?
     !!enabled
   end
@@ -41,5 +45,9 @@ class PaymentMethod
 
   def self.payment_method_instance(class_name, enabled = false, options = {})
     const_get(class_name.classify).new(enabled, options)
+  end
+
+  def when_created(payment)
+    [:pending, payment]
   end
 end

@@ -1,0 +1,18 @@
+.payment-methods {
+  padding: 0 0.5rem;
+
+  label {
+    div {
+      margin-left: 1rem;
+
+      h4 {
+        color: $white;
+        font-weight: $bold-font-weight;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

@@ -84,6 +84,7 @@ en:
     details: Event details
     register: Register now
     payment: Complete payment
+    edit_timetable: Edit timetable
     edit_itinerary: Select activities
     admin_menu: "%{event} admin"
     map: Map
@@ -151,9 +152,18 @@ en:
   accounts:
     title: "Account balance for %{participant}"
 
+  payments:
+    paid_in_full:
+      title: Thanks, you’re all paid up!
+      message: "You have nothing left to pay for your %{event} registration. Why not <a href=\"%{link}\">check out your itinerary</a> and start selecting some activities?"
+    complete_payment:
+      title: "Complete payment"
+      message: "You have %{amount} to pay to complete your %{event} registration. Please select a payment method below:"
+
   payment_methods:
     internet_banking:
       name: Internet banking
+      description: Pay via a direct deposit into our bank account (takes 1–2 working days to clear)
 
   accounts:
     sign_up: Sign up

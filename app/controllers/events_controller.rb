@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
   wrap_parameters :event, include: EventForm.wrapped_parameters
 
-  before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :event, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :event, only: [:show, :edit, :update, :destroy]
 
   authorize_resource
   skip_load_and_authorize_resource only: [:index, :check]

@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_filter :authenticate_user!, except: [:new, :create, :summary]
+  before_action :authenticate_user!, except: [:new, :create, :summary]
 
   def show
     redirect_to event_register_path(event) unless can? :read, registration

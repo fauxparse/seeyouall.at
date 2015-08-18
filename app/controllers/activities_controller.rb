@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_filter :activity, only: [:update, :destroy]
+  before_action :activity, only: [:update, :destroy]
   authorize_resource
   skip_authorize_resource only: [:create]
 

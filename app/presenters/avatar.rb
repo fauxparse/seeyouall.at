@@ -3,6 +3,8 @@ class Avatar < Struct.new(:user)
     File.read(shape).gsub("#000000", color.to_s)
   end
 
+  protected
+
   def shape
     avatars[user.id % avatars.length]
   end

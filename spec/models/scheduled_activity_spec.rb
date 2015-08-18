@@ -5,7 +5,7 @@ RSpec.describe ScheduledActivity, type: :model do
 
   let(:activity) { FactoryGirl.create(:activity) }
   let(:time_slot) { FactoryGirl.create(:time_slot, event: activity.event) }
-  let(:location) { FactoryGirl.create(:location) }
+  let(:room) { FactoryGirl.create(:room) }
 
   context "without a location" do
     it { is_expected.to be_valid }
@@ -13,7 +13,7 @@ RSpec.describe ScheduledActivity, type: :model do
 
   context "with a location" do
     before do
-      scheduled_activity.location = location
+      scheduled_activity.room = room
     end
 
     it { is_expected.to be_valid }

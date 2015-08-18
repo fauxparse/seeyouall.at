@@ -21,8 +21,12 @@ module SeeYouAllAt
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    %w(services presenters forms concepts validators serializers).each do |dir|
+    %w(serializers presenters forms concepts validators serializers).each do |dir|
       config.autoload_paths << Rails.root.join('app', dir)
+    end
+
+    Dir[Rails.root.join('app', 'services', '**/*')].each do |d|
+      config.autoload_paths << d if File.directory?(d)
     end
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.

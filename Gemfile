@@ -61,7 +61,9 @@ gem 'unicorn'
 gem 'simplecov', require: false, group: :test
 gem "codeclimate-test-reporter", group: :test, require: nil
 
-gem 'rails_12factor'
+group :production do
+  gem 'rails_12factor'
+end
 
 group :development do
   gem 'letter_opener'

@@ -67,7 +67,7 @@ FactoryGirl.define do
 
   factory :room do
     name "Room of Requirement"
-    location nil
+    location
   end
 
   factory :payment_method_configuration do

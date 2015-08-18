@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
-  before_filter :ensure_registered, except: :index
-  before_filter :payment, only: [:new, :create]
+  before_action :ensure_registered, except: :index
+  before_action :payment, only: [:new, :create]
 
   def index
   end

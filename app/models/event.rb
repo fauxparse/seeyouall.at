@@ -16,11 +16,11 @@ class Event < ActiveRecord::Base
   scope :past, -> { where("end_time < ?", Time.current) }
   scope :current_and_upcoming, -> { where("end_time > ?", Time.current) }
   scope :in_chronological_order, -> { order(start_time: :asc) }
-  scope :with_activities, -> { includes(:activity_types => :activities) }
-  scope :with_schedule, -> { includes(:scheduled_activities => [:time_slot, { :activity => :activity_type }]) }
-  scope :with_packages, -> { includes(:packages => { :allocations => :activity_type, :package_prices => :price }) }
-  scope :with_locations, -> { includes(:locations => :rooms) }
-  scope :with_payment_details, -> { includes(:payment_method_configurations) }
+  scope :with_activities, -> { preload(:activity_types => :activities) }
+  scope :with_schedule, -> { preload(:scheduled_activities => [:time_slot, { :activity => :activity_type }]) }
+  scope :with_packages, -> { preload(:packages => { :allocations => :activity_type, :package_prices => :price }) }
+  scope :with_locations, -> { preload(:locations => :rooms) }
+  scope :with_payment_details, -> { preload(:payment_method_configurations) }
 
   acts_as_url :name,
     url_attribute: :slug,

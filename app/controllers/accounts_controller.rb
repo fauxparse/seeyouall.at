@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_filter :registration
+  before_action :registration
 
   def show
   end

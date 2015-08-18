@@ -1,9 +1,11 @@
 require "rails_helper"
 
 describe RegistrationPresenter do
-  subject(:registration) { RegistrationPresenter.new(package.event.registrations.create(user: user, package: package)) }
+  subject(:registration) { RegistrationPresenter.new(package.event.registrations.create(user: user, package: package, event: event)) }
+  let(:event) { FactoryGirl.create(:event) }
   let(:user) { FactoryGirl.create(:user) }
   let(:package) { FactoryGirl.create(:package) }
+  let(:payment_method_configuration) { FactoryGirl.create(:payment_method_configuration, event: event) }
 
   def create_price(start_time, end_time, amount)
     package.package_prices.create(
@@ -14,7 +16,7 @@ describe RegistrationPresenter do
   end
 
   def pay(amount, date, state = :approved)
-    registration.payments.create(amount: Money.new(amount), state: state, created_at: date, updated_at: date)
+    registration.payments.create(amount: Money.new(amount), state: state, created_at: date, updated_at: date, payment_method_name: payment_method_configuration.payment_method_name)
   end
 
   context "with $100 earlybird pricing" do

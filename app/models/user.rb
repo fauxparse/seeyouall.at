@@ -9,5 +9,11 @@ class User < ActiveRecord::Base
 
   auto_strip_attributes :name, :email, squish: true
 
+  serialize :options, JSON
+
   validates :name, presence: { allow_blank: false }
+
+  def options=(new_options)
+    options.merge!(new_options.stringify_keys)
+  end
 end

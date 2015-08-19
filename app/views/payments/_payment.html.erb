@@ -1,0 +1,21 @@
+<%= content_tag(:tr, "data-id" => payment.id) do %>
+  <td>
+    <input type="checkbox">
+  </td>
+  <td>
+    <%= content_tag :span, payment.registration.user.name, class: "name" %>
+    <%= mail_to :span, payment.registration.user.email %>
+  </td>
+  <td>
+    <%= l(payment.created_at.to_date, format: :short) %>
+  </td>
+  <td>
+    <%= dollar_amount(payment.amount) %>
+  </td>
+  <td>
+    <%= t("payment_methods.#{payment.payment_method_name}.name") %>
+  </td>
+  <td>
+    <%= t("payments.state.#{payment.state}") %>
+  </td>
+<% end -%>

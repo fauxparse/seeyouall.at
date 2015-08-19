@@ -3,6 +3,8 @@ class PaymentsController < ApplicationController
   before_action :payment, only: [:new, :create]
 
   def index
+    @payment_methods = event.payment_methods.map.with_object({}) { |type, hash| hash[type.name] = type }
+    @payments = ListPayments.new(event, params).call
   end
 
   def show

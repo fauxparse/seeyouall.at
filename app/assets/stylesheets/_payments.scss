@@ -77,3 +77,31 @@
     }
   }
 }
+
+.payments-list {
+  table-layout: auto;
+
+  td:first-child {
+    width: 2em;
+  }
+
+  td:last-child {
+    width: 6rem;
+  }
+
+  .name {
+    @include ellipsis;
+    display: block;
+  }
+
+  a[href^="mailto:"] {
+    @include ellipsis;
+    display: block;
+    font-size: 0.75rem;
+  }
+
+  tfoot td {
+    padding-top: 1rem;
+    border-bottom: none;
+  }
+}

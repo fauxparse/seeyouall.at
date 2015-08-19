@@ -25,6 +25,13 @@ en:
       payment_method:
         account_name: Bank account name
         account_number: Bank account number
+      payment:
+        amount: Amount
+        created_at: Date
+        payment_method_name: Via
+        state: Status
+      user:
+        name: Name
     errors:
       messages:
         before_start: cannot end before it begins
@@ -153,6 +160,11 @@ en:
     title: "Account balance for %{participant}"
 
   payments:
+    state:
+      pending: Pending
+      approved: Approved
+      declined: Declined
+      refunded: Refunded
     paid_in_full:
       title: Thanks, you’re all paid up!
       message: "You have nothing left to pay for your %{event} registration. Why not <a href=\"%{link}\">check out your itinerary</a> and start selecting some activities?"

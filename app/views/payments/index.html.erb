@@ -1,0 +1,22 @@
+<table class="payments-list">
+  <thead>
+    <tr>
+      <td><input type="checkbox" name="select_all"></td>
+      <td><%= User.human_attribute_name(:name) %></td>
+      <td><%= Payment.human_attribute_name(:created_at) %></td>
+      <td><%= Payment.human_attribute_name(:amount) %></td>
+      <td><%= Payment.human_attribute_name(:payment_method_name) %></td>
+      <td><%= Payment.human_attribute_name(:state) %></td>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render(@payments) %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="6">
+        <%= will_paginate @payments %>
+      </td>
+    </tr>
+  </tfoot>
+</table>

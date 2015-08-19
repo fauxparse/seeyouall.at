@@ -41,6 +41,7 @@ gem 'auto_strip_attributes', '~> 2.0'
 gem 'geocoder'
 gem 'money-rails'
 gem 'redcarpet'
+gem 'will_paginate'
 
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers', tag: "v0.10.0.rc2"
 

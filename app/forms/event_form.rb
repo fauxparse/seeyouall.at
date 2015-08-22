@@ -33,7 +33,7 @@ class EventForm < SimpleDelegator
   end
 
   def self.permitted_parameters
-    [:name, :slug, :start_date, :end_date, payment_method_parameters]
+    [:name, :slug, :start_date, :end_date, :description, payment_method_parameters]
   end
 
   def self.payment_method_parameters

@@ -1,7 +1,7 @@
 module MarkdownHelper
   def markdown(text)
     return "" if text.blank?
-    renderer.render(text)
+    renderer.render(text).html_safe
   end
 
   protected

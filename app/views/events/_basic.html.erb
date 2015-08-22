@@ -17,12 +17,19 @@
 
 <section>
   <section class="floating-label field" rel="start_date">
-    <%= form.label :start_date %>
     <%= form.date_field :start_date, required: true %>
+    <%= form.label :start_date %>
   </section>
 
   <section class="floating-label field" rel="end_date">
-    <%= form.label :end_date %>
     <%= form.date_field :end_date, required: true %>
+    <%= form.label :end_date %>
+  </section>
+</section>
+
+<section>
+  <section class="floating-label field" rel="description">
+    <%= form.text_area :description %>
+    <%= form.label :description %>
   </section>
 </section>

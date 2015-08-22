@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818215548) do
+ActiveRecord::Schema.define(version: 20150822004947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,13 +51,14 @@ ActiveRecord::Schema.define(version: 20150818215548) do
   add_index "allocations", ["package_id", "activity_type_id"], name: "index_allocations_on_package_id_and_activity_type_id", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "name",                              null: false
-    t.string   "slug",                              null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.string   "time_zone",  default: "Wellington", null: false
-    t.datetime "start_time",                        null: false
-    t.datetime "end_time",                          null: false
+    t.string   "name",                               null: false
+    t.string   "slug",                               null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "time_zone",   default: "Wellington", null: false
+    t.datetime "start_time",                         null: false
+    t.datetime "end_time",                           null: false
+    t.text     "description"
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree

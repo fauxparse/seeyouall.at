@@ -22,7 +22,7 @@ class Avatar < Struct.new(:user)
   end
 
   def avatars
-    files.map { |f| File.basename(f, "*.svg") }
+    files.map { |f| File.basename(f, ".svg") }
   end
 
   def files

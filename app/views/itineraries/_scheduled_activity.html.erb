@@ -1,5 +1,5 @@
 <%= content_tag :article, class: "scheduled-activity card", "data-id" => scheduled_activity.id, "data-state" => @form.scheduled_activity_state(scheduled_activity.id).to_a.join(" ") do -%>
-  <header><%= placeholder_image(sequence: scheduled_activity.id) %></header>
+  <header><%= image_tag(scheduled_activity.photo_url || placeholder_image_url(sequence: scheduled_activity.id)) %></header>
   <footer>
     <h4><%= scheduled_activity.name %></h4>
     <div class="description">

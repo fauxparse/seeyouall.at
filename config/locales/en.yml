@@ -5,6 +5,7 @@ en:
         name: Activity name
         description: Description
         activity_type_id: Activity type
+        photo_url: Photo URL
       activity_type:
         name: Activity type name (lower-case, singular)
       event:
@@ -12,6 +13,8 @@ en:
         slug: Event URL
         start_time: Start date
         end_time: End date
+        description: Description
+        photo_url: Photo URL
       time_slot:
         start_time: Start time
         end_time: End time

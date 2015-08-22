@@ -1,5 +1,5 @@
 class App.Event extends Spine.Model
-  @configure "Event", "name", "slug", "description", "start_date", "end_date", "payment_methods"
+  @configure "Event", "name", "slug", "description", "start_date", "end_date", "payment_methods", "photo_url"
   @extend Spine.Model.Ajax
 
   startDate: (value) ->

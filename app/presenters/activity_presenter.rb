@@ -4,4 +4,8 @@ class ActivityPresenter < SimpleDelegator
   def to_s
     name
   end
+
+  def photo_url
+    activity_photos.first.try(:url)
+  end
 end

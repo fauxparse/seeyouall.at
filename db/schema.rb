@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150822004947) do
+ActiveRecord::Schema.define(version: 20150822011252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,11 @@ ActiveRecord::Schema.define(version: 20150822004947) do
   end
 
   add_index "activities", ["activity_type_id"], name: "index_activities_on_activity_type_id", using: :btree
+
+  create_table "activity_photos", force: :cascade do |t|
+    t.integer "activity_id"
+    t.integer "photo_id"
+  end
 
   create_table "activity_types", force: :cascade do |t|
     t.integer "event_id",   null: false
@@ -49,6 +54,11 @@ ActiveRecord::Schema.define(version: 20150822004947) do
   end
 
   add_index "allocations", ["package_id", "activity_type_id"], name: "index_allocations_on_package_id_and_activity_type_id", unique: true, using: :btree
+
+  create_table "event_photos", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "photo_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "name",                               null: false
@@ -127,6 +137,12 @@ ActiveRecord::Schema.define(version: 20150822004947) do
     t.string   "payment_method_name",                 null: false
   end
 
+  create_table "photos", force: :cascade do |t|
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "prices", force: :cascade do |t|
     t.integer "price_cents",    default: 0,     null: false
     t.string  "price_currency", default: "NZD", null: false
@@ -201,11 +217,15 @@ ActiveRecord::Schema.define(version: 20150822004947) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "activities", "activity_types", on_delete: :cascade
+  add_foreign_key "activity_photos", "activities", on_delete: :cascade
+  add_foreign_key "activity_photos", "photos", on_delete: :cascade
   add_foreign_key "activity_types", "events", on_delete: :cascade
   add_foreign_key "administrators", "events", on_delete: :cascade
   add_foreign_key "administrators", "users", on_delete: :cascade
   add_foreign_key "allocations", "activity_types", on_delete: :cascade
   add_foreign_key "allocations", "packages", on_delete: :cascade
+  add_foreign_key "event_photos", "events", on_delete: :cascade
+  add_foreign_key "event_photos", "photos", on_delete: :cascade
   add_foreign_key "facilitators", "activities", on_delete: :cascade
   add_foreign_key "facilitators", "users", on_delete: :nullify
   add_foreign_key "individual_activity_prices", "allocations", on_delete: :cascade

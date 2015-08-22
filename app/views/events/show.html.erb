@@ -1,5 +1,5 @@
 <div class="event-details">
-  <header style="background-image: url(<%= placeholder_image_url(width: 800, height: 800, sequence: event.id) %>)">
+  <header style="background-image: url(<%= event.photo_url || placeholder_image_url(width: 800, height: 800, sequence: event.id) %>)">
     <%= content_tag :h1 do %>
       <%= content_tag :b, event.name %>
       <%= content_tag :small, date_range(event.dates) %>

@@ -76,4 +76,8 @@ FactoryGirl.define do
     enabled true
     event
   end
+
+  factory :photo do
+    url "http://lorempixel.com/100/100/cats"
+  end
 end

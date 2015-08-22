@@ -1,5 +1,5 @@
 class App.Activity extends Spine.Model
-  @configure "Activity", "name", "description", "event_id", "activity_type_id"
+  @configure "Activity", "name", "description", "photo_url", "event_id", "activity_type_id"
   @extend Spine.Model.Ajax
 
   url: -> "/events/#{@event_id}/activities"

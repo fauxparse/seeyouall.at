@@ -46,4 +46,8 @@ class EventPresenter < SimpleDelegator
     @payment_methods ||= event.payment_method_configurations.select(&:enabled?)
       .map(&:payment_method)
   end
+
+  def photo_url
+    event_photos.first.try(:url)
+  end
 end

@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
   has_many :administrators, inverse_of: :event, autosave: true, dependent: :destroy
   has_many :locations, inverse_of: :event, autosave: true, dependent: :destroy
   has_many :payment_method_configurations, inverse_of: :event, autosave: true, dependent: :destroy
+  has_many :event_photos, inverse_of: :event, autosave: true, dependent: :destroy
 
   scope :upcoming, -> { where("start_time > ?", Time.current) }
   scope :current, -> {
@@ -16,11 +17,12 @@ class Event < ActiveRecord::Base
   scope :past, -> { where("end_time < ?", Time.current) }
   scope :current_and_upcoming, -> { where("end_time > ?", Time.current) }
   scope :in_chronological_order, -> { order(start_time: :asc) }
-  scope :with_activities, -> { preload(:activity_types => :activities) }
-  scope :with_schedule, -> { preload(:scheduled_activities => [:time_slot, { :activity => :activity_type }]) }
+  scope :with_activities, -> { preload(:activity_types => { :activities => { :activity_photos => :photo }}) }
+  scope :with_schedule, -> { preload(:scheduled_activities => [:time_slot, { :activity => [:activity_type, {:activity_photos => :photo}] }]) }
   scope :with_packages, -> { preload(:packages => { :allocations => :activity_type, :package_prices => :price }) }
   scope :with_locations, -> { preload(:locations => :rooms) }
   scope :with_payment_details, -> { preload(:payment_method_configurations) }
+  scope :with_photos, -> { preload(:event_photos => :photo) }
 
   acts_as_url :name,
     url_attribute: :slug,

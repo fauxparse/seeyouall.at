@@ -405,6 +405,7 @@ class EditActivityDialog extends ScheduleActivityDialog
   elements:
     "[name=name]": "nameInput"
     "[name=description]": "description"
+    "[name=photo_url]": "photoURL"
     "[rel=activity-type-id] .popup-toggle-label": "activityTypeLabel"
     "[name=start-date]": "startDateInput"
     "[name=start-time]": "startTimeInput"
@@ -457,6 +458,7 @@ class EditActivityDialog extends ScheduleActivityDialog
     promise = $.Deferred()
     @activity.name = @nameInput.val()
     @activity.description = @description.val()
+    @activity.photo_url = @photoURL.val()
     @activity.activity_type_id = parseInt(@$("[name=activity_type_id]:checked").val())
     if @schedule
       App.TimeSlot.findOrCreateByTimes(@event, @startTime, @endTime)

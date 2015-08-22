@@ -11,6 +11,13 @@ class EventForm < SimpleDelegator
     __getobj__
   end
 
+  def save
+    Event.transaction do
+      photo.save if @photo.present?
+      event.save
+    end
+  end
+
   def present
     EventPresenter.new(self)
   end
@@ -23,6 +30,17 @@ class EventForm < SimpleDelegator
     event.end_time = value.present? ? Time.zone.parse(value.to_s) : nil
   end
 
+  def photo_url=(value)
+    photo.url = value
+  end
+
+  def photo
+    @photo ||= begin
+      event_photo = event.event_photos.first || event.event_photos.build
+      event_photo.photo || event_photo.build_photo
+    end
+  end
+
   def payment_methods=(hash)
     hash.each_pair do |key, options|
       config = event.payment_method_configurations.detect { |c| c.payment_method_name == key.to_s } ||
@@ -33,7 +51,7 @@ class EventForm < SimpleDelegator
   end
 
   def self.permitted_parameters
-    [:name, :slug, :start_date, :end_date, :description, payment_method_parameters]
+    [:name, :slug, :start_date, :end_date, :description, :photo_url, payment_method_parameters]
   end
 
   def self.payment_method_parameters

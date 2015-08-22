@@ -8,7 +8,7 @@ class EventsController < ApplicationController
   skip_load_and_authorize_resource only: [:index, :check]
 
   def index
-    events = Event.current_and_upcoming.in_chronological_order.limit(5)
+    events = Event.with_photos.current_and_upcoming.in_chronological_order.limit(5)
     @events = events.map { |e| EventPresenter.new(e) }
 
     respond_to do |format|
@@ -65,7 +65,7 @@ class EventsController < ApplicationController
   end
 
   def event
-    @event ||= params[:id] && Event.find_by!(slug: params[:id])
+    @event ||= params[:id] && Event.with_photos.find_by!(slug: params[:id])
   end
 
   def registration

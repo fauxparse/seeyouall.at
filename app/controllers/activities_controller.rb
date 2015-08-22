@@ -1,4 +1,6 @@
 class ActivitiesController < ApplicationController
+  wrap_parameters :activity, include: [:activity_type_id, :name, :description, :photo_url]
+
   before_action :activity, only: [:update, :destroy]
   authorize_resource
   skip_authorize_resource only: [:create]
@@ -37,7 +39,7 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:name, :description, :activity_type_id)
+    params.require(:activity).permit(:name, :description, :activity_type_id, :photo_url)
   end
 
   def call_and_respond_with(service)

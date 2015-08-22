@@ -4,6 +4,10 @@
     <input type="text" name="name" value="<%= @activity.name %>" required autofocus>
     <label><%= I18n.t("activerecord.attributes.activity.name") %></label>
   </section>
+  <section class="floating-label field<%= " has-value" if @activity.photo_url %>">
+    <input type="url" name="photo_url" value="<%= @activity.photo_url %>">
+    <label><%= I18n.t("activerecord.attributes.activity.photo_url") %></label>
+  </section>
   <section class="floating-label field<%= " has-value" if @activity.description %>">
     <textarea name="description"><%= @activity.description %></textarea>
     <label><%= I18n.t("activerecord.attributes.activity.description") %></label>

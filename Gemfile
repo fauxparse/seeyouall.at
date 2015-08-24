@@ -58,6 +58,7 @@ gem 'unicorn'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'rollbar', '~> 1.2.7'
 
 gem 'simplecov', require: false, group: :test
 gem "codeclimate-test-reporter", group: :test, require: nil

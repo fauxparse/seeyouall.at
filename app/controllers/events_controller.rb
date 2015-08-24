@@ -8,7 +8,10 @@ class EventsController < ApplicationController
   skip_load_and_authorize_resource only: [:index, :check]
 
   def index
-    events = Event.with_photos.current_and_upcoming.in_chronological_order.limit(5)
+    events = Event
+      .with_photos
+      .with_registration_for(current_user)
+      .current_and_upcoming.in_chronological_order.limit(5)
     @events = events.map { |e| EventPresenter.new(e) }
 
     respond_to do |format|

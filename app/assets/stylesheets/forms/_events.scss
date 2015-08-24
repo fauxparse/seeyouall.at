@@ -154,6 +154,7 @@
       small {
         display: block;
         font-size: 1rem;
+        color: secondary-color($white);
       }
     }
   }
@@ -198,5 +199,72 @@
         @include flex(0 0 35%);
       }
     }
+  }
+}
+
+.upcoming-events {
+  list-style: none;
+  margin: 1rem -0.5rem 1rem;
+  @include display(flex);
+  @include flex-wrap(wrap);
+
+  .event {
+    margin: 0 0.5rem 1rem;
+    @include flex(1 1 15rem);
+
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+    border-radius: $base-border-radius;
+  }
+
+  header {
+    @include border-top-radius($base-border-radius);
+    padding-top: 28.125%;
+    position: relative;
+    background-position: 50% 25%;
+    background-size: cover;
+  }
+
+  h2 {
+    @include position(absolute, null 1rem 2.5rem 1rem);
+    font-size: 200%;
+    a { color: $white; }
+  }
+
+  h3 {
+    @include position(absolute, null 1rem 1rem 1rem);
+    font-size: 125%;
+    line-height: 1rem;
+    color: secondary-color($white);
+  }
+
+  footer {
+    padding: 1rem 0;
+
+    .action-list {
+      @include display(flex);
+      @include justify-content(flex-start);
+
+      li a {
+        @include align-items(center);
+        padding-right: 1rem;
+        background: none;
+
+        i {
+          color: $action-color;
+        }
+
+        span {
+          padding: 0;
+          font-weight: $bold-font-weight;
+          text-transform: uppercase;
+          color: $action-color;
+        }
+      }
+    }
+  }
+
+  .button {
+    background: none;
+    color: $action-color;
   }
 }

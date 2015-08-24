@@ -101,6 +101,10 @@ en:
     tabs:
       basic: Basic
       payment: Payment
+    index:
+      upcoming_events: Upcoming events
+      more: More information
+      register: Register now
 
   timetable:
     new:

@@ -50,4 +50,8 @@ class EventPresenter < SimpleDelegator
   def photo_url
     event_photos.first.try(:url)
   end
+
+  def registration_for(user)
+    registrations.detect { |r| r.user_id == user.try(:id) }
+  end
 end

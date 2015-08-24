@@ -12,6 +12,9 @@
     <%= csrf_meta_tags %>
     <%= yield :head %>
     <%= javascript_include_tag "stretchy", async: true, "data-filter" => "textarea" %>
+
+    <link rel="icon" type="image/png" href="<%= image_url("favicon.png") %>">
+    <link rel="icon" type="image/png" href="<%= image_url("favicon@2x.png") %>">
   </head>
   <body>
     <div class="page-container">

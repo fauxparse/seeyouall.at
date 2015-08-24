@@ -42,4 +42,10 @@ class Event < ActiveRecord::Base
   validates_with TimePeriodValidator
 
   alias_method :to_param, :slug
+
+  def payment_method(payment_method_name)
+    configuration = payment_method_configurations.detect { |c| c.payment_method_name == payment_method_name } ||
+      payment_method_configurations.build(payment_method_name: payment_method_name)
+    configuration.payment_method
+  end
 end

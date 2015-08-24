@@ -12,11 +12,25 @@ class Payment < ActiveRecord::Base
       .references(:registrations)
   }
 
+  before_validation :generate_token
+
+  validates :payment_method_name, :token,
+    presence: { allow_blank: false }
+
   def payment_method
-    PaymentMethod.payment_method_instance(payment_method_name)
+    registration.event.payment_method(payment_method_name)
   end
 
   def payment_method=(payment_method)
     self.payment_method_name = payment_method.class.name.demodulize.underscore
+  end
+
+  protected
+
+  def generate_token
+    loop do
+      self.token = SecureRandom.hex(32)
+      break unless self.class.exists? token: token
+    end
   end
 end

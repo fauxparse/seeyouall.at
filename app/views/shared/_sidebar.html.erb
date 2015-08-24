@@ -37,6 +37,7 @@
       <% if can? :update, event -%>
         <h4><%= t("events.admin_menu", event: event.name) %></h4>
         <%= action_list do -%>
+          <%= action_list_item(t("events.edit_settings"), edit_event_path(event), "settings") %>
           <%= action_list_item(t("events.edit_timetable"), edit_event_timetable_path(event), "timetable") %>
         <% end -%>
       <% end -%>

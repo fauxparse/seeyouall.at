@@ -94,6 +94,7 @@ en:
     details: Event details
     register: Register now
     payment: Complete payment
+    edit_settings: Edit settings
     edit_timetable: Edit timetable
     edit_itinerary: Select activities
     admin_menu: "%{event} admin"
@@ -202,6 +203,9 @@ en:
         reference_value: (your name)
         message_bottom: Once your payment has cleared (1–2 working days), you will be able to select activities.
         continue: OK, got it!
+    paypal:
+      name: PayPal
+      description: Pay with your credit card or PayPal account
 
   accounts:
     sign_up: Sign up

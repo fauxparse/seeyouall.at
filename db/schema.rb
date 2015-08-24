@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 20150822011252) do
     t.integer  "amount_cents",        default: 0,     null: false
     t.string   "amount_currency",     default: "NZD", null: false
     t.string   "payment_method_name",                 null: false
+    t.string   "token",                               null: false
   end
 
   create_table "photos", force: :cascade do |t|

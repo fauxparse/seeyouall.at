@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "a870bfa3f71dd4e9b94bf0d71c58809136abd94411d8cc65945ca47bc3fe484a",
-    "current": "a870bfa3f71dd4e9b94bf0d71c58809136abd94411d8cc65945ca47bc3fe484a"
+    "previous": "5d9014f341b0389ce651727a3cd2b246f6462abeca6995b7a1edcb7ebbc81f62",
+    "current": "5d9014f341b0389ce651727a3cd2b246f6462abeca6995b7a1edcb7ebbc81f62"
   },
   "fonts": [
-    "app/assets/fonts/icons_a870bfa3f71dd4e9b94bf0d71c588091.ttf",
-    "app/assets/fonts/icons_a870bfa3f71dd4e9b94bf0d71c588091.svg",
-    "app/assets/fonts/icons_a870bfa3f71dd4e9b94bf0d71c588091.woff",
-    "app/assets/fonts/icons_a870bfa3f71dd4e9b94bf0d71c588091.eot"
+    "app/assets/fonts/icons_5d9014f341b0389ce651727a3cd2b246.ttf",
+    "app/assets/fonts/icons_5d9014f341b0389ce651727a3cd2b246.svg",
+    "app/assets/fonts/icons_5d9014f341b0389ce651727a3cd2b246.woff",
+    "app/assets/fonts/icons_5d9014f341b0389ce651727a3cd2b246.eot"
   ],
   "glyphs": {
     "add": {
@@ -58,6 +58,10 @@
       "codepoint": 61725,
       "source": "lib/assets/icons/svg/delete.svg"
     },
+    "denied": {
+      "codepoint": 61733,
+      "source": "lib/assets/icons/svg/denied.svg"
+    },
     "edit": {
       "codepoint": 61724,
       "source": "lib/assets/icons/svg/edit.svg"
@@ -69,6 +73,10 @@
     "event": {
       "codepoint": 61706,
       "source": "lib/assets/icons/svg/event.svg"
+    },
+    "help": {
+      "codepoint": 61732,
+      "source": "lib/assets/icons/svg/help.svg"
     },
     "location": {
       "codepoint": 61719,
@@ -121,6 +129,14 @@
     "timetable": {
       "codepoint": 61714,
       "source": "lib/assets/icons/svg/timetable.svg"
+    },
+    "upcoming-events": {
+      "codepoint": 61731,
+      "source": "lib/assets/icons/svg/upcoming-events.svg"
+    },
+    "warning": {
+      "codepoint": 61734,
+      "source": "lib/assets/icons/svg/warning.svg"
     }
   },
   "options": {

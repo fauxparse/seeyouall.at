@@ -1,0 +1,32 @@
+.flash {
+  position: relative;
+  margin: 0 0 1rem;
+  padding: 1rem 1rem 1rem 4rem;
+  background: text-color();
+  color: $white;
+  border-radius: $base-border-radius;
+  
+  &::before {
+    content: $icon-denied;
+    font-family: "icons";
+    font-size: 2rem;
+    @include position(absolute, 50% null null 1rem);
+    margin: -0.5em 0;
+    line-height: 1em;
+  }
+  
+  &.error {
+    background: text-color($red);
+    &::before { content: $icon-cancel; }
+  }
+  
+  &.warning {
+    background: text-color($orange);
+    &::before { content: $icon-warning; }
+  }
+  
+  &.success {
+    background: text-color($green);
+    &::before { content: $icon-ok; }
+  }
+}

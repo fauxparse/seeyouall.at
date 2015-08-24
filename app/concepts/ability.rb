@@ -7,7 +7,7 @@ class Ability < Struct.new(:user)
     can :read, [Event, EventPresenter]
 
     if user.present?
-      can :create, [Event, EventPresenter]
+      # can :create, [Event, EventPresenter]
 
       can :manage, [Event, EventPresenter] do |event|
         administrator_of?(event)

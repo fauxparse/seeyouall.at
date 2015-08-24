@@ -243,6 +243,7 @@
     .action-list {
       @include display(flex);
       @include justify-content(flex-start);
+      @include flex-wrap(wrap);
 
       li a {
         @include align-items(center);
@@ -263,5 +264,18 @@
         .money { display: none; }
       }
     }
+  }
+}
+
+.no-new-events {
+  margin: 0 auto;
+  max-width: 20rem;
+  text-align: center;
+  
+  .icon-denied {
+    color: $error-color;
+    font-size: 10rem;
+    margin: 0 auto 1rem;
+    display: block;
   }
 }

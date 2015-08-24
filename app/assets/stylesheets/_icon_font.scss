@@ -1,10 +1,10 @@
 @font-face {
   font-family: "icons";
-  src: font-url("icons_a870bfa3f71dd4e9b94bf0d71c588091.eot");
-  src: font-url("icons_a870bfa3f71dd4e9b94bf0d71c588091.eot?#iefix") format("embedded-opentype"),
-       font-url("icons_a870bfa3f71dd4e9b94bf0d71c588091.woff") format("woff"),
-       font-url("icons_a870bfa3f71dd4e9b94bf0d71c588091.ttf") format("truetype"),
-       font-url("icons_a870bfa3f71dd4e9b94bf0d71c588091.svg#icons") format("svg");
+  src: font-url("icons_5d9014f341b0389ce651727a3cd2b246.eot");
+  src: font-url("icons_5d9014f341b0389ce651727a3cd2b246.eot?#iefix") format("embedded-opentype"),
+       font-url("icons_5d9014f341b0389ce651727a3cd2b246.woff") format("woff"),
+       font-url("icons_5d9014f341b0389ce651727a3cd2b246.ttf") format("truetype"),
+       font-url("icons_5d9014f341b0389ce651727a3cd2b246.svg#icons") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +12,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "icons";
-    src: font-url("icons_a870bfa3f71dd4e9b94bf0d71c588091.svg#icons") format("svg");
+    src: font-url("icons_5d9014f341b0389ce651727a3cd2b246.svg#icons") format("svg");
   }
 }
 
@@ -31,9 +31,11 @@
 .icon-chevron-right:before,
 .icon-chevron-up:before,
 .icon-delete:before,
+.icon-denied:before,
 .icon-edit:before,
 .icon-edit-activity:before,
 .icon-event:before,
+.icon-help:before,
 .icon-location:before,
 .icon-logout:before,
 .icon-map:before,
@@ -46,7 +48,9 @@
 .icon-sign-up:before,
 .icon-spinner:before,
 .icon-time-slot:before,
-.icon-timetable:before {
+.icon-timetable:before,
+.icon-upcoming-events:before,
+.icon-warning:before {
   display: inline-block;
   font-family: "icons";
   font-style: normal;
@@ -73,9 +77,11 @@ $icon-chevron-left: "\f119";
 $icon-chevron-right: "\f11a";
 $icon-chevron-up: "\f11b";
 $icon-delete: "\f11d";
+$icon-denied: "\f125";
 $icon-edit: "\f11c";
 $icon-edit-activity: "\f111";
 $icon-event: "\f10a";
+$icon-help: "\f124";
 $icon-location: "\f117";
 $icon-logout: "\f104";
 $icon-map: "\f11e";
@@ -89,6 +95,8 @@ $icon-sign-up: "\f11f";
 $icon-spinner: "\f105";
 $icon-time-slot: "\f10c";
 $icon-timetable: "\f112";
+$icon-upcoming-events: "\f123";
+$icon-warning: "\f126";
 
 .icon-add::before { content: $icon-add; }
 .icon-add-event::before { content: $icon-add-event; }
@@ -102,9 +110,11 @@ $icon-timetable: "\f112";
 .icon-chevron-right::before { content: $icon-chevron-right; }
 .icon-chevron-up::before { content: $icon-chevron-up; }
 .icon-delete::before { content: $icon-delete; }
+.icon-denied::before { content: $icon-denied; }
 .icon-edit::before { content: $icon-edit; }
 .icon-edit-activity::before { content: $icon-edit-activity; }
 .icon-event::before { content: $icon-event; }
+.icon-help::before { content: $icon-help; }
 .icon-location::before { content: $icon-location; }
 .icon-logout::before { content: $icon-logout; }
 .icon-map::before { content: $icon-map; }
@@ -118,3 +128,5 @@ $icon-timetable: "\f112";
 .icon-spinner::before { content: $icon-spinner; }
 .icon-time-slot::before { content: $icon-time-slot; }
 .icon-timetable::before { content: $icon-timetable; }
+.icon-upcoming-events::before { content: $icon-upcoming-events; }
+.icon-warning::before { content: $icon-warning; }

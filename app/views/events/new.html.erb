@@ -1,10 +1,18 @@
-<%= form_for @event, html: { class: "event-editor" } do |form| %>
-  <%= render partial: "basic", locals: { form: form } %>
+<% if can?(:create, @event) -%>
+  <%= form_for @event, html: { class: "event-editor" } do |form| %>
+    <%= render partial: "basic", locals: { form: form } %>
 
-  <section class="buttons">
-    <%= form.button do -%>
-      <%= content_tag :span, t("events.create") %>
-      <%= icon "arrow-right" %>
-    <% end %>
-  </section>
+    <section class="buttons">
+      <%= form.button do -%>
+        <%= content_tag :span, t("events.create") %>
+        <%= icon "arrow-right" %>
+      <% end %>
+    </section>
+  <% end -%>
+<% else -%>
+  <div class="no-new-events">
+    <i class="icon-denied"></i>
+    <h1><%= t("events.no_new_events.title") %></h1>
+    <p><%= t("events.no_new_events.message") %></p>
+  </div>
 <% end -%>

@@ -46,6 +46,7 @@
 
   <section>
     <%= action_list do -%>
+      <%= action_list_item(t("events.upcoming"), root_path, "upcoming-events") %>
       <%= action_list_item(t("events.new"), new_event_path, "add-event") %>
     <% end -%>
   </section>

@@ -22,6 +22,8 @@
       <%= render partial: "shared/header" %>
 
       <main>
+        <%= flash_messages %>
+        
         <%= yield %>
       </main>
     </main>

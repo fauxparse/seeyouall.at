@@ -16,4 +16,14 @@ module ApplicationHelper
   def add_class(options, class_name)
     options[:class] = "#{class_name} #{options[:class]}".strip
   end
+  
+  def flash_messages
+    if flash.any?
+      content_tag(:div, class: "flash-messages") do
+        flash.each do |key, message|
+          concat content_tag(:div, message, class: "flash #{key}")
+        end
+      end
+    end
+  end
 end

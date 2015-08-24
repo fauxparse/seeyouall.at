@@ -98,6 +98,7 @@ en:
     edit_timetable: Edit timetable
     edit_itinerary: Select activities
     admin_menu: "%{event} admin"
+    upcoming: Upcoming events
     map: Map
     tabs:
       basic: Basic
@@ -106,6 +107,9 @@ en:
       upcoming_events: Upcoming events
       more: More information
       register: Register now
+    no_new_events:
+      title: "Sorry, no new events yet!"
+      message: "We’re still getting things straightened out around here, and we aren’t taking any new events at this time. We hope to open up this facility soon. Thanks for your patience."
 
   timetable:
     new:

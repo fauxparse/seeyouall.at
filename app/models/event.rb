@@ -23,7 +23,6 @@ class Event < ActiveRecord::Base
   scope :with_locations, -> { preload(:locations => :rooms) }
   scope :with_payment_details, -> { preload(:payment_method_configurations) }
   scope :with_photos, -> { preload(:event_photos => :photo) }
-  scope :with_registration_for, ->(user) { includes(:registrations).references(:registrations).where("registrations.user_id = ?", user.try(:id)) }
 
   acts_as_url :name,
     url_attribute: :slug,

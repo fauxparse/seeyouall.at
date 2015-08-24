@@ -6,13 +6,18 @@
       margin-left: 1rem;
 
       h4 {
-        color: $white;
         font-weight: $bold-font-weight;
       }
 
       p {
         margin: 0;
       }
+    }
+  }
+
+  :checked + label {
+    div h4 {
+      color: $white;
     }
   }
 }

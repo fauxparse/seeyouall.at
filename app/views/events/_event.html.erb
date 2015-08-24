@@ -4,6 +4,6 @@
     <h3><%= date_range(event.dates) %></h3>
   </header>
   <footer>
-    <%= render partial: "registrations/summary", locals: { event: event, show_event_link: false } %>
+    <%= render partial: "registrations/summary", locals: { event: event, registration: homepage_event_registration_for_user(current_user), show_event_link: false } %>
   </footer>
 </li>

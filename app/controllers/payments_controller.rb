@@ -1,6 +1,5 @@
 class PaymentsController < ApplicationController
   before_action :ensure_registered, except: :index
-  before_action :payment, only: [:new, :create]
 
   def index
     @payment_methods = event.payment_methods.map.with_object({}) { |type, hash| hash[type.name] = type }
@@ -12,6 +11,8 @@ class PaymentsController < ApplicationController
   end
 
   def new
+    registration.payments.select(&:pending?).map(&:destroy)
+    payment
   end
 
   def create

@@ -259,12 +259,9 @@
           text-transform: uppercase;
           color: $action-color;
         }
+
+        .money { display: none; }
       }
     }
-  }
-
-  .button {
-    background: none;
-    color: $action-color;
   }
 }

@@ -10,7 +10,6 @@ class EventsController < ApplicationController
   def index
     events = Event
       .with_photos
-      .with_registration_for(current_user)
       .current_and_upcoming.in_chronological_order.limit(5)
     @events = events.map { |e| EventPresenter.new(e) }
 

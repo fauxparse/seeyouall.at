@@ -138,10 +138,20 @@ en:
   registrations:
     continue: "Continue"
     itinerary: "Your itinerary"
+    unpaid:
+      title: "Registered for %{event}"
+      message: "You’re registered for %{event}, but you still have money to pay before you’re ready to go."
+      explanation: "If a payment shows as “pending”, don’t worry: it’s most likely waiting for us to process it, which should happen within 1–2 business days."
+    paid:
+      title: "Thanks, you’re all paid up!"
+      message: "Your payment for %{event} has been received and you are now a fully-registered participant."
+      next_step: "Now you’re free to start choosing some activities."
     payments:
       paid: "Total paid"
       balance: "Total to pay"
       if_paid_before: "If paid before %{date}"
+      paid_via: "Paid via %{method} (%{date})"
+      pending_via: "Pending %{method} payment (%{date})"
 
   itinerary:
     book: "Book now"

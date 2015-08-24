@@ -1,5 +1,28 @@
-<h1>Registered for <%= event %></h1>
 
-<%= render(partial: "balance") %>
+<div class="registration-status">
+  <% if registration.paid? -%>
+    <h1><%= t("registrations.paid.title", event: event) %></h1>
+  <% else -%>
+    <h1><%= t("registrations.unpaid.title", event: event) %></h1>
+  <% end -%>
 
-<%= link_to t("registrations.itinerary"), event_itinerary_path(event) %>
+  <div class="message">
+    <% if registration.paid? -%>
+      <p><%= t("registrations.paid.message", event: event) %></p>
+      <p><%= t("registrations.paid.next_step") %></p>
+      <%= link_to event_itinerary_path(event), class: "button" do %>
+        <%= t("registrations.itinerary") %>
+        <%= icon "arrow-right" %>
+      <% end -%>
+    <% else -%>
+      <p><%= t("registrations.unpaid.message", event: event) %></p>
+      <p><%= t("registrations.unpaid.explanation") %></p>
+      <%= link_to new_event_payment_path(event), class: "button" do %>
+        <%= t("events.payment") %>
+        <%= icon "arrow-right" %>
+      <% end -%>
+    <% end -%>
+  </div>
+
+  <%= render(partial: "balance") %>
+</div>

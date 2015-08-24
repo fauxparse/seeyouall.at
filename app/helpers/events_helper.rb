@@ -38,4 +38,16 @@ module EventsHelper
       event.payment_method_configurations.build(payment_method_name: method.name.demodulize.underscore)
     end.map(&:payment_method)
   end
+
+  def homepage_event_registration_for_user(user)
+    @registrations ||= if user
+      current_user.registrations.where(user_id: @events.map(&:id)).map do |r|
+        RegistrationPresenter.new(r)
+      end
+    else
+      []
+    end
+
+    signed_in? ? @registrations.detect { |r| r.user_id == user.id } : nil
+  end
 end

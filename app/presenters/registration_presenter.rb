@@ -51,6 +51,10 @@ class RegistrationPresenter < SimpleDelegator
     @event ||= EventPresenter.new(registration.event)
   end
 
+  def payments
+    @payments ||= registration.payments.map { |p| PaymentPresenter.new(p) }
+  end
+
   protected
 
   def current_package_price

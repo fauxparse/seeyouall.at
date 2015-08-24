@@ -13,6 +13,20 @@
           <td><%= dollar_amount(registration.subtotal, include_currency = false) %></td>
         </tr>
       <% end -%>
+      <% registration.payments.select(&:pending?).each do |payment| %>
+        <tr class="payment">
+          <td><%= t("registrations.payments.pending_via", method: payment.payment_method_description, date: l(payment.date, format: :short)) %></td>
+          <td><abbr><%= payment.currency %></abbr></td>
+          <td><%= dollar_amount(payment.amount, include_currency = false) %></td>
+        </tr>
+      <% end -%>
+      <% registration.payments.select(&:approved?).each do |payment| %>
+        <tr class="payment">
+          <td><%= t("registrations.payments.paid_via", method: payment.payment_method_description, date: l(payment.date, format: :short)) %></td>
+          <td><abbr><%= payment.currency %></abbr></td>
+          <td><%= dollar_amount(payment.amount, include_currency = false) %></td>
+        </tr>
+      <% end -%>
       <tr>
         <td><%= t("registrations.payments.paid") %></td>
         <td><abbr><%= registration.currency %></abbr></td>

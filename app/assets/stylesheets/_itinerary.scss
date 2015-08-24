@@ -11,7 +11,12 @@
 
     h4 {
       @include display(flex);
-      @include justify-content(space-between);
+      @include justify-content(flex-start);
+
+      .activity-types {
+        margin-left: 0.5rem;
+        color: secondary-color();
+      }
     }
   }
 
@@ -114,24 +119,25 @@
     }
   }
 
-  &:not([data-state*="selected"]) button[rel="unbook"],
-  &:not([data-state*="sold_out"]) button[rel="sold-out"],
-  &[data-state*="available"] button[rel="limited"],
-  &[data-state*="restricted"] button[rel="limited"],
-  &[data-state*="selected"] button[rel="limited"],
-  &[data-state*="sold_out"] button[rel="limited"],
-  &[data-state*="selected"] button[rel="sold-out"],
-  &[data-state*="sold_out"]:not([data-state*="selected"]) button[rel="book"],
-  &[data-state*="limited"] button[rel="book"],
-  &[data-state*="unavailable"] button[rel="book"],
-  &[data-state*="selected"] button[rel="book"] {
+  &:not([data-state~="selected"]) button[rel="unbook"],
+  &:not([data-state~="sold_out"]) button[rel="sold-out"],
+  &[data-state~="available"] button[rel="limited"],
+  &[data-state~="restricted"] button[rel="limited"],
+  &[data-state~="selected"] button[rel="limited"],
+  &[data-state~="sold_out"] button[rel="limited"],
+  &[data-state~="unlimited"] button[rel="limited"],
+  &[data-state~="selected"] button[rel="sold-out"],
+  &[data-state~="sold_out"]:not([data-state~="selected"]) button[rel="book"],
+  &[data-state~="limited"] button[rel="book"],
+  &[data-state~="unavailable"] button[rel="book"],
+  &[data-state~="selected"] button[rel="book"] {
     display: none;
   }
 
-  &[data-state*="sold-out"]:not([data-state*="booked"]),
-  &[data-state*="restricted"],
-  &[data-state*="unavailable"],
-  &[data-state*="limited"] {
+  &[data-state~="sold-out"]:not([data-state~="booked"]),
+  &[data-state~="restricted"],
+  &[data-state~="unavailable"],
+  &[data-state~="limited"] {
     opacity: $disabled-alpha;
 
     .buttons button:disabled {

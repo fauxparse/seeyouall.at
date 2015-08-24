@@ -1,5 +1,6 @@
 class ItinerariesController < ApplicationController
   wrap_parameters :itinerary, include: [:selections]
+  before_action :ensure_registered, except: [:check]
 
   def show
   end
@@ -37,6 +38,11 @@ class ItinerariesController < ApplicationController
 
   protected
 
+  def ensure_registered
+    registration
+    redirect_to event_register_path(event) unless @registration.present?
+  end
+
   def event
     @event ||= begin
       event = Event
@@ -49,8 +55,8 @@ class ItinerariesController < ApplicationController
 
   def registration
     @registration ||= begin
-      registration = event.registrations.with_package.find_by!(user_id: current_user.id)
-      RegistrationPresenter.new(registration)
+      registration = event.registrations.with_package.find_by(user_id: current_user.id)
+      registration && RegistrationPresenter.new(registration)
     end
   end
 

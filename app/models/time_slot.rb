@@ -11,6 +11,6 @@ class TimeSlot < ActiveRecord::Base
   end
 
   def overlaps?(another)
-    start_time <= another.end_time && another.start_time <= end_time
+    start_time < another.end_time && another.start_time < end_time
   end
 end

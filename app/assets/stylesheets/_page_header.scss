@@ -8,7 +8,7 @@ header.page-header {
   background: $page-header-background;
   color: $page-header-color;
   padding-right: 1rem;
-
+  
   [for="show-sidebar"] {
     display: block;
     margin: 0.5rem;
@@ -111,5 +111,15 @@ main {
 
   main {
     padding-top: ($page-header-height + 1rem);
+  }
+}
+
+@media print {
+  header.page-header {
+    display: none;
+  }
+  
+  main {
+    padding: 0;
   }
 }

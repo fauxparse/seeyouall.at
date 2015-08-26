@@ -47,6 +47,9 @@ gem 'active_model_serializers', github: 'rails-api/active_model_serializers', ta
 
 gem 'i18n-js', '>= 3.0.0.rc11'
 
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 gem 'colorize'
 
 # Use ActiveModel has_secure_password

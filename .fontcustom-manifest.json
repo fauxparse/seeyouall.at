@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "5d9014f341b0389ce651727a3cd2b246f6462abeca6995b7a1edcb7ebbc81f62",
-    "current": "5d9014f341b0389ce651727a3cd2b246f6462abeca6995b7a1edcb7ebbc81f62"
+    "previous": "e40f2f827c793d2507f7321b10ab43ae99ac8016ca8b6c3029a28bc3f22bfabf",
+    "current": "e40f2f827c793d2507f7321b10ab43ae99ac8016ca8b6c3029a28bc3f22bfabf"
   },
   "fonts": [
-    "app/assets/fonts/icons_5d9014f341b0389ce651727a3cd2b246.ttf",
-    "app/assets/fonts/icons_5d9014f341b0389ce651727a3cd2b246.svg",
-    "app/assets/fonts/icons_5d9014f341b0389ce651727a3cd2b246.woff",
-    "app/assets/fonts/icons_5d9014f341b0389ce651727a3cd2b246.eot"
+    "app/assets/fonts/icons_e40f2f827c793d2507f7321b10ab43ae.ttf",
+    "app/assets/fonts/icons_e40f2f827c793d2507f7321b10ab43ae.svg",
+    "app/assets/fonts/icons_e40f2f827c793d2507f7321b10ab43ae.woff",
+    "app/assets/fonts/icons_e40f2f827c793d2507f7321b10ab43ae.eot"
   ],
   "glyphs": {
     "add": {
@@ -62,6 +62,10 @@
       "codepoint": 61733,
       "source": "lib/assets/icons/svg/denied.svg"
     },
+    "download": {
+      "codepoint": 61735,
+      "source": "lib/assets/icons/svg/download.svg"
+    },
     "edit": {
       "codepoint": 61724,
       "source": "lib/assets/icons/svg/edit.svg"
@@ -101,6 +105,10 @@
     "payment": {
       "codepoint": 61716,
       "source": "lib/assets/icons/svg/payment.svg"
+    },
+    "print": {
+      "codepoint": 61736,
+      "source": "lib/assets/icons/svg/print.svg"
     },
     "register": {
       "codepoint": 61715,

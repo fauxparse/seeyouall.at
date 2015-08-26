@@ -76,7 +76,7 @@ en:
 
   time:
     formats:
-      time_only: "%I:%M%P"
+      time_only: "%-l:%M%P"
 
   application:
     title: See you all at…
@@ -166,6 +166,9 @@ en:
     save: "Save"
     save_changes: "Save changes"
     saved: "Saved"
+    title: "%{participant}’s itinerary for %{event}"
+    download: Download
+    print: Print
 
   locations:
     add_location: "Add a location…"

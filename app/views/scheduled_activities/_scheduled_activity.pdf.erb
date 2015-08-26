@@ -1,0 +1,11 @@
+<article>
+  <div class="times">
+    <%= time_range(scheduled_activity.start_time, scheduled_activity.end_time) %>
+  </div>
+  <div class="details">
+    <h4><%= scheduled_activity.name %></h4>
+    <% if scheduled_activity.room? %>
+      <%= link_to scheduled_activity.room, directions_to(scheduled_activity.room.address), target: :_blank %>
+    <% end -%>
+  </div>
+</article>

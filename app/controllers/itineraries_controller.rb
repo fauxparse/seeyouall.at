@@ -3,6 +3,25 @@ class ItinerariesController < ApplicationController
   before_action :ensure_registered, except: [:check]
 
   def show
+    authorize!(:read, registration)
+    @schedule = registration
+      .selections
+      .preload(:scheduled_activity => [:time_slot, { :activity => :activity_type }])
+      .map { |selection| ScheduledActivityPresenter.new(selection.scheduled_activity) }
+      .sort_by(&:start_time)
+      .chunk(&:date)
+      
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => "#{event.slug}-#{current_user.name.to_url}",
+          layout: true,
+          disposition: "attachment",
+          print_media_type: true,
+          page_size: "A4",
+          show_as_html: params[:debug].present? && Rails.env.development?
+      end
+    end
   end
 
   def edit

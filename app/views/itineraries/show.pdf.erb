@@ -1,0 +1,19 @@
+<div class="itinerary list">
+  <h1><%= t("itinerary.title", participant: registration.user.name, event: event.name) %></h1>
+  <section class="main">
+    <% if @schedule.empty? -%>
+      <p class="empty">
+        <%= t("itinerary.empty") %>
+      </p>
+    <% else -%>
+      <% @schedule.each do |date, activities| -%>
+        <section class="day">
+          <h2><%= l(date, format: :itinerary) %></h2>
+          <div class="activity-list">
+            <%= render activities %>
+          </div>
+        </section>
+      <% end -%>
+    <% end -%>
+  </section>
+</div>

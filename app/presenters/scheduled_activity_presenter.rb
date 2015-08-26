@@ -2,6 +2,7 @@ class ScheduledActivityPresenter < SimpleDelegator
   alias_method :scheduled_activity, :__getobj__
 
   delegate :name, :description, :photo_url, to: :activity
+  delegate :start_time, :end_time, to: :time_slot
 
   def activity_type
     @activity_type ||= ActivityTypePresenter.new(scheduled_activity.activity.activity_type)
@@ -9,5 +10,17 @@ class ScheduledActivityPresenter < SimpleDelegator
 
   def activity
     ActivityPresenter.new(scheduled_activity.activity)
+  end
+  
+  def date
+    start_time.to_date
+  end
+  
+  def room
+    RoomPresenter.new(scheduled_activity.room) if room?
+  end
+  
+  def room?
+    scheduled_activity.room.present?
   end
 end

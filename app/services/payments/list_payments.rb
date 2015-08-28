@@ -5,7 +5,7 @@ class ListPayments
   end
 
   def call
-    sorted_scope.paginate(page: @params[:page], per_page: 25)
+    sorted_scope.page(@params[:page]).per_page(25)
   end
 
   private

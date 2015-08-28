@@ -43,7 +43,7 @@ gem 'money-rails'
 gem 'redcarpet'
 gem 'will_paginate'
 
-gem 'active_model_serializers', github: 'rails-api/active_model_serializers', tag: "v0.10.0.rc2"
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers', ref: '39d6dab218777defe8df251651d03517c7ddf35f'
 
 gem 'i18n-js', '>= 3.0.0.rc11'
 

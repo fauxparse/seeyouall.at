@@ -1,0 +1,20 @@
+<%= t("emails.salutation", name: @user) %>
+
+<%= t("emails.payments.approved.thanks", amount: @amount, event: @event) %>
+
+<% if @registration.paid? -%>
+<%= t("emails.payments.approved.paid", event: @event) %>
+
+<%= t("emails.payments.approved.paid_next_step", event: @event) %>
+
+    <%= edit_event_itinerary_url(@event) %>
+<% else -%>
+<%= t("emails.payments.approved.outstanding", amount: @outstanding) %>
+
+    <%= new_event_payment_url(@event) %>
+
+<%= t("emails.payments.approved.outstanding_next_step", event: @event) %>
+<% end %>
+
+<%= t("emails.thanks", event: @event) %>
+<%= t("emails.team", event: @event) %>

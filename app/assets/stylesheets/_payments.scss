@@ -84,7 +84,55 @@
 }
 
 .payments-list {
-  table-layout: auto;
+  @include position(fixed, $page-header-height-mobile 0rem 0rem 0rem);
+  @include media($medium-screen) { top: $page-header-height; }
+  @include display(flex);
+  @include flex-direction(column);
+  overflow: hidden;
+  
+  header {
+    background: $page-header-background;
+    color: $white;
+  }
+  
+  footer {
+    background: $page-header-background;
+    color: $white;
+    padding: 0.5rem 1rem;
+    
+    @include media($medium-screen) {
+      padding: 0.5rem $page-gutter;
+    }
+  }
+  
+  .table-container,
+  .table-and-footer {
+    @include flex(1);
+    @include display(flex);
+    @include flex-direction(column);
+  }
+  
+  .scrolling-table {
+    @include flex(1);
+    height: 100px;
+    overflow-y: auto;
+    padding: 1rem;
+    
+    @include media($medium-screen) {
+      padding: 1rem $page-gutter;
+    }
+  }
+  
+  table {
+    table-layout: auto;
+    margin: 0;
+  }
+  
+  table.loading,
+  tr.loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
   td:first-child {
     width: 2em;
@@ -92,6 +140,11 @@
 
   td:last-child {
     width: 6rem;
+  }
+  
+  tr[data-state="approved"],
+  tr[data-state="declined"] {
+    color: secondary-color();
   }
 
   .name {

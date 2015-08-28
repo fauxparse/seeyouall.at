@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
   has_many :scheduled_activities, through: :time_slots
   has_many :packages, inverse_of: :event, dependent: :destroy, autosave: true
   has_many :registrations, inverse_of: :event, autosave: true, dependent: :destroy
+  has_many :payments, through: :registrations
   has_many :administrators, inverse_of: :event, autosave: true, dependent: :destroy
   has_many :locations, inverse_of: :event, autosave: true, dependent: :destroy
   has_many :payment_method_configurations, inverse_of: :event, autosave: true, dependent: :destroy

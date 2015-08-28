@@ -23,7 +23,10 @@ Rails.application.routes.draw do
     resources :time_slots, only: [:create, :destroy]
     resources :scheduled_activities, only: [:create, :update, :destroy]
     resources :locations
-    resources :payments
+    resources :payments do
+      post :approve, on: :collection
+      post :decline, on: :collection
+    end
     resource  :account
     resource  :map, only: :show
   end

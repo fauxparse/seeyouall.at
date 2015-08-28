@@ -1,5 +1,6 @@
 class Payment < ActiveRecord::Base
   belongs_to :registration, inverse_of: :payments
+  has_one :event, through: :registration
 
   enum state: [:pending, :approved, :declined, :refunded]
 
@@ -23,6 +24,14 @@ class Payment < ActiveRecord::Base
 
   def payment_method=(payment_method)
     self.payment_method_name = payment_method.class.name.demodulize.underscore
+  end
+  
+  def approve!
+    update(state: :approved)
+  end
+
+  def decline!
+    update(state: :declined)
   end
 
   protected

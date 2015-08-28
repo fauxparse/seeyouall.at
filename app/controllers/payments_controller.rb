@@ -1,12 +1,25 @@
 class PaymentsController < ApplicationController
-  before_action :ensure_registered, except: :index
+  before_action :ensure_registered, only: [:show, :new, :create]
 
   def index
+    authorize!(:update, event)
     @payment_methods = event.payment_methods.map.with_object({}) { |type, hash| hash[type.name] = type }
     @payments = ListPayments.new(event, params).call
+    
+    respond_to do |format|
+      format.html
+      format.json do
+        render(json: @payments,
+          serializer: PaginatedSerializer,
+          each_serializer: PaymentSerializer,
+          adapter: :json
+        )
+      end
+    end
   end
 
   def show
+    authorize!(:read, payment)
     render("payments/#{payment_method.name}/#{payment.state}")
   end
 
@@ -24,7 +37,21 @@ class PaymentsController < ApplicationController
       create_payment.call
     end
   end
-
+  
+  def approve
+    authorize!(:update, event)
+    approve = ApprovePayments.new(event, params[:payment_ids] || [])
+    approve.call
+    render(json: approve.payments, each_serializer: PaymentSerializer)
+  end
+  
+  def decline
+    authorize!(:update, event)
+    decline = DeclinePayments.new(event, params[:payment_ids] || [])
+    decline.call
+    render(json: decline.payments, each_serializer: PaymentSerializer)
+  end
+  
   protected
 
   def event

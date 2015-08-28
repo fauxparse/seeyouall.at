@@ -20,6 +20,14 @@ class Ability < Struct.new(:user)
       can :manage, [Registration, RegistrationPresenter] do |registration|
         user == registration.user || administrator_of?(registration.event)
       end
+      
+      can :read, [Payment, PaymentPresenter] do |payment|
+        user == payment.user
+      end
+      
+      can :manage, [Payment, PaymentPresenter] do |payment|
+        administrator_of?(payment.event)
+      end
     end
   end
 

@@ -185,6 +185,8 @@ en:
     title: "Account balance for %{participant}"
 
   payments:
+    approve: Approve
+    decline: Decline
     state:
       pending: Pending
       approved: Approved
@@ -223,3 +225,22 @@ en:
     send_instructions: Send instructions
     new_password: New password
     confirm_password: Confirm password
+
+  emails:
+    salutation: "Hi %{name},"
+    thanks: "Looking forward to seeing you all at %{event}!"
+    team: "The %{event} team"
+    payments:
+      approved:
+        subject: "Your payment for %{event} was approved"
+        thanks: "Thanks for your payment of %{amount} to %{event}."
+        outstanding: "The remaining balance on your registration is %{amount}. You can pay this at the following URL:"
+        outstanding_next_step: "Once your registration is paid in full, you will be able to select your activities for %{event}."
+        paid: "This completes your registration."
+        paid_next_step: "You can now select your individual activities at:"
+  
+  will_paginate:
+    previous_label: "<i class=\"icon-chevron-left\"></i>"
+    next_label: "<i class=\"icon-chevron-right\"></i>"
+    page_gap: "&hellip;"
+

@@ -1,0 +1,24 @@
+.pagination {
+  @include display(flex);
+  @include flex-direction(row);
+  @include justify-content(flex-start);
+  
+  a, span, em {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    line-height: 1.5rem;
+    font-size: 1rem;
+    vertical-align: middle;
+    text-align: center;
+    color: secondary-color($white);
+    font-style: normal;
+  }
+  
+  em {
+    font-weight: $bold-font-weight;
+    color: text-color();
+    background: secondary-color($white);
+    border-radius: $base-border-radius;
+  }
+}

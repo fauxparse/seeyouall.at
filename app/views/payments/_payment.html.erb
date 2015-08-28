@@ -1,4 +1,4 @@
-<%= content_tag(:tr, "data-id" => payment.id) do %>
+<%= content_tag(:tr, "data-id" => payment.id, "data-state" => payment.state) do %>
   <td>
     <input type="checkbox">
   </td>
@@ -15,7 +15,7 @@
   <td>
     <%= t("payment_methods.#{payment.payment_method_name}.name") %>
   </td>
-  <td>
+  <td rel="state">
     <%= t("payments.state.#{payment.state}") %>
   </td>
 <% end -%>

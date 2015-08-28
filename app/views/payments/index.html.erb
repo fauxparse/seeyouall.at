@@ -1,22 +1,37 @@
-<table class="payments-list">
-  <thead>
-    <tr>
-      <td><input type="checkbox" name="select_all"></td>
-      <td><%= User.human_attribute_name(:name) %></td>
-      <td><%= Payment.human_attribute_name(:created_at) %></td>
-      <td><%= Payment.human_attribute_name(:amount) %></td>
-      <td><%= Payment.human_attribute_name(:payment_method_name) %></td>
-      <td><%= Payment.human_attribute_name(:state) %></td>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render(@payments) %>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="6">
-        <%= will_paginate @payments %>
-      </td>
-    </tr>
-  </tfoot>
-</table>
+<div class="payments-list">
+  <header>
+    
+  </header>
+  <div class="table-container">
+    <div class="table-and-footer" id="table">
+      <div class="scrolling-table">
+        <table>
+          <thead>
+            <tr>
+              <td><input type="checkbox" name="select_all"></td>
+              <td><%= User.human_attribute_name(:name) %></td>
+              <td><%= Payment.human_attribute_name(:created_at) %></td>
+              <td><%= Payment.human_attribute_name(:amount) %></td>
+              <td><%= Payment.human_attribute_name(:payment_method_name) %></td>
+              <td><%= Payment.human_attribute_name(:state) %></td>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render(@payments) %>
+          </tbody>
+        </table>
+      </div>
+      <footer>
+        <%= will_paginate @payments, inner_window: 2, outer_window: 0 %>
+        <button rel="approve">
+          <%= icon :ok %>
+          <span><%= t("payments.approve") %></span>
+        </button>
+        <button rel="decline">
+          <%= icon :cancel %>
+          <span><%= t("payments.decline") %></span>
+        </button>
+      </footer>
+    </div>
+  </div>
+</div>

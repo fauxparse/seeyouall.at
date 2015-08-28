@@ -1,0 +1,22 @@
+<p><%= t("emails.salutation", name: @user) %></p>
+
+<p><b><%= t("emails.payments.approved.thanks", amount: @amount, event: @event) %></b></p>
+
+<% if @registration.paid? %>
+  <p><%= t("emails.payments.approved.paid", event: @event) %></p>
+  <p><%= t("emails.payments.approved.paid_next_step", event: @event) %></p>
+  <blockquote>
+    <p><%= link_to(nil, edit_event_itinerary_url(@event)) %></p>
+  </blockquote>
+<% else %>
+  <p><%= t("emails.payments.approved.outstanding", amount: @outstanding) %></p>
+  <blockquote>
+    <p><%= link_to(nil, new_event_payment_url(@event)) %></p>
+  </blockquote>
+  <p><%= t("emails.payments.approved.outstanding_next_step", event: @event) %></p>
+<% end %>
+
+<p>
+  <%= t("emails.thanks", event: @event) %><br>
+  <%= t("emails.team", event: @event) %>
+</p>

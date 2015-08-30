@@ -210,8 +210,8 @@ en:
         account_number: Account number
         reference: Reference
         reference_value: (your name)
-        message_bottom: Once your payment has cleared (1–2 working days), you will be able to select activities.
-        continue: OK, got it!
+        message_bottom: Please allow 1–2 working days for your payment to clear. In the meantime, you can start selecting activities.
+        continue: Go to my itinerary
     paypal:
       name: PayPal
       description: Pay with your credit card or PayPal account
@@ -235,12 +235,10 @@ en:
         subject: "Your payment for %{event} was approved"
         thanks: "Thanks for your payment of %{amount} to %{event}."
         outstanding: "The remaining balance on your registration is %{amount}. You can pay this at the following URL:"
-        outstanding_next_step: "Once your registration is paid in full, you will be able to select your activities for %{event}."
         paid: "This completes your registration."
-        paid_next_step: "You can now select your individual activities at:"
-  
+        next_step: "You can now select your individual activities at:"
+
   will_paginate:
     previous_label: "<i class=\"icon-chevron-left\"></i>"
     next_label: "<i class=\"icon-chevron-right\"></i>"
     page_gap: "&hellip;"
-

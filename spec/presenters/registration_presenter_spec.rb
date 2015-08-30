@@ -1,7 +1,8 @@
 require "rails_helper"
 
 describe RegistrationPresenter do
-  subject(:registration) { RegistrationPresenter.new(package.event.registrations.create(user: user, package: package, event: event)) }
+  subject(:presenter) { RegistrationPresenter.new(registration) }
+  let(:registration) { package.event.registrations.create(user: user, package: package, event: event) }
   let(:event) { FactoryGirl.create(:event) }
   let(:user) { FactoryGirl.create(:user) }
   let(:package) { FactoryGirl.create(:package) }
@@ -31,15 +32,15 @@ describe RegistrationPresenter do
       end
 
       it "has $100 total" do
-        expect(registration.total).to eq Money.new(10000)
+        expect(presenter.total).to eq Money.new(10000)
       end
 
       it "has $50 paid" do
-        expect(registration.total_paid).to eq Money.new(5000)
+        expect(presenter.total_paid).to eq Money.new(5000)
       end
 
       it "has $50 outstanding" do
-        expect(registration.outstanding_balance).to eq Money.new(5000)
+        expect(presenter.outstanding_balance).to eq Money.new(5000)
       end
     end
 
@@ -49,15 +50,15 @@ describe RegistrationPresenter do
       end
 
       it "has $200 total" do
-        expect(registration.total).to eq Money.new(20000)
+        expect(presenter.total).to eq Money.new(20000)
       end
 
       it "has $0 paid" do
-        expect(registration.total_paid).to be_zero
+        expect(presenter.total_paid).to be_zero
       end
 
       it "has $200 outstanding" do
-        expect(registration.outstanding_balance).to eq Money.new(20000)
+        expect(presenter.outstanding_balance).to eq Money.new(20000)
       end
     end
 
@@ -67,29 +68,29 @@ describe RegistrationPresenter do
       end
 
       it "has $100 total" do
-        expect(registration.total).to eq Money.new(10000)
+        expect(presenter.total).to eq Money.new(10000)
       end
 
       it "has $100 paid" do
-        expect(registration.total_paid).to eq Money.new(10000)
+        expect(presenter.total_paid).to eq Money.new(10000)
       end
 
       it "has $0 outstanding" do
-        expect(registration.outstanding_balance).to be_zero
+        expect(presenter.outstanding_balance).to be_zero
       end
     end
 
     context "with no payments at all" do
       it "has $200 total" do
-        expect(registration.total).to eq Money.new(20000)
+        expect(presenter.total).to eq Money.new(20000)
       end
 
       it "has $0 paid" do
-        expect(registration.total_paid).to be_zero
+        expect(presenter.total_paid).to be_zero
       end
 
       it "has $200 outstanding" do
-        expect(registration.outstanding_balance).to eq Money.new(20000)
+        expect(presenter.outstanding_balance).to eq Money.new(20000)
       end
     end
 
@@ -99,15 +100,15 @@ describe RegistrationPresenter do
       end
 
       it "has $200 total" do
-        expect(registration.total).to eq Money.new(20000)
+        expect(presenter.total).to eq Money.new(20000)
       end
 
       it "has $50 paid" do
-        expect(registration.total_paid).to eq Money.new(5000)
+        expect(presenter.total_paid).to eq Money.new(5000)
       end
 
       it "has $150 outstanding" do
-        expect(registration.outstanding_balance).to eq Money.new(15000)
+        expect(presenter.outstanding_balance).to eq Money.new(15000)
       end
     end
   end

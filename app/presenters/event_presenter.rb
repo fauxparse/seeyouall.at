@@ -54,4 +54,8 @@ class EventPresenter < SimpleDelegator
   def registration_for(user)
     registrations.detect { |r| r.user_id == user.try(:id) }
   end
+
+  def self.model_name
+    Event.model_name
+  end
 end

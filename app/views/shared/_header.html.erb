@@ -1,10 +1,6 @@
 <header class="page-header">
   <label for="show-sidebar">
-    <% if signed_in? -%>
-      <%= avatar current_user %>
-    <% else -%>
-      <%= icon :menu %>
-    <% end -%>
+    <%= icon :menu %>
   </label>
   <%= event_header_link %>
 </header>

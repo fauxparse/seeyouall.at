@@ -17,5 +17,9 @@ class AllocationPresenter < SimpleDelegator
     !maximum.present?
   end
 
+  def self.model_name
+    Allocation.model_name
+  end
+
   delegate :name, :plural, to: :activity_type
 end

@@ -12,4 +12,8 @@ class ActivityTypePresenter < SimpleDelegator
   def pluralize(n)
     "#{n} #{n == 1 ? name : plural}"
   end
+
+  def self.model_name
+    ActivityType.model_name
+  end
 end

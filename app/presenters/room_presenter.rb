@@ -10,4 +10,8 @@ class RoomPresenter < SimpleDelegator
       "#{name} @ #{location.name}"
     end
   end
+
+  def self.model_name
+    Room.model_name
+  end
 end

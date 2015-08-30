@@ -34,6 +34,10 @@ class TimetablePresenter < SimpleDelegator
     present_collection(locations.map(&:rooms).flatten, RoomPresenter)
   end
 
+  def self.model_name
+    Event.model_name
+  end
+
   protected
 
   def present_collection(collection, presenter)

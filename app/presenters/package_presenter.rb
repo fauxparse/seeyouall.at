@@ -31,4 +31,8 @@ class PackagePresenter < SimpleDelegator
     package.package_prices.sort_by(&:start_time)
       .map { |p| PackagePricePresenter.new(p) }
   end
+
+  def self.model_name
+    Package.model_name
+  end
 end

@@ -16,4 +16,8 @@ class PackagePricePresenter < SimpleDelegator
   def end_date
     end_time.to_date
   end
+
+  def self.model_name
+    PackagePrice.model_name
+  end
 end

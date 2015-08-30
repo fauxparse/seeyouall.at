@@ -8,4 +8,8 @@ class UserPresenter < SimpleDelegator
   def avatar
     Avatar.new(self)
   end
+
+  def self.model_name
+    User.model_name
+  end
 end

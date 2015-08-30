@@ -8,4 +8,8 @@ class ActivityPresenter < SimpleDelegator
   def photo_url
     activity_photos.first.try(:url)
   end
+
+  def self.model_name
+    Activity.model_name
+  end
 end

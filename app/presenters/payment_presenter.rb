@@ -1,6 +1,6 @@
 class PaymentPresenter < SimpleDelegator
   alias_method :payment, :__getobj__
-  
+
   delegate :name, :email, to: :user
 
   def payment_method
@@ -18,7 +18,7 @@ class PaymentPresenter < SimpleDelegator
   def user
     @user ||= UserPresenter.new(registration.user)
   end
-  
+
   def amount
     @amount ||= MoneyPresenter.new(payment.amount)
   end
@@ -29,5 +29,9 @@ class PaymentPresenter < SimpleDelegator
 
   def date
     updated_at.to_date
+  end
+
+  def self.model_name
+    Payment.model_name
   end
 end

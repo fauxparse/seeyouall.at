@@ -10,6 +10,14 @@ body.devise {
     height: 100vh;
   }
 
+  .flash-messages {
+    .flash {
+      background: none;
+      color: text-color();
+      i { color: icon-color(); }
+    }
+  }
+
   h1 {
     display: none;
   }

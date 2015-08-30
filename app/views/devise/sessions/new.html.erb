@@ -7,6 +7,8 @@
 </header>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= flash_messages %>
+
   <section class="floating-label field">
     <%= f.email_field :email, autofocus: true %>
     <%= f.label :email %>

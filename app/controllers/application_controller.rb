@@ -3,7 +3,11 @@ class ApplicationController < ActionController::Base
   force_ssl if: :ssl_configured?
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    if Rails.env.test?
+      raise exception
+    else
+      redirect_to root_url, :alert => exception.message
+    end
   end
 
   protected

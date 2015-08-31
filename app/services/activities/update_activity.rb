@@ -6,7 +6,6 @@ class UpdateActivity
 
   def call
     Activity.transaction do
-      Rails.logger.info @params.inspect.yellow
       if url = @params.delete(:photo_url)
         photo.url = url
         photo.save

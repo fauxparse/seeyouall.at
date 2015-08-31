@@ -1,15 +1,14 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!, except: [:process_external_payment]
   before_action :ensure_registered, only: [:show, :new, :create]
-  
-  skip_before_action :verify_authenticity_token,
-    only: [:process_external_payment]
+
+  skip_before_action :verify_authenticity_token, if: :processing_external_payment?
 
   def index
     authorize!(:update, event)
     @payment_methods = event.payment_methods.map.with_object({}) { |type, hash| hash[type.name] = type }
     @payments = ListPayments.new(event, params).call
-    
+
     respond_to do |format|
       format.html
       format.json do
@@ -41,27 +40,32 @@ class PaymentsController < ApplicationController
       create_payment.call
     end
   end
-  
+
   def approve
     authorize!(:update, event)
     approve = ApprovePayments.new(event, params[:payment_ids] || [])
     approve.call
     render(json: approve.payments, each_serializer: PaymentSerializer)
   end
-  
+
   def decline
     authorize!(:update, event)
     decline = DeclinePayments.new(event, params[:payment_ids] || [])
     decline.call
     render(json: decline.payments, each_serializer: PaymentSerializer)
   end
-  
+
   def process_external_payment
     ProcessExternalPayment.new(params.permit!).call
     render nothing: true
   end
-  
+
   protected
+
+  def processing_external_payment?
+    (action_name == "process_external_payment") ||
+    (request.post? && action_name == "show")
+  end
 
   def event
     @event ||= begin
@@ -85,7 +89,9 @@ class PaymentsController < ApplicationController
   end
 
   def payment
-    @payment ||= begin
+    @payment ||= if params[:id].present?
+      event.payments.find(params[:id])
+    else
       payment = @registration.payments.build(payment_params || {})
       payment.amount = registration.outstanding_balance if payment.amount.to_i.zero?
       payment.payment_method_name ||= event.payment_methods.first.name

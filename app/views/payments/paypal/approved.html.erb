@@ -1,0 +1,8 @@
+<div class="payment-approved">
+  <%= inline_svg("icons/check.svg") %>
+  <h1><%= t("payment_methods.paypal.approved.title") %></h1>
+  <p><%= t("payment_methods.paypal.approved.message_top", amount: dollar_amount(payment.amount)).html_safe %></p>
+  <p><%= t("payment_methods.paypal.approved.message_bottom").html_safe %></p>
+
+  <%= link_to(t("payment_methods.paypal.approved.continue"), edit_event_itinerary_path(event), class: "button") %>
+</div>

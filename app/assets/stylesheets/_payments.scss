@@ -22,7 +22,9 @@
   }
 }
 
-.payment-pending {
+.payment-pending,
+.payment-approved,
+.payment-declined {
   svg {
     width: 25%;
     max-width: 10rem;
@@ -37,6 +39,9 @@
       fill: $green;
     }
   }
+
+  &.payment-approved svg polyline { stroke: $green; }
+  &.payment-declined svg path { fill: $error-color; }
 
   h1, p {
     text-align: center;
@@ -89,45 +94,45 @@
   @include display(flex);
   @include flex-direction(column);
   overflow: hidden;
-  
+
   header {
     background: $page-header-background;
     color: $white;
   }
-  
+
   footer {
     background: $page-header-background;
     color: $white;
     padding: 0.5rem 1rem;
-    
+
     @include media($medium-screen) {
       padding: 0.5rem $page-gutter;
     }
   }
-  
+
   .table-container,
   .table-and-footer {
     @include flex(1);
     @include display(flex);
     @include flex-direction(column);
   }
-  
+
   .scrolling-table {
     @include flex(1);
     height: 100px;
     overflow-y: auto;
     padding: 1rem;
-    
+
     @include media($medium-screen) {
       padding: 1rem $page-gutter;
     }
   }
-  
+
   table {
     table-layout: auto;
     margin: 0;
   }
-  
+
   table.loading,
   tr.loading {
     opacity: 0.5;
@@ -141,7 +146,7 @@
   td:last-child {
     width: 6rem;
   }
-  
+
   tr[data-state="approved"],
   tr[data-state="declined"] {
     color: secondary-color();

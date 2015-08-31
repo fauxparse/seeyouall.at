@@ -215,6 +215,16 @@ en:
     paypal:
       name: PayPal
       description: Pay with your credit card or PayPal account
+      approved:
+        title: Payment approved
+        message_top: "Thanks! Your payment of %{amount} was successful."
+        message_bottom: Now it’s time to start selecting activities…
+        continue: Go to my itinerary
+      declined:
+        title: Payment declined
+        message_top: "Sorry, there was an error processing your payment."
+        message_bottom: Please try again.
+        continue: Select payment method
 
   accounts:
     sign_up: Sign up

@@ -24,7 +24,8 @@ function $$(expr, con) {
 
 var _ = self.Stretchy = {
 	selectors: {
-		base: 'textarea, select:not([size]), input:not([type]), input[type="' + "text url email tel".split(" ").join('"], input[type="') + '"]',
+		// base: 'textarea, select:not([size]), input:not([type]), input[type="' + "text url email tel".split(" ").join('"], input[type="') + '"]',
+		base: 'textarea',
 		filter: "*"
 	},
 

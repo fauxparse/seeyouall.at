@@ -40,7 +40,7 @@ class PaymentMethod
   end
 
   def self.all_payment_methods
-    [InternetBanking]
+    [Paypal, InternetBanking]
   end
 
   def self.payment_method_instance(class_name, enabled = false, options = {})

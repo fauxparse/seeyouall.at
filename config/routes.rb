@@ -27,9 +27,16 @@ Rails.application.routes.draw do
       post :approve, on: :collection
       post :decline, on: :collection
     end
+    
+    post "payments/:id", to: "payments#show" # PayPal POSTs this request
+    
     resource  :account
     resource  :map, only: :show
   end
+  
+  post "events/:event_id/payments/:id/process",
+    to: "payments#process_external_payment",
+    as: :process_external_payment
 
   root to: "events#index"
 end

@@ -1,5 +1,9 @@
 class PaymentsController < ApplicationController
+  before_action :authenticate_user!, except: [:process_external_payment]
   before_action :ensure_registered, only: [:show, :new, :create]
+  
+  skip_before_action :verify_authenticity_token,
+    only: [:process_external_payment]
 
   def index
     authorize!(:update, event)
@@ -33,7 +37,7 @@ class PaymentsController < ApplicationController
       create_payment = CreatePayment.new(payment, payment_method)
         .on(:pending, :approved) { |payment| redirect_to(event_payment_path(event, payment)) }
         .on(:redirect) { |url| redirect_to(url) }
-        .on(:failure) { logger.info(payment.errors.full_messages); render(:new) }
+        .on(:failure) { render(:new) }
       create_payment.call
     end
   end
@@ -50,6 +54,11 @@ class PaymentsController < ApplicationController
     decline = DeclinePayments.new(event, params[:payment_ids] || [])
     decline.call
     render(json: decline.payments, each_serializer: PaymentSerializer)
+  end
+  
+  def process_external_payment
+    ProcessExternalPayment.new(params.permit!).call
+    render nothing: true
   end
   
   protected

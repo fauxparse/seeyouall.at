@@ -1,5 +1,6 @@
 class ItinerariesController < ApplicationController
   wrap_parameters :itinerary, include: [:selections]
+  before_action :authenticate_user!
   before_action :ensure_registered, except: [:check]
 
   def show

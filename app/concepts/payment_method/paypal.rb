@@ -11,7 +11,7 @@ class PaymentMethod
       super.merge("email" => nil)
     end
 
-    def completed(payment)
+    def when_created(payment)
       [:redirect, paypal_url(payment)]
     end
 
@@ -23,8 +23,8 @@ class PaymentMethod
         business: email,
         cmd: "_xclick",
         upload: 1,
-        return: url + "/complete",
-        notify_url: url,
+        return: url + "#{payment.id}",
+        notify_url: url + "#{payment.token}/process",
         invoice: payment.id,
         amount: payment.amount,
         item_name: payment.registration.event.name,
@@ -34,7 +34,7 @@ class PaymentMethod
     end
 
     def return_url(payment)
-      "#{ENV['APP_HOST']}/events/#{payment.registration.event.slug}/payments/#{payment.token}"
+      "#{ENV['APP_HOST']}/events/#{payment.registration.event.slug}/payments/"
     end
   end
 end

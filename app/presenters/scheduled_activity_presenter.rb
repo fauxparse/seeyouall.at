@@ -23,4 +23,8 @@ class ScheduledActivityPresenter < SimpleDelegator
   def room?
     scheduled_activity.room.present?
   end
+  
+  def self.model_name
+    ScheduledActivity.model_name
+  end
 end

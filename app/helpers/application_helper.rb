@@ -5,7 +5,7 @@ module ApplicationHelper
     else
       t("application.title")
     end
-    [content_for(:title), title].compact.join(" ║ ")
+    [content_for(:title), title].compact.join(" 📍 ")
   end
 
   def icon(icon, options = {})

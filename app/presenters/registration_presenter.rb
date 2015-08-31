@@ -54,6 +54,10 @@ class RegistrationPresenter < SimpleDelegator
   def payments
     @payments ||= registration.payments.map { |p| PaymentPresenter.new(p) }
   end
+  
+  def self.model_name
+    Registration.model_name
+  end
 
   protected
 
@@ -71,9 +75,5 @@ class RegistrationPresenter < SimpleDelegator
 
   def paid_at_least_deposit_during?(range)
     payments.any? { |p| p.approved? && range.includes?(p.updated_at) }
-  end
-
-  def self.model_name
-    Registration.model_name
   end
 end

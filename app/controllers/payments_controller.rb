@@ -90,7 +90,7 @@ class PaymentsController < ApplicationController
 
   def payment
     @payment ||= if params[:id].present?
-      event.payments.find(params[:id])
+      PaymentPresenter.new(event.payments.find!(params[:id]))
     else
       payment = @registration.payments.build(payment_params || {})
       payment.amount = registration.outstanding_balance if payment.amount.to_i.zero?

@@ -25,7 +25,7 @@ class Payment < ActiveRecord::Base
   def payment_method=(payment_method)
     self.payment_method_name = payment_method.class.name.demodulize.underscore
   end
-  
+
   def approve!
     update(state: :approved)
   end

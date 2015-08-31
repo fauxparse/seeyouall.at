@@ -22,15 +22,17 @@
         </table>
       </div>
       <footer>
+        <div class="buttons">
+          <button rel="approve">
+            <%= icon :ok %>
+            <span><%= t("payments.approve") %></span>
+          </button>
+          <button rel="decline">
+            <%= icon :cancel %>
+            <span><%= t("payments.decline") %></span>
+          </button>
+        </div>
         <%= will_paginate @payments, inner_window: 2, outer_window: 0 %>
-        <button rel="approve">
-          <%= icon :ok %>
-          <span><%= t("payments.approve") %></span>
-        </button>
-        <button rel="decline">
-          <%= icon :cancel %>
-          <span><%= t("payments.decline") %></span>
-        </button>
       </footer>
     </div>
   </div>

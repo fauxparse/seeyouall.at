@@ -101,12 +101,38 @@
   }
 
   footer {
+    @include display(flex);
+    @include flex-direction(row);
+    @include justify-content(space-between);
+    @include flex-wrap(wrap);
     background: $page-header-background;
     color: $white;
     padding: 0.5rem 1rem;
 
+    .buttons {
+      @include flex(1);
+      @include display(flex);
+      @include flex-direction(row);
+      @include flex-wrap(wrap);
+      
+      button {
+        @include flex(1);
+        padding-right: 1rem;
+        &:not(:first-child) { margin-left: 0.5rem; }
+      }
+    }
+
     @include media($medium-screen) {
       padding: 0.5rem $page-gutter;
+      
+      .buttons {
+        @include order(1);
+        @include justify-content(flex-end);
+        
+        button {
+          @include flex(0 0 auto);
+        }
+      }
     }
   }
 

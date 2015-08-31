@@ -4,7 +4,7 @@
   </td>
   <td>
     <%= content_tag :span, payment.registration.user.name, class: "name" %>
-    <%= mail_to :span, payment.registration.user.email %>
+    <%= mail_to payment.registration.user.email %>
   </td>
   <td>
     <%= l(payment.created_at.to_date, format: :short) %>

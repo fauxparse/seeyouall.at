@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def ssl_configured?
-    Rails.env.production?
+    ENV["SSL"].present?
   end
 
   def event

@@ -1,6 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!, except: [:process_external_payment]
   before_action :ensure_registered, only: [:show, :new, :create]
+  before_action :load_payment, only: [:show, :edit, :update, :destroy]
 
   skip_before_action :verify_authenticity_token, if: :processing_external_payment?
 
@@ -22,18 +23,19 @@ class PaymentsController < ApplicationController
   end
 
   def show
-    authorize!(:read, payment)
-    render("payments/#{payment_method.name}/#{payment.state}")
+    authorize!(:read, @payment)
+    render("payments/#{@payment.payment_method_name}/#{@payment.state}")
   end
 
   def new
     registration.payments.select(&:pending?).map(&:destroy)
-    payment
+    @payment = blank_payment
   end
 
   def create
     Payment.transaction do
-      create_payment = CreatePayment.new(payment, payment_method)
+      @payment = blank_payment
+      create_payment = CreatePayment.new(@payment, payment_method)
         .on(:pending, :approved) { |payment| redirect_to(event_payment_path(event, payment)) }
         .on(:redirect) { |url| redirect_to(url) }
         .on(:failure) { render(:new) }
@@ -61,10 +63,14 @@ class PaymentsController < ApplicationController
   end
 
   protected
-
+  
   def processing_external_payment?
     (action_name == "process_external_payment") ||
     (request.post? && action_name == "show")
+  end
+  
+  def load_payment
+    @payment = event.payments.find(params[:id])
   end
 
   def event
@@ -88,24 +94,20 @@ class PaymentsController < ApplicationController
     redirect_to(event_register_path(event)) unless registration.present?
   end
 
-  def payment
-    @payment ||= if params[:id].present?
-      PaymentPresenter.new(event.payments.find(params[:id]))
-    else
-      payment = @registration.payments.build(payment_params || {})
-      payment.amount = registration.outstanding_balance if payment.amount.to_i.zero?
-      payment.payment_method_name ||= event.payment_methods.first.name
-      PaymentPresenter.new(payment)
-    end
-  end
-
-  def payment_method
-    payment.payment_method
-  end
-
   def payment_params
     params.require(:payment).permit(:payment_method_name) if params[:payment].present?
   end
 
-  helper_method :event, :registration, :payment
+  def blank_payment
+    @registration.payments.build(payment_params || {}).tap do |payment|
+      payment.amount = registration.outstanding_balance if payment.amount.to_i.zero?
+      payment.payment_method_name ||= event.payment_methods.first.name
+    end
+  end
+  
+  def payment_method
+    event.payment_methods.detect { |m| m.name == @payment.payment_method_name }
+  end
+  
+  helper_method :event, :registration, :payment_method
 end

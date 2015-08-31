@@ -212,6 +212,11 @@ en:
         reference_value: (your name)
         message_bottom: Please allow 1–2 working days for your payment to clear. In the meantime, you can start selecting activities.
         continue: Go to my itinerary
+      approved:
+        title: Payment approved
+        message_top: "Thanks! Your payment of %{amount} was successful."
+        message_bottom: Now it’s time to start selecting activities…
+        continue: Go to my itinerary
     paypal:
       name: PayPal
       description: Pay with your credit card or PayPal account

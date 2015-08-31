@@ -1,7 +1,7 @@
 <div class="payment-declined">
   <%= inline_svg("icons/cancel.svg") %>
   <h1><%= t("payment_methods.paypal.declined.title") %></h1>
-  <p><%= t("payment_methods.paypal.declined.message_top", amount: dollar_amount(payment.amount)).html_safe %></p>
+  <p><%= t("payment_methods.paypal.declined.message_top", amount: dollar_amount(@payment.amount)).html_safe %></p>
   <p><%= t("payment_methods.paypal.declined.message_bottom").html_safe %></p>
 
   <%= link_to(t("payment_methods.paypal.declined.continue"), new_event_payment_path(event), class: "button") %>

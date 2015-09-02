@@ -1,11 +1,13 @@
 class ListParticipants
+  PER_PAGE = 1000 # TODO: pagination
+  
   def initialize(event, params = {})
     @event = event
     @params = params
   end
 
   def call
-    sorted_scope.page(@params[:page]).per_page(25)
+    sorted_scope.page(@params[:page]).per_page(PER_PAGE)
   end
 
   private

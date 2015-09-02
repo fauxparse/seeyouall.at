@@ -1,19 +1,30 @@
 <div class="itinerary list">
   <h1><%= t("itinerary.title", participant: registration.user.name, event: event.name) %></h1>
   <section class="main">
-    <% @schedule.each do |date, activities| -%>
-      <section class="day">
-        <h2><%= l(date, format: :itinerary) %></h2>
-        <div class="activity-list">
-          <%= render activities %>
-        </div>
-      </section>
+    <% if @schedule.any? -%>
+      <% @schedule.each do |date, activities| -%>
+        <section class="day">
+          <h2><%= l(date, format: :itinerary) %></h2>
+          <div class="activity-list">
+            <%= render activities %>
+          </div>
+        </section>
+      <% end -%>
+    <% else -%>
+      <div class="empty">
+        <p><%= t("itinerary.empty") %></p>
+        <%= link_to(t("events.edit_itinerary"), edit_event_itinerary_path(event), class: "button") if logged_in_as?(registration.user) %>
+      </div>
     <% end -%>
   </section>
   <aside>
     <%= action_list do %>
-      <%= action_list_item(t("events.edit_itinerary"), edit_event_itinerary_path(event), "select-activities") %>
-      <%= action_list_item t("itinerary.download"), event_itinerary_path(format: :pdf), "download" %>
+      <% if logged_in_as?(registration.user) %>
+        <%= action_list_item(t("events.edit_itinerary"), edit_event_itinerary_path(event), "select-activities") %>
+        <%= action_list_item t("itinerary.download"), event_itinerary_path(event, format: :pdf), "download" %>
+      <% else -%>
+        <%= action_list_item t("itinerary.download"), event_participant_itinerary_path(event, registration.user_id, format: :pdf), "download" %>
+      <% end -%>
       <%= action_list_item t("itinerary.print"), "javascript:window.print()", "print" %>
     <% end %>
   </aside>

@@ -1,0 +1,26 @@
+<div class="participants-list">
+  <header>
+    
+  </header>
+  <div class="table-container">
+    <div class="table-and-footer" id="table">
+      <div class="scrolling-table">
+        <table>
+          <thead>
+            <tr>
+              <th><%= User.human_attribute_name(:name) %></th>
+              <th><%= User.human_attribute_name(:email) %></th>
+              <th><%= t("participants.actions") %>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render(partial: "participant", collection: @participants) %>
+          </tbody>
+        </table>
+      </div>
+      <footer>
+        <%= will_paginate @participants, inner_window: 2, outer_window: 0 %>
+      </footer>
+    </div>
+  </div>
+</div>

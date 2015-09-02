@@ -363,6 +363,14 @@
 }
 
 .itinerary.list {
+  .empty {
+    color: disabled-color();
+    
+    button {
+      display: block;
+    }
+  }
+  
   @media screen {
     @include display(flex);
     @include flex-direction(row);

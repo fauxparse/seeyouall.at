@@ -35,6 +35,8 @@ en:
         state: Status
       user:
         name: Name
+      package:
+        name: Package
     errors:
       messages:
         before_start: cannot end before it begins
@@ -97,6 +99,7 @@ en:
     edit_settings: Edit settings
     edit_timetable: Edit timetable
     edit_itinerary: Select activities
+    participants: Participants
     admin_menu: "%{event} admin"
     upcoming: Upcoming events
     map: Map
@@ -169,6 +172,7 @@ en:
     title: "%{participant}’s itinerary for %{event}"
     download: Download
     print: Print
+    empty: Your itinerary is empty.
 
   locations:
     add_location: "Add a location…"
@@ -240,6 +244,10 @@ en:
     send_instructions: Send instructions
     new_password: New password
     confirm_password: Confirm password
+    
+  participants:
+    actions: Actions
+    itinerary: Itinerary
 
   emails:
     salutation: "Hi %{name},"

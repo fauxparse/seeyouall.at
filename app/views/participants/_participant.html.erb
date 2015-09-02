@@ -1,0 +1,7 @@
+<%= content_tag(:tr, "data-id" => participant.id) do %>
+  <td><%= link_to participant.user.name, event_participant_path(@event, participant), class: "name" %></td>
+  <td><%= mail_to participant.user.email %></td>
+  <td>
+    <%= link_to t("participants.itinerary"), event_participant_itinerary_path(@event, participant.user.id), class: "button" %>
+  </td>
+<% end -%>

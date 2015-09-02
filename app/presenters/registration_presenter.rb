@@ -1,6 +1,10 @@
 class RegistrationPresenter < SimpleDelegator
   alias_method :registration, :__getobj__
 
+  def name
+    registration.user.name
+  end
+  
   def outstanding_balance
     balance = total - total_paid
     balance < 0 ? Money.new(0, currency) : balance

@@ -1,10 +1,10 @@
 @font-face {
   font-family: "icons";
-  src: font-url("icons_e40f2f827c793d2507f7321b10ab43ae.eot");
-  src: font-url("icons_e40f2f827c793d2507f7321b10ab43ae.eot?#iefix") format("embedded-opentype"),
-       font-url("icons_e40f2f827c793d2507f7321b10ab43ae.woff") format("woff"),
-       font-url("icons_e40f2f827c793d2507f7321b10ab43ae.ttf") format("truetype"),
-       font-url("icons_e40f2f827c793d2507f7321b10ab43ae.svg#icons") format("svg");
+  src: font-url("icons_5c351ffff8110c07454563c824966aeb.eot");
+  src: font-url("icons_5c351ffff8110c07454563c824966aeb.eot?#iefix") format("embedded-opentype"),
+       font-url("icons_5c351ffff8110c07454563c824966aeb.woff") format("woff"),
+       font-url("icons_5c351ffff8110c07454563c824966aeb.ttf") format("truetype"),
+       font-url("icons_5c351ffff8110c07454563c824966aeb.svg#icons") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +12,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "icons";
-    src: font-url("icons_e40f2f827c793d2507f7321b10ab43ae.svg#icons") format("svg");
+    src: font-url("icons_5c351ffff8110c07454563c824966aeb.svg#icons") format("svg");
   }
 }
 
@@ -42,6 +42,7 @@
 .icon-map:before,
 .icon-menu:before,
 .icon-ok:before,
+.icon-participants:before,
 .icon-payment:before,
 .icon-print:before,
 .icon-register:before,
@@ -90,6 +91,7 @@ $icon-logout: "\f104";
 $icon-map: "\f11e";
 $icon-menu: "\f100";
 $icon-ok: "\f107";
+$icon-participants: "\f129";
 $icon-payment: "\f114";
 $icon-print: "\f128";
 $icon-register: "\f113";
@@ -125,6 +127,7 @@ $icon-warning: "\f126";
 .icon-map::before { content: $icon-map; }
 .icon-menu::before { content: $icon-menu; }
 .icon-ok::before { content: $icon-ok; }
+.icon-participants::before { content: $icon-participants; }
 .icon-payment::before { content: $icon-payment; }
 .icon-print::before { content: $icon-print; }
 .icon-register::before { content: $icon-register; }

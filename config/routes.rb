@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resource  :registration, only: [:show, :update] do
       get :summary
     end
-    resource  :itinerary do
+    resource :itinerary do
       post :check
     end
     resources :registrations, shallow: true
@@ -26,6 +26,11 @@ Rails.application.routes.draw do
     resources :payments do
       post :approve, on: :collection
       post :decline, on: :collection
+    end
+    resources :participants do
+      resource :itinerary do
+        post :check
+      end
     end
     
     post "payments/:id", to: "payments#show" # PayPal POSTs this request

@@ -15,7 +15,7 @@ class ItinerariesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render :pdf => "#{event.slug}-#{current_user.name.to_url}",
+        render :pdf => "#{event.slug}-#{registration.name.to_url}",
           layout: true,
           disposition: "attachment",
           print_media_type: true,
@@ -75,7 +75,7 @@ class ItinerariesController < ApplicationController
 
   def registration
     @registration ||= begin
-      registration = event.registrations.with_package.find_by(user_id: current_user.id)
+      registration = event.registrations.with_package.find_by(user_id: params[:participant_id] || current_user.id)
       registration && RegistrationPresenter.new(registration)
     end
   end

@@ -8,12 +8,12 @@
         <table>
           <thead>
             <tr>
-              <td><input type="checkbox" name="select_all"></td>
-              <td><%= User.human_attribute_name(:name) %></td>
-              <td><%= Payment.human_attribute_name(:created_at) %></td>
-              <td><%= Payment.human_attribute_name(:amount) %></td>
-              <td><%= Payment.human_attribute_name(:payment_method_name) %></td>
-              <td><%= Payment.human_attribute_name(:state) %></td>
+              <th><input type="checkbox" name="select_all"></th>
+              <th><%= User.human_attribute_name(:name) %></th>
+              <th><%= Payment.human_attribute_name(:created_at) %></th>
+              <th><%= Payment.human_attribute_name(:amount) %></th>
+              <th><%= Payment.human_attribute_name(:payment_method_name) %></th>
+              <th><%= Payment.human_attribute_name(:state) %></th>
             </tr>
           </thead>
           <tbody>

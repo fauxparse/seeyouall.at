@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "e40f2f827c793d2507f7321b10ab43ae99ac8016ca8b6c3029a28bc3f22bfabf",
-    "current": "e40f2f827c793d2507f7321b10ab43ae99ac8016ca8b6c3029a28bc3f22bfabf"
+    "previous": "5c351ffff8110c07454563c824966aeb2638bacf8ddeec9263e0704b7c91d0d3",
+    "current": "5c351ffff8110c07454563c824966aeb2638bacf8ddeec9263e0704b7c91d0d3"
   },
   "fonts": [
-    "app/assets/fonts/icons_e40f2f827c793d2507f7321b10ab43ae.ttf",
-    "app/assets/fonts/icons_e40f2f827c793d2507f7321b10ab43ae.svg",
-    "app/assets/fonts/icons_e40f2f827c793d2507f7321b10ab43ae.woff",
-    "app/assets/fonts/icons_e40f2f827c793d2507f7321b10ab43ae.eot"
+    "app/assets/fonts/icons_5c351ffff8110c07454563c824966aeb.ttf",
+    "app/assets/fonts/icons_5c351ffff8110c07454563c824966aeb.svg",
+    "app/assets/fonts/icons_5c351ffff8110c07454563c824966aeb.woff",
+    "app/assets/fonts/icons_5c351ffff8110c07454563c824966aeb.eot"
   ],
   "glyphs": {
     "add": {
@@ -101,6 +101,10 @@
     "ok": {
       "codepoint": 61703,
       "source": "lib/assets/icons/svg/ok.svg"
+    },
+    "participants": {
+      "codepoint": 61737,
+      "source": "lib/assets/icons/svg/participants.svg"
     },
     "payment": {
       "codepoint": 61716,

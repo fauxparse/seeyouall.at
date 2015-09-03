@@ -1,6 +1,7 @@
 class Payment < ActiveRecord::Base
   belongs_to :registration, inverse_of: :payments
   has_one :event, through: :registration
+  has_one :user, through: :registration
 
   enum state: [:pending, :approved, :declined, :refunded]
 

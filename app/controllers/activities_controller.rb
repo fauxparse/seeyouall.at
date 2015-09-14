@@ -5,6 +5,24 @@ class ActivitiesController < ApplicationController
   authorize_resource
   skip_authorize_resource only: [:create]
 
+  def index
+    authorize!(:update, event)
+    @schedules = event.scheduled_activities
+      .includes(:time_slot, room: :location, activity: :activity_type)
+      .all
+      .map { |s| ScheduledActivityPresenter.new(s) }
+      .sort_by { |s| s.time_slot.start_time }
+      .chunk { |s| s.time_slot.start_time.to_date }
+  end
+
+  def show
+    authorize!(:update, event)
+    activity = ScheduledActivity
+      .includes(:time_slot, activity: :activity_type, selections: { registration: :user })
+      .find(params[:id])
+    @activity = ScheduledActivityPresenter.new(activity)
+  end
+
   def create
     authorize!(:update, event)
     create_activity = CreateActivity.new(event, activity_params)

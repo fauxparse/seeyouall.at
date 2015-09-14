@@ -365,12 +365,12 @@
 .itinerary.list {
   .empty {
     color: disabled-color();
-    
+
     button {
       display: block;
     }
   }
-  
+
   @media screen {
     @include display(flex);
     @include flex-direction(row);
@@ -384,38 +384,38 @@
       @include order(1);
       @include flex(2 0 60%);
     }
-    
+
     aside {
       @include flex(1 0 14rem);
     }
   }
-  
+
   h2 {
     margin: 0 0 0.5rem;
     border-bottom: $base-border;
     font-size: 1.25rem;
     line-height: 2rem;
   }
-  
+
   section {
     margin: 0 0 1rem;
   }
-  
+
   .activity-list {
     article {
       @include display(flex);
       @include flex-direction(row);
       margin: 0 0 0.5rem;
-      
+
       .times {
         @include flex(1);
         color: secondary-color();
         margin-right: 1rem;
       }
-      
+
       .details {
         @include flex(2);
-        
+
         h4 {
           line-height: 1.5em;
           font-size: 100%;
@@ -431,24 +431,37 @@
       margin-right: 1rem;
     }
   }
-  
+
   @media print {
     .activity-list article {
       display: block;
-      
+
       .times {
         width: 30%;
       }
-      
+
       .details {
         margin: -1.5em 0 1rem 30%;
-        
+
         a { color: secondary-color(); }
       }
     }
-    
+
     aside {
       display: none;
+    }
+  }
+}
+
+.admin.itinerary.list {
+  display: block;
+
+  article .details {
+    @include flex(4);
+
+    h4 small {
+      color: secondary-color();
+      font-size: 100%;
     }
   }
 }

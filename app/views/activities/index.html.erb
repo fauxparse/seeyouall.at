@@ -1,0 +1,10 @@
+<div class="admin itinerary list">
+  <% @schedules.each do |(date, activities)| -%>
+    <section class="day">
+      <h2><%= l(date, format: :itinerary) %></h2>
+      <div class="activity-list">
+        <%= render partial: "activity", collection: activities %>
+      </div>
+    </section>
+  <% end -%>
+</div>

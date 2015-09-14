@@ -1,0 +1,15 @@
+<article>
+  <div class="times">
+    <%= time_range(activity.start_time, activity.end_time) %>
+  </div>
+  <div class="details">
+    <h4>
+      <%= link_to event_activity_path(event, activity.id) do %>
+        <%= activity.name %>
+        <% if activity.limited? %>
+          <small>(<%= activity.selections_count %>/<%= activity.participant_limit %>)</small>
+        <% end %>
+      <% end %>
+    </h4>
+  </div>
+</article>

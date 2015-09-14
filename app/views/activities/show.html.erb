@@ -1,0 +1,7 @@
+<h1><%= @activity.name %></h1>
+<h2><%= time_range(@activity.start_time, @activity.end_time) %></h2>
+<ol class="participant-list">
+  <% @activity.selections.each do |selection| %>
+    <li><%= mail_to selection.registration.user.email, selection.registration.user.name %></li>
+  <% end %>
+</ol>
